@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardContent,
@@ -19,6 +20,7 @@ import {
   PlusCircle,
   ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 
 const featureCards = [
   {
@@ -26,7 +28,7 @@ const featureCards = [
     description: "Add, update, and manage your crop listings. Upload quality certificates to build buyer trust.",
     icon: Carrot,
     buttonText: "Manage Inventory",
-    href: "#",
+    href: "/dashboard/crop-management?role=farmer",
   },
   {
     title: "Market Participation",
@@ -125,9 +127,11 @@ export default function FarmerDashboard() {
       <div>
         <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-semibold tracking-tight">Your Farming Toolkit</h2>
-            <Button>
+            <Button asChild>
+              <Link href="/dashboard/crop-management?role=farmer">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add New Crop
+              </Link>
             </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -141,9 +145,11 @@ export default function FarmerDashboard() {
                         </div>
                     </CardHeader>
                     <CardContent className="flex-grow flex items-end">
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" className="w-full" asChild>
+                          <Link href={feature.href}>
                             {feature.buttonText}
                             <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
                         </Button>
                     </CardContent>
                 </Card>

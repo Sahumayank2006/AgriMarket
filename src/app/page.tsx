@@ -117,7 +117,7 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
-        <BackgroundGradient hint="trees crops" />
+        <BackgroundGradient hint="agriculture crops" />
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center">
             <div className="flex items-center gap-4 mb-6 text-white">
                 <Logo className="h-16 w-16" />

@@ -34,17 +34,17 @@ interface RoleCardProps {
 
 function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
   return (
-    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:border-primary bg-background/80 backdrop-blur-sm">
+    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:border-primary bg-card/90 backdrop-blur-sm">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-lg font-bold">{title}</CardTitle>
-        <Icon className="h-6 w-6 text-muted-foreground" />
+        <CardTitle className="text-xl font-bold">{title}</CardTitle>
+        <Icon className="h-8 w-8 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground mb-4 min-h-[40px]">{description}</p>
-        <Button asChild className="w-full">
+        <p className="text-base text-muted-foreground mb-6 min-h-[60px]">{description}</p>
+        <Button asChild size="lg" className="w-full text-lg">
           <Link href={`/dashboard?role=${role}`}>
             Continue as {title}
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </Button>
       </CardContent>
@@ -88,17 +88,17 @@ export default function RoleSelectionPage() {
   ];
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
         <BackgroundGradient />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex w-full flex-col items-center justify-center p-4">
-            <div className="flex items-center gap-4 mb-4">
-                <Logo className="h-12 w-12 text-white" />
-                <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center">
+            <div className="flex items-center gap-4 mb-6 text-white">
+                <Logo className="h-16 w-16" />
+                <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
                 Welcome to AgriMarket
                 </h1>
             </div>
-            <p className="max-w-3xl text-center text-lg text-white/80 mb-12">
+            <p className="max-w-3xl text-center text-xl text-white/80 mb-12">
                 Your integrated platform for smart food waste management. Select your role to begin your journey towards a more sustainable future.
             </p>
 
@@ -107,22 +107,22 @@ export default function RoleSelectionPage() {
                 align: "center",
                 loop: true,
                 }}
-                className="w-full max-w-sm md:max-w-md"
+                className="w-full max-w-md"
             >
                 <CarouselContent>
                 {roles.map((role, index) => (
-                    <CarouselItem key={index}>
-                    <div className="p-1">
-                        <RoleCard {...role} />
-                    </div>
+                    <CarouselItem key={index} className="md:basis-1/1">
+                      <div className="p-1">
+                          <RoleCard {...role} />
+                      </div>
                     </CarouselItem>
                 ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="ml-10" />
+                <CarouselNext className="mr-10" />
             </Carousel>
 
-            <footer className="mt-16 text-center text-white/70 text-sm">
+            <footer className="mt-20 text-center text-white/70 text-sm">
                 <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>
                 <p className="mt-1">Reducing food waste, one crop at a time.</p>
             </footer>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   User,
@@ -15,6 +16,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Logo } from "@/components/icons";
 import type { Role } from "@/lib/types";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { BackgroundGradient } from "@/components/background-gradient";
 
 interface RoleCardProps {
   role: Role;
@@ -25,21 +34,21 @@ interface RoleCardProps {
 
 function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
   return (
-    <Link href={`/dashboard?role=${role}`} className="group">
-      <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:border-primary">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-lg font-bold">{title}</CardTitle>
-          <Icon className="h-6 w-6 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground mb-4">{description}</p>
-          <div className="flex items-center text-sm font-semibold text-primary">
+    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:border-primary bg-background/80 backdrop-blur-sm">
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="text-lg font-bold">{title}</CardTitle>
+        <Icon className="h-6 w-6 text-muted-foreground" />
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground mb-4 min-h-[40px]">{description}</p>
+        <Button asChild className="w-full">
+          <Link href={`/dashboard?role=${role}`}>
             Continue as {title}
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -66,7 +75,8 @@ export default function RoleSelectionPage() {
     {
       role: "logistics",
       title: "Logistics",
-      description: "Manage transportation, track deliveries, and optimize routes.",
+      description:
+        "Manage transportation, track deliveries, and optimize routes.",
       icon: Truck,
     },
     {
@@ -78,25 +88,45 @@ export default function RoleSelectionPage() {
   ];
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      <div className="flex items-center gap-4 mb-8">
-        <Logo className="h-12 w-12 text-primary" />
-        <h1 className="text-4xl font-bold tracking-tight text-foreground">
-          Welcome to AgriMarket
-        </h1>
-      </div>
-      <p className="max-w-2xl text-center text-lg text-muted-foreground mb-12">
-        Your platform for smart food waste management. Select your role to get started and join our mission to build a sustainable future.
-      </p>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 max-w-6xl w-full">
-        {roles.map((role) => (
-          <RoleCard key={role.role} {...role} />
-        ))}
-      </div>
-       <footer className="mt-16 text-center text-muted-foreground text-sm">
-        <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>
-        <p className="mt-1">Reducing food waste, one crop at a time.</p>
-      </footer>
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
+        <BackgroundGradient />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 flex w-full flex-col items-center justify-center p-4">
+            <div className="flex items-center gap-4 mb-4">
+                <Logo className="h-12 w-12 text-white" />
+                <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+                Welcome to AgriMarket
+                </h1>
+            </div>
+            <p className="max-w-3xl text-center text-lg text-white/80 mb-12">
+                Your integrated platform for smart food waste management. Select your role to begin your journey towards a more sustainable future.
+            </p>
+
+            <Carousel
+                opts={{
+                align: "start",
+                loop: true,
+                }}
+                className="w-full max-w-xs md:max-w-4xl"
+            >
+                <CarouselContent>
+                {roles.map((role, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                        <RoleCard {...role} />
+                    </div>
+                    </CarouselItem>
+                ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden md:flex" />
+                <CarouselNext className="hidden md:flex" />
+            </Carousel>
+
+            <footer className="mt-16 text-center text-white/70 text-sm">
+                <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>
+                <p className="mt-1">Reducing food waste, one crop at a time.</p>
+            </footer>
+        </div>
     </div>
   );
 }

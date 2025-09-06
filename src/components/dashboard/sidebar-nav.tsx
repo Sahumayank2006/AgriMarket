@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -18,6 +19,7 @@ import {
   Warehouse,
   Truck,
   Map,
+  User,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -37,6 +39,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 const navItems = {
   farmer: [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/dashboard/profile", label: "My Profile", icon: User },
     { href: "/dashboard/crop-management", label: "Crop Management", icon: Carrot },
     { href: "/dashboard/spoilage-prediction", label: "Spoilage Prediction", icon: Sparkles },
     { href: "/dashboard/meal-planner", label: "Meal Planner", icon: Library },

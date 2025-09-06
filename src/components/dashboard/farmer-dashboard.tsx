@@ -19,6 +19,7 @@ import {
   ShieldQuestion,
   PlusCircle,
   ArrowRight,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -72,11 +73,19 @@ export default function FarmerDashboard() {
   return (
     <div className="flex flex-col gap-8">
        <Card>
-        <CardHeader>
-          <CardTitle>Welcome, Farmer!</CardTitle>
-          <CardDescription>
-            Here is your one-stop ecosystem to manage your farm, connect with markets, and grow your business.
-          </CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle>Welcome, Farmer!</CardTitle>
+            <CardDescription className="mt-2">
+              Here is your one-stop ecosystem to manage your farm, connect with markets, and grow your business.
+            </CardDescription>
+          </div>
+          <Button asChild variant="outline">
+            <Link href="/dashboard/profile?role=farmer">
+              <User className="mr-2 h-4 w-4" />
+              Manage Profile
+            </Link>
+          </Button>
         </CardHeader>
         <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

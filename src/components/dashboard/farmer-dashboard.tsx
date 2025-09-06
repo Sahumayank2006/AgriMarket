@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardContent,
@@ -43,7 +44,7 @@ const featureCards = [
     description: "Request transport services to move your produce to warehouses or buyers.",
     icon: Truck,
     buttonText: "Schedule Transport",
-    href: "#",
+    href: "/dashboard/transport?role=farmer",
   },
   {
     title: "Advisory & Alerts",

@@ -43,6 +43,7 @@ const navItems = {
     { href: "/dashboard/profile", label: "My Profile", icon: User },
     { href: "/dashboard/crop-management", label: "Crop Management", icon: Carrot },
     { href: "/dashboard/market-participation", label: "Marketplace", icon: Store },
+    { href: "/dashboard/transport", label: "Transport", icon: Truck },
     { href: "/dashboard/spoilage-prediction", label: "Spoilage Prediction", icon: Sparkles },
     { href: "/dashboard/meal-planner", label: "Meal Planner", icon: Library },
   ],

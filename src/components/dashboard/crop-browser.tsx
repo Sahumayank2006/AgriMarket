@@ -34,7 +34,7 @@ const mockCrops = [
     id: 1,
     name: "Organic Tomatoes",
     farmer: "Green Valley Farms",
-    location: "Sokoto, Nigeria",
+    location: "Nashik, Maharashtra",
     price: 120,
     quantity: 120,
     expiry: "3 days",
@@ -46,7 +46,7 @@ const mockCrops = [
     id: 2,
     name: "Sweet Corn",
     farmer: "Sunrise Agriculture",
-    location: "Kano, Nigeria",
+    location: "Pune, Maharashtra",
     price: 60,
     quantity: 500,
     expiry: "5 days",
@@ -58,7 +58,7 @@ const mockCrops = [
     id: 3,
     name: "Red Apples",
     farmer: "Orchard Fresh",
-    location: "Kaduna, Nigeria",
+    location: "Nashik, Maharashtra",
     price: 180,
     quantity: 300,
     expiry: "10 days",
@@ -70,7 +70,7 @@ const mockCrops = [
     id: 4,
     name: "Potatoes",
     farmer: "Green Valley Farms",
-    location: "Sokoto, Nigeria",
+    location: "Pune, Maharashtra",
     price: 40,
     quantity: 1000,
     expiry: "14 days",
@@ -82,7 +82,7 @@ const mockCrops = [
     id: 5,
     name: "Organic Carrots",
     farmer: "Sunrise Agriculture",
-    location: "Kano, Nigeria",
+    location: "Nagpur, Maharashtra",
     price: 90,
     quantity: 250,
     expiry: "7 days",
@@ -92,14 +92,14 @@ const mockCrops = [
   },
   {
     id: 6,
-    name: "Watermelons",
+    name: "Oranges",
     farmer: "Orchard Fresh",
-    location: "Kaduna, Nigeria",
+    location: "Nagpur, Maharashtra",
     price: 250,
     quantity: 80,
     expiry: "6 days",
     image: "https://picsum.photos/400/300?random=6",
-    dataAiHint: "watermelon",
+    dataAiHint: "oranges",
     type: "fruit"
   },
 ];
@@ -139,9 +139,9 @@ export function CropBrowser() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Locations</SelectItem>
-              <SelectItem value="Sokoto, Nigeria">Sokoto</SelectItem>
-              <SelectItem value="Kano, Nigeria">Kano</SelectItem>
-              <SelectItem value="Kaduna, Nigeria">Kaduna</SelectItem>
+              <SelectItem value="Nashik, Maharashtra">Nashik</SelectItem>
+              <SelectItem value="Pune, Maharashtra">Pune</SelectItem>
+              <SelectItem value="Nagpur, Maharashtra">Nagpur</SelectItem>
             </SelectContent>
           </Select>
           <Select value={expiry} onValueChange={setExpiry}>

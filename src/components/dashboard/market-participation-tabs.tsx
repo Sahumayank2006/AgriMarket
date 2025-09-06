@@ -45,7 +45,7 @@ const dealerBids = [
     crop: "Organic Tomatoes",
     quantity: 500,
     offerPrice: 125,
-    location: "Kano, Nigeria",
+    location: "Pune, Maharashtra",
     dealerImage: "https://i.pravatar.cc/150?u=dealer1",
   },
   {
@@ -54,16 +54,16 @@ const dealerBids = [
     crop: "Red Apples",
     quantity: 1000,
     offerPrice: 170,
-    location: "Kaduna, Nigeria",
+    location: "Nashik, Maharashtra",
     dealerImage: "https://i.pravatar.cc/150?u=dealer2",
   },
   {
     id: "bid-03",
-    dealerName: "Sokoto Greens",
+    dealerName: "Nagpur Greens",
     crop: "Potatoes",
     quantity: 2000,
     offerPrice: 38,
-    location: "Sokoto, Nigeria",
+    location: "Nagpur, Maharashtra",
     dealerImage: "https://i.pravatar.cc/150?u=dealer3",
   },
    {
@@ -72,13 +72,13 @@ const dealerBids = [
     crop: "Sweet Corn",
     quantity: 800,
     offerPrice: 65,
-    location: "Kano, Nigeria",
+    location: "Pune, Maharashtra",
     dealerImage: "https://i.pravatar.cc/150?u=dealer4",
   },
 ];
 
 const myListings = [
-    { id: "list-01", crop: "Watermelons", quantity: 80, price: 250, status: "active", bids: 3 },
+    { id: "list-01", crop: "Oranges", quantity: 80, price: 250, status: "active", bids: 3 },
     { id: "list-02", crop: "Organic Carrots", quantity: 250, price: 90, status: "active", bids: 5 },
     { id: "list-03", crop: "Wheat", quantity: 5000, price: 2100, status: "pending", bids: 0 },
 ];

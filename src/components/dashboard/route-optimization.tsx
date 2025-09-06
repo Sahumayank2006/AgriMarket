@@ -26,6 +26,7 @@ import {
 import { optimizeRoute } from "@/ai/flows/optimize-route";
 import type { OptimizeRouteOutput } from "@/ai/flows/optimize-route";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   startLocation: z.string().min(3, "Start location is required."),
@@ -181,5 +182,3 @@ export function RouteOptimization() {
     </Card>
   );
 }
-// This needs an Input component, but it's not available in this file. I'll add it.
-import { Input } from "@/components/ui/input";

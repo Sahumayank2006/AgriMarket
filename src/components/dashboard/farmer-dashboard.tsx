@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import {
   Carrot,
   IndianRupee,
-  LineChart,
+  Store,
   Package,
   Truck,
   Bell,
@@ -21,6 +21,8 @@ import {
   ArrowRight,
   User,
   Lightbulb,
+  Banknote,
+  Landmark,
 } from "lucide-react";
 import Link from "next/link";
 import { FarmLocationMap } from "./farm-location-map";
@@ -36,7 +38,7 @@ const featureCards = [
   {
     title: "Market Participation",
     description: "Browse dealer bids, place your crops for sale, and accept offers from buyers.",
-    icon: LineChart,
+    icon: Store,
     buttonText: "Go to Market",
     href: "/dashboard/market-participation?role=farmer",
   },
@@ -57,9 +59,9 @@ const featureCards = [
   {
     title: "Financial Services",
     description: "Apply for loans, manage insurance, and track your payments and subsidies.",
-    icon: IndianRupee,
+    icon: Landmark,
     buttonText: "Manage Finances",
-    href: "#",
+    href: "/dashboard/financial-services?role=farmer",
   },
   {
     title: "Community & Learning",

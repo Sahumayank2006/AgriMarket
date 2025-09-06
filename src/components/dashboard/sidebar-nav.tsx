@@ -22,6 +22,7 @@ import {
   User,
   Store,
   Lightbulb,
+  Landmark,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -46,6 +47,7 @@ const navItems = {
     { href: "/dashboard/market-participation", label: "Marketplace", icon: Store },
     { href: "/dashboard/transport", label: "Transport", icon: Truck },
     { href: "/dashboard/advisory", label: "Advisory", icon: Lightbulb },
+    { href: "/dashboard/financial-services", label: "Financial Services", icon: Landmark },
     { href: "/dashboard/spoilage-prediction", label: "Spoilage Prediction", icon: Sparkles },
     { href: "/dashboard/meal-planner", label: "Meal Planner", icon: Library },
   ],

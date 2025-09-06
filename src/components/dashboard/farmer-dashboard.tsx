@@ -15,7 +15,7 @@ import {
   Package,
   Truck,
   Bell,
-  BookOpen,
+  MapPin,
   Users,
   ShieldQuestion,
   PlusCircle,

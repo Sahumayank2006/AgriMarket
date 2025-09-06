@@ -27,16 +27,7 @@ export function FarmLocationMap() {
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <div className="relative h-64 w-full rounded-md overflow-hidden border">
-                <Image 
-                    src="https://picsum.photos/seed/map/1200/800"
-                    alt="Map of farm location"
-                    fill
-                    style={{objectFit: 'cover'}}
-                    data-ai-hint="map farm"
-                />
-            </div>
-            <div className="mt-4 flex flex-col md:flex-row gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
                 <div className="relative flex-1">
                     <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input 

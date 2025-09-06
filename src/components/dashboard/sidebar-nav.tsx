@@ -115,6 +115,12 @@ export function SidebarNav() {
               </Link>
             </SidebarMenuItem>
           ))}
+            {role === 'farmer' && (
+                 <div className="mt-4 p-2">
+                    <p className="text-xs text-muted-foreground px-2">Total Revenue</p>
+                    <p className="text-lg font-semibold px-2">₹1,25,430</p>
+                </div>
+            )}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
@@ -135,12 +141,6 @@ export function SidebarNav() {
                         </p>
                     </div>
             </div>
-            {role === 'farmer' && (
-                 <div className="mt-2">
-                    <p className="text-xs text-muted-foreground">Total Revenue</p>
-                    <p className="text-lg font-semibold">₹1,25,430</p>
-                </div>
-            )}
         </div>
       </SidebarFooter>
     </>

@@ -97,31 +97,27 @@ export default function RoleSelectionPage() {
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const [backgroundHint, setBackgroundHint] = useState(roles[0].dataAiHint);
 
   useEffect(() => {
     if (!api) {
       return;
     }
     const updateSlideInfo = () => {
-      const selectedSnap = api.selectedScrollSnap();
-      setCurrent(selectedSnap);
-      setBackgroundHint(roles[selectedSnap].dataAiHint);
+      setCurrent(api.selectedScrollSnap());
     }
     
     updateSlideInfo();
-
     api.on("select", updateSlideInfo);
     
     return () => {
       api.off("select", updateSlideInfo);
     };
-  }, [api, roles]);
+  }, [api]);
 
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
-        <BackgroundGradient hint={backgroundHint} />
+        <BackgroundGradient hint="trees crops" />
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center">
             <div className="flex items-center gap-4 mb-6 text-white">
                 <Logo className="h-16 w-16" />

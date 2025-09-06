@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Medal, Recycle, Seedling, Lightbulb } from "lucide-react";
+import { Medal, Recycle, Sprout, Lightbulb } from "lucide-react";
 
 const badges = [
   {
@@ -15,7 +15,7 @@ const badges = [
     color: "text-blue-500",
   },
   {
-    icon: Seedling,
+    icon: Sprout,
     title: "Eco-Pioneer",
     description: "Implemented 3+ new sustainable farming practices.",
     color: "text-green-500",

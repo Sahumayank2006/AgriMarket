@@ -4,12 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  User,
-  Building,
   ShieldCheck,
   ShoppingBag,
   Truck,
-  Leaf,
   Sprout,
   Warehouse,
 } from "lucide-react";
@@ -35,6 +32,7 @@ interface RoleCardProps {
   title: string;
   description: string;
   icon: React.ElementType;
+  dataAiHint: string;
 }
 
 function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
@@ -64,18 +62,21 @@ export default function RoleSelectionPage() {
       title: "Farmer",
       description: "Manage your crops, predict spoilage, and reduce waste.",
       icon: Sprout,
+      dataAiHint: "farm crops",
     },
     {
       role: "dealer",
       title: "Dealer",
       description: "Browse surplus crops, place orders, and track deliveries.",
       icon: ShoppingBag,
+      dataAiHint: "market stall",
     },
     {
       role: "green-guardian",
       title: "Warehouse Manager",
       description: "Monitor storage, manage inventory, and ensure quality.",
       icon: Warehouse,
+      dataAiHint: "warehouse interior",
     },
     {
       role: "logistics",
@@ -83,32 +84,44 @@ export default function RoleSelectionPage() {
       description:
         "Manage transportation, track deliveries, and optimize routes.",
       icon: Truck,
+      dataAiHint: "delivery truck",
     },
     {
       role: "admin",
       title: "Admin",
       description: "Oversee the platform, manage users, and view analytics.",
       icon: ShieldCheck,
+      dataAiHint: "data dashboard",
     },
   ];
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [backgroundHint, setBackgroundHint] = useState(roles[0].dataAiHint);
 
   useEffect(() => {
     if (!api) {
       return;
     }
-    setCurrent(api.selectedScrollSnap());
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
+    const updateSlideInfo = () => {
+      const selectedSnap = api.selectedScrollSnap();
+      setCurrent(selectedSnap);
+      setBackgroundHint(roles[selectedSnap].dataAiHint);
+    }
+    
+    updateSlideInfo();
+
+    api.on("select", updateSlideInfo);
+    
+    return () => {
+      api.off("select", updateSlideInfo);
+    };
+  }, [api, roles]);
 
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
-        <BackgroundGradient />
+        <BackgroundGradient hint={backgroundHint} />
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center">
             <div className="flex items-center gap-4 mb-6 text-white">
                 <Logo className="h-16 w-16" />

@@ -104,22 +104,22 @@ export default function RoleSelectionPage() {
 
             <Carousel
                 opts={{
-                align: "start",
+                align: "center",
                 loop: true,
                 }}
-                className="w-full max-w-xs md:max-w-4xl"
+                className="w-full max-w-sm md:max-w-md"
             >
                 <CarouselContent>
                 {roles.map((role, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <CarouselItem key={index}>
                     <div className="p-1">
                         <RoleCard {...role} />
                     </div>
                     </CarouselItem>
                 ))}
                 </CarouselContent>
-                <CarouselPrevious className="hidden md:flex" />
-                <CarouselNext className="hidden md:flex" />
+                <CarouselPrevious />
+                <CarouselNext />
             </Carousel>
 
             <footer className="mt-16 text-center text-white/70 text-sm">

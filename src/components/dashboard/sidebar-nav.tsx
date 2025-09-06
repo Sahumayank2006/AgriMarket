@@ -20,6 +20,7 @@ import {
   Truck,
   Map,
   User,
+  Store,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -41,6 +42,7 @@ const navItems = {
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/dashboard/profile", label: "My Profile", icon: User },
     { href: "/dashboard/crop-management", label: "Crop Management", icon: Carrot },
+    { href: "/dashboard/market-participation", label: "Marketplace", icon: Store },
     { href: "/dashboard/spoilage-prediction", label: "Spoilage Prediction", icon: Sparkles },
     { href: "/dashboard/meal-planner", label: "Meal Planner", icon: Library },
   ],

@@ -1,5 +1,3 @@
-
-
 import {
   Card,
   CardContent,
@@ -38,7 +36,7 @@ const featureCards = [
     description: "Browse dealer bids, place your crops for sale, and accept offers from buyers.",
     icon: LineChart,
     buttonText: "Go to Market",
-    href: "#",
+    href: "/dashboard/market-participation?role=farmer",
   },
   {
     title: "Transport & Logistics",

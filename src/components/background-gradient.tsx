@@ -11,10 +11,10 @@ export function BackgroundGradient() {
     >
       <div
         className={cn(
-          "absolute inset-0 h-full w-full bg-[url(https://picsum.photos/1920/1080?random=12)] bg-cover bg-center bg-no-repeat",
+          "absolute inset-0 h-full w-full bg-[url(https://picsum.photos/1920/1080?random=13)] bg-cover bg-center bg-no-repeat",
           "bg-fixed"
         )}
-        data-ai-hint="farming landscape"
+        data-ai-hint="forest trees"
       ></div>
     </div>
   );

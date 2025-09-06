@@ -1,1 +1,1 @@
-export type Role = "farmer" | "dealer" | "admin" | "green-guardian";
+export type Role = "farmer" | "dealer" | "admin" | "green-guardian" | "logistics";

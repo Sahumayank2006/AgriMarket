@@ -16,6 +16,8 @@ import {
   Sparkles,
   Users,
   Warehouse,
+  Truck,
+  Map,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -49,6 +51,11 @@ const navItems = {
     { href: "/dashboard/inventory", label: "Inventory", icon: Package },
     { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
   ],
+  logistics: [
+    { href: "/dashboard", label: "Logistics Overview", icon: Truck },
+    { href: "/dashboard/route-optimization", label: "Route Optimization", icon: Map },
+    { href: "/dashboard/delivery-tracking", label: "Delivery Tracking", icon: Package },
+  ],
   admin: [
     { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
     { href: "/dashboard/users", label: "User Management", icon: Users },
@@ -68,6 +75,7 @@ function getRoleName(role: Role) {
     dealer: "Dealer",
     admin: "Admin",
     "green-guardian": "Warehouse Manager",
+    logistics: "Logistics",
   };
   return names[role];
 }

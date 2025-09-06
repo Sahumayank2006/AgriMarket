@@ -38,6 +38,7 @@ function getRoleName(role: Role | null) {
     dealer: "Dealer",
     admin: "Admin",
     "green-guardian": "Warehouse Manager",
+    logistics: "Logistics",
   };
   return names[role];
 }

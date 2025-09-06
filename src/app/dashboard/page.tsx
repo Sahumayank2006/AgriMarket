@@ -7,6 +7,7 @@ import FarmerDashboard from "@/components/dashboard/farmer-dashboard";
 import AdminDashboard from "@/components/dashboard/admin-dashboard";
 import DealerDashboard from "@/components/dashboard/dealer-dashboard";
 import GreenGuardianDashboard from "@/components/dashboard/green-guardian-dashboard";
+import LogisticsDashboard from "@/components/dashboard/logistics-dashboard";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function DashboardPageContent() {
@@ -37,6 +38,8 @@ function DashboardPageContent() {
       return <DealerDashboard />;
     case "green-guardian":
       return <GreenGuardianDashboard />;
+    case "logistics":
+      return <LogisticsDashboard />;
     default:
       return <div>Invalid role selected.</div>;
   }

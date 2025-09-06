@@ -5,6 +5,7 @@ import {
   Building,
   ShieldCheck,
   ShoppingBag,
+  Truck,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,12 @@ export default function RoleSelectionPage() {
       icon: Building,
     },
     {
+      role: "logistics",
+      title: "Logistics",
+      description: "Manage transportation, track deliveries, and optimize routes.",
+      icon: Truck,
+    },
+    {
       role: "admin",
       title: "Admin",
       description: "Oversee the platform, manage users, and view analytics.",
@@ -78,7 +85,7 @@ export default function RoleSelectionPage() {
       <p className="max-w-2xl text-center text-lg text-muted-foreground mb-12">
         Your platform for smart food waste management. Select your role to get started and join our mission to build a sustainable future.
       </p>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl w-full">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 max-w-6xl w-full">
         {roles.map((role) => (
           <RoleCard key={role.role} {...role} />
         ))}

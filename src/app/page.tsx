@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -22,8 +24,11 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { BackgroundGradient } from "@/components/background-gradient";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface RoleCardProps {
   role: Role;
@@ -87,6 +92,20 @@ export default function RoleSelectionPage() {
     },
   ];
 
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
         <BackgroundGradient />
@@ -103,15 +122,27 @@ export default function RoleSelectionPage() {
             </p>
 
             <Carousel
+                setApi={setApi}
                 opts={{
-                align: "center",
-                loop: true,
+                    align: "center",
+                    loop: true,
                 }}
-                className="w-full max-w-md"
+                className="w-full max-w-3xl"
             >
-                <CarouselContent>
+                <CarouselContent className="-ml-4">
                 {roles.map((role, index) => (
-                    <CarouselItem key={index} className="md:basis-1/1">
+                    <CarouselItem
+                        key={index}
+                        className={cn(
+                            "pl-4 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
+                            "carousel-item",
+                            { "is-active": index === current }
+                        )}
+                        style={{
+                            opacity: "var(--carousel-item-opacity, 0.3)",
+                            transform: "scale(var(--carousel-item-scale, 0.9))",
+                        }}
+                    >
                       <div className="p-1">
                           <RoleCard {...role} />
                       </div>

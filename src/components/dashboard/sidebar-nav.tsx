@@ -48,8 +48,7 @@ const navItems = {
     { href: "/dashboard/transport", label: "Transport", icon: Truck },
     { href: "/dashboard/advisory", label: "Advisory", icon: Lightbulb },
     { href: "/dashboard/financial-services", label: "Financial Services", icon: Landmark },
-    { href: "/dashboard/spoilage-prediction", label: "Spoilage Prediction", icon: Sparkles },
-    { href: "/dashboard/meal-planner", label: "Meal Planner", icon: Library },
+    { href: "/dashboard/inventory", label: "Your Inventory", icon: Package },
   ],
   dealer: [
     { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
@@ -74,10 +73,6 @@ const navItems = {
   ],
 };
 
-const commonItems = [
-  { href: "/dashboard/donations", label: "Donations", icon: HeartHandshake },
-  { href: "/dashboard/sustainability", label: "Sustainability Hub", icon: Leaf },
-];
 
 function getRoleName(role: Role) {
   const names: Record<Role, string> = {
@@ -121,39 +116,31 @@ export function SidebarNav() {
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
-        <SidebarMenu className="mt-4">
-          <p className="px-4 py-2 text-xs font-semibold text-muted-foreground">Community</p>
-          {commonItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
-              <Link href={`${item.href}${roleQuery}`}>
-                <SidebarMenuButton
-                  isActive={pathname === item.href}
-                  tooltip={{ children: item.label }}
-                >
-                  <item.icon />
-                  <span>{item.label}</span>
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
-        <div className="flex items-center gap-3 rounded-md p-2 bg-muted/50">
-           <Avatar className="h-10 w-10">
-                <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
-                <AvatarFallback>
-                  {getRoleName(role).charAt(0)}
-                </AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-                <p className="text-sm font-medium leading-none">
-                  {getRoleName(role)}
-                </p>
-                <p className="text-xs leading-none text-muted-foreground">
-                  {role}@agrimarket.com
-                </p>
+        <div className="flex flex-col gap-3 rounded-md p-3 bg-muted/50">
+           <div className="flex items-center gap-3">
+                <Avatar className="h-10 w-10">
+                        <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
+                        <AvatarFallback>
+                        {getRoleName(role).charAt(0)}
+                        </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                        <p className="text-sm font-medium leading-none">
+                        {getRoleName(role)}
+                        </p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                        {role}@agrimarket.com
+                        </p>
+                    </div>
             </div>
+            {role === 'farmer' && (
+                 <div className="mt-2">
+                    <p className="text-xs text-muted-foreground">Total Revenue</p>
+                    <p className="text-lg font-semibold">₹1,25,430</p>
+                </div>
+            )}
         </div>
       </SidebarFooter>
     </>

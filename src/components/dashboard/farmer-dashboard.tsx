@@ -63,12 +63,12 @@ const featureCards = [
     buttonText: "Manage Finances",
     href: "/dashboard/financial-services?role=farmer",
   },
-  {
-    title: "Community & Learning",
-    description: "Join farmer forums, access training modules, and grow your knowledge.",
-    icon: Users,
-    buttonText: "Join Community",
-    href: "#",
+   {
+    title: "Your Inventory",
+    description: "View your current inventory and check for potential spoilage.",
+    icon: Package,
+    buttonText: "View Inventory",
+    href: "/dashboard/inventory?role=farmer",
   },
 ];
 

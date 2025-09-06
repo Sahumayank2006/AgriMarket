@@ -35,7 +35,7 @@ const mockCrops = [
     name: "Organic Tomatoes",
     farmer: "Green Valley Farms",
     location: "Sokoto, Nigeria",
-    price: 1.5,
+    price: 120,
     quantity: 120,
     expiry: "3 days",
     image: "https://picsum.photos/400/300?random=1",
@@ -47,7 +47,7 @@ const mockCrops = [
     name: "Sweet Corn",
     farmer: "Sunrise Agriculture",
     location: "Kano, Nigeria",
-    price: 0.8,
+    price: 60,
     quantity: 500,
     expiry: "5 days",
     image: "https://picsum.photos/400/300?random=2",
@@ -59,7 +59,7 @@ const mockCrops = [
     name: "Red Apples",
     farmer: "Orchard Fresh",
     location: "Kaduna, Nigeria",
-    price: 2.2,
+    price: 180,
     quantity: 300,
     expiry: "10 days",
     image: "https://picsum.photos/400/300?random=3",
@@ -71,7 +71,7 @@ const mockCrops = [
     name: "Potatoes",
     farmer: "Green Valley Farms",
     location: "Sokoto, Nigeria",
-    price: 0.5,
+    price: 40,
     quantity: 1000,
     expiry: "14 days",
     image: "https://picsum.photos/400/300?random=4",
@@ -83,7 +83,7 @@ const mockCrops = [
     name: "Organic Carrots",
     farmer: "Sunrise Agriculture",
     location: "Kano, Nigeria",
-    price: 1.1,
+    price: 90,
     quantity: 250,
     expiry: "7 days",
     image: "https://picsum.photos/400/300?random=5",
@@ -95,7 +95,7 @@ const mockCrops = [
     name: "Watermelons",
     farmer: "Orchard Fresh",
     location: "Kaduna, Nigeria",
-    price: 3.0,
+    price: 250,
     quantity: 80,
     expiry: "6 days",
     image: "https://picsum.photos/400/300?random=6",
@@ -193,7 +193,7 @@ export function CropBrowser() {
               </CardContent>
               <CardFooter className="flex justify-between items-center">
                 <div className="text-lg font-bold text-primary">
-                  ${crop.price.toFixed(2)}
+                  ₹{crop.price.toFixed(2)}
                   <span className="text-sm font-normal text-muted-foreground">
                     /kg
                   </span>

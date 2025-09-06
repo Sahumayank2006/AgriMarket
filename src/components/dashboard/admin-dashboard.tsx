@@ -3,7 +3,7 @@
 import {
   Activity,
   Carrot,
-  DollarSign,
+  IndianRupee,
   HeartHandshake,
   Users,
 } from "lucide-react";
@@ -71,10 +71,10 @@ export default function AdminDashboard() {
             <CardTitle className="text-sm font-medium">
               Total Revenue
             </CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <IndianRupee className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
+            <div className="text-2xl font-bold">₹4,52,31,890</div>
             <p className="text-xs text-muted-foreground">
               +20.1% from last month
             </p>

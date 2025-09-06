@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   Carrot,
-  DollarSign,
+  IndianRupee,
   LineChart,
   Package,
   Truck,
@@ -52,7 +52,7 @@ const featureCards = [
   {
     title: "Financial Services",
     description: "Apply for loans, manage insurance, and track your payments and subsidies.",
-    icon: DollarSign,
+    icon: IndianRupee,
     buttonText: "Manage Finances",
     href: "#",
   },
@@ -101,10 +101,10 @@ export default function FarmerDashboard() {
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Recent Payout</CardTitle>
-                        <DollarSign className="h-4 w-4 text-muted-foreground" />
+                        <IndianRupee className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">$1,250.00</div>
+                        <div className="text-2xl font-bold">₹1,25,000</div>
                         <p className="text-xs text-muted-foreground">from last week's sales</p>
                     </CardContent>
                 </Card>

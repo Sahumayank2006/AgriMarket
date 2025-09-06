@@ -20,6 +20,7 @@ import {
   PlusCircle,
   ArrowRight,
   User,
+  Lightbulb,
 } from "lucide-react";
 import Link from "next/link";
 import { FarmLocationMap } from "./farm-location-map";
@@ -49,9 +50,9 @@ const featureCards = [
   {
     title: "Advisory & Alerts",
     description: "Get AI-driven advice on farming, weather alerts, and government scheme updates.",
-    icon: Bell,
+    icon: Lightbulb,
     buttonText: "View Advisory",
-    href: "#",
+    href: "/dashboard/advisory?role=farmer",
   },
   {
     title: "Financial Services",

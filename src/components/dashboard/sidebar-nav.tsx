@@ -21,6 +21,7 @@ import {
   Map,
   User,
   Store,
+  Lightbulb,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -44,6 +45,7 @@ const navItems = {
     { href: "/dashboard/crop-management", label: "Crop Management", icon: Carrot },
     { href: "/dashboard/market-participation", label: "Marketplace", icon: Store },
     { href: "/dashboard/transport", label: "Transport", icon: Truck },
+    { href: "/dashboard/advisory", label: "Advisory", icon: Lightbulb },
     { href: "/dashboard/spoilage-prediction", label: "Spoilage Prediction", icon: Sparkles },
     { href: "/dashboard/meal-planner", label: "Meal Planner", icon: Library },
   ],

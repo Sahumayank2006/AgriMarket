@@ -4,7 +4,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { CalendarIcon, Upload } from "lucide-react";
+import { CalendarIcon, Upload, Crosshair } from "lucide-react";
 import { format } from "date-fns";
 
 import { Button } from "@/components/ui/button";
@@ -66,6 +66,15 @@ export function CropInventoryForm() {
       additionalNotes: "",
     },
   });
+  
+  const handleDetectLocation = () => {
+    toast({
+        title: "Detecting Location...",
+        description: "Please wait while we fetch your current location.",
+    });
+    // In a real app, you would use navigator.geolocation here
+    // and then form.setValue('cropLocation', detectedLocation);
+  };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -268,9 +277,15 @@ export function CropInventoryForm() {
                             render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Crop Location</FormLabel>
-                                <FormControl>
-                                <Input placeholder="e.g., Farm Address or GPS coordinates" {...field} />
-                                </FormControl>
+                                <div className="flex gap-2">
+                                  <FormControl>
+                                  <Input placeholder="e.g., Farm Address or GPS coordinates" {...field} />
+                                  </FormControl>
+                                  <Button type="button" variant="outline" onClick={handleDetectLocation}>
+                                    <Crosshair className="mr-2 h-4 w-4" />
+                                    Detect
+                                  </Button>
+                                </div>
                                 <FormDescription>Where is your field or crop stored?</FormDescription>
                                 <FormMessage />
                             </FormItem>

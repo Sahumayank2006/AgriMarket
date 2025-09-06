@@ -4,7 +4,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { CalendarIcon, Car, Leaf, MapPin, Milestone, Package, Tractor, Upload, Warehouse } from "lucide-react";
+import { CalendarIcon, Upload } from "lucide-react";
 import { format } from "date-fns";
 
 import { Button } from "@/components/ui/button";
@@ -35,24 +35,18 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 const formSchema = z.object({
-  // Crop Details
   cropName: z.string().min(2, "Crop name must be at least 2 characters."),
   quantity: z.coerce.number().positive("Quantity must be a positive number."),
   unit: z.string().min(1, "Unit is required."),
-  harvestDate: z.date(),
-  storageDetails: z.string().min(3, "Storage details are required."),
-  
-  // Pricing & Logistics
-  expectedPrice: z.coerce.number().positive("Price must be a positive number."),
-  cropLocation: z.string().min(3, "Location is required."),
-  transportRequired: z.enum(["yes", "no"]),
-
-  // Quality & Compliance
   qualityCertificate: z.any().optional(),
-  farmingPractices: z.string().optional(),
+  expectedPrice: z.coerce.number().positive("Price must be a positive number."),
+  harvestDate: z.date(),
+  storageDetails: z.string().min(1, "Storage location is required."),
+  transportRequired: z.enum(["yes", "no"]),
+  cropLocation: z.string().min(3, "Location is required."),
   additionalNotes: z.string().optional(),
 });
 
@@ -65,11 +59,10 @@ export function CropInventoryForm() {
       quantity: 0,
       unit: "kg",
       harvestDate: new Date(),
-      storageDetails: "On-farm storage, dry and ventilated",
+      storageDetails: "Farm",
       expectedPrice: 0,
       cropLocation: "",
       transportRequired: "no",
-      farmingPractices: "Organic farming practices used",
       additionalNotes: "",
     },
   });
@@ -92,224 +85,212 @@ export function CropInventoryForm() {
         <CardContent>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <Accordion type="multiple" defaultValue={["item-1", "item-2", "item-3"]} className="w-full">
-                    <AccordionItem value="item-1">
-                        <AccordionTrigger>
-                            <h3 className="text-lg font-semibold flex items-center gap-2"><Package className="h-5 w-5" /> Crop Details</h3>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-4 space-y-6">
+                    <div className="space-y-6">
+                        <FormField
+                            control={form.control}
+                            name="cropName"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Name of Crop</FormLabel>
+                                <FormControl>
+                                <Input placeholder="e.g., Wheat, Rice, Tomato" {...field} />
+                                </FormControl>
+                                <FormDescription>What crop are you selling?</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <div className="grid md:grid-cols-2 gap-6">
                             <FormField
                                 control={form.control}
-                                name="cropName"
+                                name="quantity"
                                 render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Crop Name</FormLabel>
+                                    <FormLabel>Quantity Available</FormLabel>
                                     <FormControl>
-                                    <Input placeholder="e.g., Organic Tomatoes" {...field} />
+                                    <Input type="number" placeholder="100" {...field} />
                                     </FormControl>
+                                    <FormDescription>How much do you have to sell?</FormDescription>
                                     <FormMessage />
                                 </FormItem>
                                 )}
                             />
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <FormField
-                                    control={form.control}
-                                    name="quantity"
-                                    render={({ field }) => (
+                            <FormField
+                                control={form.control}
+                                name="unit"
+                                render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Quantity Available</FormLabel>
-                                        <FormControl>
-                                        <Input type="number" placeholder="100" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="unit"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Unit of Measurement</FormLabel>
-                                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select a unit" />
-                                                </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
+                                        <FormLabel>Unit</FormLabel>
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a unit" />
+                                            </SelectTrigger>
+                                            </FormControl>
+                                            <SelectContent>
                                                 <SelectItem value="kg">Kilograms (kg)</SelectItem>
                                                 <SelectItem value="quintal">Quintals</SelectItem>
                                                 <SelectItem value="ton">Tons</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <FormField
-                                    control={form.control}
-                                    name="harvestDate"
-                                    render={({ field }) => (
-                                    <FormItem className="flex flex-col">
-                                        <FormLabel>Harvest Date</FormLabel>
-                                        <Popover>
-                                        <PopoverTrigger asChild>
-                                            <FormControl>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                "pl-3 text-left font-normal",
-                                                !field.value && "text-muted-foreground"
-                                                )}
-                                            >
-                                                {field.value ? (
-                                                format(field.value, "PPP")
-                                                ) : (
-                                                <span>Pick a date</span>
-                                                )}
-                                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                            </Button>
-                                            </FormControl>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange}
-                                            initialFocus
-                                            />
-                                        </PopoverContent>
-                                        </Popover>
+                                            </SelectContent>
+                                        </Select>
+                                        <FormDescription>Unit of measurement.</FormDescription>
                                         <FormMessage />
                                     </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="storageDetails"
-                                    render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Storage Details</FormLabel>
+                                )}
+                            />
+                        </div>
+                        <FormField
+                            control={form.control}
+                            name="qualityCertificate"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Quality Proof (Optional)</FormLabel>
+                                <FormControl>
+                                    <Input type="file" {...field} />
+                                </FormControl>
+                                <FormDescription>Upload photos or certificates if available.</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="expectedPrice"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Price Expectation</FormLabel>
+                                <FormControl>
+                                <Input type="number" placeholder="2000" {...field} />
+                                </FormControl>
+                                <FormDescription>What price do you want per unit? (e.g., Rs per quintal)</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <FormField
+                                control={form.control}
+                                name="harvestDate"
+                                render={({ field }) => (
+                                <FormItem className="flex flex-col">
+                                    <FormLabel>Harvest Date</FormLabel>
+                                    <Popover>
+                                    <PopoverTrigger asChild>
                                         <FormControl>
-                                        <Input placeholder="e.g., On-farm cold storage" {...field} />
+                                        <Button
+                                            variant={"outline"}
+                                            className={cn(
+                                            "pl-3 text-left font-normal",
+                                            !field.value && "text-muted-foreground"
+                                            )}
+                                        >
+                                            {field.value ? (
+                                            format(field.value, "PPP")
+                                            ) : (
+                                            <span>Pick a date</span>
+                                            )}
+                                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                        </Button>
                                         </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )}
-                                />
-                            </div>
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-2">
-                         <AccordionTrigger>
-                            <h3 className="text-lg font-semibold flex items-center gap-2"><Milestone className="h-5 w-5" /> Pricing & Logistics</h3>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-4 space-y-6">
-                             <div className="grid md:grid-cols-2 gap-6">
-                                <FormField
-                                    control={form.control}
-                                    name="expectedPrice"
-                                    render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Expected Price (per unit)</FormLabel>
-                                        <FormControl>
-                                        <Input type="number" placeholder="150" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="cropLocation"
-                                    render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Location of Crop</FormLabel>
-                                        <FormControl>
-                                        <Input placeholder="e.g., Farm Address or GPS coordinates" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )}
-                                />
-                             </div>
-                              <FormField
-                                    control={form.control}
-                                    name="transportRequired"
-                                    render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Transport Required?</FormLabel>
-                                        <FormControl>
-                                           <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select an option" />
-                                                </SelectTrigger>
-                                                </FormControl>
-                                                <SelectContent>
-                                                    <SelectItem value="yes">Yes, I need transport services.</SelectItem>
-                                                    <SelectItem value="no">No, I have my own arrangements.</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                    )}
-                                />
-                        </AccordionContent>
-                    </AccordionItem>
-                     <AccordionItem value="item-3">
-                         <AccordionTrigger>
-                            <h3 className="text-lg font-semibold flex items-center gap-2"><Leaf className="h-5 w-5" /> Quality & Compliance</h3>
-                        </AccordionTrigger>
-                        <AccordionContent className="p-4 space-y-6">
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0" align="start">
+                                        <Calendar
+                                        mode="single"
+                                        selected={field.value}
+                                        onSelect={field.onChange}
+                                        initialFocus
+                                        />
+                                    </PopoverContent>
+                                    </Popover>
+                                    <FormDescription>When was the crop harvested?</FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
                              <FormField
                                 control={form.control}
-                                name="qualityCertificate"
+                                name="storageDetails"
                                 render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Quality Certificate</FormLabel>
-                                    <FormControl>
-                                        <Input type="file" {...field} />
-                                    </FormControl>
-                                    <FormDescription>Upload quality test reports, organic certificates, etc.</FormDescription>
+                                    <FormLabel>Storage Location</FormLabel>
+                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select storage type" />
+                                        </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="Farm">Farm</SelectItem>
+                                            <SelectItem value="Warehouse">Warehouse</SelectItem>
+                                            <SelectItem value="Cold storage">Cold storage</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormDescription>Where is the crop stored?</FormDescription>
                                     <FormMessage />
                                 </FormItem>
                                 )}
                             />
-                            <FormField
-                                control={form.control}
-                                name="farmingPractices"
-                                render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Farming & Irrigation Practices</FormLabel>
-                                    <FormControl>
-                                        <Textarea placeholder="e.g., Used drip irrigation, organic pest control methods." {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="additionalNotes"
-                                render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Additional Notes</FormLabel>
-                                    <FormControl>
-                                        <Textarea placeholder="Any other relevant information for the buyer." {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                                )}
-                            />
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
-                <Button type="submit" size="lg" className="w-full md:w-auto">
+                        </div>
+                         <FormField
+                            control={form.control}
+                            name="transportRequired"
+                            render={({ field }) => (
+                            <FormItem className="space-y-3">
+                                <FormLabel>Need Transport?</FormLabel>
+                                <FormControl>
+                                    <RadioGroup
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                    className="flex items-center space-x-4"
+                                    >
+                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                        <FormControl>
+                                        <RadioGroupItem value="yes" />
+                                        </FormControl>
+                                        <FormLabel className="font-normal">Yes</FormLabel>
+                                    </FormItem>
+                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                        <FormControl>
+                                        <RadioGroupItem value="no" />
+                                        </FormControl>
+                                        <FormLabel className="font-normal">No</FormLabel>
+                                    </FormItem>
+                                    </RadioGroup>
+                                </FormControl>
+                                <FormDescription>Do you want us to help arrange transport?</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="cropLocation"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Crop Location</FormLabel>
+                                <FormControl>
+                                <Input placeholder="e.g., Farm Address or GPS coordinates" {...field} />
+                                </FormControl>
+                                <FormDescription>Where is your field or crop stored?</FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="additionalNotes"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Additional Notes (Optional)</FormLabel>
+                                <FormControl>
+                                    <Textarea placeholder="Add anything else buyers should know about your crop." {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                    </div>
+                <Button type="submit" size="lg" className="w-full md:w-auto mt-8">
                     <Upload className="mr-2 h-4 w-4" /> Add Crop to Inventory
                 </Button>
                 </form>

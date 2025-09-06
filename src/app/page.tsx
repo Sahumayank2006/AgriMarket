@@ -6,6 +6,9 @@ import {
   ShieldCheck,
   ShoppingBag,
   Truck,
+  Leaf,
+  Sprout,
+  Warehouse,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -46,7 +49,7 @@ export default function RoleSelectionPage() {
       role: "farmer",
       title: "Farmer",
       description: "Manage your crops, predict spoilage, and reduce waste.",
-      icon: User,
+      icon: Sprout,
     },
     {
       role: "dealer",
@@ -58,7 +61,7 @@ export default function RoleSelectionPage() {
       role: "green-guardian",
       title: "Warehouse Manager",
       description: "Monitor storage, manage inventory, and ensure quality.",
-      icon: Building,
+      icon: Warehouse,
     },
     {
       role: "logistics",

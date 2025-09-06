@@ -174,8 +174,6 @@ export function CropBrowser() {
                   style={{objectFit: 'cover'}}
                   className="transition-transform duration-300 group-hover:scale-105"
                   data-ai-hint={crop.dataAiHint}
-                  width={400}
-                  height={300}
                 />
                  <Badge variant="secondary" className="absolute top-2 left-2">Expires in {crop.expiry}</Badge>
               </div>

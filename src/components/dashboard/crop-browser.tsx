@@ -38,7 +38,7 @@ const mockCrops = [
     price: 120,
     quantity: 120,
     expiry: "3 days",
-    image: "https://picsum.photos/400/300?random=1",
+    image: "https://picsum.photos/seed/tomatoes/400/300",
     dataAiHint: "tomatoes",
     type: "vegetable"
   },
@@ -50,7 +50,7 @@ const mockCrops = [
     price: 60,
     quantity: 500,
     expiry: "5 days",
-    image: "https://picsum.photos/400/300?random=2",
+    image: "https://picsum.photos/seed/corn/400/300",
     dataAiHint: "corn field",
     type: "vegetable"
   },
@@ -62,7 +62,7 @@ const mockCrops = [
     price: 180,
     quantity: 300,
     expiry: "10 days",
-    image: "https://picsum.photos/400/300?random=3",
+    image: "https://picsum.photos/seed/apples/400/300",
     dataAiHint: "apples",
     type: "fruit"
   },
@@ -74,7 +74,7 @@ const mockCrops = [
     price: 40,
     quantity: 1000,
     expiry: "14 days",
-    image: "https://picsum.photos/400/300?random=4",
+    image: "https://picsum.photos/seed/potatoes/400/300",
     dataAiHint: "potatoes",
     type: "vegetable"
   },
@@ -86,7 +86,7 @@ const mockCrops = [
     price: 90,
     quantity: 250,
     expiry: "7 days",
-    image: "https://picsum.photos/400/300?random=5",
+    image: "https://picsum.photos/seed/carrots/400/300",
     dataAiHint: "carrots",
     type: "vegetable"
   },
@@ -98,7 +98,7 @@ const mockCrops = [
     price: 250,
     quantity: 80,
     expiry: "6 days",
-    image: "https://picsum.photos/400/300?random=6",
+    image: "https://picsum.photos/seed/oranges/400/300",
     dataAiHint: "oranges",
     type: "fruit"
   },

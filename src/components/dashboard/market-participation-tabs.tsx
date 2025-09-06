@@ -46,7 +46,8 @@ const dealerBids = [
     quantity: 500,
     offerPrice: 125,
     location: "Pune, Maharashtra",
-    dealerImage: "https://i.pravatar.cc/150?u=dealer1",
+    dealerImage: "https://picsum.photos/seed/logo1/80/80",
+    dataAiHint: "vegetable stall"
   },
   {
     id: "bid-02",
@@ -55,7 +56,8 @@ const dealerBids = [
     quantity: 1000,
     offerPrice: 170,
     location: "Nashik, Maharashtra",
-    dealerImage: "https://i.pravatar.cc/150?u=dealer2",
+    dealerImage: "https://picsum.photos/seed/logo2/80/80",
+    dataAiHint: "grain market"
   },
   {
     id: "bid-03",
@@ -64,7 +66,8 @@ const dealerBids = [
     quantity: 2000,
     offerPrice: 38,
     location: "Nagpur, Maharashtra",
-    dealerImage: "https://i.pravatar.cc/150?u=dealer3",
+    dealerImage: "https://picsum.photos/seed/logo3/80/80",
+    dataAiHint: "farm logo"
   },
    {
     id: "bid-04",
@@ -73,7 +76,8 @@ const dealerBids = [
     quantity: 800,
     offerPrice: 65,
     location: "Pune, Maharashtra",
-    dealerImage: "https://i.pravatar.cc/150?u=dealer4",
+    dealerImage: "https://picsum.photos/seed/logo4/80/80",
+    dataAiHint: "corn logo"
   },
 ];
 
@@ -128,6 +132,7 @@ function BrowseBids() {
               width={80}
               height={80}
               className="rounded-full border-2 border-primary/50 aspect-square object-cover"
+              data-ai-hint={bid.dataAiHint}
             />
             <div className="flex-1">
               <h3 className="font-semibold text-lg">{bid.dealerName}</h3>

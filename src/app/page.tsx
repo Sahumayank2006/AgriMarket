@@ -35,6 +35,7 @@ import { BackgroundGradient } from "@/components/background-gradient";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 interface RoleCardProps {
   role: Role;
@@ -253,6 +254,19 @@ export default function RoleSelectionPage() {
                         <CarouselPrevious className="ml-10" />
                         <CarouselNext className="mr-10" />
                     </Carousel>
+                </div>
+
+                <div className="mt-20 w-full max-w-5xl text-center text-white animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 3 } as React.CSSProperties}>
+                    <Separator className="bg-white/50 mb-4" />
+                    <p className="text-lg font-semibold mb-6">Seamless Agricultural Operations – From Farm to Market</p>
+                    <Image
+                        src="https://i.ibb.co/SwNT6LpR/Copilot-20250908-002308.png"
+                        alt="Seamless Agricultural Operations"
+                        width={1100}
+                        height={250}
+                        className="rounded-lg object-contain mx-auto"
+                        data-ai-hint="agriculture technology"
+                    />
                 </div>
                 
                  <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 4 } as React.CSSProperties}>

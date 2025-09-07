@@ -125,11 +125,11 @@ export default function RoleSelectionPage() {
         <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
             <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
                 <div className="flex justify-between items-center gap-4 h-16">
-                    <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-4">
                         <div className="flex-shrink-0">
                             <Image src="https://i.ibb.co/Zz7ZMwXG/Chat-GPT-Image-Sep-7-2025-10-53-41-PM.png" alt="eAgriMarket Logo" width={100} height={23} className="object-contain" />
                         </div>
-                        <div className="flex-shrink-0">
+                        <div className="flex-shrink-0 ml-16">
                             <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
                         </div>
                     </div>

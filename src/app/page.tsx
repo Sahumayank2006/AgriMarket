@@ -226,8 +226,8 @@ export default function RoleSelectionPage() {
                     <Image
                         src="https://i.ibb.co/yFbP1WjB/Copilot-20250908-003134.png"
                         alt="AgriMarket Features"
-                        width={1024}
-                        height={256}
+                        width={614}
+                        height={154}
                         className="rounded-lg object-contain mx-auto"
                         data-ai-hint="agriculture features"
                     />

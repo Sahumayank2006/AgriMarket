@@ -70,21 +70,22 @@ interface PerformerCardProps {
 function PerformerCard({ name, location, achievement, imageSrc }: PerformerCardProps) {
     return (
         <Card className="h-full flex flex-col text-center items-center p-4 bg-card/90 backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:border-primary">
-            <Avatar className="h-20 w-20 border-4 border-primary/50 mb-4">
+            <Avatar className="h-16 w-16 border-4 border-primary/50 mb-3">
                 <AvatarImage src={imageSrc} alt={name} />
                 <AvatarFallback>{name.charAt(0)}</AvatarFallback>
             </Avatar>
-            <CardHeader className="p-2">
-                <CardTitle className="text-lg font-bold">{name}</CardTitle>
-                <p className="text-sm text-muted-foreground">{location}</p>
+            <CardHeader className="p-1">
+                <CardTitle className="text-md font-bold">{name}</CardTitle>
+                <p className="text-xs text-muted-foreground">{location}</p>
             </CardHeader>
             <CardContent className="p-2 flex-grow flex flex-col justify-center items-center">
-                 <Award className="h-6 w-6 text-amber-400 mb-2" />
-                <p className="text-sm text-muted-foreground">{achievement}</p>
+                 <Award className="h-5 w-5 text-amber-400 mb-1" />
+                <p className="text-xs text-muted-foreground text-center">{achievement}</p>
             </CardContent>
         </Card>
     );
 }
+
 
 export default function RoleSelectionPage() {
   const roles: RoleCardProps[] = [
@@ -261,7 +262,7 @@ export default function RoleSelectionPage() {
                     {topPerformers.map((performer, index) => (
                         <CarouselItem
                             key={index}
-                            className="pl-4 md:basis-1/2 lg:basis-1/3"
+                            className="pl-4 md:basis-1/3 lg:basis-1/4"
                         >
                           <div className="p-1 h-full">
                               <PerformerCard {...performer} />

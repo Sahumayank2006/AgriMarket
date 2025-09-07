@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -42,9 +43,9 @@ export function RouteOptimization() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      startLocation: "Warehouse A, Sokoto",
-      deliveryPoints: "Kano Market\nKaduna Central Storage\nZaria Farms",
-      endLocation: "Warehouse A, Sokoto",
+      startLocation: "Warehouse A, Nashik",
+      deliveryPoints: "Pune Market\nNagpur Central Storage\nSurat Farms",
+      endLocation: "Warehouse A, Nashik",
     },
   });
 

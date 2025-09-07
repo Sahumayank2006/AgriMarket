@@ -196,7 +196,7 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-between items-center gap-4 h-16">
                         <div className="flex items-center gap-12">
                              <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="eNAM Logo" width={100} height={23} className="object-contain" />
+                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
                             </div>
                             <div className="flex-shrink-0">
                                 <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
@@ -211,7 +211,7 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
 
-            <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-32 sm:pt-24">
+            <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
                 <div className="mb-6 text-white">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         Welcome to eAgriMarket

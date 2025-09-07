@@ -124,13 +124,8 @@ export default function RoleSelectionPage() {
 
         <div className="absolute top-8 z-20 w-full max-w-4xl px-4">
             <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4">
-                <p className="text-center text-sm font-medium text-muted-foreground mb-3">TRUSTED BY</p>
-                <div className="flex justify-around items-center gap-4 grayscale opacity-70">
-                    <Leaf className="h-8 w-8" data-ai-hint="nature logo"/>
-                    <Tractor className="h-8 w-8" data-ai-hint="farm logo"/>
-                    <div className="font-bold text-xl" data-ai-hint="text logo">AgriCorp</div>
-                    <div className="font-semibold text-lg italic" data-ai-hint="text logo">Harvest Co.</div>
-                    <Warehouse className="h-8 w-8" data-ai-hint="building logo"/>
+                <div className="flex justify-around items-center gap-4 grayscale opacity-70 h-10">
+                    {/* You can add your logos here */}
                 </div>
             </div>
         </div>

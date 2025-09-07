@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -9,6 +10,8 @@ import {
   Truck,
   Sprout,
   Warehouse,
+  Leaf,
+  Tractor
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -118,7 +121,21 @@ export default function RoleSelectionPage() {
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
         <BackgroundGradient hint="agriculture crops" />
-        <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center">
+
+        <div className="absolute top-8 z-20 w-full max-w-4xl px-4">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4">
+                <p className="text-center text-sm font-medium text-muted-foreground mb-3">TRUSTED BY</p>
+                <div className="flex justify-around items-center gap-4 grayscale opacity-70">
+                    <Leaf className="h-8 w-8" data-ai-hint="nature logo"/>
+                    <Tractor className="h-8 w-8" data-ai-hint="farm logo"/>
+                    <div className="font-bold text-xl" data-ai-hint="text logo">AgriCorp</div>
+                    <div className="font-semibold text-lg italic" data-ai-hint="text logo">Harvest Co.</div>
+                    <Warehouse className="h-8 w-8" data-ai-hint="building logo"/>
+                </div>
+            </div>
+        </div>
+
+        <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-32 sm:pt-24">
             <div className="flex items-center gap-4 mb-6 text-white">
                 <Logo className="h-16 w-16" />
                 <h1 className="text-5xl font-bold tracking-tight md:text-6xl">

@@ -187,12 +187,12 @@ export default function RoleSelectionPage() {
 
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden">
         <div className="relative flex w-full flex-col items-center justify-center p-4 grow">
             <BackgroundGradient hint="agriculture crops" />
 
             <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2 animate-in fade-in slide-in-from-top-4 duration-1000">
                     <div className="flex justify-between items-center gap-4 h-16">
                         <div className="flex items-center gap-12">
                              <div className="flex-shrink-0">
@@ -212,48 +212,50 @@ export default function RoleSelectionPage() {
             </div>
 
             <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
-                <div className="mb-6 text-white">
+                <div className="mb-6 text-white text-center">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         Welcome to eAgriMarket
                     </h1>
+                    <p className="max-w-3xl text-center text-xl text-white/80 mt-4 animate-in fade-in slide-in-from-top-8 duration-1000 ease-in-out">
+                        Transforming Agriculture with a Single Digital Platform
+                    </p>
                 </div>
-                <p className="max-w-3xl text-center text-xl text-white/80 mb-12">
-                    Transforming Agriculture with a Single Digital Platform
-                </p>
 
-                <Carousel
-                    setApi={setApi}
-                    opts={{
-                        align: "center",
-                        loop: true,
-                    }}
-                    className="w-full max-w-3xl"
-                >
-                    <CarouselContent className="-ml-4">
-                    {roles.map((role, index) => (
-                        <CarouselItem
-                            key={index}
-                            className={cn(
-                                "pl-4 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
-                                "carousel-item",
-                                { "is-active": index === current }
-                            )}
-                            style={{
-                                opacity: "var(--carousel-item-opacity, 0.3)",
-                                transform: "scale(var(--carousel-item-scale, 0.9))",
-                            }}
-                        >
-                          <div className="p-1">
-                              <RoleCard {...role} />
-                          </div>
-                        </CarouselItem>
-                    ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="ml-10" />
-                    <CarouselNext className="mr-10" />
-                </Carousel>
+                <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-in-out">
+                    <Carousel
+                        setApi={setApi}
+                        opts={{
+                            align: "center",
+                            loop: true,
+                        }}
+                        className="w-full max-w-3xl mx-auto"
+                    >
+                        <CarouselContent className="-ml-4">
+                        {roles.map((role, index) => (
+                            <CarouselItem
+                                key={index}
+                                className={cn(
+                                    "pl-4 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
+                                    "carousel-item",
+                                    { "is-active": index === current }
+                                )}
+                                style={{
+                                    opacity: "var(--carousel-item-opacity, 0.3)",
+                                    transform: "scale(var(--carousel-item-scale, 0.9))",
+                                }}
+                            >
+                              <div className="p-1">
+                                  <RoleCard {...role} />
+                              </div>
+                            </CarouselItem>
+                        ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="ml-10" />
+                        <CarouselNext className="mr-10" />
+                    </Carousel>
+                </div>
                 
-                 <div className="mt-20 w-full max-w-5xl text-center">
+                 <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 4 } as React.CSSProperties}>
                     <h2 className="text-4xl font-bold text-white mb-8">Top Performers</h2>
                      <Carousel
                         setApi={setPerformerApi}
@@ -282,7 +284,7 @@ export default function RoleSelectionPage() {
             </div>
         </div>
 
-         <footer className="w-full bg-gray-900 text-white py-12">
+         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 5 } as React.CSSProperties}>
             <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">

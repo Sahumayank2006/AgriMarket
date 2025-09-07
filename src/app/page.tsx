@@ -222,7 +222,7 @@ export default function RoleSelectionPage() {
                     </p>
                 </div>
 
-                 <div className="my-8 w-full max-w-5xl animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 2 } as React.CSSProperties}>
+                 <div className="my-4 w-full max-w-5xl animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 2 } as React.CSSProperties}>
                     <Image
                         src="https://i.ibb.co/yFbP1WjB/Copilot-20250908-003134.png"
                         alt="AgriMarket Features"

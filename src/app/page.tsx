@@ -12,7 +12,11 @@ import {
   Warehouse,
   Leaf,
   Tractor,
-  Award
+  Award,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -183,104 +187,143 @@ export default function RoleSelectionPage() {
 
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
-        <BackgroundGradient hint="agriculture crops" />
+    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
+        <div className="relative flex w-full flex-col items-center justify-center p-4 grow">
+            <BackgroundGradient hint="agriculture crops" />
 
-        <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
-                <div className="flex justify-between items-center gap-4 h-16">
-                    <div className="flex items-center gap-12">
-                         <div className="flex-shrink-0">
-                            <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="eNAM Logo" width={100} height={23} className="object-contain" />
+            <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
+                    <div className="flex justify-between items-center gap-4 h-16">
+                        <div className="flex items-center gap-12">
+                             <div className="flex-shrink-0">
+                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="eNAM Logo" width={100} height={23} className="object-contain" />
+                            </div>
+                            <div className="flex-shrink-0">
+                                <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
+                            </div>
                         </div>
-                        <div className="flex-shrink-0">
-                            <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
-                        </div>
-                    </div>
-                    <div className="flex justify-end items-center gap-4">
-                         <div className="flex-shrink-0">
-                            <Image src="https://i.ibb.co/Zz7ZMwXG/Chat-GPT-Image-Sep-7-2025-10-53-41-PM.png" alt="eAgriMarket Logo" width={100} height={23} className="object-contain" />
+                        <div className="flex justify-end items-center gap-4">
+                             <div className="flex-shrink-0">
+                                <Image src="https://i.ibb.co/Zz7ZMwXG/Chat-GPT-Image-Sep-7-2025-10-53-41-PM.png" alt="eAgriMarket Logo" width={100} height={23} className="object-contain" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-32 sm:pt-24">
-            <div className="mb-6 text-white">
-                <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                    Welcome to eAgriMarket
-                </h1>
-            </div>
-            <p className="max-w-3xl text-center text-xl text-white/80 mb-12">
-                Transforming Agriculture with a Single Digital Platform
-            </p>
+            <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-32 sm:pt-24">
+                <div className="mb-6 text-white">
+                    <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
+                        Welcome to eAgriMarket
+                    </h1>
+                </div>
+                <p className="max-w-3xl text-center text-xl text-white/80 mb-12">
+                    Transforming Agriculture with a Single Digital Platform
+                </p>
 
-            <Carousel
-                setApi={setApi}
-                opts={{
-                    align: "center",
-                    loop: true,
-                }}
-                className="w-full max-w-3xl"
-            >
-                <CarouselContent className="-ml-4">
-                {roles.map((role, index) => (
-                    <CarouselItem
-                        key={index}
-                        className={cn(
-                            "pl-4 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
-                            "carousel-item",
-                            { "is-active": index === current }
-                        )}
-                        style={{
-                            opacity: "var(--carousel-item-opacity, 0.3)",
-                            transform: "scale(var(--carousel-item-scale, 0.9))",
-                        }}
-                    >
-                      <div className="p-1">
-                          <RoleCard {...role} />
-                      </div>
-                    </CarouselItem>
-                ))}
-                </CarouselContent>
-                <CarouselPrevious className="ml-10" />
-                <CarouselNext className="mr-10" />
-            </Carousel>
-            
-             <div className="mt-20 w-full max-w-5xl text-center">
-                <h2 className="text-4xl font-bold text-white mb-8">Top Performers</h2>
-                 <Carousel
-                    setApi={setPerformerApi}
+                <Carousel
+                    setApi={setApi}
                     opts={{
                         align: "center",
                         loop: true,
                     }}
-                    className="w-full max-w-4xl mx-auto"
+                    className="w-full max-w-3xl"
                 >
                     <CarouselContent className="-ml-4">
-                    {topPerformers.map((performer, index) => (
+                    {roles.map((role, index) => (
                         <CarouselItem
                             key={index}
-                            className="pl-4 md:basis-1/3 lg:basis-1/4"
+                            className={cn(
+                                "pl-4 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
+                                "carousel-item",
+                                { "is-active": index === current }
+                            )}
+                            style={{
+                                opacity: "var(--carousel-item-opacity, 0.3)",
+                                transform: "scale(var(--carousel-item-scale, 0.9))",
+                            }}
                         >
-                          <div className="p-1 h-full">
-                              <PerformerCard {...performer} />
+                          <div className="p-1">
+                              <RoleCard {...role} />
                           </div>
                         </CarouselItem>
                     ))}
                     </CarouselContent>
-                    <CarouselPrevious className="ml-0 text-white" />
-                    <CarouselNext className="mr-0 text-white" />
+                    <CarouselPrevious className="ml-10" />
+                    <CarouselNext className="mr-10" />
                 </Carousel>
+                
+                 <div className="mt-20 w-full max-w-5xl text-center">
+                    <h2 className="text-4xl font-bold text-white mb-8">Top Performers</h2>
+                     <Carousel
+                        setApi={setPerformerApi}
+                        opts={{
+                            align: "center",
+                            loop: true,
+                        }}
+                        className="w-full max-w-4xl mx-auto"
+                    >
+                        <CarouselContent className="-ml-4">
+                        {topPerformers.map((performer, index) => (
+                            <CarouselItem
+                                key={index}
+                                className="pl-4 md:basis-1/3 lg:basis-1/4"
+                            >
+                              <div className="p-1 h-full">
+                                  <PerformerCard {...performer} />
+                              </div>
+                            </CarouselItem>
+                        ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="ml-0 text-white" />
+                        <CarouselNext className="mr-0 text-white" />
+                    </Carousel>
+                </div>
             </div>
-
-
-            <footer className="mt-20 text-center text-white/70 text-sm">
-                <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>
-                <p className="mt-1">Reducing food waste, one crop at a time.</p>
-            </footer>
         </div>
+
+         <footer className="w-full bg-gray-900 text-white py-12">
+            <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-1">
+                    <div className="flex items-center gap-2 mb-4">
+                        <Logo className="h-8 w-8 text-primary" />
+                        <span className="text-xl font-semibold">AgriMarket</span>
+                    </div>
+                    <p className="text-gray-400 text-sm">
+                        Reducing food waste, one crop at a time. A digital ecosystem for sustainable agriculture.
+                    </p>
+                </div>
+                <div>
+                    <h4 className="font-semibold mb-4">Company</h4>
+                    <ul className="space-y-2 text-sm text-gray-400">
+                        <li><Link href="#" className="hover:text-white">About Us</Link></li>
+                        <li><Link href="#" className="hover:text-white">Careers</Link></li>
+                        <li><Link href="#" className="hover:text-white">Press</Link></li>
+                        <li><Link href="#" className="hover:text-white">Contact Us</Link></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 className="font-semibold mb-4">Legal</h4>
+                    <ul className="space-y-2 text-sm text-gray-400">
+                        <li><Link href="#" className="hover:text-white">Privacy Policy</Link></li>
+                        <li><Link href="#" className="hover:text-white">Terms of Service</Link></li>
+                        <li><Link href="#" className="hover:text-white">Cookie Policy</Link></li>
+                    </ul>
+                </div>
+                <div>
+                     <h4 className="font-semibold mb-4">Follow Us</h4>
+                    <div className="flex space-x-4">
+                        <Link href="#" className="text-gray-400 hover:text-white"><Facebook className="h-6 w-6" /></Link>
+                        <Link href="#" className="text-gray-400 hover:text-white"><Twitter className="h-6 w-6" /></Link>
+                        <Link href="#" className="text-gray-400 hover:text-white"><Instagram className="h-6 w-6" /></Link>
+                        <Link href="#" className="text-gray-400 hover:text-white"><Linkedin className="h-6 w-6" /></Link>
+                    </div>
+                </div>
+            </div>
+            <div className="max-w-6xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+                <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
   );
 }

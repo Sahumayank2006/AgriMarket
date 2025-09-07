@@ -197,9 +197,9 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-between items-center gap-4 h-16">
                         <div className="flex items-center gap-12">
                              <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/sdZVHNk/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
+                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="g20 logo" width={100} height={23} className="object-contain" />
                             </div>
-                            <div className="flex-shrink-0">
+                             <div className="flex-shrink-0">
                                 <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
                             </div>
                         </div>

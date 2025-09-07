@@ -212,7 +212,7 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
 
-            <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
+            <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-40">
                 <div className="mb-6 text-white text-center">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         Welcome to eAgriMarket
@@ -232,8 +232,12 @@ export default function RoleSelectionPage() {
                         data-ai-hint="agriculture features"
                     />
                 </div>
+                
+                <div className="mb-8 text-center text-lg font-semibold text-white/90 animate-in fade-in duration-1000" style={{ "--index": 3 } as React.CSSProperties}>
+                  <p>Choose Your Role to Get Started</p>
+                </div>
 
-                <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-in-out">
+                <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-in-out" style={{ "--index": 4 } as React.CSSProperties}>
                     <Carousel
                         setApi={setApi}
                         opts={{
@@ -267,7 +271,7 @@ export default function RoleSelectionPage() {
                     </Carousel>
                 </div>
 
-                <div className="mt-20 w-full max-w-5xl text-center text-white animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 3 } as React.CSSProperties}>
+                <div className="mt-20 w-full max-w-5xl text-center text-white animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 5 } as React.CSSProperties}>
                     <Separator className="bg-white/50 mb-4" />
                     <p className="text-lg font-semibold mb-6">Seamless Agricultural Operations – From Farm to Market</p>
                     <Image
@@ -280,7 +284,7 @@ export default function RoleSelectionPage() {
                     />
                 </div>
                 
-                 <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 4 } as React.CSSProperties}>
+                 <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 6 } as React.CSSProperties}>
                     <h2 className="text-4xl font-bold text-white mb-8">Top Performers</h2>
                      <Carousel
                         setApi={setPerformerApi}
@@ -309,7 +313,7 @@ export default function RoleSelectionPage() {
             </div>
         </div>
 
-         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 5 } as React.CSSProperties}>
+         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 7 } as React.CSSProperties}>
             <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">

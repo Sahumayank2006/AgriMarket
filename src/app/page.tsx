@@ -122,10 +122,15 @@ export default function RoleSelectionPage() {
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
         <BackgroundGradient hint="agriculture crops" />
 
-        <div className="absolute top-8 z-20 w-full max-w-4xl px-4">
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-4">
-                <div className="flex justify-around items-center gap-4 grayscale opacity-70 h-10">
-                    {/* You can add your logos here */}
+        <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
+                <div className="flex justify-between items-center gap-4 h-16">
+                    <div className="flex-shrink-0">
+                        <Image src="/eagrimarket-logo.png" alt="eAgriMarket Logo" width={180} height={40} className="object-contain" />
+                    </div>
+                    <div className="flex justify-end items-center gap-4 flex-grow">
+                        {/* You can add other logos or content here */}
+                    </div>
                 </div>
             </div>
         </div>

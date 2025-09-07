@@ -143,10 +143,9 @@ export default function RoleSelectionPage() {
         </div>
 
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-32 sm:pt-24">
-            <div className="flex items-center gap-4 mb-6 text-white">
-                <Logo className="h-16 w-16" />
-                <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
-                Welcome to AgriMarket
+            <div className="mb-6 text-white">
+                <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
+                    Welcome to eAgriMarket
                 </h1>
             </div>
             <p className="max-w-3xl text-center text-xl text-white/80 mb-12">

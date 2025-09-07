@@ -149,7 +149,7 @@ export default function RoleSelectionPage() {
                 </h1>
             </div>
             <p className="max-w-3xl text-center text-xl text-white/80 mb-12">
-                Your integrated platform for smart food waste management. Select your role to begin your journey towards a more sustainable future.
+                Transforming Agriculture with a Single Digital Platform
             </p>
 
             <Carousel

@@ -11,7 +11,8 @@ import {
   Sprout,
   Warehouse,
   Leaf,
-  Tractor
+  Tractor,
+  Award
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,7 @@ import {
 import { BackgroundGradient } from "@/components/background-gradient";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface RoleCardProps {
   role: Role;
@@ -56,6 +58,32 @@ function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
       </CardContent>
     </Card>
   );
+}
+
+interface PerformerCardProps {
+  name: string;
+  location: string;
+  achievement: string;
+  imageSrc: string;
+}
+
+function PerformerCard({ name, location, achievement, imageSrc }: PerformerCardProps) {
+    return (
+        <Card className="h-full flex flex-col text-center items-center p-4 bg-card/90 backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:border-primary">
+            <Avatar className="h-20 w-20 border-4 border-primary/50 mb-4">
+                <AvatarImage src={imageSrc} alt={name} />
+                <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <CardHeader className="p-2">
+                <CardTitle className="text-lg font-bold">{name}</CardTitle>
+                <p className="text-sm text-muted-foreground">{location}</p>
+            </CardHeader>
+            <CardContent className="p-2 flex-grow flex flex-col justify-center items-center">
+                 <Award className="h-6 w-6 text-amber-400 mb-2" />
+                <p className="text-sm text-muted-foreground">{achievement}</p>
+            </CardContent>
+        </Card>
+    );
 }
 
 export default function RoleSelectionPage() {
@@ -97,9 +125,44 @@ export default function RoleSelectionPage() {
       dataAiHint: "data dashboard",
     },
   ];
+  
+  const topPerformers: PerformerCardProps[] = [
+    {
+        name: "Anjali Sharma",
+        location: "Pune Warehouse",
+        achievement: "Reduced spoilage by 15% in Q2 2024.",
+        imageSrc: "https://i.pravatar.cc/150?u=anjali"
+    },
+    {
+        name: "Rajesh Kumar",
+        location: "Nashik Cold Storage",
+        achievement: "Maintained 99.8% inventory accuracy.",
+        imageSrc: "https://i.pravatar.cc/150?u=rajesh"
+    },
+    {
+        name: "Priya Singh",
+        location: "Nagpur Hub",
+        achievement: "Fastest average dispatch time in July.",
+        imageSrc: "https://i.pravatar.cc/150?u=priya"
+    },
+    {
+        name: "Vikram Patel",
+        location: "Mumbai Central",
+        achievement: "Zero safety incidents in the last 12 months.",
+        imageSrc: "https://i.pravatar.cc/150?u=vikram"
+    },
+    {
+        name: "Sunita Reddy",
+        location: "Pune Warehouse",
+        achievement: "Highest rated manager by logistics partners.",
+        imageSrc: "https://i.pravatar.cc/150?u=sunita"
+    },
+  ];
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  
+  const [performerApi, setPerformerApi] = useState<CarouselApi>();
 
   useEffect(() => {
     if (!api) {
@@ -183,6 +246,34 @@ export default function RoleSelectionPage() {
                 <CarouselPrevious className="ml-10" />
                 <CarouselNext className="mr-10" />
             </Carousel>
+            
+             <div className="mt-20 w-full max-w-5xl text-center">
+                <h2 className="text-4xl font-bold text-white mb-8">Top Performers</h2>
+                 <Carousel
+                    setApi={setPerformerApi}
+                    opts={{
+                        align: "center",
+                        loop: true,
+                    }}
+                    className="w-full max-w-4xl mx-auto"
+                >
+                    <CarouselContent className="-ml-4">
+                    {topPerformers.map((performer, index) => (
+                        <CarouselItem
+                            key={index}
+                            className="pl-4 md:basis-1/2 lg:basis-1/3"
+                        >
+                          <div className="p-1 h-full">
+                              <PerformerCard {...performer} />
+                          </div>
+                        </CarouselItem>
+                    ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="ml-0 text-white" />
+                    <CarouselNext className="mr-0 text-white" />
+                </Carousel>
+            </div>
+
 
             <footer className="mt-20 text-center text-white/70 text-sm">
                 <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>

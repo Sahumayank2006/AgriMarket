@@ -222,6 +222,17 @@ export default function RoleSelectionPage() {
                     </p>
                 </div>
 
+                 <div className="my-8 w-full max-w-5xl animate-in fade-in duration-1000 ease-in-out" style={{ "--index": 2 } as React.CSSProperties}>
+                    <Image
+                        src="https://i.ibb.co/yFbP1WjB/Copilot-20250908-003134.png"
+                        alt="AgriMarket Features"
+                        width={1024}
+                        height={256}
+                        className="rounded-lg object-contain mx-auto"
+                        data-ai-hint="agriculture features"
+                    />
+                </div>
+
                 <div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-in-out">
                     <Carousel
                         setApi={setApi}

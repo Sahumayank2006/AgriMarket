@@ -262,8 +262,8 @@ export default function RoleSelectionPage() {
                     <Image
                         src="https://i.ibb.co/SwNT6LpR/Copilot-20250908-002308.png"
                         alt="Seamless Agricultural Operations"
-                        width={900}
-                        height={205}
+                        width={630}
+                        height={144}
                         className="rounded-lg object-contain mx-auto"
                         data-ai-hint="agriculture technology"
                     />

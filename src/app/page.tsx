@@ -46,7 +46,7 @@ interface RoleCardProps {
 
 function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
   return (
-    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:border-primary bg-card/90 backdrop-blur-sm">
+    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary bg-card/90 backdrop-blur-sm">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-bold">{title}</CardTitle>
         <Icon className="h-8 w-8 text-muted-foreground" />
@@ -73,7 +73,7 @@ interface PerformerCardProps {
 
 function PerformerCard({ name, location, achievement, imageSrc }: PerformerCardProps) {
     return (
-        <Card className="h-full flex flex-col text-center items-center p-4 bg-card/90 backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:border-primary">
+        <Card className="h-full flex flex-col text-center items-center p-4 bg-card/90 backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary">
             <Avatar className="h-16 w-16 border-4 border-primary/50 mb-3">
                 <AvatarImage src={imageSrc} alt={name} />
                 <AvatarFallback>{name.charAt(0)}</AvatarFallback>
@@ -196,7 +196,7 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-between items-center gap-4 h-16">
                         <div className="flex items-center gap-12">
                              <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
+                                <Image src="https://i.ibb.co/sdZVHNk/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
                             </div>
                             <div className="flex-shrink-0">
                                 <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />

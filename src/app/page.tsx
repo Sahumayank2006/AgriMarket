@@ -191,7 +191,7 @@ export default function RoleSelectionPage() {
       <hr className="w-full border-t-4 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow">
 
-            <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-24">
+            <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
                 <div className="mb-6 text-foreground">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         Welcome to AharaSetu
@@ -314,5 +314,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    

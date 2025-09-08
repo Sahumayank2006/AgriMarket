@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const metadata: Metadata = {
-  title: 'AgriMarket',
+  title: 'AharaSetu',
   description: 'A platform to efficiently manage surplus food, reduce waste, and facilitate marketplace transactions.',
 };
 

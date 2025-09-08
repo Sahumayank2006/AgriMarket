@@ -194,7 +194,7 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-between items-center gap-4 h-16">
                         <div className="flex items-center gap-12">
                              <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/sdZVHNk/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
+                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
                             </div>
                             <div className="flex-shrink-0">
                                 <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
@@ -202,7 +202,7 @@ export default function RoleSelectionPage() {
                         </div>
                         <div className="flex justify-end items-center gap-4">
                              <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/Zz7ZMwXG/Chat-GPT-Image-Sep-7-2025-10-53-41-PM.png" alt="eAgriMarket Logo" width={100} height={23} className="object-contain" />
+                                <Image src="https://i.ibb.co/Zz7ZMwXG/Chat-GPT-Image-Sep-7-2025-10-53-41-PM.png" alt="AharaSetu Logo" width={100} height={23} className="object-contain" />
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@ export default function RoleSelectionPage() {
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
                 <div className="mb-6 text-foreground">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                        Welcome to eAgriMarket
+                        Welcome to AharaSetu
                     </h1>
                 </div>
                 <p className="max-w-3xl text-center text-xl text-muted-foreground mb-12 animate-in fade-in slide-in-from-top-6 duration-1000">
@@ -297,7 +297,7 @@ export default function RoleSelectionPage() {
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">
                         <Logo className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-semibold">AgriMarket</span>
+                        <span className="text-xl font-semibold">AharaSetu</span>
                     </div>
                     <p className="text-gray-400 text-sm">
                         Reducing food waste, one crop at a time. A digital ecosystem for sustainable agriculture.
@@ -331,7 +331,7 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
             <div className="max-w-6xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-                <p>&copy; {new Date().getFullYear()} AgriMarket. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} AharaSetu. All rights reserved.</p>
             </div>
         </footer>
     </div>

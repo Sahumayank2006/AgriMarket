@@ -5,9 +5,9 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: "agrimarket-7quyf.firebaseapp.com",
-  projectId: "agrimarket-7quyf",
-  storageBucket: "agrimarket-7quyf.firebasestorage.app",
+  authDomain: "aharasetu.firebaseapp.com",
+  projectId: "aharasetu",
+  storageBucket: "aharasetu.appspot.com",
   messagingSenderId: "1079117222665",
   appId: "1:1079117222665:web:7466113853f2212c0e39d8",
 };

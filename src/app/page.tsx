@@ -66,37 +66,24 @@ function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
 
 interface PerformerCardProps {
   name: string;
+  role: string;
   location: string;
   achievement: string;
-  imageSrc: string;
-  moneySaved?: string;
 }
 
-function PerformerCard({ name, location, achievement, imageSrc, moneySaved }: PerformerCardProps) {
+function PerformerCard({ name, role, location, achievement }: PerformerCardProps) {
     return (
-        <Card className="h-full flex flex-col p-4 bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
-            <div className="flex items-center gap-4">
-                <Avatar className="h-14 w-14 border-2 border-blue-200">
-                    <AvatarImage src={imageSrc} alt={name} />
-                    <AvatarFallback>{name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                    <h4 className="font-bold text-sm">{name}</h4>
-                    <p className="text-xs text-muted-foreground">{location}</p>
+        <Card className="h-full flex flex-col p-6 bg-blue-100 dark:bg-blue-900/30 border-blue-200 rounded-2xl shadow-lg text-center transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+            <CardContent className="p-0 flex-grow flex flex-col justify-center items-center">
+                <h4 className="font-bold text-lg text-foreground">{name}</h4>
+                <p className="text-sm text-muted-foreground mt-1">{role}</p>
+                <p className="text-sm text-muted-foreground">{location}</p>
+            </CardContent>
+            <div className="mt-4">
+                <div className="bg-white dark:bg-card rounded-full px-4 py-2 text-sm text-blue-800 dark:text-blue-200 font-semibold shadow-inner">
+                    {achievement}
                 </div>
             </div>
-            <CardContent className="p-0 pt-3 flex-grow">
-                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <Award className="h-4 w-4 text-amber-500" />
-                    <p className="flex-1">{achievement}</p>
-                 </div>
-                 {moneySaved && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
-                        <IndianRupee className="h-4 w-4 text-green-500" />
-                        <p className="flex-1 font-medium">{moneySaved}</p>
-                    </div>
-                 )}
-            </CardContent>
         </Card>
     );
 }
@@ -144,39 +131,34 @@ export default function RoleSelectionPage() {
   
   const topPerformers: PerformerCardProps[] = [
     {
-        name: "Vijay Kumar",
-        location: "Maharashtra Region",
-        achievement: "Highest reduction in transport costs.",
-        imageSrc: "https://i.pravatar.cc/150?u=vijay",
-        moneySaved: "Saved ₹50,000 on logistics."
+      name: "Vijay Kumar",
+      role: "Logistics Head",
+      location: "Maharashtra Region",
+      achievement: "₹50,000+ saved on transport",
     },
     {
-        name: "Meera Patel",
-        location: "Nashik Cold Storage",
-        achievement: "Reduced spoilage by 25% for tomatoes.",
-        imageSrc: "https://i.pravatar.cc/150?u=meera",
-        moneySaved: "Saved produce worth ₹1,20,000."
+      name: "Meera Patel",
+      role: "Warehouse Manager",
+      location: "Nashik Cold Storage",
+      achievement: "25% spoilage reduction",
     },
     {
-        name: "Rohan Gupta",
-        location: "Pune Distribution",
-        achievement: "Fastest average delivery time in Q2.",
-        imageSrc: "https://i.pravatar.cc/150?u=rohan",
-        moneySaved: "Improved customer satisfaction by 15%."
+      name: "Rohan Gupta",
+      role: "Top Farmer",
+      location: "Pune District",
+      achievement: "Fastest delivery times in Q2",
     },
     {
-        name: "Aisha Sharma",
-        location: "Nagpur Hub",
-        achievement: "Top-rated farmer for produce quality.",
-        imageSrc: "https://i.pravatar.cc/150?u=aisha",
-        moneySaved: "Secured premium pricing on 80% of sales."
+      name: "Aisha Sharma",
+      role: "Quality Control Lead",
+      location: "Nagpur Hub",
+      achievement: "99.8% quality rating",
     },
     {
-        name: "Suresh Singh",
-        location: "Aurangabad Warehouse",
-        achievement: "Best inventory management accuracy.",
-        imageSrc: "https://i.pravatar.cc/150?u=suresh",
-        moneySaved: "Prevented ₹75,000 in potential losses."
+      name: "Suresh Singh",
+      role: "Top Dealer",
+      location: "Aurangabad",
+      achievement: "500+ successful trades",
     },
   ];
 

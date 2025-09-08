@@ -195,7 +195,7 @@ export default function RoleSelectionPage() {
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
       <div className="w-full h-24 bg-white flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <Image src="https://i.ibb.co/23qQpPDZ/Copilot-20250908-153516.png" alt="AharaSetu Logo" width={112} height={45} />
+          <Image src="https://i.ibb.co/23qQpPDZ/Copilot-20250908-153516.png" alt="AaharSetu Logo" width={112} height={45} />
           <Image src="https://i.ibb.co/rRSFrGhv/mohfw-1.png" alt="MoHFW Logo" width={112} height={45} />
         </div>
         <Image src="https://i.ibb.co/6RGXhqsJ/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={112} height={45} />
@@ -207,7 +207,7 @@ export default function RoleSelectionPage() {
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
                 <div className="mb-6 text-foreground">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                        Welcome to AharaSetu
+                        Welcome to AaharSetu
                     </h1>
                 </div>
                 <p className="max-w-3xl text-center text-xl text-muted-foreground mb-12 animate-in fade-in slide-in-from-top-6 duration-1000">
@@ -287,7 +287,7 @@ export default function RoleSelectionPage() {
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">
                         <Logo className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-semibold">AharaSetu</span>
+                        <span className="text-xl font-semibold">AaharSetu</span>
                     </div>
                     <p className="text-gray-400 text-sm">
                         Reducing food waste, one crop at a time. A digital ecosystem for sustainable agriculture.
@@ -321,7 +321,7 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
             <div className="max-w-6xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-                <p>&copy; {new Date().getFullYear()} AharaSetu. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} AaharSetu. All rights reserved.</p>
             </div>
         </footer>
     </div>

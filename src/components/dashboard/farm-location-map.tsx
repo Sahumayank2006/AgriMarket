@@ -39,7 +39,7 @@ export function FarmLocationMap() {
                     <Input 
                         placeholder="Enter your farm's address or GPS coordinates" 
                         className="pl-10"
-                        defaultValue="123 AharaSetu Lane, Farmer's Ville, Sokoto"
+                        defaultValue="123 AaharSetu Lane, Farmer's Ville, Sokoto"
                     />
                 </div>
                 <Button variant="outline" onClick={handleDetectLocation}>

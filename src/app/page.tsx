@@ -187,7 +187,9 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
-      <div className="w-full h-24 bg-white" />
+      <div className="w-full h-24 bg-white flex items-center justify-center">
+        <Image src="https://i.ibb.co/6RGXhqsJ/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={200} height={80} />
+      </div>
       <hr className="w-full border-t-4 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow">
 

@@ -187,7 +187,7 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
-      <div className="w-full h-12 bg-white" />
+      <div className="w-full h-24 bg-white" />
       <hr className="w-full border-t-4 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow">
 

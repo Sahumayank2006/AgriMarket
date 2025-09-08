@@ -194,9 +194,12 @@ export default function RoleSelectionPage() {
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
       <div className="w-full h-24 bg-white flex items-center justify-between px-4">
-        <Image src="https://i.ibb.co/23qQpPDZ/Copilot-20250908-153516.png" alt="AharaSetu Logo" width={112} height={45} />
+        <div className="flex items-center gap-4">
+          <Image src="https://i.ibb.co/23qQpPDZ/Copilot-20250908-153516.png" alt="AharaSetu Logo" width={112} height={45} />
+          <Image src="https://i.ibb.co/rRSFrGhv/mohfw-1.png" alt="MoHFW Logo" width={112} height={45} />
+        </div>
         <Image src="https://i.ibb.co/6RGXhqsJ/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={112} height={45} />
-        <div style={{ width: 112 }} /> 
+        <div style={{ width: 240 }} /> 
       </div>
       <hr className="w-full border-t-4 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow">

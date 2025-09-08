@@ -94,13 +94,13 @@ export function SidebarNav() {
 
   return (
     <>
-      <SidebarHeader>
-        <div className="flex items-center gap-2">
-          <Logo className="h-8 w-8 text-primary" />
-          <span className="text-xl font-semibold">AgriMarket</span>
+      <SidebarHeader className="github-border border-b bg-white dark:bg-gray-950">
+        <div className="flex items-center gap-2 p-4">
+          <Logo className="h-8 w-8 text-primary-500" />
+          <span className="text-lg font-medium">AgriMarket</span>
         </div>
       </SidebarHeader>
-      <SidebarContent className="p-2">
+      <SidebarContent className="p-2 bg-gray-50 dark:bg-gray-900">
         <SidebarMenu>
           {currentNavItems.map((item) => (
             <SidebarMenuItem key={item.href}>
@@ -108,17 +108,18 @@ export function SidebarNav() {
                 <SidebarMenuButton
                   isActive={pathname === item.href}
                   tooltip={{ children: item.label }}
+                  className="font-medium hover:bg-white dark:hover:bg-gray-800 hover:github-shadow transition-all duration-200 data-[active=true]:bg-primary-50 dark:data-[active=true]:bg-primary-900/20 data-[active=true]:text-primary-600 dark:data-[active=true]:text-primary-400"
                 >
-                  <item.icon />
+                  <item.icon className="h-4 w-4" />
                   <span>{item.label}</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
           ))}
             {role === 'farmer' && (
-                 <div className="mt-4 p-2">
-                    <p className="text-xs text-muted-foreground px-2">Total Revenue</p>
-                    <p className="text-lg font-semibold px-2">₹1,25,430</p>
+                 <div className="mt-4 p-3 mx-2 bg-white dark:bg-gray-950 rounded github-border github-shadow">
+                    <p className="text-xs font-light text-gray-600 dark:text-gray-400">Total Revenue</p>
+                    <p className="text-lg font-medium metric text-gray-900 dark:text-gray-100">₹1,25,430</p>
                 </div>
             )}
         </SidebarMenu>

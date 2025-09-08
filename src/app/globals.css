@@ -1,87 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300; /* Light weight as default */
+}
+
+/* Global selection color for accessibility and branding */
+::selection {
+  background-color: #21808D;
+  color: #ffffff;
+}
+::-moz-selection {
+  background-color: #21808D;
+  color: #ffffff;
 }
 
 @layer base {
   :root {
-    --background: 220 40% 98%;
-    --foreground: 220 40% 10%;
-    --card: 220 40% 98%;
-    --card-foreground: 220 40% 10%;
-    --popover: 220 40% 98%;
-    --popover-foreground: 220 40% 10%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 47.9 95.8% 53.1%;
-    --secondary-foreground: 26 83.3% 14.1%;
-    --muted: 220 20% 94%;
-    --muted-foreground: 220 20% 40%;
-    --accent: 220 30% 90%;
-    --accent-foreground: 220 40% 10%;
-    --destructive: 0 84.2% 60.2%;
+    /* GitHub-inspired color system with sophisticated blue primary */
+    --background: 220 14% 96%; /* Light gray (#f6f8fa) */
+    --foreground: 215 28% 17%; /* Dark text */
+    --card: 0 0% 100%; /* Pure white for cards */
+    --card-foreground: 215 28% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+    
+    /* Primary - sophisticated blue (#2563eb) */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - muted variant of primary */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 215 28% 17%;
+    
+    /* Muted backgrounds and text */
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    /* Accent - success green (#16a34a) */
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive - red for errors */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 20% 85%;
-    --input: 220 20% 85%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.8rem;
-    --chart-1: 142.1 76.2% 36.3%;
-    --chart-2: 47.9 95.8% 53.1%;
-    --chart-3: 200 40% 50%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --sidebar-background: 220 40% 98%;
-    --sidebar-foreground: 220 40% 10%;
-    --sidebar-primary: 142.1 76.2% 36.3%;
-    --sidebar-primary-foreground: 355.7 100% 97.3%;
-    --sidebar-accent: 220 30% 90%;
-    --sidebar-accent-foreground: 220 40% 10%;
-    --sidebar-border: 220 20% 85%;
-    --sidebar-ring: 142.1 76.2% 36.3%;
+    
+    /* Borders - GitHub gray (#d0d7de) */
+    --border: 215 20% 83%;
+    --input: 215 20% 83%;
+    --ring: 217 91% 60%;
+    --radius: 6px;
+    
+    /* Chart colors using primary palette */
+    --chart-1: 217 91% 60%; /* Primary blue */
+    --chart-2: 142 71% 45%; /* Success green */
+    --chart-3: 38 92% 50%;  /* Warning yellow */
+    --chart-4: 280 89% 60%; /* Purple */
+    --chart-5: 12 100% 62%; /* Red */
+    
+    /* Sidebar colors */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 28% 17%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 215 28% 17%;
+    --sidebar-border: 215 20% 83%;
+    --sidebar-ring: 217 91% 60%;
 
     --carousel-item-opacity: 0.3;
     --carousel-item-scale: 0.9;
   }
+  
   .dark {
-    --background: 220 20% 5%;
-    --foreground: 220 20% 95%;
-    --card: 220 20% 5%;
-    --card-foreground: 220 20% 95%;
-    --popover: 220 20% 5%;
-    --popover-foreground: 220 20% 95%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 47.9 95.8% 53.1%;
-    --secondary-foreground: 26 83.3% 14.1%;
-    --muted: 220 20% 12%;
-    --muted-foreground: 220 20% 60%;
-    --accent: 220 20% 15%;
-    --accent-foreground: 220 20% 95%;
-    --destructive: 0 62.8% 30.6%;
+    /* Dark mode - GitHub dark (#0d1117) */
+    --background: 220 13% 9%; /* Dark gray (#0d1117) */
+    --foreground: 220 14% 93%; /* Light text */
+    --card: 220 13% 9%;
+    --card-foreground: 220 14% 93%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 220 14% 93%;
+    
+    /* Primary remains same sophisticated blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - darker variant */
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 220 14% 93%;
+    
+    /* Muted - darker backgrounds */
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 15% 57%;
+    
+    /* Accent - success green remains */
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive */
+    --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 20% 20%;
-    --input: 220 20% 20%;
-    --ring: 142.1 76.2% 36.3%;
-    --chart-1: 142.1 76.2% 36.3%;
-    --chart-2: 47.9 95.8% 53.1%;
-    --chart-3: 200 40% 50%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --sidebar-background: 220 20% 5%;
-    --sidebar-foreground: 220 20% 95%;
-    --sidebar-primary: 142.1 76.2% 36.3%;
-    --sidebar-primary-foreground: 355.7 100% 97.3%;
-    --sidebar-accent: 220 20% 15%;
-    --sidebar-accent-foreground: 220 20% 95%;
-    --sidebar-border: 220 20% 20%;
-    --sidebar-ring: 142.1 76.2% 36.3%;
+    
+    /* Borders - darker */
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 217 91% 60%;
+    
+    /* Chart colors remain same */
+    --chart-1: 217 91% 60%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 280 89% 60%;
+    --chart-5: 12 100% 62%;
+    
+    /* Sidebar dark colors */
+    --sidebar-background: 220 13% 9%;
+    --sidebar-foreground: 220 14% 93%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 28% 17%;
+    --sidebar-accent-foreground: 220 14% 93%;
+    --sidebar-border: 215 28% 17%;
+    --sidebar-ring: 217 91% 60%;
 
     --carousel-item-opacity: 0.3;
     --carousel-item-scale: 0.9;
   }
+
+/* Ensure selection in dark mode uses same branded color */
+.dark ::selection {
+  background-color: #21808D;
+  color: #ffffff;
+}
+.dark ::-moz-selection {
+  background-color: #21808D;
+  color: #ffffff;
+}
 }
 
 @layer base {
@@ -89,7 +148,31 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-light; /* Default to light weight */
+  }
+  
+  /* Typography hierarchy following design system */
+  h1, h2, h3 {
+    @apply font-semibold; /* 600 for major headers */
+  }
+  
+  h4, h5, h6 {
+    @apply font-medium; /* 500 for smaller headers */
+  }
+  
+  /* Button and navigation text */
+  button, nav a, .nav-item {
+    @apply font-medium; /* 500 for interactive elements */
+  }
+  
+  /* Card titles and important stats */
+  .card-title, .stat-value, .metric {
+    @apply font-medium; /* 500 for card titles and stats */
+  }
+  
+  /* Body text, subtitles, labels */
+  p, span, label, .subtitle {
+    @apply font-light; /* 300 for body text */
   }
 }
 
@@ -97,5 +180,32 @@ body {
   .carousel-item.is-active {
     --carousel-item-opacity: 1;
     --carousel-item-scale: 1;
+  }
+  
+  /* GitHub-inspired utility classes */
+  .github-border {
+    @apply border border-gray-200 dark:border-gray-700;
+  }
+  
+  .github-shadow {
+    box-shadow: 0 1px 0 rgba(31, 35, 40, 0.15);
+  }
+  
+  .github-shadow-lg {
+    box-shadow: 0 4px 8px rgba(31, 35, 40, 0.15);
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-200 ease-out hover:scale-105;
+  }
+  
+  .hover-shadow {
+    @apply transition-shadow duration-200 ease-out hover:shadow-md;
+  }
+
+  /* Hind font utility for Hindi content */
+  .hind {
+    font-family: 'Hind', sans-serif;
   }
 }

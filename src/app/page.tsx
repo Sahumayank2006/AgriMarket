@@ -10,6 +10,7 @@ import {
   Truck,
   Sprout,
   Warehouse,
+  IndianRupee,
   Leaf,
   Tractor,
   Award,
@@ -68,22 +69,33 @@ interface PerformerCardProps {
   location: string;
   achievement: string;
   imageSrc: string;
+  moneySaved?: string;
 }
 
-function PerformerCard({ name, location, achievement, imageSrc }: PerformerCardProps) {
+function PerformerCard({ name, location, achievement, imageSrc, moneySaved }: PerformerCardProps) {
     return (
-        <Card className="h-full flex flex-col text-center items-center p-4 bg-card transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary">
-            <Avatar className="h-16 w-16 border-4 border-primary/50 mb-3">
-                <AvatarImage src={imageSrc} alt={name} />
-                <AvatarFallback>{name.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <CardHeader className="p-1">
-                <CardTitle className="text-md font-bold">{name}</CardTitle>
-                <p className="text-xs text-muted-foreground">{location}</p>
-            </CardHeader>
-            <CardContent className="p-2 flex-grow flex flex-col justify-center items-center">
-                 <Award className="h-5 w-5 text-amber-400 mb-1" />
-                <p className="text-xs text-muted-foreground text-center">{achievement}</p>
+        <Card className="h-full flex flex-col p-4 bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1">
+            <div className="flex items-center gap-4">
+                <Avatar className="h-14 w-14 border-2 border-blue-200">
+                    <AvatarImage src={imageSrc} alt={name} />
+                    <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                    <h4 className="font-bold text-sm">{name}</h4>
+                    <p className="text-xs text-muted-foreground">{location}</p>
+                </div>
+            </div>
+            <CardContent className="p-0 pt-3 flex-grow">
+                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Award className="h-4 w-4 text-amber-500" />
+                    <p className="flex-1">{achievement}</p>
+                 </div>
+                 {moneySaved && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
+                        <IndianRupee className="h-4 w-4 text-green-500" />
+                        <p className="flex-1 font-medium">{moneySaved}</p>
+                    </div>
+                 )}
             </CardContent>
         </Card>
     );
@@ -132,34 +144,39 @@ export default function RoleSelectionPage() {
   
   const topPerformers: PerformerCardProps[] = [
     {
-        name: "Anjali Sharma",
-        location: "Pune Warehouse",
-        achievement: "Reduced spoilage by 15% in Q2 2024.",
-        imageSrc: "https://i.pravatar.cc/150?u=anjali"
+        name: "Vijay Kumar",
+        location: "Maharashtra Region",
+        achievement: "Highest reduction in transport costs.",
+        imageSrc: "https://i.pravatar.cc/150?u=vijay",
+        moneySaved: "Saved ₹50,000 on logistics."
     },
     {
-        name: "Rajesh Kumar",
+        name: "Meera Patel",
         location: "Nashik Cold Storage",
-        achievement: "Maintained 99.8% inventory accuracy.",
-        imageSrc: "https://i.pravatar.cc/150?u=rajesh"
+        achievement: "Reduced spoilage by 25% for tomatoes.",
+        imageSrc: "https://i.pravatar.cc/150?u=meera",
+        moneySaved: "Saved produce worth ₹1,20,000."
     },
     {
-        name: "Priya Singh",
+        name: "Rohan Gupta",
+        location: "Pune Distribution",
+        achievement: "Fastest average delivery time in Q2.",
+        imageSrc: "https://i.pravatar.cc/150?u=rohan",
+        moneySaved: "Improved customer satisfaction by 15%."
+    },
+    {
+        name: "Aisha Sharma",
         location: "Nagpur Hub",
-        achievement: "Fastest average dispatch time in July.",
-        imageSrc: "https://i.pravatar.cc/150?u=priya"
+        achievement: "Top-rated farmer for produce quality.",
+        imageSrc: "https://i.pravatar.cc/150?u=aisha",
+        moneySaved: "Secured premium pricing on 80% of sales."
     },
     {
-        name: "Vikram Patel",
-        location: "Mumbai Central",
-        achievement: "Zero safety incidents in the last 12 months.",
-        imageSrc: "https://i.pravatar.cc/150?u=vikram"
-    },
-    {
-        name: "Sunita Reddy",
-        location: "Pune Warehouse",
-        achievement: "Highest rated manager by logistics partners.",
-        imageSrc: "https://i.pravatar.cc/150?u=sunita"
+        name: "Suresh Singh",
+        location: "Aurangabad Warehouse",
+        achievement: "Best inventory management accuracy.",
+        imageSrc: "https://i.pravatar.cc/150?u=suresh",
+        moneySaved: "Prevented ₹75,000 in potential losses."
     },
   ];
 
@@ -247,16 +264,16 @@ export default function RoleSelectionPage() {
                      <Carousel
                         setApi={setPerformerApi}
                         opts={{
-                            align: "center",
-                            loop: true,
+                            align: "start",
+                            loop: false,
                         }}
-                        className="w-full max-w-4xl mx-auto"
+                        className="w-full max-w-5xl mx-auto"
                     >
                         <CarouselContent className="-ml-4">
                         {topPerformers.map((performer, index) => (
                             <CarouselItem
                                 key={index}
-                                className="pl-4 md:basis-1/3 lg:basis-1/4"
+                                className="pl-4 md:basis-1/2 lg:basis-1/3"
                             >
                               <div className="p-1 h-full">
                                   <PerformerCard {...performer} />

@@ -188,26 +188,6 @@ export default function RoleSelectionPage() {
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
         <div className="flex w-full flex-col items-center justify-center p-4 grow">
-            
-            <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
-                <div className="bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
-                    <div className="flex justify-between items-center gap-4 h-16">
-                        <div className="flex items-center gap-12">
-                             <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/sdZVHNk7/download-1.png" alt="download-1" width={100} height={23} className="object-contain" />
-                            </div>
-                            <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/bRCtsmHs/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={100} height={23} className="object-contain" />
-                            </div>
-                        </div>
-                        <div className="flex justify-end items-center gap-4">
-                             <div className="flex-shrink-0">
-                                <Image src="https://i.ibb.co/Zz7ZMwXG/Chat-GPT-Image-Sep-7-2025-10-53-41-PM.png" alt="AharaSetu Logo" width={100} height={23} className="object-contain" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
                 <div className="mb-6 text-foreground">
@@ -219,10 +199,6 @@ export default function RoleSelectionPage() {
                     Transforming Agriculture with a Single Digital Platform
                 </p>
 
-                <div className="w-full flex justify-center mb-6 mt-0">
-                    <Image src="https://i.ibb.co/yFbP1WjB/Copilot-20250908-003134.png" alt="Main Features" width={246} height={62} className="rounded-lg shadow-lg" />
-                </div>
-                
                  <p className="text-lg text-muted-foreground mb-8">Choose Your Role to Get Started</p>
 
                 <Carousel
@@ -262,7 +238,6 @@ export default function RoleSelectionPage() {
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                         <p className="text-lg text-muted-foreground mt-4">Seamless Agricultural Operations – From Farm to Market</p>
                     </div>
-                    <Image src="https://i.ibb.co/SwNT6LpR/Copilot-20250908-002308.png" alt="Seamless Operations" width={630} height={144} className="mx-auto rounded-lg shadow-lg mb-12" />
 
                     <h2 className="text-4xl font-bold text-foreground mb-8">Top Performers</h2>
                      <Carousel

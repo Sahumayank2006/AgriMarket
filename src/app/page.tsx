@@ -31,7 +31,6 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { BackgroundGradient } from "@/components/background-gradient";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -46,7 +45,7 @@ interface RoleCardProps {
 
 function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
   return (
-    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary bg-card/90 backdrop-blur-sm">
+    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary bg-card">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-bold">{title}</CardTitle>
         <Icon className="h-8 w-8 text-muted-foreground" />
@@ -73,7 +72,7 @@ interface PerformerCardProps {
 
 function PerformerCard({ name, location, achievement, imageSrc }: PerformerCardProps) {
     return (
-        <Card className="h-full flex flex-col text-center items-center p-4 bg-card/90 backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary">
+        <Card className="h-full flex flex-col text-center items-center p-4 bg-card transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary">
             <Avatar className="h-16 w-16 border-4 border-primary/50 mb-3">
                 <AvatarImage src={imageSrc} alt={name} />
                 <AvatarFallback>{name.charAt(0)}</AvatarFallback>
@@ -187,12 +186,11 @@ export default function RoleSelectionPage() {
 
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden">
-        <div className="relative flex w-full flex-col items-center justify-center p-4 grow">
-            <BackgroundGradient hint="agriculture crops" />
-
+    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
+        <div className="flex w-full flex-col items-center justify-center p-4 grow">
+            
             <div className="absolute top-8 z-20 w-full max-w-5xl px-4">
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
+                <div className="bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-2">
                     <div className="flex justify-between items-center gap-4 h-16">
                         <div className="flex items-center gap-12">
                              <div className="flex-shrink-0">
@@ -211,15 +209,21 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
 
-            <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
-                <div className="mb-6 text-white">
+            <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
+                <div className="mb-6 text-foreground">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         Welcome to eAgriMarket
                     </h1>
                 </div>
-                <p className="max-w-3xl text-center text-xl text-white/80 mb-12">
+                <p className="max-w-3xl text-center text-xl text-muted-foreground mb-12 animate-in fade-in slide-in-from-top-6 duration-1000">
                     Transforming Agriculture with a Single Digital Platform
                 </p>
+
+                <div className="w-full flex justify-center mb-6 mt-0">
+                    <Image src="https://i.ibb.co/yFbP1WjB/Copilot-20250908-003134.png" alt="Main Features" width={246} height={62} className="rounded-lg shadow-lg" />
+                </div>
+                
+                 <p className="text-lg text-muted-foreground mb-8">Choose Your Role to Get Started</p>
 
                 <Carousel
                     setApi={setApi}
@@ -227,7 +231,7 @@ export default function RoleSelectionPage() {
                         align: "center",
                         loop: true,
                     }}
-                    className="w-full max-w-3xl"
+                    className="w-full max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000"
                 >
                     <CarouselContent className="-ml-4">
                     {roles.map((role, index) => (
@@ -253,8 +257,14 @@ export default function RoleSelectionPage() {
                     <CarouselNext className="mr-10" />
                 </Carousel>
                 
-                 <div className="mt-20 w-full max-w-5xl text-center">
-                    <h2 className="text-4xl font-bold text-white mb-8">Top Performers</h2>
+                 <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+                    <div className="mb-8">
+                        <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
+                        <p className="text-lg text-muted-foreground mt-4">Seamless Agricultural Operations – From Farm to Market</p>
+                    </div>
+                    <Image src="https://i.ibb.co/SwNT6LpR/Copilot-20250908-002308.png" alt="Seamless Operations" width={630} height={144} className="mx-auto rounded-lg shadow-lg mb-12" />
+
+                    <h2 className="text-4xl font-bold text-foreground mb-8">Top Performers</h2>
                      <Carousel
                         setApi={setPerformerApi}
                         opts={{
@@ -275,14 +285,14 @@ export default function RoleSelectionPage() {
                             </CarouselItem>
                         ))}
                         </CarouselContent>
-                        <CarouselPrevious className="ml-0 text-white" />
-                        <CarouselNext className="mr-0 text-white" />
+                        <CarouselPrevious className="ml-0" />
+                        <CarouselNext className="mr-0" />
                     </Carousel>
                 </div>
             </div>
         </div>
 
-         <footer className="w-full bg-gray-900 text-white py-12">
+         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000">
             <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">

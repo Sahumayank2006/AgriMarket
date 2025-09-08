@@ -1,3 +1,4 @@
+// This component is no longer used. You can delete it if you want.
 "use client";
 
 import { cn } from "@/lib/utils";

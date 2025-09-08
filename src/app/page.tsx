@@ -183,6 +183,12 @@ export default function RoleSelectionPage() {
     };
   }, [api]);
 
+  useEffect(() => {
+    if (!performerApi) {
+      return;
+    }
+  }, [performerApi]);
+
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">

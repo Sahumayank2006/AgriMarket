@@ -186,10 +186,12 @@ export default function RoleSelectionPage() {
 
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
+    <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
+      <div className="w-full h-12 bg-white" />
+      <hr className="w-full border-t-4 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow">
 
-            <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-28 sm:pt-24">
+            <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-24">
                 <div className="mb-6 text-foreground">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         Welcome to AharaSetu
@@ -312,3 +314,5 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    

@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -16,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { WarehouseSlotVisibility } from "./warehouse-slot-visibility";
 
 
 const sensorData = [
@@ -100,6 +102,8 @@ export default function GreenGuardianDashboard() {
           </CardContent>
         </Card>
       </div>
+
+       <WarehouseSlotVisibility />
 
        <Card>
         <CardHeader>

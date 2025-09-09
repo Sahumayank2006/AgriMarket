@@ -23,6 +23,7 @@ import {
   Store,
   Lightbulb,
   Landmark,
+  CalendarCheck,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -55,6 +56,7 @@ const navItemsContent = {
         "green-guardian": [
             { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
             { href: "/dashboard/inventory", label: "Inventory", icon: Package },
+            { href: "/dashboard/slot-management", label: "Slot Management", icon: CalendarCheck },
             { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
         ],
         logistics: [
@@ -90,6 +92,7 @@ const navItemsContent = {
         "green-guardian": [
             { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },
             { href: "/dashboard/inventory", label: "इन्वेंटरी", icon: Package },
+            { href: "/dashboard/slot-management", label: "स्लॉट प्रबंधन", icon: CalendarCheck },
             { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
         ],
         logistics: [

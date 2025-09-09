@@ -300,9 +300,10 @@ export default function RoleSelectionPage() {
                         Welcome to AaharSetu
                     </h1>
                 </div>
-                <p className="max-w-3xl text-center text-xl text-muted-foreground mb-12 animate-in fade-in slide-in-from-top-6 duration-1000">
+                <p className="max-w-3xl text-center text-xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-top-6 duration-1000">
                     Transforming Agriculture with a Single Digital Platform
                 </p>
+                <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={150} height={150} className="mb-8" />
 
                  <p className="text-lg text-muted-foreground mb-8">Choose Your Role to Get Started</p>
 

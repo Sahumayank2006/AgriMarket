@@ -275,7 +275,6 @@ export default function RoleSelectionPage() {
         <div className="flex items-center gap-4">
           <Image src="https://i.ibb.co/td7KZ93/Chat-GPT-Image-Sep-9-2025-07-46-01-AM.png" alt="AaharSetu Logo" width={112} height={45} />
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={112} height={45}/>
-          <Image src="https://i.ibb.co/rRSFrGhv/mohfw-1.png" alt="MoHFW Logo" width={112} height={45} />
         </div>
         <Image src="https://i.ibb.co/6RGXhqsJ/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={112} height={45} />
         <div className="flex items-center gap-2">

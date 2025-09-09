@@ -127,6 +127,7 @@ export default function BookSlotPage() {
     try {
       const farmerId = "farmer-rohan"; // This should be dynamic in a real app
       const farmerName = "Rohan Gupta"; // This should be dynamic in a real app
+      const warehouseManagerId = "warehouse-manager"; // This should be dynamic based on selected warehouse
 
       await addDoc(collection(db, "slots"), {
         ...values,
@@ -138,7 +139,7 @@ export default function BookSlotPage() {
       
       // Create notification for the farmer
       await addDoc(collection(db, "notifications"), {
-          userId: farmerId, // Target user for the notification
+          userId: farmerId, 
           icon: "CheckCircle",
           title: "Slot booking confirmed!",
           description: `Your booking at ${values.warehouse} for ${values.quantity} ${values.unit} is confirmed for ${format(values.bookingDate, "PPP")}.`,
@@ -146,11 +147,22 @@ export default function BookSlotPage() {
           read: false,
           link: "/dashboard/slot-management?role=farmer"
       });
+      
+      // Create notification for the warehouse manager
+      await addDoc(collection(db, "notifications"), {
+          userId: warehouseManagerId,
+          icon: "Package",
+          title: "New Slot Booking!",
+          description: `${farmerName} booked a slot for ${values.quantity} ${values.unit} of ${values.cropType}.`,
+          timestamp: serverTimestamp(),
+          read: false,
+          link: "/dashboard/slot-management?role=green-guardian"
+      });
 
 
       toast({
         title: t.bookingSuccessTitle,
-        description: t.bookingSuccessDesc(values),
+        description: "Slot has been generated",
       });
       form.reset();
     } catch (error) {

@@ -73,7 +73,8 @@ export function NotificationDropdown() {
 
     const q = query(
         collection(db, "notifications"), 
-        where("userId", "==", userId)
+        where("userId", "==", userId),
+        orderBy("timestamp", "desc")
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -82,16 +83,25 @@ export function NotificationDropdown() {
             fetchedNotifications.push({ id: doc.id, ...doc.data() } as Notification);
         });
         
-        // Sort on the client while index is building
-        fetchedNotifications.sort((a, b) => {
-            if (a.timestamp && b.timestamp) {
-                return b.timestamp.toMillis() - a.timestamp.toMillis()
-            }
-            return 0;
-        });
-
-
         setNotifications(fetchedNotifications);
+    }, (error) => {
+        console.error("Error fetching notifications, likely due to missing index:", error);
+        // Fallback for when index is building
+        const fallbackQuery = query(collection(db, "notifications"), where("userId", "==", userId));
+        const fallbackUnsubscribe = onSnapshot(fallbackQuery, (querySnapshot) => {
+            const fetchedNotifications: Notification[] = [];
+            querySnapshot.forEach((doc) => {
+                fetchedNotifications.push({ id: doc.id, ...doc.data() } as Notification);
+            });
+            fetchedNotifications.sort((a, b) => {
+                if (a.timestamp && b.timestamp) {
+                    return b.timestamp.toMillis() - a.timestamp.toMillis()
+                }
+                return 0;
+            });
+            setNotifications(fetchedNotifications);
+        });
+        return () => fallbackUnsubscribe();
     });
 
     return () => unsubscribe();
@@ -122,9 +132,11 @@ export function NotificationDropdown() {
                 <div className="flex-grow">
                     <p className="font-semibold text-sm">{notification.title}</p>
                     <p className="text-xs text-muted-foreground">{notification.description}</p>
-                    <p className="text-xs text-muted-foreground/70 mt-1">
-                        {notification.timestamp && formatDistanceToNow(notification.timestamp.toDate(), { addSuffix: true })}
-                    </p>
+                    {notification.timestamp && (
+                        <p className="text-xs text-muted-foreground/70 mt-1">
+                            {formatDistanceToNow(notification.timestamp.toDate(), { addSuffix: true })}
+                        </p>
+                    )}
                 </div>
                 {!notification.read && <div className="h-2 w-2 rounded-full bg-primary mt-1 flex-shrink-0" />}
             </DropdownMenuItem>

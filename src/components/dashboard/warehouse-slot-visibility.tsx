@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2, Trash2 } from "lucide-react";
+import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2, Trash2, Check, Ban } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { useEffect, useState, useRef } from "react";
@@ -58,6 +58,10 @@ const getStatusBadge = (status: string) => {
             return <Badge className="bg-blue-500 text-white hover:bg-blue-600"><Clock className="mr-1 h-3 w-3"/>{status}</Badge>;
         case 'cancelled':
             return <Badge variant="destructive"><XCircle className="mr-1 h-3 w-3"/>{status}</Badge>;
+         case 'accepted':
+            return <Badge className="bg-green-600 text-white hover:bg-green-700"><Check className="mr-1 h-3 w-3"/>{status}</Badge>;
+        case 'rejected':
+            return <Badge variant="destructive"><Ban className="mr-1 h-3 w-3"/>{status}</Badge>;
         default:
             return <Badge variant="outline">{status}</Badge>;
     }
@@ -89,7 +93,7 @@ export function WarehouseSlotVisibility() {
                         const newSlot = change.doc.data();
                         toast({
                             title: "New Slot Booked!",
-                            description: `${newSlot.farmerName} booked a slot for ${newSlot.quantity} ${newSlot.unit} of ${newSlot.cropType}.`
+                            description: `A farmer has booked a slot. Kindly check.`
                         });
                     }
                 });
@@ -100,13 +104,24 @@ export function WarehouseSlotVisibility() {
         return () => unsubscribe();
     }, [toast]);
 
-    const handleUpdateStatus = async (id: string, status: "Completed" | "Cancelled") => {
-        const slotRef = doc(db, "slots", id);
+    const handleUpdateStatus = async (slot: Slot, status: "Accepted" | "Rejected") => {
+        const slotRef = doc(db, "slots", slot.id);
         try {
             await updateDoc(slotRef, { status });
+
+            // Notify farmer
+             await addDoc(collection(db, "notifications"), {
+                userId: slot.farmerId,
+                icon: status === "Accepted" ? "CheckCircle" : "XCircle",
+                title: `Booking ${status}!`,
+                description: `Your booking for ${slot.quantity} ${slot.unit} of ${slot.cropType} has been ${status.toLowerCase()}.`,
+                timestamp: serverTimestamp(),
+                read: false,
+            });
+
             toast({
                 title: "Slot Updated",
-                description: `Booking ${id} has been marked as ${status}.`
+                description: `Booking ${slot.id} has been marked as ${status}.`
             });
         } catch (error) {
             console.error("Error updating slot status:", error);
@@ -124,7 +139,6 @@ export function WarehouseSlotVisibility() {
         try {
             await deleteDoc(slotRef);
             
-            // Create notification for the farmer
             await addDoc(collection(db, "notifications"), {
                 userId: slot.farmerId,
                 icon: "XCircle",
@@ -203,23 +217,24 @@ export function WarehouseSlotVisibility() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem 
+                                disabled={slot.status !== 'Upcoming'}
+                                onClick={() => handleUpdateStatus(slot, 'Accepted')}
+                            >
+                            <Check className="mr-2 h-4 w-4" />
+                            Accept
+                            </DropdownMenuItem>
+                             <DropdownMenuItem 
+                                className="text-destructive"
+                                disabled={slot.status !== 'Upcoming'}
+                                onClick={() => handleUpdateStatus(slot, 'Rejected')}
+                            >
+                            <Ban className="mr-2 h-4 w-4" />
+                            Reject
+                            </DropdownMenuItem>
                             <DropdownMenuItem>
-                            <User className="mr-2 h-4 w-4" />
-                            View Farmer Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem 
-                                disabled={slot.status !== 'Upcoming'}
-                                onClick={() => handleUpdateStatus(slot.id, 'Completed')}
-                            >
-                            <CheckCircle className="mr-2 h-4 w-4" />
-                            Mark as Completed
-                            </DropdownMenuItem>
-                            <DropdownMenuItem 
-                                disabled={slot.status !== 'Upcoming'}
-                                onClick={() => handleUpdateStatus(slot.id, 'Cancelled')}
-                            >
-                            <XCircle className="mr-2 h-4 w-4" />
-                            Cancel Slot
+                                <User className="mr-2 h-4 w-4" />
+                                View Farmer Profile
                             </DropdownMenuItem>
                             <AlertDialogTrigger asChild>
                                 <DropdownMenuItem className="text-destructive" onClick={() => setSelectedSlot(slot)}>

@@ -12,6 +12,29 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Warehouse, CalendarPlus } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import { useContext } from "react";
+import { LanguageContext } from "@/contexts/language-context";
+
+const pageContent = {
+    en: {
+        title: "Nearest Warehouses",
+        description: "Find available storage facilities near your farm location.",
+        available: "Available",
+        limited: "Limited Slots",
+        full: "Full",
+        bookSlot: "Book Slot",
+        away: "away"
+    },
+    hi: {
+        title: "निकटतम गोदाम",
+        description: "अपने खेत के स्थान के पास उपलब्ध भंडारण सुविधाएं खोजें।",
+        available: "उपलब्ध",
+        limited: "सीमित स्लॉट",
+        full: "भरा हुआ",
+        bookSlot: "स्लॉट बुक करें",
+        away: "दूर"
+    }
+}
 
 const mockWarehouses = [
   {
@@ -35,12 +58,24 @@ const mockWarehouses = [
 ];
 
 export function NearestWarehouses() {
+  const { lang } = useContext(LanguageContext);
+  const t = pageContent[lang];
+
+  const getAvailabilityText = (availability: string) => {
+    switch (availability) {
+        case "Available": return t.available;
+        case "Limited Slots": return t.limited;
+        case "Full": return t.full;
+        default: return availability;
+    }
+  }
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2"><Warehouse /> Nearest Warehouses</CardTitle>
+        <CardTitle className="flex items-center gap-2"><Warehouse /> {t.title}</CardTitle>
         <CardDescription>
-          Find available storage facilities near your farm location.
+          {t.description}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -50,7 +85,7 @@ export function NearestWarehouses() {
               <h4 className="font-semibold">{warehouse.name}</h4>
               <p className="text-sm text-muted-foreground flex items-center gap-1">
                 <MapPin className="h-3 w-3" />
-                Approx. {warehouse.distance} away
+                Approx. {warehouse.distance} {t.away}
               </p>
             </div>
             <div className="flex items-center gap-4">
@@ -64,16 +99,16 @@ export function NearestWarehouses() {
                         warehouse.availability === "Limited Slots" ? "bg-amber-500 text-white" : ""
                     }
                 >
-                    {warehouse.availability}
+                    {getAvailabilityText(warehouse.availability)}
                 </Badge>
                 <Button 
                     asChild 
                     size="sm"
                     disabled={warehouse.availability === "Full"}
                 >
-                    <Link href="/dashboard/book-slot?role=farmer">
+                    <Link href={`/dashboard/book-slot?role=farmer&lang=${lang}`}>
                          <CalendarPlus className="mr-2 h-4 w-4" />
-                         Book Slot
+                         {t.bookSlot}
                     </Link>
                 </Button>
             </div>

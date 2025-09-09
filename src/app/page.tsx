@@ -37,7 +37,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -49,6 +49,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LanguageContext, content } from "@/contexts/language-context";
+import type { LangKey } from "@/contexts/language-context";
 
 
 interface RoleCardProps {
@@ -58,324 +60,6 @@ interface RoleCardProps {
   icon: React.ElementType;
   dataAiHint: string;
 }
-
-const content = {
-  en: {
-    langName: "English",
-    welcome: "Welcome to AaharSetu",
-    tagline: "Transforming Agriculture with a Single Digital Platform",
-    chooseRole: "Choose Your Role to Get Started",
-    roles: [
-      {
-        role: "farmer" as Role,
-        title: "Farmer",
-        description: "Manage your crops, predict spoilage, and reduce waste.",
-        icon: Sprout,
-        dataAiHint: "farm crops",
-      },
-      {
-        role: "dealer" as Role,
-        title: "Dealer",
-        description: "Browse surplus crops, place orders, and track deliveries.",
-        icon: ShoppingBag,
-        dataAiHint: "market stall",
-      },
-      {
-        role: "green-guardian" as Role,
-        title: "Warehouse Manager",
-        description: "Monitor storage, manage inventory, and ensure quality.",
-        icon: Warehouse,
-        dataAiHint: "warehouse interior",
-      },
-      {
-        role: "logistics" as Role,
-        title: "Logistics",
-        description: "Manage transportation, track deliveries, and optimize routes.",
-        icon: Truck,
-        dataAiHint: "delivery truck",
-      },
-      {
-        role: "admin" as Role,
-        title: "Admin",
-        description: "Oversee the platform, manage users, and view analytics.",
-        icon: ShieldCheck,
-        dataAiHint: "data dashboard",
-      },
-    ],
-    continueAs: "Continue as",
-    topPerformers: "Top Performers",
-    guidelinesTitle: "Standard Guidelines",
-    guidelinesDescription: "Access and download the operational guidelines, quality standards, and best practices for all platform stakeholders.",
-    documentCenterTitle: "Document Center",
-    documentCenterDescription: "Upload or download important PDF documents, DOCX files, etc.",
-    dropzoneActive: "Drop the files here ...",
-    dropzoneIdle: "Drag 'n' drop some files here, or click to select files",
-    dropzoneHint: "PDF, DOCX, etc. up to 10MB",
-    impactTitle: "Our Impact",
-    impactStats: [
-      {
-          icon: Warehouse,
-          value: "150+",
-          label: "Warehouses Connected",
-      },
-      {
-          icon: Leaf,
-          value: "5,000+ Tons",
-          label: "Food Saved from Waste",
-      },
-      {
-          icon: IndianRupee,
-          value: "₹25 Cr+",
-          label: "Value Created for Farmers",
-      },
-    ],
-    footerAbout: "About Us",
-    footerCareers: "Careers",
-    footerPress: "Press",
-    footerContact: "Contact Us",
-    footerLegal: "Legal",
-    footerPrivacy: "Privacy Policy",
-    footerTerms: "Terms of Service",
-    footerCookie: "Cookie Policy",
-    footerFollow: "Follow Us",
-    footerRights: "All rights reserved.",
-  },
-  hi: {
-    langName: "हिंदी",
-    welcome: "आहारसेतु में आपका स्वागत है",
-    tagline: "एक ही डिजिटल प्लेटफॉर्म के साथ कृषि को बदलना",
-    chooseRole: "आरंभ करने के लिए अपनी भूमिका चुनें",
-    roles: [
-      {
-        role: "farmer" as Role,
-        title: "किसान",
-        description: "अपनी फसलों का प्रबंधन करें, खराब होने का अनुमान लगाएं और कचरे को कम करें।",
-        icon: Sprout,
-        dataAiHint: "farm crops",
-      },
-      {
-        role: "dealer" as Role,
-        title: "व्यापारी",
-        description: "अधिशेष फसलों को ब्राउज़ करें, ऑर्डर दें और डिलीवरी ट्रैक करें।",
-        icon: ShoppingBag,
-        dataAiHint: "market stall",
-      },
-      {
-        role: "green-guardian" as Role,
-        title: "गोदाम प्रबंधक",
-        description: "भंडारण की निगरानी करें, इन्वेंट्री का प्रबंधन करें और गुणवत्ता सुनिश्चित करें।",
-        icon: Warehouse,
-        dataAiHint: "warehouse interior",
-      },
-      {
-        role: "logistics" as Role,
-        title: "रसद",
-        description: "परिवहन का प्रबंधन करें, डिलीवरी ट्रैक करें और मार्गों का अनुकूलन करें।",
-        icon: Truck,
-        dataAiHint: "delivery truck",
-      },
-      {
-        role: "admin" as Role,
-        title: "व्यवस्थापक",
-        description: "प्लेटफ़ॉर्म की देखरेख करें, उपयोगकर्ताओं का प्रबंधन करें और विश्लेषण देखें।",
-        icon: ShieldCheck,
-        dataAiHint: "data dashboard",
-      },
-    ],
-    continueAs: "के रूप में जारी रखें",
-    topPerformers: "शीर्ष प्रदर्शन करने वाले",
-    guidelinesTitle: "मानक दिशानिर्देश",
-    guidelinesDescription: "सभी प्लेटफ़ॉर्म हितधारकों के लिए परिचालन दिशानिर्देश, गुणवत्ता मानक और सर्वोत्तम प्रथाओं तक पहुंचें और डाउनलोड करें।",
-    documentCenterTitle: "दस्तावेज़ केंद्र",
-    documentCenterDescription: "महत्वपूर्ण PDF दस्तावेज़, DOCX फ़ाइलें आदि अपलोड या डाउनलोड करें।",
-    dropzoneActive: "फ़ाइलों को यहाँ छोड़ें...",
-    dropzoneIdle: "कुछ फ़ाइलों को यहाँ खींचें और छोड़ें, या फ़ाइलों का चयन करने के लिए क्लिक करें",
-    dropzoneHint: "PDF, DOCX, आदि 10MB तक",
-    impactTitle: "हमारा प्रभाव",
-     impactStats: [
-      {
-          icon: Warehouse,
-          value: "150+",
-          label: "गोदाम जुड़े",
-      },
-      {
-          icon: Leaf,
-          value: "5,000+ टन",
-          label: "भोजन बर्बादी से बचाया",
-      },
-      {
-          icon: IndianRupee,
-          value: "₹25 करोड़+",
-          label: "किसानों के लिए बनाया गया मूल्य",
-      },
-    ],
-    footerAbout: "हमारे बारे में",
-    footerCareers: "करियर",
-    footerPress: "प्रेस",
-    footerContact: "हमसे संपर्क करें",
-    footerLegal: "कानूनी",
-    footerPrivacy: "गोपनीयता नीति",
-    footerTerms: "सेवा की शर्तें",
-    footerCookie: "कुकी नीति",
-    footerFollow: "हमें फॉलो करें",
-    footerRights: "सर्वाधिकार सुरक्षित।",
-  },
-  bn: {
-    langName: "বাংলা",
-    welcome: "আहारসেতুতে স্বাগতম",
-    tagline: "একটি ডিজিটাল প্ল্যাটফর্মের মাধ্যমে কৃষির রূপান্তর",
-    chooseRole: "শুরু করতে আপনার ভূমিকা પસંદ করুন",
-    roles: [
-      { role: "farmer", title: " কৃষক", description: "আপনার ফসল পরিচালনা করুন, 예측 করুন এবং বর্জ্য হ্রাস করুন।", icon: Sprout, dataAiHint: "farm crops" },
-      { role: "dealer", title: "ডিলার", description: "উודিলারৃত্ত ফসল ব্রাউজ করুন, অর্ডার দিন এবং ডেলিভারি ট্র্যাক করুন।", icon: ShoppingBag, dataAiHint: "market stall" },
-      { role: "green-guardian", title: "গুদام ব্যবস্থাপک", description: "স্টোরেজ নিরীক্ষণ করুন, ইনভেন্টরি পরিচালনা করুন এবং গুণমান নিশ্চিত করুন।", icon: Warehouse, dataAiHint: "warehouse interior" },
-      { role: "logistics", title: "লজিস্টিকস", description: "পরিবহন পরিচালনা করুন, ডেলিভারি ট্র্যাক করুন এবং রুট অপ্টিমাইজ করুন।", icon: Truck, dataAiHint: "delivery truck" },
-      { role: "admin", title: "অ্যাডমিন", description: "প্ল্যাটফর্মের তত্ত্বাবধান করুন, ব্যবহারকারীদের পরিচালনা করুন এবং বিশ্লেষণ দেখুন।", icon: ShieldCheck, dataAiHint: "data dashboard" },
-    ],
-    continueAs: "হিসাবে চালিয়ে যান",
-    topPerformers: "শীর্ষ प्रदर्शनকারী",
-    guidelinesTitle: "স্ট্যান্ডার্ড নির্দেশিকা",
-    guidelinesDescription: "সমস্ত প্ল্যাটফর্ম স্টেকহোল্ডারদের জন্য অপারেশনাল নির্দেশিকা, গুণমানের معیار এবং সেরা অনুশীলনগুলি অ্যাক্সেস এবং ডাউনলোড করুন।",
-    documentCenterTitle: "ডকুমেন্ট 센터",
-    documentCenterDescription: "গুরুত্বপূর্ণ PDF ডকুমেন্ট, DOCX ফাইল ইত্যাদি আপলোড বা ডাউনলোড করুন।",
-    dropzoneActive: "এখানে ফাইলগুলি ড্রপ করুন...",
-    dropzoneIdle: "এখানে कुछ ফাইল টেনে আনুন, বা ফাইল নির্বাচন করতে ক্লিক করুন",
-    dropzoneHint: "PDF, DOCX, ইত্যাদি 10MB পর্যন্ত",
-    impactTitle: "আমাদের প্রভাব",
-    impactStats: [
-      { icon: Warehouse, value: "150+", label: "সংযুক্ত গুদাম" },
-      { icon: Leaf, value: "5,000+ টন", label: "খাদ্য অপচয় থেকে বাঁচানো হয়েছে" },
-      { icon: IndianRupee, value: "₹25 কোটি+", label: "কৃষকদের জন্য তৈরি मूल्य" },
-    ],
-    footerAbout: "আমাদের সম্পর্কে",
-    footerCareers: "কেরিয়ার",
-    footerPress: "প্রেস",
-    footerContact: "যোগাযোগ করুন",
-    footerLegal: "আইনি",
-    footerPrivacy: "গোপনীয়তা নীতি",
-    footerTerms: "পরিষেবার শর্তাবলী",
-    footerCookie: "কুকি নীতি",
-    footerFollow: "আমাদের অনুসরণ করুন",
-    footerRights: "সমস্ত अधिकार সংরক্ষিত।",
-  },
-  te: {
-    langName: "తెలుగు",
-    welcome: "ఆహారसेतुకు స్వాగతం",
-    tagline: "ఒకే డిజిటల్ ప్లాట్‌ఫారమ్‌తో వ్యవసాయాన్ని మార్చడం",
-    chooseRole: "ప్రారంభించడానికి మీ పాత్రను ఎంచుకోండి",
-    roles: [
-      { role: "farmer", title: "రైతు", description: "మీ పంటలను నిర్వహించండి, పాడుకాకుండా అంచనా వేయండి మరియు వ్యర్థాలను తగ్గించండి.", icon: Sprout, dataAiHint: "farm crops" },
-      { role: "dealer", title: "డీलर", description: "మిగులు పంటలను బ్రౌజ్ చేయండి, ఆర్డర్లు ఇవ్వండి మరియు డెలివరీలను ట్రాక్ చేయండి.", icon: ShoppingBag, dataAiHint: "market stall" },
-      { role: "green-guardian", title: "గిడ్డంగి व्यवस्थापक", description: "నిల్వను పర్యవేక్షించండి, इन्वेंटरीని నిర్వహించండి మరియు నాణ్యతను నిర్ధారించండి.", icon: Warehouse, dataAiHint: "warehouse interior" },
-      { role: "logistics", title: "లాజిస్టిక్స్", description: "రవాణాను నిర్వహించండి, డెలివరీలను ట్రాక్ చేయండి మరియు మార్గాలను ఆప్టిమైజ్ చేయండి.", icon: Truck, dataAiHint: "delivery truck" },
-      { role: "admin", title: "అഡ്మిన్", description: "ప్లాట్‌ఫారమ్‌ను పర్యవేక్షించండి, వినియోగదారులను నిర్వహించండి మరియు విశ్లేషణలను వీక్షించండి.", icon: ShieldCheck, dataAiHint: "data dashboard" },
-    ],
-    continueAs: "గా కొనసాగండి",
-    topPerformers: "అగ్ర ప్రదర్శకులు",
-    guidelinesTitle: "ప్రామాణిక మార్గదర్శకాలు",
-    guidelinesDescription: "అన్ని ప్లాట్‌ఫారమ్ பங்குதாரர்களுக்கான కార్యాಚರಣ మార్గదర్శకాలు, నాణ్యता ప్రమాణాలు మరియు ఉత్తమ అభ್ಯಾసాలను యాక్సెస్ చేయండి మరియు డౌన్‌లోడ్ చేయండి.",
-    documentCenterTitle: "పత్ర కేంద్రం",
-    documentCenterDescription: "ముఖ్యమైన PDF పత్రాలు, DOCX ఫైళ్లు మొదలైనవి అప్‌లోడ్ చేయండి లేదా డౌన్‌లోడ్ చేయండి.",
-    dropzoneActive: "ఫైళ్లను ఇక్కడ వదలండి...",
-    dropzoneIdle: "కొన్ని ఫైళ్లను ఇక్కడ లాగి వదలండి, లేదా ఫైళ్లను ఎంచుకోవడానికి క్లిక్ చేయండి",
-    dropzoneHint: "PDF, DOCX, మొదలైనవి 10MB వరకు",
-    impactTitle: "మా ప్రభావం",
-    impactStats: [
-      { icon: Warehouse, value: "150+", label: "అనుసంధానించబడిన గిడ్డంగులు" },
-      { icon: Leaf, value: "5,000+ టన్నులు", label: "ఆహారం వృధా కాకుండా కాపాడబడింది" },
-      { icon: IndianRupee, value: "₹25 కోట్లు+", label: "రైతుల కోసం సృష్టించబడిన విలువ" },
-    ],
-    footerAbout: "మా గురించి",
-    footerCareers: "కెరీర్లు",
-    footerPress: "ప्रेस",
-    footerContact: "మమ్మల్ని సంప్రదించండి",
-    footerLegal: "చట్టపరమైన",
-    footerPrivacy: "గోప్యతా విధానం",
-    footerTerms: "సేವಾ నిబంధనలు",
-    footerCookie: "కుకీ విధానం",
-    footerFollow: "మమ్మల్ని అనుసరించండి",
-    footerRights: "అన్ని హక్కులూ ਰਾਖਵించబడినవి.",
-  },
-  mr: {
-    langName: "मराठी",
-    welcome: "आहारसेतूमध्ये स्वागत आहे",
-    tagline: "एकाच डिजिटल प्लॅटफॉर्मसह शेतीत परिवर्तन",
-    chooseRole: "सुरुवात करण्यासाठी तुमची भूमिका निवडा",
-    roles: [
-        { role: "farmer", title: "शेतकरी", description: "तुमच्या पिकांचे व्यवस्थापन करा, नासाडीचा अंदाज घ्या आणि कचरा कमी करा.", icon: Sprout, dataAiHint: "farm crops" },
-        { role: "dealer", title: "व्यापारी", description: "शिल्लक पिके ब्राउझ करा, ऑर्डर द्या आणि डिलिव्हरीचा मागोवा घ्या.", icon: ShoppingBag, dataAiHint: "market stall" },
-        { role: "green-guardian", title: "वेअरहाऊस व्यवस्थापक", description: "साठवणुकीचे निरीक्षण करा, इन्व्हेंटरी व्यवस्थापित करा आणि गुणवत्ता सुनिश्चित करा.", icon: Warehouse, dataAiHint: "warehouse interior" },
-        { role: "logistics", title: "लॉजिस्टिक्स", description: "वाहतुकीचे व्यवस्थापन करा, डिलिव्हरीचा मागोवा घ्या आणि मार्ग ऑप्टिमाइझ करा.", icon: Truck, dataAiHint: "delivery truck" },
-        { role: "admin", title: "प्रशासक", description: "प्लॅटफॉर्मचे निरीक्षण करा, वापरकर्त्यांचे व्यवस्थापन करा आणि विश्लेषणे पहा.", icon: ShieldCheck, dataAiHint: "data dashboard" },
-    ],
-    continueAs: "म्हणून सुरू ठेवा",
-    topPerformers: "शीर्ष कामगिरी करणारे",
-    guidelinesTitle: "मानक मार्गदर्शक तत्त्वे",
-    guidelinesDescription: "सर्व प्लॅtform भागधारकांसाठी operasional मार्गदर्शक तत्त्वे, गुणवत्ता मानके आणि सर्वोत्तम पद्धतींमध्ये प्रवेश करा आणि डाउनलोड करा.",
-    documentCenterTitle: "दस्तऐवज केंद्र",
-    documentCenterDescription: "महत्त्वाची PDF दस्तऐवज, DOCX फाइल्स इत्यादी अपलोड किंवा डाउनलोड करा.",
-    dropzoneActive: "קבצים येथे टाका...",
-    dropzoneIdle: "येथे काही फाइल्स ड्रॅग आणि ड्रॉप करा, किंवा फाइल्स निवडण्यासाठी क्लिक करा",
-    dropzoneHint: "PDF, DOCX, इत्यादी 10MB पर्यंत",
-    impactTitle: "आमचा प्रभाव",
-    impactStats: [
-        { icon: Warehouse, value: "150+", label: "जोडलेली गोदामे" },
-        { icon: Leaf, value: "5,000+ टन", label: "अन्न वाया जाण्यापासून वाचवले" },
-        { icon: IndianRupee, value: "₹25 कोटी+", label: "शेतकऱ्यांसाठी निर्माण केलेले मूल्य" },
-    ],
-    footerAbout: "आमच्याबद्दल",
-    footerCareers: "करिअर",
-    footerPress: "प्रेस",
-    footerContact: "आमच्याशी संपर्क साधा",
-footerLegal: "कायदेशीर",
-    footerPrivacy: "गोपनीयता धोरण",
-    footerTerms: "सेवा अटी",
-    footerCookie: "कुकी धोरण",
-    footerFollow: "आम्हाला फॉलो करा",
-    footerRights: "सर्व हक्क राखीव.",
-  },
-  ta: {
-    langName: "தமிழ்",
-    welcome: "ஆஹார்சேதுவுக்கு வரவேற்கிறோம்",
-    tagline: "ஒரே டிஜிட்டல் தளத்துடன் விவசாயத்தை மாற்றுதல்",
-    chooseRole: "தொடங்குவதற்கு உங்கள் பங்கைத் தேர்ந்தெடுக்கவும்",
-    roles: [
-        { role: "farmer", title: "விவசாயி", description: "உங்கள் பயிர்களை நிர்வகிக்கவும், கெட்டுப்போவதை கணிக்கவும் மற்றும் கழிவுகளை குறைக்கவும்.", icon: Sprout, dataAiHint: "farm crops" },
-        { role: "dealer", title: "డీलर", description: "உபரி பயிர்களை உலவவும், ஆர்டர்களை வைக்கவும் மற்றும் டெலிவரிகளைக் கண்காணிக்கவும்.", icon: ShoppingBag, dataAiHint: "market stall" },
-        { role: "green-guardian", title: "கிடங்கு மேலாளர்", description: "சேமிப்பகத்தை கண்காணிக்கவும், சரக்குகளை நிர்வகிக்கவும் மற்றும் தரத்தை உறுதிப்படுத்தவும்.", icon: Warehouse, dataAiHint: "warehouse interior" },
-        { role: "logistics", title: "லாஜிஸ்டிக்ஸ்", description: "போக்குவரத்தை நிர்வகிக்கவும், டெலிவரிகளைக் கண்காணிக்கவும் மற்றும் வழிகளை மேம்படுத்தவும்.", icon: Truck, dataAiHint: "delivery truck" },
-        { role: "admin", title: "நிர்வாகி", description: "தளத்தை மேற்பார்வையிடவும், பயனர்களை நிர்வகிக்கவும் మరియు பகுப்பாய்வுகளைப் பார்க்கவும்.", icon: ShieldCheck, dataAiHint: "data dashboard" },
-    ],
-    continueAs: "ஆக തുടരുക",
-    topPerformers: "சிறந்த செயல்திறன் காட்டுபவர்கள்",
-    guidelinesTitle: "தரமான வழிகாட்டுதல்கள்",
-    guidelinesDescription: "அனைத்து தள பங்குதாரர்களுக்கான செயல்பாட்டு வழிகாட்டுதல்கள், தர стандаரங்கள் மற்றும் சிறந்த நடைமுறைகளை அணுகவும் మరియు பதிவிறக்கவும்.",
-    documentCenterTitle: "ஆவண மையம்",
-    documentCenterDescription: "முக்கியமான PDF ஆவணங்கள், DOCX கோப்புகள் போன்றவற்றை பதிவேற்றவும் அல்லது பதிவிறக்கவும்.",
-    dropzoneActive: "கோப்புகளை இங்கே விடுங்கள்...",
-    dropzoneIdle: "சில கோப்புகளை இங்கே இழுத்து விடுங்கள், அல்லது கோப்புகளைத் தேர்ந்தெடுக்க கிளிக் செய்யவும்",
-    dropzoneHint: "PDF, DOCX, போன்றவை 10MB வரை",
-    impactTitle: "எங்கள் தாக்கம்",
-    impactStats: [
-        { icon: Warehouse, value: "150+", label: "இணைக்கப்பட்ட கிடங்குகள்" },
-        { icon: Leaf, value: "5,000+ டன்கள்", label: "உணவு வீணாவதிலிருந்து சேமிக்கப்பட்டது" },
-        { icon: IndianRupee, value: "₹25 கோடி+", label: "விவசாயிகளுக்காக உருவாக்கப்பட்ட மதிப்பு" },
-    ],
-    footerAbout: "எங்களைப் பற்றி",
-    footerCareers: "வேலை வாய்ப்புகள்",
-    footerPress: "பத்திரிகை",
-    footerContact: "ഞങ്ങളെ ಸಂಪರ್ಕിക്കുക",
-    footerLegal: "சட்டரீதியான",
-    footerPrivacy: "தனியுரிமைக் கொள்கை",
-    footerTerms: "सेवा നിബന്ധനകൾ",
-    footerCookie: "குकी கொள்கை",
-    footerFollow: "ഞങ്ങളെ പിന്തുടരുക",
-    footerRights: "அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
-  }
-};
-
-type LangKey = keyof typeof content;
-
 
 function RoleCard({ role, title, description, icon: Icon, lang, continueAsText }: RoleCardProps & { lang: LangKey; continueAsText: string }) {
   return (
@@ -387,7 +71,7 @@ function RoleCard({ role, title, description, icon: Icon, lang, continueAsText }
       <CardContent>
         <p className="text-base text-muted-foreground mb-6 min-h-[60px]">{description}</p>
         <Button asChild size="lg" className="w-full text-lg">
-          <Link href={`/dashboard?role=${role}`}>
+          <Link href={`/dashboard?role=${role}&lang=${lang}`}>
              {continueAsText} {title}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
@@ -439,7 +123,7 @@ function PerformerCard({ name, role, location, achievement, avatarUrl }: Perform
 
 
 export default function RoleSelectionPage() {
-  const [lang, setLang] = useState<LangKey>('en');
+  const { lang, setLang } = useContext(LanguageContext);
   const pageContent = content[lang];
   
   const topPerformers: PerformerCardProps[] = [

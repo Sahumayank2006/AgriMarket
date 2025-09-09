@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useSearchParams } from "next/navigation";
@@ -28,34 +29,49 @@ import { Button } from "../ui/button";
 import { SidebarTrigger } from "../ui/sidebar";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import type { Role } from "@/lib/types";
+import { LanguageContext, content } from "@/contexts/language-context";
 
-function getRoleName(role: Role | null) {
-  if (!role) return "User";
-  const names: Record<Role, string> = {
-    farmer: "Farmer",
-    dealer: "Dealer",
-    admin: "Admin",
-    "green-guardian": "Warehouse Manager",
-    logistics: "Logistics",
+function getRoleName(role: Role | null, lang: 'en' | 'hi') {
+  if (!role) return lang === 'en' ? "User" : "उपयोगकर्ता";
+  
+  const names = {
+    en: {
+      farmer: "Farmer",
+      dealer: "Dealer",
+      admin: "Admin",
+      "green-guardian": "Warehouse Manager",
+      logistics: "Logistics",
+    },
+    hi: {
+      farmer: "किसान",
+      dealer: "व्यापारी",
+      admin: "व्यवस्थापक",
+      "green-guardian": "गोदाम प्रबंधक",
+      logistics: "रसद",
+    }
   };
-  return names[role];
+  return names[lang][role];
 }
 
 export function Header() {
   const searchParams = useSearchParams();
   const [role, setRole] = useState<Role | null>(null);
+  const { lang } = useContext(LanguageContext);
+  const t = content[lang];
 
   useEffect(() => {
     setRole(searchParams.get("role") as Role | null);
   }, [searchParams]);
+  
+  const currentRoleName = getRoleName(role, lang);
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6 lg:px-8">
       <div className="flex items-center gap-2">
         <SidebarTrigger className="md:hidden" />
-        <h1 className="text-xl font-semibold">{getRoleName(role)} Dashboard</h1>
+        <h1 className="text-xl font-semibold">{currentRoleName} {t.dashboardTitle}</h1>
       </div>
 
       <div className="flex items-center gap-4">
@@ -69,7 +85,7 @@ export function Header() {
               <Avatar className="h-10 w-10">
                 <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
                 <AvatarFallback>
-                  {getRoleName(role).charAt(0)}
+                  {currentRoleName.charAt(0)}
                 </AvatarFallback>
               </Avatar>
             </Button>
@@ -78,7 +94,7 @@ export function Header() {
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {getRoleName(role)}
+                  {currentRoleName}
                 </p>
                 <p className="text-xs leading-none text-muted-foreground">
                   {role}@aaharsetu.com
@@ -88,17 +104,17 @@ export function Header() {
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
+              <span>{t.profile}</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
+              <span>{t.settings}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href="/">
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                <span>{t.logout}</span>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

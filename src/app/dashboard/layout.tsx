@@ -1,9 +1,25 @@
-import { Suspense } from "react";
+
+"use client";
+
+import { Suspense, useContext, useEffect } from "react";
 import { SidebarProvider, Sidebar, SidebarInset } from "@/components/ui/sidebar";
 import { SidebarNav } from "@/components/dashboard/sidebar-nav";
 import { Header } from "@/components/dashboard/header";
+import { useSearchParams } from "next/navigation";
+import { LanguageContext } from "@/contexts/language-context";
+import type { LangKey } from "@/contexts/language-context";
 
 function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams();
+  const { setLang } = useContext(LanguageContext);
+
+  useEffect(() => {
+    const lang = searchParams.get("lang") as LangKey;
+    if (lang) {
+      setLang(lang);
+    }
+  }, [searchParams, setLang]);
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen bg-background">

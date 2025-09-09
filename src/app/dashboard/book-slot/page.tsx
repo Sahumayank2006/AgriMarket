@@ -46,6 +46,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useContext } from "react";
+import { LanguageContext } from "@/contexts/language-context";
 
 const formSchema = z.object({
   warehouse: z.string().min(1, "Please select a warehouse."),
@@ -55,7 +57,51 @@ const formSchema = z.object({
   bookingDate: z.date(),
 });
 
+const pageContent = {
+    en: {
+        title: "Book a Warehouse Slot",
+        description: "Fill in the details to reserve your spot at a selected warehouse.",
+        selectWarehouse: "Select Warehouse*",
+        warehousePlaceholder: "Choose a warehouse from the list...",
+        warehouse1: "Nashik Cold Storage (5km away)",
+        warehouse2: "Panchvati Warehouse Hub (8km away)",
+        cropType: "Crop Type*",
+        cropPlaceholder: "Or type your crop...",
+        suggestions: "Suggestions",
+        quantity: "Quantity*",
+        quintal: "Quintal",
+        ton: "Ton",
+        bookingDate: "Booking Date*",
+        pickDate: "Pick a date",
+        confirmBooking: "Confirm Booking",
+        bookingSuccessTitle: "Slot Booked Successfully!",
+        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `Your slot at ${values.warehouse} for ${values.quantity} ${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`
+    },
+    hi: {
+        title: "वेयरहाउस स्लॉट बुक करें",
+        description: "चयनित वेयरहाउस में अपना स्थान आरक्षित करने के लिए विवरण भरें।",
+        selectWarehouse: "वेयरहाउस चुनें*",
+        warehousePlaceholder: "सूची में से एक वेयरहाउस चुनें...",
+        warehouse1: "नासिक कोल्ड स्टोरेज (5 किमी दूर)",
+        warehouse2: "पंचवटी वेयरहाउस हब (8 किमी दूर)",
+        cropType: "फसल का प्रकार*",
+        cropPlaceholder: "या अपनी फसल टाइप करें...",
+        suggestions: "सुझाव",
+        quantity: "मात्रा*",
+        quintal: "क्विंटल",
+        ton: "टन",
+        bookingDate: "बुकिंग तिथि*",
+        pickDate: "एक तारीख चुनें",
+        confirmBooking: "बुकिंग की पुष्टि करें",
+        bookingSuccessTitle: "स्लॉट सफलतापूर्वक बुक हो गया!",
+        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `${values.warehouse} पर ${values.cropType.split(" ")[0]} के ${values.quantity} ${values.unit} के लिए आपका स्लॉट कन्फर्म हो गया है।`
+    }
+}
+
+
 export default function BookSlotPage() {
+  const { lang } = useContext(LanguageContext);
+  const t = pageContent[lang];
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -71,8 +117,8 @@ export default function BookSlotPage() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     toast({
-      title: "Slot Booked Successfully!",
-      description: `Your slot at ${values.warehouse} for ${values.quantity} ${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`,
+      title: t.bookingSuccessTitle,
+      description: t.bookingSuccessDesc(values),
     });
     form.reset();
   }
@@ -81,9 +127,9 @@ export default function BookSlotPage() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Book a Warehouse Slot</CardTitle>
+          <CardTitle>{t.title}</CardTitle>
           <CardDescription>
-            Fill in the details to reserve your spot at a selected warehouse.
+            {t.description}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -96,22 +142,22 @@ export default function BookSlotPage() {
                 name="warehouse"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="flex items-center gap-2"><Warehouse className="h-4 w-4"/>Select Warehouse*</FormLabel>
+                    <FormLabel className="flex items-center gap-2"><Warehouse className="h-4 w-4"/>{t.selectWarehouse}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Choose a warehouse from the list..." />
+                          <SelectValue placeholder={t.warehousePlaceholder} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="Nashik Cold Storage">
-                          Nashik Cold Storage (5km away)
+                          {t.warehouse1}
                         </SelectItem>
                         <SelectItem value="Panchvati Warehouse Hub">
-                          Panchvati Warehouse Hub (8km away)
+                          {t.warehouse2}
                         </SelectItem>
                       </SelectContent>
                     </Select>
@@ -126,14 +172,14 @@ export default function BookSlotPage() {
                   name="cropType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex items-center gap-2"><Carrot className="h-4 w-4"/>Crop Type*</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><Carrot className="h-4 w-4"/>{t.cropType}</FormLabel>
                        <div className="flex gap-2">
                         <FormControl>
-                          <Input placeholder="Or type your crop..." {...field} />
+                          <Input placeholder={t.cropPlaceholder} {...field} />
                         </FormControl>
                          <Select onValueChange={field.onChange}>
                             <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="Suggestions" />
+                                <SelectValue placeholder={t.suggestions} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="Tomatoes (टमाटर)">Tomatoes (टमाटर)</SelectItem>
@@ -155,7 +201,7 @@ export default function BookSlotPage() {
                     name="quantity"
                     render={({ field }) => (
                       <FormItem className="flex-1">
-                        <FormLabel className="flex items-center gap-2"><Package className="h-4 w-4"/>Quantity*</FormLabel>
+                        <FormLabel className="flex items-center gap-2"><Package className="h-4 w-4"/>{t.quantity}</FormLabel>
                         <FormControl>
                           <Input type="number" placeholder="10" {...field} />
                         </FormControl>
@@ -178,13 +224,13 @@ export default function BookSlotPage() {
                                     <FormControl>
                                     <RadioGroupItem value="quintal" />
                                     </FormControl>
-                                    <FormLabel className="font-normal">Quintal</FormLabel>
+                                    <FormLabel className="font-normal">{t.quintal}</FormLabel>
                                 </FormItem>
                                 <FormItem className="flex items-center space-x-2 space-y-0">
                                     <FormControl>
                                     <RadioGroupItem value="ton" />
                                     </FormControl>
-                                    <FormLabel className="font-normal">Ton</FormLabel>
+                                    <FormLabel className="font-normal">{t.ton}</FormLabel>
                                 </FormItem>
                             </RadioGroup>
                         </FormControl>
@@ -199,7 +245,7 @@ export default function BookSlotPage() {
                 name="bookingDate"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel className="flex items-center gap-2"><CalendarIcon className="h-4 w-4"/>Booking Date*</FormLabel>
+                    <FormLabel className="flex items-center gap-2"><CalendarIcon className="h-4 w-4"/>{t.bookingDate}</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -213,7 +259,7 @@ export default function BookSlotPage() {
                             {field.value ? (
                               format(field.value, "PPP")
                             ) : (
-                              <span>Pick a date</span>
+                              <span>{t.pickDate}</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                           </Button>
@@ -233,7 +279,7 @@ export default function BookSlotPage() {
                 )}
               />
               <Button type="submit" size="lg">
-                Confirm Booking
+                {t.confirmBooking}
               </Button>
             </form>
           </Form>

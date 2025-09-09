@@ -49,11 +49,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const formSchema = z.object({
   warehouse: z.string().min(1, "Please select a warehouse."),
-  cropType: z.string().min(2, "Crop type is required."),
+  cropType: z.string().min(1, "Crop type is required."),
   quantity: z.coerce.number().positive("Quantity must be a positive number."),
   unit: z.string().min(1, "Unit is required."),
   bookingDate: z.date(),
-  timeSlot: z.string().min(1, "Please select a time slot."),
 });
 
 export default function BookSlotPage() {
@@ -63,10 +62,9 @@ export default function BookSlotPage() {
     defaultValues: {
       warehouse: "",
       cropType: "",
-      quantity: 100,
-      unit: "kg",
+      quantity: 10,
+      unit: "quintal",
       bookingDate: new Date(),
-      timeSlot: "",
     },
   });
 
@@ -74,7 +72,7 @@ export default function BookSlotPage() {
     console.log(values);
     toast({
       title: "Slot Booked Successfully!",
-      description: `Your slot at ${values.warehouse} for ${values.quantity}${values.unit} of ${values.cropType} is confirmed.`,
+      description: `Your slot at ${values.warehouse} for ${values.quantity}${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`,
     });
     form.reset();
   }
@@ -129,9 +127,24 @@ export default function BookSlotPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2"><Carrot className="h-4 w-4"/>Crop Type*</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., Tomatoes" {...field} />
-                      </FormControl>
+                       <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a crop..." />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Tomatoes (टमाटर)">Tomatoes (टमाटर)</SelectItem>
+                          <SelectItem value="Onions (प्याज)">Onions (प्याज)</SelectItem>
+                          <SelectItem value="Potatoes (आलू)">Potatoes (आलू)</SelectItem>
+                          <SelectItem value="Wheat (गेहूँ)">Wheat (गेहूँ)</SelectItem>
+                          <SelectItem value="Grapes (अंगूर)">Grapes (अंगूर)</SelectItem>
+                          <SelectItem value="Pomegranates (अनार)">Pomegranates (अनार)</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -144,7 +157,7 @@ export default function BookSlotPage() {
                       <FormItem className="flex-1">
                         <FormLabel className="flex items-center gap-2"><Package className="h-4 w-4"/>Quantity*</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="100" {...field} />
+                          <Input type="number" placeholder="10" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -165,7 +178,6 @@ export default function BookSlotPage() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="kg">kg</SelectItem>
                             <SelectItem value="quintal">quintal</SelectItem>
                             <SelectItem value="ton">ton</SelectItem>
                           </SelectContent>
@@ -214,41 +226,6 @@ export default function BookSlotPage() {
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name="timeSlot"
-                render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel className="flex items-center gap-2"><Clock className="h-4 w-4"/>Select a Time Slot*</FormLabel>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                      >
-                        {[
-                          "09:00 AM - 11:00 AM",
-                          "11:00 AM - 01:00 PM",
-                          "02:00 PM - 04:00 PM",
-                          "04:00 PM - 06:00 PM",
-                        ].map((slot) => (
-                          <FormItem key={slot} className="flex-1">
-                            <FormControl>
-                                <RadioGroupItem value={slot} className="sr-only" id={slot}/>
-                            </FormControl>
-                            <FormLabel htmlFor={slot} className="flex flex-col items-center justify-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
-                                {slot}
-                            </FormLabel>
-                          </FormItem>
-                        ))}
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               <Button type="submit" size="lg">
                 Confirm Booking
               </Button>

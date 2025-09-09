@@ -22,6 +22,7 @@ import {
   Upload,
   FileText,
   X,
+  Languages,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -42,6 +43,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useDropzone } from "react-dropzone";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 
 interface RoleCardProps {
@@ -270,10 +277,23 @@ export default function RoleSelectionPage() {
           <Image src="https://i.ibb.co/rRSFrGhv/mohfw-1.png" alt="MoHFW Logo" width={112} height={45} />
         </div>
         <Image src="https://i.ibb.co/6RGXhqsJ/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi Ka Amrit Mahotsav Logo" width={112} height={45} />
-        <div style={{ width: 240 }} /> 
+        <div className="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Languages className="mr-2 h-4 w-4" />
+                  English
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>English</DropdownMenuItem>
+                <DropdownMenuItem>हिंदी</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+        </div>
       </div>
       <hr className="w-full border-t-4 border-primary" />
-        <div className="flex w-full flex-col items-center justify-center p-4 grow">
+        <div className="flex w-full flex-col items-center justify-center p-4 grow wavy-border">
 
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
                 <div className="mb-6 text-foreground">

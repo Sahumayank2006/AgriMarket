@@ -72,7 +72,7 @@ export default function BookSlotPage() {
     console.log(values);
     toast({
       title: "Slot Booked Successfully!",
-      description: `Your slot at ${values.warehouse} for ${values.quantity}${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`,
+      description: `Your slot at ${values.warehouse} for ${values.quantity} ${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`,
     });
     form.reset();
   }
@@ -127,24 +127,24 @@ export default function BookSlotPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2"><Carrot className="h-4 w-4"/>Crop Type*</FormLabel>
-                       <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
+                       <div className="flex gap-2">
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a crop..." />
-                          </SelectTrigger>
+                          <Input placeholder="Or type your crop..." {...field} />
                         </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Tomatoes (टमाटर)">Tomatoes (टमाटर)</SelectItem>
-                          <SelectItem value="Onions (प्याज)">Onions (प्याज)</SelectItem>
-                          <SelectItem value="Potatoes (आलू)">Potatoes (आलू)</SelectItem>
-                          <SelectItem value="Wheat (गेहूँ)">Wheat (गेहूँ)</SelectItem>
-                          <SelectItem value="Grapes (अंगूर)">Grapes (अंगूर)</SelectItem>
-                          <SelectItem value="Pomegranates (अनार)">Pomegranates (अनार)</SelectItem>
-                        </SelectContent>
-                      </Select>
+                         <Select onValueChange={field.onChange}>
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Suggestions" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="Tomatoes (टमाटर)">Tomatoes (टमाटर)</SelectItem>
+                                <SelectItem value="Onions (प्याज)">Onions (प्याज)</SelectItem>
+                                <SelectItem value="Potatoes (आलू)">Potatoes (आलू)</SelectItem>
+                                <SelectItem value="Wheat (गेहूँ)">Wheat (गेहूँ)</SelectItem>
+                                <SelectItem value="Grapes (अंगूर)">Grapes (अंगूर)</SelectItem>
+                                <SelectItem value="Pomegranates (अनार)">Pomegranates (अनार)</SelectItem>
+                            </SelectContent>
+                        </Select>
+                       </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -167,21 +167,27 @@ export default function BookSlotPage() {
                     control={form.control}
                     name="unit"
                     render={({ field }) => (
-                      <FormItem className="w-[120px] self-end">
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Unit" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="quintal">quintal</SelectItem>
-                            <SelectItem value="ton">ton</SelectItem>
-                          </SelectContent>
-                        </Select>
+                      <FormItem className="w-[180px] self-end">
+                         <FormControl>
+                           <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="flex items-center space-x-4 pt-8"
+                            >
+                                <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                    <RadioGroupItem value="quintal" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">Quintal</FormLabel>
+                                </FormItem>
+                                <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                    <RadioGroupItem value="ton" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">Ton</FormLabel>
+                                </FormItem>
+                            </RadioGroup>
+                        </FormControl>
                       </FormItem>
                     )}
                   />

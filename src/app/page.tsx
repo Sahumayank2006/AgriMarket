@@ -59,7 +59,167 @@ interface RoleCardProps {
   dataAiHint: string;
 }
 
-function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
+const content = {
+  en: {
+    welcome: "Welcome to AaharSetu",
+    tagline: "Transforming Agriculture with a Single Digital Platform",
+    chooseRole: "Choose Your Role to Get Started",
+    roles: [
+      {
+        role: "farmer" as Role,
+        title: "Farmer",
+        description: "Manage your crops, predict spoilage, and reduce waste.",
+        icon: Sprout,
+        dataAiHint: "farm crops",
+      },
+      {
+        role: "dealer" as Role,
+        title: "Dealer",
+        description: "Browse surplus crops, place orders, and track deliveries.",
+        icon: ShoppingBag,
+        dataAiHint: "market stall",
+      },
+      {
+        role: "green-guardian" as Role,
+        title: "Warehouse Manager",
+        description: "Monitor storage, manage inventory, and ensure quality.",
+        icon: Warehouse,
+        dataAiHint: "warehouse interior",
+      },
+      {
+        role: "logistics" as Role,
+        title: "Logistics",
+        description: "Manage transportation, track deliveries, and optimize routes.",
+        icon: Truck,
+        dataAiHint: "delivery truck",
+      },
+      {
+        role: "admin" as Role,
+        title: "Admin",
+        description: "Oversee the platform, manage users, and view analytics.",
+        icon: ShieldCheck,
+        dataAiHint: "data dashboard",
+      },
+    ],
+    topPerformers: "Top Performers",
+    guidelinesTitle: "Standard Guidelines",
+    guidelinesDescription: "Access and download the operational guidelines, quality standards, and best practices for all platform stakeholders.",
+    documentCenterTitle: "Document Center",
+    documentCenterDescription: "Upload or download important PDF documents, DOCX files, etc.",
+    dropzoneActive: "Drop the files here ...",
+    dropzoneIdle: "Drag 'n' drop some files here, or click to select files",
+    dropzoneHint: "PDF, DOCX, etc. up to 10MB",
+    impactTitle: "Our Impact",
+    impactStats: [
+      {
+          icon: Warehouse,
+          value: "150+",
+          label: "Warehouses Connected",
+      },
+      {
+          icon: Leaf,
+          value: "5,000+ Tons",
+          label: "Food Saved from Waste",
+      },
+      {
+          icon: IndianRupee,
+          value: "₹25 Cr+",
+          label: "Value Created for Farmers",
+      },
+    ],
+    footerAbout: "About Us",
+    footerCareers: "Careers",
+    footerPress: "Press",
+    footerContact: "Contact Us",
+    footerLegal: "Legal",
+    footerPrivacy: "Privacy Policy",
+    footerTerms: "Terms of Service",
+    footerCookie: "Cookie Policy",
+    footerFollow: "Follow Us",
+    footerRights: "All rights reserved.",
+  },
+  hi: {
+    welcome: "आहारसेतु में आपका स्वागत है",
+    tagline: "एक ही डिजिटल प्लेटफॉर्म के साथ कृषि को बदलना",
+    chooseRole: "आरंभ करने के लिए अपनी भूमिका चुनें",
+    roles: [
+      {
+        role: "farmer" as Role,
+        title: "किसान",
+        description: "अपनी फसलों का प्रबंधन करें, खराब होने का अनुमान लगाएं और कचरे को कम करें।",
+        icon: Sprout,
+        dataAiHint: "farm crops",
+      },
+      {
+        role: "dealer" as Role,
+        title: "व्यापारी",
+        description: "अधिशेष फसलों को ब्राउज़ करें, ऑर्डर दें और डिलीवरी ट्रैक करें।",
+        icon: ShoppingBag,
+        dataAiHint: "market stall",
+      },
+      {
+        role: "green-guardian" as Role,
+        title: "गोदाम प्रबंधक",
+        description: "भंडारण की निगरानी करें, इन्वेंट्री का प्रबंधन करें और गुणवत्ता सुनिश्चित करें।",
+        icon: Warehouse,
+        dataAiHint: "warehouse interior",
+      },
+      {
+        role: "logistics" as Role,
+        title: "रसद",
+        description: "परिवहन का प्रबंधन करें, डिलीवरी ट्रैक करें और मार्गों का अनुकूलन करें।",
+        icon: Truck,
+        dataAiHint: "delivery truck",
+      },
+      {
+        role: "admin" as Role,
+        title: "व्यवस्थापक",
+        description: "प्लेटफ़ॉर्म की देखरेख करें, उपयोगकर्ताओं का प्रबंधन करें और विश्लेषण देखें।",
+        icon: ShieldCheck,
+        dataAiHint: "data dashboard",
+      },
+    ],
+    topPerformers: "शीर्ष प्रदर्शन करने वाले",
+    guidelinesTitle: "मानक दिशानिर्देश",
+    guidelinesDescription: "सभी प्लेटफ़ॉर्म हितधारकों के लिए परिचालन दिशानिर्देश, गुणवत्ता मानक और सर्वोत्तम प्रथाओं तक पहुंचें और डाउनलोड करें।",
+    documentCenterTitle: "दस्तावेज़ केंद्र",
+    documentCenterDescription: "महत्वपूर्ण PDF दस्तावेज़, DOCX फ़ाइलें आदि अपलोड या डाउनलोड करें।",
+    dropzoneActive: "फ़ाइलों को यहाँ छोड़ें...",
+    dropzoneIdle: "कुछ फ़ाइलों को यहाँ खींचें और छोड़ें, या फ़ाइलों का चयन करने के लिए क्लिक करें",
+    dropzoneHint: "PDF, DOCX, आदि 10MB तक",
+    impactTitle: "हमारा प्रभाव",
+     impactStats: [
+      {
+          icon: Warehouse,
+          value: "150+",
+          label: "गोदाम जुड़े",
+      },
+      {
+          icon: Leaf,
+          value: "5,000+ टन",
+          label: "भोजन बर्बादी से बचाया",
+      },
+      {
+          icon: IndianRupee,
+          value: "₹25 करोड़+",
+          label: "किसानों के लिए बनाया गया मूल्य",
+      },
+    ],
+    footerAbout: "हमारे बारे में",
+    footerCareers: "करियर",
+    footerPress: "प्रेस",
+    footerContact: "हमसे संपर्क करें",
+    footerLegal: "कानूनी",
+    footerPrivacy: "गोपनीयता नीति",
+    footerTerms: "सेवा की शर्तें",
+    footerCookie: "कुकी नीति",
+    footerFollow: "हमें फॉलो करें",
+    footerRights: "सर्वाधिकार सुरक्षित।",
+  }
+};
+
+
+function RoleCard({ role, title, description, icon: Icon, lang }: RoleCardProps & { lang: 'en' | 'hi' }) {
   return (
     <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary bg-card">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -70,7 +230,7 @@ function RoleCard({ role, title, description, icon: Icon }: RoleCardProps) {
         <p className="text-base text-muted-foreground mb-6 min-h-[60px]">{description}</p>
         <Button asChild size="lg" className="w-full text-lg">
           <Link href={`/dashboard?role=${role}`}>
-            Continue as {title}
+             {lang === 'en' ? `Continue as ${title}` : `${title} के रूप में जारी रखें`}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </Button>
@@ -121,44 +281,8 @@ function PerformerCard({ name, role, location, achievement, avatarUrl }: Perform
 
 
 export default function RoleSelectionPage() {
-  const roles: RoleCardProps[] = [
-    {
-      role: "farmer",
-      title: "Farmer",
-      description: "Manage your crops, predict spoilage, and reduce waste.",
-      icon: Sprout,
-      dataAiHint: "farm crops",
-    },
-    {
-      role: "dealer",
-      title: "Dealer",
-      description: "Browse surplus crops, place orders, and track deliveries.",
-      icon: ShoppingBag,
-      dataAiHint: "market stall",
-    },
-    {
-      role: "green-guardian",
-      title: "Warehouse Manager",
-      description: "Monitor storage, manage inventory, and ensure quality.",
-      icon: Warehouse,
-      dataAiHint: "warehouse interior",
-    },
-    {
-      role: "logistics",
-      title: "Logistics",
-      description:
-        "Manage transportation, track deliveries, and optimize routes.",
-      icon: Truck,
-      dataAiHint: "delivery truck",
-    },
-    {
-      role: "admin",
-      title: "Admin",
-      description: "Oversee the platform, manage users, and view analytics.",
-      icon: ShieldCheck,
-      dataAiHint: "data dashboard",
-    },
-  ];
+  const [lang, setLang] = useState<'en' | 'hi'>('en');
+  const pageContent = content[lang];
   
   const topPerformers: PerformerCardProps[] = [
     {
@@ -210,24 +334,6 @@ export default function RoleSelectionPage() {
         achievement: "On-time delivery rate 98%",
         avatarUrl: "https://i.pravatar.cc/150?u=amit"
     }
-  ];
-
-  const impactStats = [
-    {
-        icon: Warehouse,
-        value: "150+",
-        label: "Warehouses Connected",
-    },
-    {
-        icon: Leaf,
-        value: "5,000+ Tons",
-        label: "Food Saved from Waste",
-    },
-    {
-        icon: IndianRupee,
-        value: "₹25 Cr+",
-        label: "Value Created for Farmers",
-    },
   ];
 
   const [api, setApi] = useState<CarouselApi>();
@@ -284,12 +390,12 @@ export default function RoleSelectionPage() {
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
                   <Languages className="mr-2 h-4 w-4" />
-                  English
+                  {lang === 'en' ? 'English' : 'हिंदी'}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>English</DropdownMenuItem>
-                <DropdownMenuItem>हिंदी</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
         </div>
@@ -300,14 +406,14 @@ export default function RoleSelectionPage() {
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
                 <div className="mb-6 text-foreground">
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                        Welcome to AaharSetu
+                        {pageContent.welcome}
                     </h1>
                 </div>
                 <p className="max-w-3xl text-center text-xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-top-6 duration-1000">
-                    Transforming Agriculture with a Single Digital Platform
+                    {pageContent.tagline}
                 </p>
 
-                 <p className="text-lg text-muted-foreground mb-8">Choose Your Role to Get Started</p>
+                 <p className="text-lg text-muted-foreground mb-8">{pageContent.chooseRole}</p>
 
                 <Carousel
                     setApi={setApi}
@@ -318,7 +424,7 @@ export default function RoleSelectionPage() {
                     className="w-full max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000"
                 >
                     <CarouselContent className="-ml-4">
-                    {roles.map((role, index) => (
+                    {pageContent.roles.map((role, index) => (
                         <CarouselItem
                             key={index}
                             className={cn(
@@ -332,7 +438,7 @@ export default function RoleSelectionPage() {
                             }}
                         >
                           <div className="p-1">
-                              <RoleCard {...role} />
+                              <RoleCard {...role} lang={lang} />
                           </div>
                         </CarouselItem>
                     ))}
@@ -350,7 +456,7 @@ export default function RoleSelectionPage() {
                         <Image src="https://i.ibb.co/TB55Lx4Q/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
                     </div>
 
-                    <h2 className="text-4xl font-bold text-foreground mb-8">Top Performers</h2>
+                    <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.topPerformers}</h2>
                      <Carousel
                         setApi={setPerformerApi}
                         opts={{
@@ -381,21 +487,21 @@ export default function RoleSelectionPage() {
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                     </div>
                      <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl">
-                        <h2 className="text-4xl font-bold text-foreground mb-4">Standard Guidelines</h2>
-                        <p className="max-w-2xl mx-auto text-muted-foreground mb-8">Access and download the operational guidelines, quality standards, and best practices for all platform stakeholders.</p>
+                        <h2 className="text-4xl font-bold text-foreground mb-4">{pageContent.guidelinesTitle}</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground mb-8">{pageContent.guidelinesDescription}</p>
                         <Card className="max-w-3xl mx-auto text-left">
                             <CardHeader>
-                                <CardTitle>Document Center</CardTitle>
-                                <CardDescription>Upload or download important PDF documents, DOCX files, etc.</CardDescription>
+                                <CardTitle>{pageContent.documentCenterTitle}</CardTitle>
+                                <CardDescription>{pageContent.documentCenterDescription}</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div {...getRootProps()} className={cn("flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg cursor-pointer hover:bg-muted/50", isDragActive && "bg-muted/50 border-primary")}>
                                     <input {...getInputProps()} />
                                     <Upload className="w-8 h-8 mb-4 text-muted-foreground" />
                                     <p className="mb-2 text-sm text-muted-foreground">
-                                        {isDragActive ? "Drop the files here ..." : "Drag 'n' drop some files here, or click to select files"}
+                                        {isDragActive ? pageContent.dropzoneActive : pageContent.dropzoneIdle}
                                     </p>
-                                    <p className="text-xs text-muted-foreground">PDF, DOCX, etc. up to 10MB</p>
+                                    <p className="text-xs text-muted-foreground">{pageContent.dropzoneHint}</p>
                                 </div>
                                 {files.length > 0 && (
                                     <div className="mt-4 grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -421,9 +527,9 @@ export default function RoleSelectionPage() {
                      <div className="mb-8">
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                     </div>
-                    <h2 className="text-4xl font-bold text-foreground mb-8">Our Impact</h2>
+                    <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.impactTitle}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                       {impactStats.map((stat, index) => (
+                       {pageContent.impactStats.map((stat, index) => (
                          <Card key={index} className="p-6 text-center">
                             <stat.icon className="h-12 w-12 text-primary mx-auto mb-4" />
                             <p className="text-4xl font-bold">{stat.value}</p>
@@ -449,22 +555,22 @@ export default function RoleSelectionPage() {
                 <div>
                     <h4 className="font-semibold mb-4">Company</h4>
                     <ul className="space-y-2 text-sm text-gray-400">
-                        <li><Link href="#" className="hover:text-white">About Us</Link></li>
-                        <li><Link href="#" className="hover:text-white">Careers</Link></li>
-                        <li><Link href="#" className="hover:text-white">Press</Link></li>
-                        <li><Link href="#" className="hover:text-white">Contact Us</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerAbout}</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerCareers}</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerPress}</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerContact}</Link></li>
                     </ul>
                 </div>
                  <div>
-                    <h4 className="font-semibold mb-4">Legal</h4>
+                    <h4 className="font-semibold mb-4">{pageContent.footerLegal}</h4>
                     <ul className="space-y-2 text-sm text-gray-400">
-                        <li><Link href="#" className="hover:text-white">Privacy Policy</Link></li>
-                        <li><Link href="#" className="hover:text-white">Terms of Service</Link></li>
-                        <li><Link href="#" className="hover:text-white">Cookie Policy</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerPrivacy}</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerTerms}</Link></li>
+                        <li><Link href="#" className="hover:text-white">{pageContent.footerCookie}</Link></li>
                     </ul>
                 </div>
                 <div>
-                     <h4 className="font-semibold mb-4">Follow Us</h4>
+                     <h4 className="font-semibold mb-4">{pageContent.footerFollow}</h4>
                     <div className="flex space-x-4">
                         <Link href="#" className="text-gray-400 hover:text-white"><Facebook className="h-6 w-6" /></Link>
                         <Link href="#" className="text-gray-400 hover:text-white"><Twitter className="h-6 w-6" /></Link>
@@ -474,7 +580,7 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
             <div className="max-w-6xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-                <p>&copy; {new Date().getFullYear()} AaharSetu. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} AaharSetu. {pageContent.footerRights}</p>
             </div>
         </footer>
     </div>

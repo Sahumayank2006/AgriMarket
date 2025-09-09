@@ -23,7 +23,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Button } from "../ui/button";
 import { useEffect, useState, useRef } from "react";
 import { db } from "@/lib/firebase/firebase";
-import { collection, onSnapshot, query, Timestamp, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, onSnapshot, query, Timestamp, doc, updateDoc, deleteDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -35,11 +35,11 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 interface Slot {
     id: string;
+    farmerId: string;
     farmerName: string;
     farmerAvatar: string;
     cropType: string;
@@ -68,6 +68,8 @@ export function WarehouseSlotVisibility() {
     const [loading, setLoading] = useState(true);
     const { toast } = useToast();
     const isInitialLoad = useRef(true);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
 
     useEffect(() => {
         const q = query(collection(db, "slots"));
@@ -115,13 +117,25 @@ export function WarehouseSlotVisibility() {
         }
     };
     
-    const handleDeleteSlot = async (id: string) => {
-        const slotRef = doc(db, "slots", id);
+    const handleDeleteSlot = async (slot: Slot | null) => {
+        if (!slot) return;
+        const slotRef = doc(db, "slots", slot.id);
         try {
             await deleteDoc(slotRef);
+            
+            // Create notification for the farmer
+            await addDoc(collection(db, "notifications"), {
+                userId: slot.farmerId,
+                icon: "XCircle",
+                title: "Booking Deleted by Warehouse",
+                description: `Your booking for ${slot.quantity} ${slot.unit} of ${slot.cropType} on ${format(slot.bookingDate.toDate(), "PPP")} has been removed by the warehouse manager.`,
+                timestamp: serverTimestamp(),
+                read: false,
+            });
+
             toast({
                 title: "Slot Deleted",
-                description: `Booking ${id} has been permanently deleted.`
+                description: `Booking ${slot.id} has been permanently deleted.`
             });
         } catch (error) {
             console.error("Error deleting slot:", error);
@@ -130,6 +144,9 @@ export function WarehouseSlotVisibility() {
                 title: "Deletion Failed",
                 description: "Could not delete the slot. Please try again."
             });
+        } finally {
+            setDialogOpen(false);
+            setSelectedSlot(null);
         }
     };
 
@@ -147,91 +164,91 @@ export function WarehouseSlotVisibility() {
                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
         ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Farmer</TableHead>
-              <TableHead>Crop Type</TableHead>
-              <TableHead>Quantity</TableHead>
-              <TableHead>Arrival Date</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {bookedSlots.map((slot) => (
-              <TableRow key={slot.id}>
-                <TableCell>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-9 w-9">
-                      <AvatarImage src={slot.farmerAvatar} alt={slot.farmerName} />
-                      <AvatarFallback>{slot.farmerName.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <span className="font-medium">{slot.farmerName}</span>
-                  </div>
-                </TableCell>
-                <TableCell>{slot.cropType}</TableCell>
-                <TableCell>{slot.quantity} {slot.unit}</TableCell>
-                <TableCell>{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
-                <TableCell>{getStatusBadge(slot.status)}</TableCell>
-                 <TableCell className="text-right">
-                  <AlertDialog>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                          <span className="sr-only">Open menu</span>
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                          <User className="mr-2 h-4 w-4" />
-                          View Farmer Profile
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                            disabled={slot.status !== 'Upcoming'}
-                            onClick={() => handleUpdateStatus(slot.id, 'Completed')}
-                        >
-                          <CheckCircle className="mr-2 h-4 w-4" />
-                          Mark as Completed
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                            disabled={slot.status !== 'Upcoming'}
-                            onClick={() => handleUpdateStatus(slot.id, 'Cancelled')}
-                        >
-                           <XCircle className="mr-2 h-4 w-4" />
-                          Cancel Slot
-                        </DropdownMenuItem>
-                        <AlertDialogTrigger asChild>
-                            <DropdownMenuItem className="text-destructive">
-                                <Trash2 className="mr-2 h-4 w-4" />
-                                Delete Permanently
+        <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <Table>
+            <TableHeader>
+                <TableRow>
+                <TableHead>Farmer</TableHead>
+                <TableHead>Crop Type</TableHead>
+                <TableHead>Quantity</TableHead>
+                <TableHead>Arrival Date</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {bookedSlots.map((slot) => (
+                <TableRow key={slot.id}>
+                    <TableCell>
+                    <div className="flex items-center gap-3">
+                        <Avatar className="h-9 w-9">
+                        <AvatarImage src={slot.farmerAvatar} alt={slot.farmerName} />
+                        <AvatarFallback>{slot.farmerName.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <span className="font-medium">{slot.farmerName}</span>
+                    </div>
+                    </TableCell>
+                    <TableCell>{slot.cropType}</TableCell>
+                    <TableCell>{slot.quantity} {slot.unit}</TableCell>
+                    <TableCell>{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
+                    <TableCell>{getStatusBadge(slot.status)}</TableCell>
+                    <TableCell className="text-right">
+                        <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem>
+                            <User className="mr-2 h-4 w-4" />
+                            View Farmer Profile
                             </DropdownMenuItem>
-                        </AlertDialogTrigger>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                    <AlertDialogContent>
-                        <AlertDialogHeader>
-                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete the booking
-                                from the database.
-                            </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDeleteSlot(slot.id)}>
-                                Yes, delete it
-                            </AlertDialogAction>
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                   </AlertDialog>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                            <DropdownMenuItem 
+                                disabled={slot.status !== 'Upcoming'}
+                                onClick={() => handleUpdateStatus(slot.id, 'Completed')}
+                            >
+                            <CheckCircle className="mr-2 h-4 w-4" />
+                            Mark as Completed
+                            </DropdownMenuItem>
+                            <DropdownMenuItem 
+                                disabled={slot.status !== 'Upcoming'}
+                                onClick={() => handleUpdateStatus(slot.id, 'Cancelled')}
+                            >
+                            <XCircle className="mr-2 h-4 w-4" />
+                            Cancel Slot
+                            </DropdownMenuItem>
+                            <AlertDialogTrigger asChild>
+                                <DropdownMenuItem className="text-destructive" onClick={() => setSelectedSlot(slot)}>
+                                    <Trash2 className="mr-2 h-4 w-4" />
+                                    Delete Permanently
+                                </DropdownMenuItem>
+                            </AlertDialogTrigger>
+                        </DropdownMenuContent>
+                        </DropdownMenu>
+                    </TableCell>
+                </TableRow>
+                ))}
+            </TableBody>
+            </Table>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        This action cannot be undone. This will permanently delete the booking
+                        for <span className="font-semibold">{selectedSlot?.farmerName}</span>'s <span className="font-semibold">{selectedSlot?.cropType}</span> and notify them.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel onClick={() => setSelectedSlot(null)}>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => handleDeleteSlot(selectedSlot)}>
+                        Yes, delete it
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
         )}
       </CardContent>
     </Card>

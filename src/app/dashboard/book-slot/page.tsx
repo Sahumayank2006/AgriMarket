@@ -50,7 +50,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useContext, useState } from "react";
 import { LanguageContext } from "@/contexts/language-context";
 import { db } from "@/lib/firebase/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const formSchema = z.object({
   warehouse: z.string().min(1, "Please select a warehouse."),
@@ -125,12 +125,28 @@ export default function BookSlotPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
+      const farmerId = "farmer-rohan"; // This should be dynamic in a real app
+      const farmerName = "Rohan Gupta"; // This should be dynamic in a real app
+
       await addDoc(collection(db, "slots"), {
         ...values,
-        status: "Upcoming", // Add a default status
-        farmerName: "Rohan Gupta", // This should be dynamic in a real app
-        farmerAvatar: "https://i.pravatar.cc/150?u=rohan" // This should be dynamic in a real app
+        status: "Upcoming",
+        farmerId,
+        farmerName,
+        farmerAvatar: "https://i.pravatar.cc/150?u=rohan"
       });
+      
+      // Create notification for the farmer
+      await addDoc(collection(db, "notifications"), {
+          userId: farmerId, // Target user for the notification
+          icon: "CheckCircle",
+          title: "Slot booking confirmed!",
+          description: `Your booking at ${values.warehouse} for ${values.quantity} ${values.unit} is confirmed for ${format(values.bookingDate, "PPP")}.`,
+          timestamp: serverTimestamp(),
+          read: false,
+          link: "/dashboard/slot-management?role=farmer"
+      });
+
 
       toast({
         title: t.bookingSuccessTitle,

@@ -7,6 +7,7 @@ import {
   Package,
   AlertTriangle,
   User,
+  XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,39 +20,75 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { db } from "@/lib/firebase/firebase";
+import { collection, query, where, onSnapshot, orderBy, Timestamp } from "firebase/firestore";
+import { formatDistanceToNow } from "date-fns";
+import { useSearchParams } from "next/navigation";
+import type { Role } from "@/lib/types";
 
-const notifications = [
-  {
-    icon: <CheckCircle className="h-4 w-4 text-green-500" />,
-    title: "New slot booking confirmed!",
-    description: "Rohan Gupta booked a slot for 10 quintals of Tomatoes.",
-    time: "2 minutes ago",
-    read: false,
-  },
-  {
-    icon: <AlertTriangle className="h-4 w-4 text-yellow-500" />,
-    title: "Spoilage Alert",
-    description: "Your potatoes have a high risk of spoilage.",
-    time: "1 hour ago",
-    read: false,
-  },
-  {
-    icon: <Package className="h-4 w-4 text-blue-500" />,
-    title: "Order Shipped",
-    description: "Your order #ORD-002 has been shipped.",
-    time: "1 day ago",
-    read: true,
-  },
-  {
-    icon: <User className="h-4 w-4 text-purple-500" />,
-    title: "New Bid Received",
-    description: "Agro Traders placed a bid on your Red Apples.",
-    time: "2 days ago",
-    read: true,
-  },
-];
+type NotificationIcon = "CheckCircle" | "Package" | "AlertTriangle" | "User" | "XCircle";
+
+interface Notification {
+  id: string;
+  icon: NotificationIcon;
+  title: string;
+  description: string;
+  timestamp: Timestamp;
+  read: boolean;
+  link?: string;
+  userId: string;
+}
+
+const iconMap: Record<NotificationIcon, React.ReactNode> = {
+  CheckCircle: <CheckCircle className="h-4 w-4 text-green-500" />,
+  Package: <Package className="h-4 w-4 text-blue-500" />,
+  AlertTriangle: <AlertTriangle className="h-4 w-4 text-yellow-500" />,
+  User: <User className="h-4 w-4 text-purple-500" />,
+  XCircle: <XCircle className="h-4 w-4 text-red-500" />,
+};
+
 
 export function NotificationDropdown() {
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const searchParams = useSearchParams();
+  const role = searchParams.get("role") as Role | null;
+
+  useEffect(() => {
+    // In a real app, you'd get the current user's ID from auth state
+    const getCurrentUserId = () => {
+        switch(role) {
+            case "farmer": return "farmer-rohan";
+            case "green-guardian": return "warehouse-manager";
+            default: return null;
+        }
+    }
+    
+    const userId = getCurrentUserId();
+
+    if (!userId) {
+        setNotifications([]);
+        return;
+    }
+
+    const q = query(
+        collection(db, "notifications"), 
+        where("userId", "==", userId),
+        orderBy("timestamp", "desc")
+    );
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const fetchedNotifications: Notification[] = [];
+        querySnapshot.forEach((doc) => {
+            fetchedNotifications.push({ id: doc.id, ...doc.data() } as Notification);
+        });
+        setNotifications(fetchedNotifications);
+    });
+
+    return () => unsubscribe();
+  }, [role]);
+  
+
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
@@ -68,13 +105,17 @@ export function NotificationDropdown() {
         <DropdownMenuLabel>Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <div className="max-h-80 overflow-y-auto">
-            {notifications.map((notification, index) => (
-            <DropdownMenuItem key={index} className={cn("flex items-start gap-3 p-3", !notification.read && "bg-accent")}>
-                <div className="flex-shrink-0 mt-1">{notification.icon}</div>
+            {notifications.length === 0 ? (
+                 <p className="text-center text-sm text-muted-foreground p-4">No new notifications.</p>
+            ) : notifications.map((notification) => (
+            <DropdownMenuItem key={notification.id} className={cn("flex items-start gap-3 p-3", !notification.read && "bg-accent")}>
+                <div className="flex-shrink-0 mt-1">{iconMap[notification.icon]}</div>
                 <div className="flex-grow">
                     <p className="font-semibold text-sm">{notification.title}</p>
                     <p className="text-xs text-muted-foreground">{notification.description}</p>
-                    <p className="text-xs text-muted-foreground/70 mt-1">{notification.time}</p>
+                    <p className="text-xs text-muted-foreground/70 mt-1">
+                        {formatDistanceToNow(notification.timestamp.toDate(), { addSuffix: true })}
+                    </p>
                 </div>
                 {!notification.read && <div className="h-2 w-2 rounded-full bg-primary mt-1 flex-shrink-0" />}
             </DropdownMenuItem>

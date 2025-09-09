@@ -298,10 +298,6 @@ export default function RoleSelectionPage() {
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                     </div>
 
-                    <div className="my-12">
-                        <Image src="https://i.ibb.co/TB55Lx4Q/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
-                    </div>
-
                     <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.topPerformers}</h2>
                      <Carousel
                         setApi={setPerformerApi}
@@ -383,6 +379,10 @@ export default function RoleSelectionPage() {
                          </Card>
                        ))}
                     </div>
+                </div>
+
+                 <div className="my-12">
+                    <Image src="https://i.ibb.co/Ps0sHgxD/nlogos.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
                 </div>
             </div>
         </div>

@@ -277,7 +277,7 @@ export default function RoleSelectionPage() {
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
         </div>
         <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={68} height={68} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
         </div>
         <div className="flex items-center gap-2 justify-end">
             <DropdownMenu>

@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Link from "next/link";
@@ -19,7 +20,8 @@ import {
   Instagram,
   Linkedin,
   Upload,
-  FileText
+  FileText,
+  X,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -34,12 +36,12 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { BackgroundGradient } from "@/components/background-gradient";
+import { useDropzone } from "react-dropzone";
 
 
 interface RoleCardProps {
@@ -224,6 +226,18 @@ export default function RoleSelectionPage() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [performerApi, setPerformerApi] = useState<CarouselApi>();
+  const [files, setFiles] = useState<File[]>([]);
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setFiles(prevFiles => [...prevFiles, ...acceptedFiles]);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const removeFile = (fileName: string) => {
+    setFiles(prevFiles => prevFiles.filter(file => file.name !== fileName));
+  };
+
 
   useEffect(() => {
     if (!api) {
@@ -347,22 +361,35 @@ export default function RoleSelectionPage() {
                      <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl">
                         <h2 className="text-4xl font-bold text-foreground mb-4">Standard Guidelines</h2>
                         <p className="max-w-2xl mx-auto text-muted-foreground mb-8">Access and download the operational guidelines, quality standards, and best practices for all platform stakeholders.</p>
-                        <Card className="max-w-lg mx-auto text-left">
+                        <Card className="max-w-3xl mx-auto text-left">
                             <CardHeader>
-                                <CardTitle>Download Center</CardTitle>
-                                <CardDescription>Upload or download important PDF documents.</CardDescription>
+                                <CardTitle>Document Center</CardTitle>
+                                <CardDescription>Upload or download important PDF documents, DOCX files, etc.</CardDescription>
                             </CardHeader>
                             <CardContent>
-                                 <div className="flex items-center justify-center w-full">
-                                    <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted">
-                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <Upload className="w-8 h-8 mb-4 text-muted-foreground" />
-                                            <p className="mb-2 text-sm text-muted-foreground"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-                                            <p className="text-xs text-muted-foreground">PDF, DOCX, or other documents</p>
-                                        </div>
-                                        <Input id="dropzone-file" type="file" className="hidden" />
-                                    </label>
-                                </div> 
+                                <div {...getRootProps()} className={cn("flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg cursor-pointer hover:bg-muted/50", isDragActive && "bg-muted/50 border-primary")}>
+                                    <input {...getInputProps()} />
+                                    <Upload className="w-8 h-8 mb-4 text-muted-foreground" />
+                                    <p className="mb-2 text-sm text-muted-foreground">
+                                        {isDragActive ? "Drop the files here ..." : "Drag 'n' drop some files here, or click to select files"}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground">PDF, DOCX, etc. up to 10MB</p>
+                                </div>
+                                {files.length > 0 && (
+                                    <div className="mt-4 grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+                                        {files.map(file => (
+                                            <Card key={file.name} className="p-2 flex items-center justify-between">
+                                                <div className="flex items-center gap-2 overflow-hidden">
+                                                   <FileText className="h-5 w-5 flex-shrink-0" />
+                                                   <span className="text-sm truncate">{file.name}</span>
+                                                </div>
+                                                <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => removeFile(file.name)}>
+                                                    <X className="h-4 w-4" />
+                                                </Button>
+                                            </Card>
+                                        ))}
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
                      </div>

@@ -18,13 +18,25 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2 } from "lucide-react";
+import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2, Trash2 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { db } from "@/lib/firebase/firebase";
-import { collection, onSnapshot, query, Timestamp } from "firebase/firestore";
+import { collection, onSnapshot, query, Timestamp, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { format } from "date-fns";
+import { useToast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface Slot {
     id: string;
@@ -54,6 +66,8 @@ const getStatusBadge = (status: string) => {
 export function WarehouseSlotVisibility() {
     const [bookedSlots, setBookedSlots] = useState<Slot[]>([]);
     const [loading, setLoading] = useState(true);
+    const { toast } = useToast();
+    const isInitialLoad = useRef(true);
 
     useEffect(() => {
         const q = query(collection(db, "slots"));
@@ -63,11 +77,61 @@ export function WarehouseSlotVisibility() {
                 slots.push({ id: doc.id, ...doc.data() } as Slot);
             });
             setBookedSlots(slots);
+            
+            if (isInitialLoad.current) {
+                isInitialLoad.current = false;
+            } else {
+                 querySnapshot.docChanges().forEach((change) => {
+                    if (change.type === "added") {
+                        const newSlot = change.doc.data();
+                        toast({
+                            title: "New Slot Booked!",
+                            description: `${newSlot.farmerName} booked a slot for ${newSlot.quantity} ${newSlot.unit} of ${newSlot.cropType}.`
+                        });
+                    }
+                });
+            }
             setLoading(false);
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [toast]);
+
+    const handleUpdateStatus = async (id: string, status: "Completed" | "Cancelled") => {
+        const slotRef = doc(db, "slots", id);
+        try {
+            await updateDoc(slotRef, { status });
+            toast({
+                title: "Slot Updated",
+                description: `Booking ${id} has been marked as ${status}.`
+            });
+        } catch (error) {
+            console.error("Error updating slot status:", error);
+            toast({
+                variant: "destructive",
+                title: "Update Failed",
+                description: "Could not update the slot status. Please try again."
+            });
+        }
+    };
+    
+    const handleDeleteSlot = async (id: string) => {
+        const slotRef = doc(db, "slots", id);
+        try {
+            await deleteDoc(slotRef);
+            toast({
+                title: "Slot Deleted",
+                description: `Booking ${id} has been permanently deleted.`
+            });
+        } catch (error) {
+            console.error("Error deleting slot:", error);
+             toast({
+                variant: "destructive",
+                title: "Deletion Failed",
+                description: "Could not delete the slot. Please try again."
+            });
+        }
+    };
 
   return (
     <Card>
@@ -111,29 +175,58 @@ export function WarehouseSlotVisibility() {
                 <TableCell>{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
                 <TableCell>{getStatusBadge(slot.status)}</TableCell>
                  <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>
-                        <User className="mr-2 h-4 w-4" />
-                        View Farmer Profile
-                      </DropdownMenuItem>
-                       <DropdownMenuItem disabled={slot.status !== 'Upcoming'}>
-                        <CheckCircle className="mr-2 h-4 w-4" />
-                        Mark as Completed
-                      </DropdownMenuItem>
-                      <DropdownMenuItem disabled={slot.status !== 'Upcoming'} className="text-destructive">
-                         <XCircle className="mr-2 h-4 w-4" />
-                        Cancel Slot
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <AlertDialog>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                          <span className="sr-only">Open menu</span>
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <User className="mr-2 h-4 w-4" />
+                          View Farmer Profile
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                            disabled={slot.status !== 'Upcoming'}
+                            onClick={() => handleUpdateStatus(slot.id, 'Completed')}
+                        >
+                          <CheckCircle className="mr-2 h-4 w-4" />
+                          Mark as Completed
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                            disabled={slot.status !== 'Upcoming'}
+                            onClick={() => handleUpdateStatus(slot.id, 'Cancelled')}
+                        >
+                           <XCircle className="mr-2 h-4 w-4" />
+                          Cancel Slot
+                        </DropdownMenuItem>
+                        <AlertDialogTrigger asChild>
+                            <DropdownMenuItem className="text-destructive">
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Delete Permanently
+                            </DropdownMenuItem>
+                        </AlertDialogTrigger>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete the booking
+                                from the database.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDeleteSlot(slot.id)}>
+                                Yes, delete it
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                   </AlertDialog>
                 </TableCell>
               </TableRow>
             ))}

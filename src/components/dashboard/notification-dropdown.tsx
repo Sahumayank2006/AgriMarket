@@ -83,7 +83,13 @@ export function NotificationDropdown() {
         });
         
         // Sort on the client while index is building
-        fetchedNotifications.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
+        fetchedNotifications.sort((a, b) => {
+            if (a.timestamp && b.timestamp) {
+                return b.timestamp.toMillis() - a.timestamp.toMillis()
+            }
+            return 0;
+        });
+
 
         setNotifications(fetchedNotifications);
     });
@@ -117,7 +123,7 @@ export function NotificationDropdown() {
                     <p className="font-semibold text-sm">{notification.title}</p>
                     <p className="text-xs text-muted-foreground">{notification.description}</p>
                     <p className="text-xs text-muted-foreground/70 mt-1">
-                        {formatDistanceToNow(notification.timestamp.toDate(), { addSuffix: true })}
+                        {notification.timestamp && formatDistanceToNow(notification.timestamp.toDate(), { addSuffix: true })}
                     </p>
                 </div>
                 {!notification.read && <div className="h-2 w-2 rounded-full bg-primary mt-1 flex-shrink-0" />}

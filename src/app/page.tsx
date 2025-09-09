@@ -38,6 +38,9 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { BackgroundGradient } from "@/components/background-gradient";
+
 
 interface RoleCardProps {
   role: Role;
@@ -429,7 +432,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    
-
-    

@@ -297,8 +297,8 @@ export default function RoleSelectionPage() {
                     <Image 
                         src="https://i.ibb.co/Kj6Q6Zf5/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png"
                         alt="eAaharSetu process diagram"
-                        width={1024}
-                        height={576}
+                        width={512}
+                        height={288}
                         className="rounded-lg shadow-lg"
                     />
                 </div>

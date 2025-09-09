@@ -151,50 +151,50 @@ export default function RoleSelectionPage() {
       name: "Vijay Kumar",
       role: "Logistics Head",
       location: "Maharashtra Region",
-      achievement: "₹50,000+ saved on transport",
-      avatarUrl: "https://i.pravatar.cc/150?u=vikram"
+      achievement: "1.2 tons of food waste saved",
+      avatarUrl: "https://i.pravatar.cc/150?u=vijay"
     },
     {
       name: "Meera Patel",
       role: "Warehouse Manager",
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
-      avatarUrl: "https://i.pravatar.cc/150?u=sunita"
+      avatarUrl: "https://i.pravatar.cc/150?u=meera"
     },
     {
       name: "Rohan Gupta",
       role: "Top Farmer",
       location: "Pune District",
-      achievement: "Fastest delivery times in Q2",
-      avatarUrl: "https://i.pravatar.cc/150?u=sanjay"
+      achievement: "Highest crop utilization rate",
+      avatarUrl: "https://i.pravatar.cc/150?u=rohan"
     },
     {
       name: "Aisha Sharma",
       role: "Quality Control Lead",
       location: "Nagpur Hub",
       achievement: "99.8% quality rating",
-      avatarUrl: "https://i.pravatar.cc/150?u=neha"
+      avatarUrl: "https://i.pravatar.cc/150?u=aisha"
     },
     {
       name: "Suresh Singh",
       role: "Top Dealer",
       location: "Aurangabad",
-      achievement: "500+ successful trades",
-      avatarUrl: "https://i.pravatar.cc/150?u=rajesh"
+      achievement: "50+ tons of surplus moved",
+      avatarUrl: "https://i.pravatar.cc/150?u=suresh"
     },
     {
         name: "Priya Rao",
         role: "Eco-Farmer",
         location: "Satara",
         achievement: "Water usage down 30%",
-        avatarUrl: "https://i.pravatar.cc/150?u=pooja"
+        avatarUrl: "https://i.pravatar.cc/150?u=priya"
     },
     {
         name: "Amit Deshmukh",
         role: "Logistics Coordinator",
         location: "Mumbai Port",
         achievement: "On-time delivery rate 98%",
-        avatarUrl: "https://i.pravatar.cc/150?u=arjun"
+        avatarUrl: "https://i.pravatar.cc/150?u=amit"
     }
   ];
 

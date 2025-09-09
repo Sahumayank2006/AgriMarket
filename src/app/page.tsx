@@ -271,13 +271,15 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
-      <div className="w-full h-24 bg-white flex items-center justify-between px-4">
-        <div className="flex items-center gap-4">
+      <div className="w-full h-24 bg-white grid grid-cols-3 items-center px-4">
+        <div className="flex items-center gap-4 justify-start">
           <Image src="https://i.ibb.co/td7KZ93/Chat-GPT-Image-Sep-9-2025-07-46-01-AM.png" alt="AaharSetu Logo" width={112} height={45} />
-          <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={68} height={68} />
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex justify-center">
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={68} height={68} />
+        </div>
+        <div className="flex items-center gap-2 justify-end">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">

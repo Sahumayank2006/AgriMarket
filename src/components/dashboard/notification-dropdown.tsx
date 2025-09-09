@@ -73,8 +73,7 @@ export function NotificationDropdown() {
 
     const q = query(
         collection(db, "notifications"), 
-        where("userId", "==", userId),
-        orderBy("timestamp", "desc")
+        where("userId", "==", userId)
     );
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -82,6 +81,10 @@ export function NotificationDropdown() {
         querySnapshot.forEach((doc) => {
             fetchedNotifications.push({ id: doc.id, ...doc.data() } as Notification);
         });
+        
+        // Sort on the client while index is building
+        fetchedNotifications.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
+
         setNotifications(fetchedNotifications);
     });
 

@@ -297,8 +297,8 @@ export default function RoleSelectionPage() {
                     <Image 
                         src="https://i.ibb.co/Kj6Q6Zf5/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png"
                         alt="eAaharSetu process diagram"
-                        width={512}
-                        height={288}
+                        width={256}
+                        height={144}
                         className="rounded-lg shadow-lg"
                     />
                 </div>
@@ -391,8 +391,14 @@ export default function RoleSelectionPage() {
                     </div>
                 </div>
 
-                 <div className="my-12">
-                    <Image src="https://i.ibb.co/Ps0sHgxD/nlogos.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
+                <div className="my-20 w-full max-w-5xl text-center">
+                    <h2 className="text-3xl font-semibold text-foreground mb-8">Our Partners</h2>
+                    <div className="flex justify-around items-center gap-8 flex-wrap">
+                        <Image src="https://i.ibb.co/d0SPMppv/logo-4.png" alt="Partner Logo 4" width={150} height={60} style={{objectFit:"contain"}} />
+                        <Image src="https://i.ibb.co/BKgM48Db/logo3.png" alt="Partner Logo 3" width={150} height={60} style={{objectFit:"contain"}} />
+                        <Image src="https://i.ibb.co/JwbjkpJ6/logo2.png" alt="Partner Logo 2" width={150} height={60} style={{objectFit:"contain"}} />
+                        <Image src="https://i.ibb.co/BVNLZRHZ/logo1.png" alt="Partner Logo 1" width={150} height={60} style={{objectFit:"contain"}} />
+                    </div>
                 </div>
             </div>
         </div>

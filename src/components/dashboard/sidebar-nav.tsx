@@ -43,12 +43,6 @@ const navItems = {
   farmer: [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/dashboard/profile", label: "My Profile", icon: User },
-    { href: "/dashboard/crop-management", label: "Crop Management", icon: Carrot },
-    { href: "/dashboard/market-participation", label: "Marketplace", icon: Store },
-    { href: "/dashboard/transport", label: "Transport", icon: Truck },
-    { href: "/dashboard/advisory", label: "Advisory", icon: Lightbulb },
-    { href: "/dashboard/financial-services", label: "Financial Services", icon: Landmark },
-    { href: "/dashboard/inventory", label: "Your Inventory", icon: Package },
   ],
   dealer: [
     { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
@@ -138,8 +132,7 @@ export function SidebarNav() {
                         </p>
                         <p className="text-xs leading-none text-muted-foreground">
                         {role}@aaharsetu.com
-                        </p>
-                    </div>
+                        </p>                    </div>
             </div>
         </div>
       </SidebarFooter>

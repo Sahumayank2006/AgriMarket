@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import Link from "next/link";
@@ -18,11 +17,13 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Linkedin
+  Linkedin,
+  Upload,
+  FileText
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Logo } from "@/components/icons";
 import type { Role } from "@/lib/types";
 import {
@@ -36,6 +37,7 @@ import {
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 
 interface RoleCardProps {
   role: Role;
@@ -186,7 +188,7 @@ export default function RoleSelectionPage() {
         name: "Priya Rao",
         role: "Eco-Farmer",
         location: "Satara",
-        achievement: "Water usage down 30%",
+        achievement: "30% reduction in food waste",
         avatarUrl: "https://i.pravatar.cc/150?u=priya"
     },
     {
@@ -198,9 +200,26 @@ export default function RoleSelectionPage() {
     }
   ];
 
+  const impactStats = [
+    {
+        icon: Warehouse,
+        value: "150+",
+        label: "Warehouses Connected",
+    },
+    {
+        icon: Leaf,
+        value: "5,000+ Tons",
+        label: "Food Saved from Waste",
+    },
+    {
+        icon: IndianRupee,
+        value: "₹25 Cr+",
+        label: "Value Created for Farmers",
+    },
+  ];
+
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  
   const [performerApi, setPerformerApi] = useState<CarouselApi>();
 
   useEffect(() => {
@@ -317,10 +336,55 @@ export default function RoleSelectionPage() {
                         <CarouselNext className="mr-0" />
                     </Carousel>
                 </div>
+
+                <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+                    <div className="mb-8">
+                        <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
+                    </div>
+                     <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl">
+                        <h2 className="text-4xl font-bold text-foreground mb-4">Standard Guidelines</h2>
+                        <p className="max-w-2xl mx-auto text-muted-foreground mb-8">Access and download the operational guidelines, quality standards, and best practices for all platform stakeholders.</p>
+                        <Card className="max-w-lg mx-auto text-left">
+                            <CardHeader>
+                                <CardTitle>Download Center</CardTitle>
+                                <CardDescription>Upload or download important PDF documents.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                 <div className="flex items-center justify-center w-full">
+                                    <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted">
+                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <Upload className="w-8 h-8 mb-4 text-muted-foreground" />
+                                            <p className="mb-2 text-sm text-muted-foreground"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                                            <p className="text-xs text-muted-foreground">PDF, DOCX, or other documents</p>
+                                        </div>
+                                        <Input id="dropzone-file" type="file" className="hidden" />
+                                    </label>
+                                </div> 
+                            </CardContent>
+                        </Card>
+                     </div>
+                </div>
+
+                <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+                     <div className="mb-8">
+                        <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
+                    </div>
+                    <h2 className="text-4xl font-bold text-foreground mb-8">Our Impact</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                       {impactStats.map((stat, index) => (
+                         <Card key={index} className="p-6 text-center">
+                            <stat.icon className="h-12 w-12 text-primary mx-auto mb-4" />
+                            <p className="text-4xl font-bold">{stat.value}</p>
+                            <p className="text-muted-foreground mt-1">{stat.label}</p>
+                         </Card>
+                       ))}
+                    </div>
+                </div>
+
             </div>
         </div>
 
-         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000">
+         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000 mt-20">
             <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">
@@ -365,3 +429,7 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    
+
+    

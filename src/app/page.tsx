@@ -392,7 +392,6 @@ export default function RoleSelectionPage() {
                 </div>
 
                 <div className="my-20 w-full max-w-5xl text-center">
-                    <h2 className="text-3xl font-semibold text-foreground mb-8">Our Partners</h2>
                     <div className="flex justify-around items-center gap-8 flex-wrap">
                         <Image src="https://i.ibb.co/d0SPMppv/logo-4.png" alt="Partner Logo 4" width={150} height={60} style={{objectFit:"contain"}} />
                         <Image src="https://i.ibb.co/BKgM48Db/logo3.png" alt="Partner Logo 3" width={150} height={60} style={{objectFit:"contain"}} />

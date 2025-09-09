@@ -32,6 +32,7 @@ import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import type { Role } from "@/lib/types";
 import { LanguageContext, content } from "@/contexts/language-context";
+import { NotificationDropdown } from "./notification-dropdown";
 
 function getRoleName(role: Role | null, lang: 'en' | 'hi') {
   if (!role) return lang === 'en' ? "User" : "उपयोगकर्ता";
@@ -75,9 +76,7 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" aria-label="Notifications">
-          <Bell className="h-5 w-5" />
-        </Button>
+        <NotificationDropdown />
         
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

@@ -62,7 +62,7 @@ export function FarmerSlotHistory() {
             querySnapshot.forEach((doc) => {
                 slots.push({ id: doc.id, ...doc.data() } as Slot);
             });
-            // Sort slots by booking date descending
+            // The sort was moved client-side to avoid needing a second composite index
             slots.sort((a, b) => b.bookingDate.toDate().getTime() - a.bookingDate.toDate().getTime());
             setBookedSlots(slots);
             setLoading(false);

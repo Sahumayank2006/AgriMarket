@@ -411,6 +411,10 @@ export default function RoleSelectionPage() {
                     </div>
                 </div>
 
+                <div className="mt-12 w-full max-w-4xl animate-in fade-in duration-1000">
+                    <Image src="https://i.ibb.co/GvK8Hvf7/nlogos.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
+                </div>
+
             </div>
         </div>
 

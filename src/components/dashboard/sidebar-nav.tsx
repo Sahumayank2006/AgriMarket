@@ -47,6 +47,7 @@ const navItemsContent = {
         farmer: [
             { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
             { href: "/dashboard/profile", label: "My Profile", icon: User },
+            { href: "/dashboard/slot-history", label: "Slot History", icon: CalendarCheck },
         ],
         dealer: [
             { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
@@ -83,6 +84,7 @@ const navItemsContent = {
         farmer: [
             { href: "/dashboard", label: "डैशबोर्ड", icon: LayoutDashboard },
             { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
+            { href: "/dashboard/slot-history", label: "स्लॉट इतिहास", icon: CalendarCheck },
         ],
         dealer: [
             { href: "/dashboard", label: "बाजार", icon: ShoppingBag },

@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Logo } from "@/components/icons";
 import type { Role } from "@/lib/types";
 import {
@@ -63,20 +63,26 @@ interface RoleCardProps {
 
 function RoleCard({ role, title, description, icon: Icon, lang, continueAsText }: RoleCardProps & { lang: LangKey; continueAsText: string }) {
   return (
-    <Card className="h-full transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-2 hover:border-primary bg-card">
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-xl font-bold">{title}</CardTitle>
-        <Icon className="h-8 w-8 text-muted-foreground" />
+    <Card className="group h-full flex flex-col text-center transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-primary/20 hover:shadow-2xl">
+      <CardHeader className="items-center pt-8">
+         <div className="p-4 bg-secondary rounded-full ring-8 ring-background group-hover:ring-primary/10 transition-all duration-300">
+            <Icon className="h-8 w-8 text-primary" />
+         </div>
       </CardHeader>
-      <CardContent>
-        <p className="text-base text-muted-foreground mb-6 min-h-[60px]">{description}</p>
-        <Button asChild size="lg" className="w-full text-lg">
+      <CardContent className="flex-grow">
+        <CardTitle className="text-2xl font-bold">{title}</CardTitle>
+        <CardDescription className="mt-2 text-base text-muted-foreground min-h-[50px]">
+            {description}
+        </CardDescription>
+      </CardContent>
+      <CardFooter>
+         <Button asChild size="lg" className="w-full text-lg">
           <Link href={`/dashboard?role=${role}&lang=${lang}`}>
              {continueAsText} {title}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </Button>
-      </CardContent>
+      </CardFooter>
     </Card>
   );
 }
@@ -267,7 +273,7 @@ export default function RoleSelectionPage() {
                         align: "center",
                         loop: true,
                     }}
-                    className="w-full max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000"
+                    className="w-full max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000"
                 >
                     <CarouselContent className="-ml-4">
                     {pageContent.roles.map((role, index) => (
@@ -283,7 +289,7 @@ export default function RoleSelectionPage() {
                                 transform: "scale(var(--carousel-item-scale, 0.9))",
                             }}
                         >
-                          <div className="p-1">
+                          <div className="p-1 h-full">
                               <RoleCard {...role} lang={lang} continueAsText={pageContent.continueAs} />
                           </div>
                         </CarouselItem>
@@ -297,8 +303,8 @@ export default function RoleSelectionPage() {
                     <Image 
                         src="https://i.ibb.co/Kj6Q6Zf5/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png"
                         alt="eAaharSetu process diagram"
-                        width={384}
-                        height={216}
+                        width={576}
+                        height={324}
                         className="rounded-lg shadow-lg"
                     />
                 </div>
@@ -447,3 +453,5 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    

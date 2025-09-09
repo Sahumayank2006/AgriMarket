@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import Link from "next/link";
@@ -263,7 +261,6 @@ export default function RoleSelectionPage() {
                  <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
                     <div className="mb-8">
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
-                        <p className="text-lg text-muted-foreground mt-4">Seamless Agricultural Operations – From Farm to Market</p>
                     </div>
 
                     <div className="my-12">

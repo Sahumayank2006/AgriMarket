@@ -274,6 +274,7 @@ export default function RoleSelectionPage() {
       <div className="w-full h-24 bg-white flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
           <Image src="https://i.ibb.co/td7KZ93/Chat-GPT-Image-Sep-9-2025-07-46-01-AM.png" alt="AaharSetu Logo" width={112} height={45} />
+          <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={68} height={68} />
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
         </div>
         <div className="flex items-center gap-2">
@@ -303,7 +304,6 @@ export default function RoleSelectionPage() {
                 <p className="max-w-3xl text-center text-xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-top-6 duration-1000">
                     Transforming Agriculture with a Single Digital Platform
                 </p>
-                <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={150} height={150} className="mb-8" />
 
                  <p className="text-lg text-muted-foreground mb-8">Choose Your Role to Get Started</p>
 

@@ -161,6 +161,18 @@ export default function RoleSelectionPage() {
       location: "Aurangabad",
       achievement: "500+ successful trades",
     },
+    {
+        name: "Priya Rao",
+        role: "Eco-Farmer",
+        location: "Satara",
+        achievement: "Water usage down 30%",
+    },
+    {
+        name: "Amit Deshmukh",
+        role: "Logistics Coordinator",
+        location: "Mumbai Port",
+        achievement: "On-time delivery rate 98%",
+    }
   ];
 
   const [api, setApi] = useState<CarouselApi>();
@@ -252,6 +264,10 @@ export default function RoleSelectionPage() {
                     <div className="mb-8">
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                         <p className="text-lg text-muted-foreground mt-4">Seamless Agricultural Operations – From Farm to Market</p>
+                    </div>
+
+                    <div className="my-12">
+                        <Image src="https://i.ibb.co/fGDxLXL4/logos.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
                     </div>
 
                     <h2 className="text-4xl font-bold text-foreground mb-8">Top Performers</h2>

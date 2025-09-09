@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Clock, Loader2, Warehouse, XCircle } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { db } from "@/lib/firebase/firebase";
-import { collection, onSnapshot, query, Timestamp, where } from "firebase/firestore";
+import { collection, onSnapshot, query, Timestamp, where, orderBy } from "firebase/firestore";
 import { format } from "date-fns";
 
 interface Slot {
@@ -55,16 +55,22 @@ export function FarmerSlotHistory() {
         // In a real app, you'd get the current farmer's ID from auth state
         const farmerId = "farmer-rohan"; 
 
-        const q = query(collection(db, "slots"), where("farmerId", "==", farmerId));
+        const q = query(
+            collection(db, "slots"), 
+            where("farmerId", "==", farmerId),
+            orderBy("bookingDate", "desc")
+        );
         
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const slots: Slot[] = [];
             querySnapshot.forEach((doc) => {
                 slots.push({ id: doc.id, ...doc.data() } as Slot);
             });
-            // The sort was moved client-side to avoid needing a second composite index
-            slots.sort((a, b) => b.bookingDate.toDate().getTime() - a.bookingDate.toDate().getTime());
             setBookedSlots(slots);
+            setLoading(false);
+        }, (error) => {
+            console.error("Error fetching slot history: ", error);
+            // You might want to show an error message to the user
             setLoading(false);
         });
 

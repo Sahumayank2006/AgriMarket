@@ -18,57 +18,24 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CheckCircle, Clock, MoreHorizontal, User, XCircle } from "lucide-react";
+import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
+import { db } from "@/lib/firebase/firebase";
+import { collection, onSnapshot, query, Timestamp } from "firebase/firestore";
+import { format } from "date-fns";
 
-const bookedSlots = [
-  {
-    id: "SLOT-001",
-    farmerName: "Rohan Gupta",
-    farmerAvatar: "https://i.pravatar.cc/150?u=rohan",
-    cropType: "Tomatoes (टमाटर)",
-    quantity: "10 Quintal",
-    bookingDate: "2024-08-10",
-    status: "Upcoming",
-  },
-  {
-    id: "SLOT-002",
-    farmerName: "Priya Rao",
-    farmerAvatar: "https://i.pravatar.cc/150?u=priya",
-    cropType: "Onions (प्याज)",
-    quantity: "25 Quintal",
-    bookingDate: "2024-08-11",
-    status: "Upcoming",
-  },
-  {
-    id: "SLOT-003",
-    farmerName: "Vijay Kumar",
-    farmerAvatar: "https://i.pravatar.cc/150?u=vijay",
-    cropType: "Potatoes (आलू)",
-    quantity: "5 Ton",
-    bookingDate: "2024-08-08",
-    status: "Completed",
-  },
-  {
-    id: "SLOT-004",
-    farmerName: "Amit Deshmukh",
-    farmerAvatar: "https://i.pravatar.cc/150?u=amit",
-    cropType: "Grapes (अंगूर)",
-    quantity: "8 Quintal",
-    bookingDate: "2024-08-12",
-    status: "Upcoming",
-  },
-   {
-    id: "SLOT-005",
-    farmerName: "Meera Patel",
-    farmerAvatar: "https://i.pravatar.cc/150?u=meera",
-    cropType: "Pomegranates (अनार)",
-    quantity: "12 Quintal",
-    bookingDate: "2024-08-09",
-    status: "Cancelled",
-  },
-];
+interface Slot {
+    id: string;
+    farmerName: string;
+    farmerAvatar: string;
+    cropType: string;
+    quantity: number;
+    unit: string;
+    bookingDate: Timestamp;
+    status: string;
+}
 
 const getStatusBadge = (status: string) => {
     switch (status.toLowerCase()) {
@@ -85,6 +52,23 @@ const getStatusBadge = (status: string) => {
 
 
 export function WarehouseSlotVisibility() {
+    const [bookedSlots, setBookedSlots] = useState<Slot[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const q = query(collection(db, "slots"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const slots: Slot[] = [];
+            querySnapshot.forEach((doc) => {
+                slots.push({ id: doc.id, ...doc.data() } as Slot);
+            });
+            setBookedSlots(slots);
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, []);
+
   return (
     <Card>
       <CardHeader>
@@ -94,6 +78,11 @@ export function WarehouseSlotVisibility() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        {loading ? (
+            <div className="flex justify-center items-center h-48">
+                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            </div>
+        ) : (
         <Table>
           <TableHeader>
             <TableRow>
@@ -118,8 +107,8 @@ export function WarehouseSlotVisibility() {
                   </div>
                 </TableCell>
                 <TableCell>{slot.cropType}</TableCell>
-                <TableCell>{slot.quantity}</TableCell>
-                <TableCell>{slot.bookingDate}</TableCell>
+                <TableCell>{slot.quantity} {slot.unit}</TableCell>
+                <TableCell>{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
                 <TableCell>{getStatusBadge(slot.status)}</TableCell>
                  <TableCell className="text-right">
                   <DropdownMenu>
@@ -150,6 +139,7 @@ export function WarehouseSlotVisibility() {
             ))}
           </TableBody>
         </Table>
+        )}
       </CardContent>
     </Card>
   );

@@ -10,6 +10,7 @@ import {
   Carrot,
   Clock,
   Package,
+  Loader2,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
@@ -46,8 +47,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LanguageContext } from "@/contexts/language-context";
+import { db } from "@/lib/firebase/firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const formSchema = z.object({
   warehouse: z.string().min(1, "Please select a warehouse."),
@@ -75,7 +78,9 @@ const pageContent = {
         pickDate: "Pick a date",
         confirmBooking: "Confirm Booking",
         bookingSuccessTitle: "Slot Booked Successfully!",
-        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `Your slot at ${values.warehouse} for ${values.quantity} ${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`
+        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `Your slot at ${values.warehouse} for ${values.quantity} ${values.unit} of ${values.cropType.split(" ")[0]} is confirmed.`,
+        bookingErrorTitle: "Booking Failed",
+        bookingErrorDesc: "Could not save your booking. Please try again.",
     },
     hi: {
         title: "वेयरहाउस स्लॉट बुक करें",
@@ -94,7 +99,9 @@ const pageContent = {
         pickDate: "एक तारीख चुनें",
         confirmBooking: "बुकिंग की पुष्टि करें",
         bookingSuccessTitle: "स्लॉट सफलतापूर्वक बुक हो गया!",
-        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `${values.warehouse} पर ${values.cropType.split(" ")[0]} के ${values.quantity} ${values.unit} के लिए आपका स्लॉट कन्फर्म हो गया है।`
+        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `${values.warehouse} पर ${values.cropType.split(" ")[0]} के ${values.quantity} ${values.unit} के लिए आपका स्लॉट कन्फर्म हो गया है।`,
+        bookingErrorTitle: "बुकिंग विफल",
+        bookingErrorDesc: "आपकी बुकिंग सहेजी नहीं जा सकी। कृपया पुनः प्रयास करें।",
     }
 }
 
@@ -103,6 +110,7 @@ export default function BookSlotPage() {
   const { lang } = useContext(LanguageContext);
   const t = pageContent[lang];
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -114,13 +122,31 @@ export default function BookSlotPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: t.bookingSuccessTitle,
-      description: t.bookingSuccessDesc(values),
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      await addDoc(collection(db, "slots"), {
+        ...values,
+        status: "Upcoming", // Add a default status
+        farmerName: "Rohan Gupta", // This should be dynamic in a real app
+        farmerAvatar: "https://i.pravatar.cc/150?u=rohan" // This should be dynamic in a real app
+      });
+
+      toast({
+        title: t.bookingSuccessTitle,
+        description: t.bookingSuccessDesc(values),
+      });
+      form.reset();
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      toast({
+        variant: "destructive",
+        title: t.bookingErrorTitle,
+        description: t.bookingErrorDesc,
+      });
+    } finally {
+        setIsLoading(false);
+    }
   }
 
   return (
@@ -278,7 +304,8 @@ export default function BookSlotPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" size="lg">
+              <Button type="submit" size="lg" disabled={isLoading}>
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {t.confirmBooking}
               </Button>
             </form>

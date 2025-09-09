@@ -57,14 +57,20 @@ export function FarmerSlotHistory() {
 
         const q = query(
             collection(db, "slots"), 
-            where("farmerId", "==", farmerId),
-            orderBy("bookingDate", "desc")
+            where("farmerId", "==", farmerId)
         );
         
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const slots: Slot[] = [];
             querySnapshot.forEach((doc) => {
                 slots.push({ id: doc.id, ...doc.data() } as Slot);
+            });
+             // Sort on the client while index is building
+            slots.sort((a, b) => {
+                if (a.bookingDate && b.bookingDate) {
+                    return b.bookingDate.toMillis() - a.bookingDate.toMillis()
+                }
+                return 0;
             });
             setBookedSlots(slots);
             setLoading(false);

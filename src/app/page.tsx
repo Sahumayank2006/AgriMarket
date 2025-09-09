@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -264,7 +265,7 @@ export default function RoleSelectionPage() {
                     </div>
 
                     <div className="my-12">
-                        <Image src="https://i.ibb.co/fGDxLXL4/logos.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
+                        <Image src="https://i.ibb.co/TB55Lx4Q/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png" alt="Partner Logos" width={800} height={92} className="mx-auto" />
                     </div>
 
                     <h2 className="text-4xl font-bold text-foreground mb-8">Top Performers</h2>

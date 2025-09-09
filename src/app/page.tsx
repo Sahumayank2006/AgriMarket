@@ -77,20 +77,20 @@ function PerformerCard({ name, role, location, achievement, avatarUrl }: Perform
     return (
         <Card className="h-full flex flex-col p-6 bg-blue-100 dark:bg-blue-900/30 border-blue-200 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
             <CardContent className="p-0 flex-grow">
-                <div className="flex items-center gap-4">
-                    <Avatar className="h-20 w-20 border-4 border-white">
+                <div className="flex items-start gap-4">
+                    <Avatar className="h-20 w-20 border-4 border-white flex-shrink-0">
                         <AvatarImage src={avatarUrl} alt={name} />
                         <AvatarFallback>{name.charAt(0)}</AvatarFallback>
                     </Avatar>
-                    <div className="flex-1">
+                    <div className="flex-1 flex flex-col">
                         <div className="flex justify-between items-start">
-                             <div>
+                             <div className="flex-1">
+                                <h4 className="font-bold text-lg text-foreground">{name}</h4>
                                 <p className="text-sm text-muted-foreground mt-1">{role}</p>
                                 <p className="text-sm text-muted-foreground">{location}</p>
                              </div>
                             <div className="text-right">
-                                <Image src="https://i.ibb.co/sp1M0WnQ/Copilot-20250908-154142-Photoroom.png" alt="Medal" width={40} height={40} />
-                                <h4 className="font-bold text-lg text-foreground">{name}</h4>
+                                <Image src="https://i.ibb.co/sp1M0WnQ/Copilot-20250908-154142-Photoroom.png" alt="Medal" width={60} height={60} />
                             </div>
                         </div>
                     </div>
@@ -152,49 +152,49 @@ export default function RoleSelectionPage() {
       role: "Logistics Head",
       location: "Maharashtra Region",
       achievement: "₹50,000+ saved on transport",
-      avatarUrl: "https://i.pravatar.cc/150?u=vijay"
+      avatarUrl: "https://i.pravatar.cc/150?u=vikram"
     },
     {
       name: "Meera Patel",
       role: "Warehouse Manager",
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
-      avatarUrl: "https://i.pravatar.cc/150?u=meera"
+      avatarUrl: "https://i.pravatar.cc/150?u=sunita"
     },
     {
       name: "Rohan Gupta",
       role: "Top Farmer",
       location: "Pune District",
       achievement: "Fastest delivery times in Q2",
-      avatarUrl: "https://i.pravatar.cc/150?u=rohan"
+      avatarUrl: "https://i.pravatar.cc/150?u=sanjay"
     },
     {
       name: "Aisha Sharma",
       role: "Quality Control Lead",
       location: "Nagpur Hub",
       achievement: "99.8% quality rating",
-      avatarUrl: "https://i.pravatar.cc/150?u=aisha"
+      avatarUrl: "https://i.pravatar.cc/150?u=neha"
     },
     {
       name: "Suresh Singh",
       role: "Top Dealer",
       location: "Aurangabad",
       achievement: "500+ successful trades",
-      avatarUrl: "https://i.pravatar.cc/150?u=suresh"
+      avatarUrl: "https://i.pravatar.cc/150?u=rajesh"
     },
     {
         name: "Priya Rao",
         role: "Eco-Farmer",
         location: "Satara",
         achievement: "Water usage down 30%",
-        avatarUrl: "https://i.pravatar.cc/150?u=priya"
+        avatarUrl: "https://i.pravatar.cc/150?u=pooja"
     },
     {
         name: "Amit Deshmukh",
         role: "Logistics Coordinator",
         location: "Mumbai Port",
         achievement: "On-time delivery rate 98%",
-        avatarUrl: "https://i.pravatar.cc/150?u=amit"
+        avatarUrl: "https://i.pravatar.cc/150?u=arjun"
     }
   ];
 

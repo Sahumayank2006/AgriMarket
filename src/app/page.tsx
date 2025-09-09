@@ -293,6 +293,16 @@ export default function RoleSelectionPage() {
                     <CarouselNext className="mr-10" />
                 </Carousel>
                 
+                <div className="mt-20 w-full max-w-5xl flex justify-center animate-in fade-in duration-1000">
+                    <Image 
+                        src="https://i.ibb.co/Kj6Q6Zf5/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png"
+                        alt="eAaharSetu process diagram"
+                        width={1024}
+                        height={576}
+                        className="rounded-lg shadow-lg"
+                    />
+                </div>
+
                  <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
                     <div className="mb-8">
                         <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />

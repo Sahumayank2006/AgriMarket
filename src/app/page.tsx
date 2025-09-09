@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Link from "next/link";
@@ -69,18 +70,34 @@ interface PerformerCardProps {
   role: string;
   location: string;
   achievement: string;
+  avatarUrl: string;
 }
 
-function PerformerCard({ name, role, location, achievement }: PerformerCardProps) {
+function PerformerCard({ name, role, location, achievement, avatarUrl }: PerformerCardProps) {
     return (
-        <Card className="h-full flex flex-col p-6 bg-blue-100 dark:bg-blue-900/30 border-blue-200 rounded-2xl shadow-lg text-center transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
-            <CardContent className="p-0 flex-grow flex flex-col justify-center items-center">
-                <h4 className="font-bold text-lg text-foreground">{name}</h4>
-                <p className="text-sm text-muted-foreground mt-1">{role}</p>
-                <p className="text-sm text-muted-foreground">{location}</p>
+        <Card className="h-full flex flex-col p-6 bg-blue-100 dark:bg-blue-900/30 border-blue-200 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
+            <CardContent className="p-0 flex-grow">
+                <div className="flex items-center gap-4">
+                    <Avatar className="h-20 w-20 border-4 border-white">
+                        <AvatarImage src={avatarUrl} alt={name} />
+                        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                        <div className="flex justify-between items-start">
+                             <div>
+                                <p className="text-sm text-muted-foreground mt-1">{role}</p>
+                                <p className="text-sm text-muted-foreground">{location}</p>
+                             </div>
+                            <div className="text-right">
+                                <Image src="https://i.ibb.co/sp1M0WnQ/Copilot-20250908-154142-Photoroom.png" alt="Medal" width={40} height={40} />
+                                <h4 className="font-bold text-lg text-foreground">{name}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </CardContent>
             <div className="mt-4">
-                <div className="bg-white dark:bg-card rounded-full px-4 py-2 text-sm text-blue-800 dark:text-blue-200 font-semibold shadow-inner">
+                <div className="bg-white dark:bg-card rounded-full px-4 py-2 text-sm text-blue-800 dark:text-blue-200 font-semibold shadow-inner text-center">
                     {achievement}
                 </div>
             </div>
@@ -135,42 +152,49 @@ export default function RoleSelectionPage() {
       role: "Logistics Head",
       location: "Maharashtra Region",
       achievement: "₹50,000+ saved on transport",
+      avatarUrl: "https://i.pravatar.cc/150?u=vijay"
     },
     {
       name: "Meera Patel",
       role: "Warehouse Manager",
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
+      avatarUrl: "https://i.pravatar.cc/150?u=meera"
     },
     {
       name: "Rohan Gupta",
       role: "Top Farmer",
       location: "Pune District",
       achievement: "Fastest delivery times in Q2",
+      avatarUrl: "https://i.pravatar.cc/150?u=rohan"
     },
     {
       name: "Aisha Sharma",
       role: "Quality Control Lead",
       location: "Nagpur Hub",
       achievement: "99.8% quality rating",
+      avatarUrl: "https://i.pravatar.cc/150?u=aisha"
     },
     {
       name: "Suresh Singh",
       role: "Top Dealer",
       location: "Aurangabad",
       achievement: "500+ successful trades",
+      avatarUrl: "https://i.pravatar.cc/150?u=suresh"
     },
     {
         name: "Priya Rao",
         role: "Eco-Farmer",
         location: "Satara",
         achievement: "Water usage down 30%",
+        avatarUrl: "https://i.pravatar.cc/150?u=priya"
     },
     {
         name: "Amit Deshmukh",
         role: "Logistics Coordinator",
         location: "Mumbai Port",
         achievement: "On-time delivery rate 98%",
+        avatarUrl: "https://i.pravatar.cc/150?u=amit"
     }
   ];
 
@@ -281,7 +305,7 @@ export default function RoleSelectionPage() {
                         {topPerformers.map((performer, index) => (
                             <CarouselItem
                                 key={index}
-                                className="pl-4 md:basis-1/2 lg:basis-1/3"
+                                className="pl-4 md:basis-1/2 lg:basis-[48%]"
                             >
                               <div className="p-1 h-full">
                                   <PerformerCard {...performer} />
@@ -341,5 +365,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    

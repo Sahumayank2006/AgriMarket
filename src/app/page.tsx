@@ -96,38 +96,30 @@ interface PerformerCardProps {
 }
 
 function PerformerCard({ name, role, location, achievement, avatarUrl }: PerformerCardProps) {
-    return (
-        <Card className="h-full flex flex-col p-6 bg-blue-100 dark:bg-blue-900/30 border-blue-200 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
-            <CardContent className="p-0 flex-grow">
-                <div className="flex items-start gap-4">
-                    <Avatar className="h-20 w-20 border-4 border-white flex-shrink-0">
-                        <AvatarImage src={avatarUrl} alt={name} />
-                        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 flex flex-col">
-                        <div className="flex justify-between items-start">
-                             <div className="flex-1">
-                                <h4 className="font-bold text-lg text-foreground">{name}</h4>
-                                <p className="text-sm text-muted-foreground mt-1">{role}</p>
-                                <p className="text-sm text-muted-foreground">{location}</p>
-                             </div>
-                            <div className="text-right">
-                                <Image src="https://i.ibb.co/sp1M0WnQ/Copilot-20250908-154142-Photoroom.png" alt="Medal" width={60} height={60} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </CardContent>
-            <div className="mt-4">
-                <div className="bg-white dark:bg-card rounded-full px-4 py-2 text-sm text-blue-800 dark:text-blue-200 font-semibold shadow-inner text-center">
-                    {achievement}
-                </div>
-            </div>
-        </Card>
-    );
+  return (
+    <Card className="h-full flex flex-col p-6 bg-[#b3d9ff] dark:bg-blue-900/30 rounded-[2rem] shadow-xl border-0 transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1">
+      <CardContent className="p-0 flex-grow">
+        <div className="flex items-start gap-6 mb-6">
+          <Avatar className="h-20 w-20 border-4 border-white shadow-lg flex-shrink-0">
+            <AvatarImage src={avatarUrl} alt={name} />
+            <AvatarFallback className="bg-gray-200 text-gray-700 font-bold">{name.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex-1 pt-2">
+            <h4 className="font-bold text-xl text-gray-800 mb-1">{name}</h4>
+            <p className="text-sm text-gray-600 mb-1">{role}</p>
+            <p className="text-sm text-gray-600">{location}</p>
+          </div>
+        </div>
+      </CardContent>
+      <div className="mt-auto">
+        <div className="flex items-center justify-center gap-2 bg-white rounded-full px-4 py-2 text-sm font-semibold shadow-md">
+          <span className="text-yellow-500 text-base">★</span>
+          <span className="text-blue-700">{achievement}</span>
+        </div>
+      </div>
+    </Card>
+  );
 }
-
-
 export default function RoleSelectionPage() {
   const { lang, setLang } = useContext(LanguageContext);
   const pageContent = content[lang];
@@ -265,79 +257,84 @@ export default function RoleSelectionPage() {
                     {pageContent.tagline}
                 </p>
 
-                 <p className="text-lg text-muted-foreground mb-8">{pageContent.chooseRole}</p>
 
-                <Carousel
-                    setApi={setApi}
-                    opts={{
-                        align: "center",
-                        loop: true,
-                    }}
-                    className="w-full max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000"
-                >
-                    <CarouselContent className="-ml-4">
-                    {pageContent.roles.map((role, index) => (
-                        <CarouselItem
-                            key={index}
-                            className={cn(
-                                "pl-4 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
-                                "carousel-item",
-                                { "is-active": index === current }
-                            )}
-                            style={{
-                                opacity: "var(--carousel-item-opacity, 0.3)",
-                                transform: "scale(var(--carousel-item-scale, 0.9))",
-                            }}
-                        >
-                          <div className="p-1 h-full">
-                              <RoleCard {...role} lang={lang} continueAsText={pageContent.continueAs} />
-                          </div>
-                        </CarouselItem>
-                    ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="ml-10" />
-                    <CarouselNext className="mr-10" />
-                </Carousel>
+                <p className="text-lg text-muted-foreground mb-8">{pageContent.chooseRole}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                  {pageContent.roles.map((role, idx) => (
+                    <div key={idx} className="bg-white dark:bg-card rounded-2xl shadow-lg flex items-center p-6 gap-6 transition-all hover:shadow-primary/20 hover:shadow-2xl">
+                      <div className="flex-shrink-0">
+                        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-4 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900">
+                          <role.icon className="h-10 w-10 text-primary" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-bold text-2xl text-foreground mb-1">{role.title}</div>
+                        <div className="text-base text-muted-foreground mb-2">{role.description}</div>
+                      </div>
+                      <div>
+                        <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90">
+                          <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
+                            <ArrowRight className="h-6 w-6" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
                 
-                <div className="mt-20 w-full max-w-5xl flex justify-center animate-in fade-in duration-1000">
-                    <Image 
-                        src="https://i.ibb.co/Kj6Q6Zf5/Chat-GPT-Image-Sep-9-2025-07-46-12-AM.png"
-                        alt="eAaharSetu process diagram"
-                        width={576}
-                        height={324}
-                        className="rounded-lg shadow-lg"
-                    />
+
+                {/* Exact replica of eSanjeevani watermark section */}
+                <div className="relative w-full h-80 md:h-96 flex justify-center items-center overflow-hidden bg-white">
+                  {/* Ultra-light watermark text - barely visible like in reference */}
+                  <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
+                    <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 opacity-30 leading-none tracking-tighter whitespace-nowrap">
+                      #AaharSetu
+                    </span>
+                  </div>
+                  {/* Colored overlay text - perfectly centered */}
+                  <div className="relative z-10 flex items-center justify-center">
+                    <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight">
+                      <span className="text-orange-500">#</span><span className="text-green-500">AaharSetu</span>
+                    </span>
+                  </div>
                 </div>
 
-                 <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
-                    <div className="mb-8">
-                        <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
+                 <div className="mt-20 w-full text-left animate-in fade-in duration-1000">
+                    <div className="mb-8 max-w-5xl mx-auto">
+                        <hr className="w-1/4 border-t-2 border-primary/20" />
                     </div>
 
-                    <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.topPerformers}</h2>
-                     <Carousel
+                    <h2 className="text-4xl font-bold text-foreground mb-8 max-w-5xl mx-auto">{pageContent.topPerformers}</h2>
+                    <div className="relative w-full">
+                      <Carousel
                         setApi={setPerformerApi}
                         opts={{
-                            align: "start",
-                            loop: false,
+                          align: "start",
+                          loop: false,
+                          slidesToScroll: 1,
                         }}
-                        className="w-full max-w-5xl mx-auto"
-                    >
-                        <CarouselContent className="-ml-4">
-                        {topPerformers.map((performer, index) => (
+                        className="w-full"
+                      >
+                        <CarouselContent className="flex ml-4">
+                          {topPerformers.map((performer, index) => (
                             <CarouselItem
-                                key={index}
-                                className="pl-4 md:basis-1/2 lg:basis-[48%]"
+                              key={index}
+                              className="mr-4 md:basis-[32%] lg:basis-[32%] flex-shrink-0"
+                              style={{ minWidth: '0', maxWidth: '100%' }}
                             >
-                              <div className="p-1 h-full">
-                                  <PerformerCard {...performer} />
+                              <div className="h-full">
+                                <PerformerCard {...performer} />
                               </div>
                             </CarouselItem>
-                        ))}
+                          ))}
                         </CarouselContent>
-                        <CarouselPrevious className="ml-0" />
-                        <CarouselNext className="mr-0" />
-                    </Carousel>
+                        {/* Navigation arrows positioned in the center */}
+                        <div className="flex justify-center items-center mt-8 gap-4 w-full">
+                          <CarouselPrevious className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
+                          <CarouselNext className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
+                        </div>
+                      </Carousel>
+                    </div>
                 </div>
 
                 <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">

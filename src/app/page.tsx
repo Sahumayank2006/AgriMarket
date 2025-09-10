@@ -23,6 +23,10 @@ import {
   FileText,
   X,
   Languages,
+  Shield,
+  CircleDot,
+  Cloud,
+  Heart,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -51,6 +55,50 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LanguageContext, content } from "@/contexts/language-context";
 import type { LangKey } from "@/contexts/language-context";
+
+// Animated Counter Component
+function AnimatedCounter({ start = 0, end, duration = 2000, prefix = "", suffix = "" }: {
+  start?: number;
+  end: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+}) {
+  const [count, setCount] = useState(start);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const updateCount = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(easeOutQuart * (end - start) + start);
+      
+      setCount(currentCount);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(updateCount);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(updateCount);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [start, end, duration]);
+
+  return (
+    <span>
+      {prefix}{count.toLocaleString('en-IN')}{suffix}
+    </span>
+  );
+}
 
 
 interface RoleCardProps {
@@ -92,32 +140,32 @@ interface PerformerCardProps {
   role: string;
   location: string;
   achievement: string;
+  rupeesSaved: string;
   avatarUrl: string;
 }
 
-function PerformerCard({ name, role, location, achievement, avatarUrl }: PerformerCardProps) {
+function PerformerCard({ name, role, location, achievement, rupeesSaved, avatarUrl }: PerformerCardProps) {
   return (
-    <Card className="h-full flex flex-col p-6 bg-[#b3d9ff] dark:bg-blue-900/30 rounded-[2rem] shadow-xl border-0 transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1">
-      <CardContent className="p-0 flex-grow">
-        <div className="flex items-start gap-6 mb-6">
-          <Avatar className="h-20 w-20 border-4 border-white shadow-lg flex-shrink-0">
-            <AvatarImage src={avatarUrl} alt={name} />
-            <AvatarFallback className="bg-gray-200 text-gray-700 font-bold">{name.charAt(0)}</AvatarFallback>
-          </Avatar>
-          <div className="flex-1 pt-2">
-            <h4 className="font-bold text-xl text-gray-800 mb-1">{name}</h4>
-            <p className="text-sm text-gray-600 mb-1">{role}</p>
-            <p className="text-sm text-gray-600">{location}</p>
-          </div>
-        </div>
-      </CardContent>
-      <div className="mt-auto">
-        <div className="flex items-center justify-center gap-2 bg-white rounded-full px-4 py-2 text-sm font-semibold shadow-md">
-          <span className="text-yellow-500 text-base">★</span>
-          <span className="text-blue-700">{achievement}</span>
-        </div>
+    <div className="group bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1 h-28">
+      <div className="flex-shrink-0">
+        <Avatar className="h-16 w-16 border-4 border-gray-200 dark:border-gray-600 group-hover:border-primary/30 transition-all duration-300">
+          <AvatarImage src={avatarUrl} alt={name} />
+          <AvatarFallback className="bg-gray-100 text-gray-600 font-light text-lg">{name.charAt(0)}</AvatarFallback>
+        </Avatar>
       </div>
-    </Card>
+      <div className="flex-1 min-w-0">
+        <div className="font-light text-lg text-foreground mb-1 truncate">{name}</div>
+        <div className="text-sm text-muted-foreground mb-1 truncate font-light">{role} • {location}</div>
+        <div className="text-sm text-gray-600 font-light truncate">{achievement}</div>
+        <div className="text-xs text-gray-500 font-light mt-1">Saved: {rupeesSaved}</div>
+      </div>
+      <div className="flex flex-col items-center gap-1 flex-shrink-0">
+        <div className="bg-gray-100 dark:bg-gray-700/50 p-2 rounded-full">
+          <Award className="h-5 w-5 text-gray-500" />
+        </div>
+        <span className="text-xs font-light text-muted-foreground">Top</span>
+      </div>
+    </div>
   );
 }
 export default function RoleSelectionPage() {
@@ -130,49 +178,56 @@ export default function RoleSelectionPage() {
       role: "Logistics Head",
       location: "Maharashtra Region",
       achievement: "1.2 tons of food wastage saved",
-      avatarUrl: "https://i.pravatar.cc/150?u=vijay"
+      rupeesSaved: "₹2,40,000",
+      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
     },
     {
-      name: "Meera Patel",
+      name: "Meera Patel", 
       role: "Warehouse Manager",
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
-      avatarUrl: "https://i.pravatar.cc/150?u=meera"
+      rupeesSaved: "₹1,85,000",
+      avatarUrl: "https://images.unsplash.com/photo-1494790108755-2616b612b29c?w=150&h=150&fit=crop&crop=face"
     },
     {
       name: "Rohan Gupta",
-      role: "Top Farmer",
+      role: "Top Farmer", 
       location: "Pune District",
       achievement: "Highest crop utilization rate",
-      avatarUrl: "https://i.pravatar.cc/150?u=rohan"
+      rupeesSaved: "₹3,20,000",
+      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
     },
     {
       name: "Aisha Sharma",
       role: "Quality Control Lead",
-      location: "Nagpur Hub",
+      location: "Nagpur Hub", 
       achievement: "99.8% quality rating",
-      avatarUrl: "https://i.pravatar.cc/150?u=aisha"
+      rupeesSaved: "₹1,65,000",
+      avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
     },
     {
       name: "Suresh Singh",
       role: "Top Dealer",
       location: "Aurangabad",
       achievement: "50+ tons of surplus moved",
-      avatarUrl: "https://i.pravatar.cc/150?u=suresh"
+      rupeesSaved: "₹4,50,000",
+      avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
     },
     {
         name: "Priya Rao",
         role: "Eco-Farmer",
-        location: "Satara",
+        location: "Satara", 
         achievement: "30% reduction in food waste",
-        avatarUrl: "https://i.pravatar.cc/150?u=priya"
+        rupeesSaved: "₹2,75,000",
+        avatarUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
     },
     {
         name: "Amit Deshmukh",
         role: "Logistics Coordinator",
         location: "Mumbai Port",
         achievement: "On-time delivery rate 98%",
-        avatarUrl: "https://i.pravatar.cc/150?u=amit"
+        rupeesSaved: "₹1,95,000",
+        avatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face"
     }
   ];
 
@@ -217,7 +272,38 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
-      <div className="w-full h-24 bg-white grid grid-cols-3 items-center px-4">
+      <div className="w-full bg-white px-4 py-3">
+        {/* Mobile Layout */}
+        <div className="block md:hidden">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Image src="https://i.ibb.co/td7KZ93/Chat-GPT-Image-Sep-9-2025-07-46-01-AM.png" alt="AaharSetu Logo" width={80} height={32} />
+              <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={100} height={40}/>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Languages className="mr-1 h-3 w-3" />
+                  <span className="text-xs">{content[lang].langName}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <div className="flex justify-center">
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
+          </div>
+        </div>
+        
+        {/* Desktop Layout */}
+        <div className="hidden md:grid md:grid-cols-3 md:items-center md:h-24">
         <div className="flex items-center gap-4 justify-start">
           <Image src="https://i.ibb.co/td7KZ93/Chat-GPT-Image-Sep-9-2025-07-46-01-AM.png" alt="AaharSetu Logo" width={112} height={45} />
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
@@ -243,6 +329,7 @@ export default function RoleSelectionPage() {
               </DropdownMenuContent>
             </DropdownMenu>
         </div>
+        </div>
       </div>
       <hr className="w-full border-t-4 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow wavy-border">
@@ -259,22 +346,22 @@ export default function RoleSelectionPage() {
 
 
                 <p className="text-lg text-muted-foreground mb-8">{pageContent.chooseRole}</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                  {pageContent.roles.map((role, idx) => (
-                    <div key={idx} className="bg-white dark:bg-card rounded-2xl shadow-lg flex items-center p-6 gap-6 transition-all hover:shadow-primary/20 hover:shadow-2xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                  {pageContent.roles.slice(0, 4).map((role, idx) => (
+                    <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
                       <div className="flex-shrink-0">
-                        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-4 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900">
-                          <role.icon className="h-10 w-10 text-primary" />
+                        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-primary/30 transition-all duration-300">
+                          <role.icon className="h-8 w-8 text-primary" />
                         </div>
                       </div>
                       <div className="flex-1">
-                        <div className="font-bold text-2xl text-foreground mb-1">{role.title}</div>
-                        <div className="text-base text-muted-foreground mb-2">{role.description}</div>
+                        <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
+                        <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
                       </div>
                       <div>
-                        <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90">
+                        <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
                           <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
-                            <ArrowRight className="h-6 w-6" />
+                            <ArrowRight className="h-5 w-5" />
                           </Link>
                         </Button>
                       </div>
@@ -282,9 +369,37 @@ export default function RoleSelectionPage() {
                   ))}
                 </div>
                 
+                {/* Admin card centered */}
+                {pageContent.roles.length > 4 && (
+                  <div className="flex justify-center w-full max-w-4xl mx-auto mb-16">
+                    <div className="w-full max-w-md">
+                      {pageContent.roles.slice(4).map((role, idx) => (
+                        <div key={idx + 4} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-blue-500 hover:outline hover:outline-2 hover:outline-blue-500 hover:-translate-y-1">
+                          <div className="flex-shrink-0">
+                            <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-blue-400 transition-all duration-300">
+                              <role.icon className="h-8 w-8 text-blue-600" />
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
+                            <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
+                          </div>
+                          <div>
+                            <Button asChild size="icon" className="rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 group-hover:scale-110 transition-transform duration-300">
+                              <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
+                                <ArrowRight className="h-5 w-5" />
+                              </Link>
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
 
                 {/* Exact replica of eSanjeevani watermark section */}
-                <div className="relative w-full h-80 md:h-96 flex justify-center items-center overflow-hidden bg-white">
+                <div className="relative w-full h-80 md:h-96 flex flex-col justify-center items-center overflow-hidden bg-white">
                   {/* Ultra-light watermark text - barely visible like in reference */}
                   <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
                     <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 opacity-30 leading-none tracking-tighter whitespace-nowrap">
@@ -292,10 +407,18 @@ export default function RoleSelectionPage() {
                     </span>
                   </div>
                   {/* Colored overlay text - perfectly centered */}
-                  <div className="relative z-10 flex items-center justify-center">
-                    <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight">
+                  <div className="relative z-10 flex flex-col items-center justify-center">
+                    <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4">
                       <span className="text-orange-500">#</span><span className="text-green-500">AaharSetu</span>
                     </span>
+                    {/* Animated Counter */}
+                    <div className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
+                      <IndianRupee className="h-6 w-6 md:h-8 md:w-8" />
+                      <AnimatedCounter end={17300000} duration={3000} />
+                    </div>
+                    <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                      Saved this year
+                    </p>
                   </div>
                 </div>
 
@@ -320,7 +443,6 @@ export default function RoleSelectionPage() {
                             <CarouselItem
                               key={index}
                               className="mr-4 md:basis-[32%] lg:basis-[32%] flex-shrink-0"
-                              style={{ minWidth: '0', maxWidth: '100%' }}
                             >
                               <div className="h-full">
                                 <PerformerCard {...performer} />
@@ -396,10 +518,37 @@ export default function RoleSelectionPage() {
 
                 <div className="my-20 w-full max-w-5xl text-center">
                     <div className="flex justify-around items-center gap-8 flex-wrap">
-                        <Image src="https://i.ibb.co/d0SPMppv/logo-4.png" alt="Partner Logo 4" width={150} height={60} style={{objectFit:"contain"}} />
-                        <Image src="https://i.ibb.co/BKgM48Db/logo3.png" alt="Partner Logo 3" width={150} height={60} style={{objectFit:"contain"}} />
-                        <Image src="https://i.ibb.co/JwbjkpJ6/logo2.png" alt="Partner Logo 2" width={150} height={60} style={{objectFit:"contain"}} />
-                        <Image src="https://i.ibb.co/BVNLZRHZ/logo1.png" alt="Partner Logo 1" width={150} height={60} style={{objectFit:"contain"}} />
+                        {/* SSL Encryption */}
+                        <div className="flex flex-col items-center space-y-2">
+                            <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-full">
+                                <Shield className="h-12 w-12 text-green-600" />
+                            </div>
+                            <span className="text-sm font-medium text-muted-foreground">Encryption</span>
+                        </div>
+                        
+                        {/* Ashoka Chakra */}
+                        <div className="flex flex-col items-center space-y-2">
+                            <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full">
+                                <CircleDot className="h-12 w-12 text-blue-600" />
+                            </div>
+                            <span className="text-sm font-medium text-muted-foreground">ABDM compliant</span>
+                        </div>
+                        
+                        {/* Ministry of Health and Family Welfare */}
+                        <div className="flex flex-col items-center space-y-2">
+                            <div className="bg-orange-100 dark:bg-orange-900/30 p-4 rounded-full">
+                                <Heart className="h-12 w-12 text-orange-600" />
+                            </div>
+                            <span className="text-sm font-medium text-muted-foreground">MoHFW Guidelines</span>
+                        </div>
+                        
+                        {/* Cloud Based */}
+                        <div className="flex flex-col items-center space-y-2">
+                            <div className="bg-sky-100 dark:bg-sky-900/30 p-4 rounded-full">
+                                <Cloud className="h-12 w-12 text-sky-600" />
+                            </div>
+                            <span className="text-sm font-medium text-muted-foreground">Cloud based</span>
+                        </div>
                     </div>
                 </div>
             </div>

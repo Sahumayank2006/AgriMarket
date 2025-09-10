@@ -10,9 +10,19 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"Roboto"', 'sans-serif'],
-        headline: ['"Roboto"', 'sans-serif'],
+        body: ['"Inter"', 'sans-serif'],
+        headline: ['"Inter"', 'sans-serif'],
         code: ['monospace'],
+        // Regional language fonts
+        hindi: ['"Hind"', 'sans-serif'],
+        marathi: ['"Hind"', 'sans-serif'],
+        bengali: ['"Hind Siliguri"', 'sans-serif'],
+        telugu: ['"Hind Guntur"', 'sans-serif'],
+        tamil: ['"Hind Madurai"', 'sans-serif'],
+      },
+      fontWeight: {
+        light: '300',
+        medium: '500',
       },
       colors: {
         background: 'hsl(var(--background))',

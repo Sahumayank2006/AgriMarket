@@ -1,7 +1,7 @@
 
 "use client"
 
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import type { Role } from '@/lib/types';
 import { Sprout, ShoppingBag, Warehouse, Truck, ShieldCheck, IndianRupee, Leaf } from 'lucide-react';
 
@@ -274,6 +274,15 @@ export const LanguageContext = createContext<LanguageContextType>({
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     const [lang, setLang] = useState<LangKey>('en');
+
+    // Update body class when language changes
+    useEffect(() => {
+        // Remove all existing language classes
+        document.body.classList.remove('lang-en', 'lang-hi', 'lang-bn', 'lang-te', 'lang-ta', 'lang-mr');
+        
+        // Add the current language class
+        document.body.classList.add(`lang-${lang}`);
+    }, [lang]);
 
     return (
         <LanguageContext.Provider value={{ lang, setLang }}>

@@ -187,7 +187,7 @@ export default function RoleSelectionPage() {
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
       rupeesSaved: "₹1,85,000",
-      avatarUrl: "https://images.unsplash.com/photo-1494790108755-2616b612b29c?w=150&h=150&fit=crop&crop=face"
+      avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
     },
     {
       name: "Rohan Gupta",
@@ -520,12 +520,12 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-around items-center gap-8 flex-wrap">
                         {/* SSL Encryption */}
                         <div className="flex flex-col items-center space-y-2">
-                           <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={102} height={102} />
+                           <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
                         </div>
                         
                         {/* ABDM Compliant */}
                         <div className="flex flex-col items-center space-y-2">
-                           <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="ABDM compliant" width={102} height={102} />
+                           <Image src="https://i.ibb.co/6JLL2CHR/Copilot-20250911-211324.png" alt="ABDM compliant" width={163} height={163} />
                         </div>
                         
                         {/* Ministry of Health and Family Welfare */}
@@ -538,7 +538,7 @@ export default function RoleSelectionPage() {
                         
                         {/* Cloud Based */}
                         <div className="flex flex-col items-center space-y-2">
-                           <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={102} height={102} />
+                           <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
                         </div>
                     </div>
                 </div>
@@ -598,6 +598,8 @@ export default function RoleSelectionPage() {
 
 
 
+
+    
 
     
 

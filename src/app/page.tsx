@@ -530,10 +530,7 @@ export default function RoleSelectionPage() {
                         
                         {/* Ministry of Health and Family Welfare */}
                         <div className="flex flex-col items-center space-y-2">
-                            <div className="bg-orange-100 dark:bg-orange-900/30 p-4 rounded-full">
-                                <Heart className="h-12 w-12 text-orange-600" />
-                            </div>
-                            <span className="text-sm font-medium text-muted-foreground">MoHFW Guidelines</span>
+                            <Image src="https://i.ibb.co/GvMq7x8r/Copilot-20250911-211848.png" alt="MoHFW Guidelines" width={163} height={163} />
                         </div>
                         
                         {/* Cloud Based */}
@@ -598,6 +595,8 @@ export default function RoleSelectionPage() {
 
 
 
+
+    
 
     
 

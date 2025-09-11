@@ -277,7 +277,7 @@ export default function RoleSelectionPage() {
         <div className="block md:hidden">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Image src="https://i.ibb.co/C9H0H7V/e-Aahar-Setu-National-Food-Grain-Distribution-Service.png" alt="AaharSetu Logo" width={112} height={45} />
+              <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="AaharSetu Logo" width={112} height={45} />
               <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={100} height={40}/>
             </div>
             <DropdownMenu>
@@ -305,7 +305,7 @@ export default function RoleSelectionPage() {
         {/* Desktop Layout */}
         <div className="hidden md:grid md:grid-cols-3 md:items-center md:h-24">
         <div className="flex items-center gap-4 justify-start">
-          <Image src="https://i.ibb.co/C9H0H7V/e-Aahar-Setu-National-Food-Grain-Distribution-Service.png" alt="AaharSetu Logo" width={112} height={45} />
+          <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="AaharSetu Logo" width={112} height={45} />
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
         </div>
         <div className="flex justify-center">

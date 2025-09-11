@@ -277,7 +277,7 @@ export default function RoleSelectionPage() {
         <div className="block md:hidden">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="AaharSetu Logo" width={112} height={45} />
+              <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
               <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={100} height={40}/>
             </div>
             <DropdownMenu>
@@ -305,7 +305,7 @@ export default function RoleSelectionPage() {
         {/* Desktop Layout */}
         <div className="hidden md:grid md:grid-cols-3 md:items-center md:h-24">
         <div className="flex items-center gap-4 justify-start">
-          <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="AaharSetu Logo" width={112} height={45} />
+          <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
           <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
         </div>
         <div className="flex justify-center">
@@ -403,13 +403,13 @@ export default function RoleSelectionPage() {
                   {/* Ultra-light watermark text - barely visible like in reference */}
                   <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
                     <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 opacity-30 leading-none tracking-tighter whitespace-nowrap">
-                      #AaharSetu
+                      #eAaharSetu
                     </span>
                   </div>
                   {/* Colored overlay text - perfectly centered */}
                   <div className="relative z-10 flex flex-col items-center justify-center">
                     <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4">
-                      <span className="text-orange-500">#</span><span className="text-green-500">AaharSetu</span>
+                      <span className="text-orange-500">#</span><span className="text-green-500">eAaharSetu</span>
                     </span>
                     {/* Animated Counter */}
                     <div className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
@@ -559,7 +559,7 @@ export default function RoleSelectionPage() {
                 <div className="md:col-span-1">
                     <div className="flex items-center gap-2 mb-4">
                         <Logo className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-semibold">AaharSetu</span>
+                        <span className="text-xl font-semibold">eAaharSetu</span>
                     </div>
                     <p className="text-gray-400 text-sm">
                         Reducing food waste, one crop at a time. A digital ecosystem for sustainable agriculture.
@@ -593,7 +593,7 @@ export default function RoleSelectionPage() {
                 </div>
             </div>
             <div className="max-w-6xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-                <p>&copy; {new Date().getFullYear()} AaharSetu. {pageContent.footerRights}</p>
+                <p>&copy; {new Date().getFullYear()} eAaharSetu. {pageContent.footerRights}</p>
             </div>
         </footer>
     </div>

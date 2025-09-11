@@ -8,7 +8,7 @@ import { Sprout, ShoppingBag, Warehouse, Truck, ShieldCheck, IndianRupee, Leaf }
 export const content = {
   en: {
     langName: "English",
-    welcome: "Welcome to AaharSetu",
+    welcome: "Welcome to eAaharSetu",
     tagline: "Transforming Agriculture with a Single Digital Platform",
     chooseRole: "Choose Your Role to Get Started",
     roles: [
@@ -50,7 +50,7 @@ export const content = {
   },
   hi: {
     langName: "हिंदी",
-    welcome: "आहारसेतु में आपका स्वागत है",
+    welcome: "ई-आहारसेतु में आपका स्वागत है",
     tagline: "एक ही डिजिटल प्लेटफॉर्म के साथ कृषि को बदलना",
     chooseRole: "आरंभ करने के लिए अपनी भूमिका चुनें",
     roles: [
@@ -92,7 +92,7 @@ export const content = {
   },
   bn: {
     langName: "বাংলা",
-    welcome: "আहारসেতুতে স্বাগতম",
+    welcome: "ই-আহারসেতুতে স্বাগতম",
     tagline: "একটি ডিজিটাল প্ল্যাটফর্মের মাধ্যমে কৃষির রূপান্তর",
     chooseRole: "শুরু করতে আপনার ভূমিকা પસંદ করুন",
     roles: [
@@ -106,7 +106,7 @@ export const content = {
     topPerformers: "শীর্ষ प्रदर्शनকারী",
     guidelinesTitle: "স্ট্যান্ডার্ড নির্দেশিকা",
     guidelinesDescription: "সমস্ত প্ল্যাটফর্ম স্টেকহোল্ডারদের জন্য অপারেশনাল নির্দেশিকা, গুণমানের معیار এবং সেরা অনুশীলনগুলি অ্যাক্সেস এবং ডাউনলোড করুন।",
-    documentCenterTitle: "ডকুমেন্ট 센터",
+    documentCenterTitle: "ডকুমেন্ট সেন্টার",
     documentCenterDescription: "গুরুত্বপূর্ণ PDF ডকুমেন্ট, DOCX ফাইল ইত্যাদি আপলোড বা ডাউনলোড করুন।",
     dropzoneActive: "এখানে ফাইলগুলি ড্রপ করুন...",
     dropzoneIdle: "এখানে কিছু ফাইল টেনে আনুন, বা ফাইল নির্বাচন করতে ক্লিক করুন",
@@ -134,7 +134,7 @@ export const content = {
   },
   te: {
     langName: "తెలుగు",
-    welcome: "ఆహారसेतुకు స్వాగతం",
+    welcome: "ఇ-ఆహారసేతుకు స్వాగతం",
     tagline: "ఒకే డిజిటల్ ప్లాట్‌ఫారమ్‌తో వ్యవసాయాన్ని మార్చడం",
     chooseRole: "ప్రారంభించడానికి మీ పాత్రను ఎంచుకోండి",
     roles: [
@@ -176,7 +176,7 @@ export const content = {
   },
   mr: {
     langName: "मराठी",
-    welcome: "आहारसेतूमध्ये स्वागत आहे",
+    welcome: "ई-आहारसेतूमध्ये स्वागत आहे",
     tagline: "एकाच डिजिटल प्लॅटफॉर्मसह शेतीत परिवर्तन",
     chooseRole: "सुरुवात करण्यासाठी तुमची भूमिका निवडा",
     roles: [
@@ -218,7 +218,7 @@ export const content = {
   },
   ta: {
     langName: "தமிழ்",
-    welcome: "ஆஹார்சேதுவுக்கு வரவேற்கிறோம்",
+    welcome: "இ-ஆஹார்சேதுவுக்கு வரவேற்கிறோம்",
     tagline: "ஒரே டிஜிட்டல் தளத்துடன் விவசாயத்தை மாற்றுதல்",
     chooseRole: "தொடங்குவதற்கு உங்கள் பங்கைத் தேர்ந்தெடுக்கவும்",
     roles: [

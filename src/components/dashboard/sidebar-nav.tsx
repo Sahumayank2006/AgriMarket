@@ -139,7 +139,7 @@ export function SidebarNav() {
       <SidebarHeader>
         <div className="flex items-center gap-2">
           <Logo className="h-8 w-8 text-primary" />
-          <span className="text-xl font-semibold">AaharSetu</span>
+          <span className="text-xl font-semibold">eAaharSetu</span>
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">
@@ -179,7 +179,7 @@ export function SidebarNav() {
                         {getRoleName(role, lang)}
                         </p>
                         <p className="text-xs leading-none text-muted-foreground">
-                        {role}@aaharsetu.com
+                        {role}@eaaharsetu.com
                         </p>                    </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ import { LanguageProvider } from '@/contexts/language-context';
 
 {/*
 export const metadata: Metadata = {
-  title: 'AaharSetu',
+  title: 'eAaharSetu',
   description: 'A platform to efficiently manage surplus food, reduce waste, and facilitate marketplace transactions.',
 };
 */}
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <title>AaharSetu</title>
+        <title>eAaharSetu</title>
         <meta name="description" content="A platform to efficiently manage surplus food, reduce waste, and facilitate marketplace transactions." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

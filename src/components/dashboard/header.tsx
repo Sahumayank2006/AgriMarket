@@ -96,7 +96,7 @@ export function Header() {
                   {currentRoleName}
                 </p>
                 <p className="text-xs leading-none text-muted-foreground">
-                  {role}@aaharsetu.com
+                  {role}@eaaharsetu.com
                 </p>
               </div>
             </DropdownMenuLabel>

@@ -523,12 +523,9 @@ export default function RoleSelectionPage() {
                            <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={102} height={102} />
                         </div>
                         
-                        {/* Ashoka Chakra */}
+                        {/* ABDM Compliant */}
                         <div className="flex flex-col items-center space-y-2">
-                            <div className="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-full">
-                                <CircleDot className="h-12 w-12 text-blue-600" />
-                            </div>
-                            <span className="text-sm font-medium text-muted-foreground">ABDM compliant</span>
+                           <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="ABDM compliant" width={102} height={102} />
                         </div>
                         
                         {/* Ministry of Health and Family Welfare */}
@@ -601,5 +598,7 @@ export default function RoleSelectionPage() {
 
 
 
+
+    
 
     

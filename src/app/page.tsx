@@ -274,12 +274,15 @@ export default function RoleSelectionPage() {
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
       <div className="w-full bg-white px-4 py-3">
         {/* Mobile Layout */}
-        <div className="block md:hidden">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-              <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={100} height={40}/>
-            </div>
+        <div className="grid grid-cols-3 items-center md:hidden">
+          <div className="flex items-center gap-2 justify-start">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={70} height={28}/>
+          </div>
+          <div className="flex justify-center">
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
+          </div>
+          <div className="flex justify-end">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
@@ -296,9 +299,6 @@ export default function RoleSelectionPage() {
                 <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </div>
-          <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
           </div>
         </div>
         
@@ -595,6 +595,8 @@ export default function RoleSelectionPage() {
 
 
 
+
+    
 
     
 

@@ -520,7 +520,7 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-around items-center gap-8 flex-wrap">
                         {/* SSL Encryption */}
                         <div className="flex flex-col items-center space-y-2">
-                           <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={40} height={40} />
+                           <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={64} height={64} />
                         </div>
                         
                         {/* Ashoka Chakra */}
@@ -600,5 +600,6 @@ export default function RoleSelectionPage() {
     
 
     
+
 
 

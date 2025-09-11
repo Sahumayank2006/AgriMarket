@@ -3,6 +3,13 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  experimental: {
+    // This is to allow cross-origin requests from the development environment (Firebase Studio)
+    allowedDevOrigins: [
+        "http://localhost:6000",
+        "https://*.cloudworkstations.dev",
+    ],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

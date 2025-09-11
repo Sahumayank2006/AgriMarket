@@ -520,8 +520,8 @@ export default function RoleSelectionPage() {
                     <div className="flex justify-around items-center gap-8 flex-wrap">
                         {/* SSL Encryption */}
                         <div className="flex flex-col items-center space-y-2">
-                            <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-full">
-                                <Shield className="h-12 w-12 text-green-600" />
+                            <div className="bg-green-100 dark:bg-green-900/30 p-4 rounded-full flex items-center justify-center h-24 w-24">
+                                <Image src="https://i.ibb.co/PZ61wXNv/logo-4.png" alt="Encryption" width={40} height={40} />
                             </div>
                             <span className="text-sm font-medium text-muted-foreground">Encryption</span>
                         </div>

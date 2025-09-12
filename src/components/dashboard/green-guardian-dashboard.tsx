@@ -10,6 +10,8 @@ import {
   RefreshCw,
   AlertTriangle,
   ExternalLink,
+  Bell,
+  Clock,
 } from "lucide-react";
 
 import {
@@ -24,6 +26,9 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Responsi
 import { WarehouseSlotVisibility } from "./warehouse-slot-visibility";
 import { TruckTracking } from "./truck-tracking";
 import { useSensorData } from "@/hooks/use-sensor-data";
+import { WarehouseAlerts } from "./warehouse-alerts";
+import { WarehouseWeatherCard } from "./warehouse-weather-card";
+import { ProductShelfLife } from "./product-shelf-life";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -339,6 +344,19 @@ export default function GreenGuardianDashboard() {
             </CardContent>
           </Card>
 
+          {/* New Warehouse Alerts Component */}
+          <WarehouseAlerts 
+            warehouseId="W01"
+            temperature={stats?.avgTemperature || 22}
+            humidity={stats?.avgHumidity || 60}
+            refreshing={isLoading}
+          />
+          
+          {/* New Warehouse Weather Component */}
+          <WarehouseWeatherCard 
+            warehouseId="W01"
+          />
+          
           {/* 3. Upcoming Slot Bookings */}
           <WarehouseSlotVisibility />
         </div>
@@ -403,6 +421,13 @@ export default function GreenGuardianDashboard() {
             </CardContent>
           </Card>
 
+          {/* New Product Shelf Life Prediction Component */}
+          <ProductShelfLife 
+            warehouseId="W01"
+            temperature={stats?.avgTemperature || 22}
+            humidity={stats?.avgHumidity || 60}
+          />
+          
           {/* 5. Stock Level Tracker */}
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader>

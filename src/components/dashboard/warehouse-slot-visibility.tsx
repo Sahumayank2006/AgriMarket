@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2, Trash2, Check, Ban } from "lucide-react";
+import { CheckCircle, Clock, MoreHorizontal, User, XCircle, Loader2, Trash2, Check, Ban, ChevronDown, ChevronUp } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { useEffect, useState, useRef } from "react";
@@ -75,6 +75,8 @@ export function WarehouseSlotVisibility() {
     const isInitialLoad = useRef(true);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const INITIAL_DISPLAY_COUNT = 4;
 
     useEffect(() => {
         const q = query(collection(db, "slots"));
@@ -165,54 +167,85 @@ export function WarehouseSlotVisibility() {
         }
     };
 
+  const displayedSlots = isExpanded ? bookedSlots : bookedSlots.slice(0, INITIAL_DISPLAY_COUNT);
+  const hasMoreSlots = bookedSlots.length > INITIAL_DISPLAY_COUNT;
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Upcoming Slot Bookings</CardTitle>
-        <CardDescription>
-          Review and manage scheduled drop-offs from farmers.
-        </CardDescription>
+    <Card className="mx-2 sm:mx-0">
+      <CardHeader className="px-4 sm:px-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-base sm:text-lg">Upcoming Slot Bookings</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">
+              Review and manage scheduled drop-offs from farmers.
+            </CardDescription>
+          </div>
+          {hasMoreSlots && (
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-2"
+            >
+              {isExpanded ? (
+                <>
+                  <ChevronUp className="h-4 w-4" />
+                  Show Less
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="h-4 w-4" />
+                  Show All ({bookedSlots.length})
+                </>
+              )}
+            </Button>
+          )}
+        </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-2 sm:px-6">
         {loading ? (
             <div className="flex justify-center items-center h-48">
                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
         ) : (
         <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
-            <Table>
-            <TableHeader>
-                <TableRow>
-                <TableHead>Farmer</TableHead>
-                <TableHead>Crop Type</TableHead>
-                <TableHead>Quantity</TableHead>
-                <TableHead>Arrival Date</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-            </TableHeader>
+            <div className="overflow-x-auto">
+                <Table className="min-w-full">
+                <TableHeader>
+                    <TableRow>
+                    <TableHead className="text-xs sm:text-sm">Farmer</TableHead>
+                    <TableHead className="text-xs sm:text-sm hidden sm:table-cell">Crop Type</TableHead>
+                    <TableHead className="text-xs sm:text-sm">Quantity</TableHead>
+                    <TableHead className="text-xs sm:text-sm hidden md:table-cell">Arrival Date</TableHead>
+                    <TableHead className="text-xs sm:text-sm">Status</TableHead>
+                    <TableHead className="text-xs sm:text-sm text-right">Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
             <TableBody>
-                {bookedSlots.map((slot) => (
+                {displayedSlots.map((slot) => (
                 <TableRow key={slot.id}>
-                    <TableCell>
-                    <div className="flex items-center gap-3">
-                        <Avatar className="h-9 w-9">
+                    <TableCell className="p-2 sm:p-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        <Avatar className="h-6 w-6 sm:h-9 sm:w-9 flex-shrink-0">
                         <AvatarImage src={slot.farmerAvatar} alt={slot.farmerName} />
-                        <AvatarFallback>{slot.farmerName.charAt(0)}</AvatarFallback>
+                        <AvatarFallback className="text-xs">{slot.farmerName.charAt(0)}</AvatarFallback>
                         </Avatar>
-                        <span className="font-medium">{slot.farmerName}</span>
+                        <div className="min-w-0">
+                            <span className="font-medium text-xs sm:text-sm truncate block">{slot.farmerName}</span>
+                            <span className="text-xs text-muted-foreground sm:hidden">{slot.cropType}</span>
+                        </div>
                     </div>
                     </TableCell>
-                    <TableCell>{slot.cropType}</TableCell>
-                    <TableCell>{slot.quantity} {slot.unit}</TableCell>
-                    <TableCell>{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
-                    <TableCell>{getStatusBadge(slot.status)}</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell className="p-2 sm:p-4 hidden sm:table-cell text-xs sm:text-sm">{slot.cropType}</TableCell>
+                    <TableCell className="p-2 sm:p-4 text-xs sm:text-sm">{slot.quantity} {slot.unit}</TableCell>
+                    <TableCell className="p-2 sm:p-4 hidden md:table-cell text-xs sm:text-sm">{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
+                    <TableCell className="p-2 sm:p-4">{getStatusBadge(slot.status)}</TableCell>
+                    <TableCell className="p-2 sm:p-4 text-right">
                         <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" className="h-8 w-8 p-0">
+                            <Button variant="ghost" className="h-6 w-6 sm:h-8 sm:w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
+                            <MoreHorizontal className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
@@ -248,7 +281,8 @@ export function WarehouseSlotVisibility() {
                 </TableRow>
                 ))}
             </TableBody>
-            </Table>
+                </Table>
+            </div>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

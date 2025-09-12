@@ -22,10 +22,11 @@ import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase/firebase";
-import { collection, query, where, onSnapshot, orderBy, Timestamp } from "firebase/firestore";
+import { collection, query, where, onSnapshot, orderBy, Timestamp, updateDoc, doc, writeBatch, serverTimestamp } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import type { Role } from "@/lib/types";
+import { useToast } from "@/hooks/use-toast";
 
 type NotificationIcon = "CheckCircle" | "Package" | "AlertTriangle" | "User" | "XCircle";
 
@@ -53,6 +54,7 @@ export function NotificationDropdown() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const searchParams = useSearchParams();
   const role = searchParams.get("role") as Role | null;
+  const { toast } = useToast();
 
   useEffect(() => {
     // In a real app, you'd get the current user's ID from auth state
@@ -110,6 +112,51 @@ export function NotificationDropdown() {
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
+  const markAsRead = async (id: string) => {
+    try {
+      // Optimistic update
+      setNotifications((prev) => prev.map(n => n.id === id ? { ...n, read: true } : n));
+      await updateDoc(doc(db, "notifications", id), { read: true, readAt: serverTimestamp() });
+    } catch (err) {
+      console.error("Failed to mark notification as read", err);
+      toast({
+        variant: "destructive",
+        title: "Failed to update",
+        description: "Could not mark notification as read. Please try again.",
+      });
+    }
+  };
+
+  const markAllAsRead = async () => {
+    const unread = notifications.filter(n => !n.read);
+    if (unread.length === 0) return;
+    try {
+      // Optimistic update
+      setNotifications((prev) => prev.map(n => ({ ...n, read: true })));
+      const batch = writeBatch(db);
+      unread.forEach(n => {
+        batch.update(doc(db, "notifications", n.id), { read: true, readAt: serverTimestamp() });
+      });
+      await batch.commit();
+      toast({ title: "All notifications marked as read" });
+    } catch (err) {
+      console.error("Failed to mark all as read", err);
+      toast({
+        variant: "destructive",
+        title: "Update failed",
+        description: "Could not mark all as read. Please try again.",
+      });
+    }
+  };
+
+  const handleItemClick = async (n: Notification) => {
+    if (!n.read) await markAsRead(n.id);
+    if (n.link) {
+      // Navigate to link
+      window.location.href = n.link;
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -121,13 +168,24 @@ export function NotificationDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-80 md:w-96" align="end">
-        <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+        <div className="flex items-center justify-between px-2 py-1.5">
+          <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+          {unreadCount > 0 && (
+            <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={markAllAsRead}>
+              Mark all as read
+            </Button>
+          )}
+        </div>
         <DropdownMenuSeparator />
         <div className="max-h-80 overflow-y-auto">
             {notifications.length === 0 ? (
                  <p className="text-center text-sm text-muted-foreground p-4">No new notifications.</p>
             ) : notifications.map((notification) => (
-            <DropdownMenuItem key={notification.id} className={cn("flex items-start gap-3 p-3", !notification.read && "bg-accent")}>
+            <DropdownMenuItem 
+              key={notification.id} 
+              className={cn("flex items-start gap-3 p-3 cursor-pointer", !notification.read && "bg-accent")} 
+              onClick={() => handleItemClick(notification)}
+            >
                 <div className="flex-shrink-0 mt-1">{iconMap[notification.icon]}</div>
                 <div className="flex-grow">
                     <p className="font-semibold text-sm">{notification.title}</p>

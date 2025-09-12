@@ -27,14 +27,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { SidebarTrigger } from "../ui/sidebar";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import type { Role } from "@/lib/types";
 import { LanguageContext, content } from "@/contexts/language-context";
 import { NotificationDropdown } from "./notification-dropdown";
 
-function getRoleName(role: Role | null, lang: 'en' | 'hi') {
+function getRoleName(role: Role | null, lang: 'en' | 'hi' | 'bn' | 'te' | 'mr' | 'ta') {
+  const supportedLang = (['en', 'hi'].includes(lang as string)) ? lang as 'en' | 'hi' : 'en';
   if (!role) return lang === 'en' ? "User" : "उपयोगकर्ता";
   
   const names = {
@@ -53,7 +53,7 @@ function getRoleName(role: Role | null, lang: 'en' | 'hi') {
       logistics: "रसद",
     }
   };
-  return names[lang][role];
+  return names[supportedLang][role];
 }
 
 export function Header() {
@@ -62,8 +62,17 @@ export function Header() {
   const { lang } = useContext(LanguageContext);
   const t = content[lang];
 
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+
   useEffect(() => {
-    setRole(searchParams.get("role") as Role | null);
+    const newRole = searchParams.get("role") as Role | null;
+    setRole(newRole);
+
+    // TODO: Replace this with actual profile picture fetch from Firebase
+    // For now using dummy URL
+    if (newRole) {
+      setProfilePicture(`https://i.pravatar.cc/150?u=${newRole}`);
+    }
   }, [searchParams]);
   
   const currentRoleName = getRoleName(role, lang);
@@ -82,7 +91,7 @@ export function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">
               <Avatar className="h-10 w-10">
-                <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
+                <AvatarImage src={profilePicture || ""} alt="User avatar" />
                 <AvatarFallback>
                   {currentRoleName.charAt(0)}
                 </AvatarFallback>
@@ -101,13 +110,17 @@ export function Header() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>{t.profile}</span>
+            <DropdownMenuItem asChild>
+              <Link href={`/dashboard/profile?role=${role}&lang=${lang}`}>
+                <User className="mr-2 h-4 w-4" />
+                <span>{t.profile}</span>
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>{t.settings}</span>
+            <DropdownMenuItem asChild>
+              <Link href={`/dashboard/settings?role=${role}&lang=${lang}`}>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>{t.settings}</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>

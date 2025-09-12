@@ -210,6 +210,54 @@ body {
     --carousel-item-scale: 1;
   }
 
+  /* Rotating rim animation with head and tail */
+  .rim-animation {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rim-animation::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 60deg,
+      var(--rim-color, #ef4444) 90deg,
+      var(--rim-color, #ef4444) 120deg,
+      transparent 180deg,
+      transparent 360deg
+    );
+    animation: rim-spin 2s linear infinite;
+    z-index: -1;
+  }
+
+  .rim-animation-red {
+    --rim-color: #ef4444;
+  }
+
+  .rim-animation-amber {
+    --rim-color: #f59e0b;
+  }
+
+  .rim-animation-blue {
+    --rim-color: #3b82f6;
+  }
+
+  @keyframes rim-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   .wavy-border {
     position: relative;
     padding-left: 20px;

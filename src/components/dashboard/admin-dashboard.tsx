@@ -62,6 +62,8 @@ const chartConfig = {
   },
 };
 
+import { WarehouseSensorMonitor } from "./warehouse-sensor-monitor";
+
 export default function AdminDashboard() {
   return (
     <div className="space-y-6">
@@ -182,6 +184,11 @@ export default function AdminDashboard() {
             </ChartContainer>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Warehouse Sensor Monitoring Section with warehouse selection */}
+      <div className="mt-8">
+        <WarehouseSensorMonitor />
       </div>
     </div>
   );

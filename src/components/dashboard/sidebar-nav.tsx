@@ -24,6 +24,7 @@ import {
   Lightbulb,
   Landmark,
   CalendarCheck,
+  Settings,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -59,6 +60,8 @@ const navItemsContent = {
             { href: "/dashboard/inventory", label: "Inventory", icon: Package },
             { href: "/dashboard/slot-management", label: "Slot Management", icon: CalendarCheck },
             { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
+            { href: "/dashboard/profile", label: "My Profile", icon: User },
+            { href: "/dashboard/settings", label: "Settings", icon: Settings },
         ],
         logistics: [
             { href: "/dashboard", label: "Logistics Overview", icon: Truck },
@@ -96,6 +99,8 @@ const navItemsContent = {
             { href: "/dashboard/inventory", label: "इन्वेंटरी", icon: Package },
             { href: "/dashboard/slot-management", label: "स्लॉट प्रबंधन", icon: CalendarCheck },
             { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
+            { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
+            { href: "/dashboard/settings", label: "सेटिंग्स", icon: Settings },
         ],
         logistics: [
             { href: "/dashboard", label: "रसद अवलोकन", icon: Truck },
@@ -120,8 +125,9 @@ const navItemsContent = {
 }
 
 
-function getRoleName(role: Role, lang: 'en' | 'hi') {
-  return navItemsContent[lang].roles[role] || navItemsContent.en.roles[role];
+function getRoleName(role: Role, lang: 'en' | 'hi' | 'bn' | 'te' | 'mr' | 'ta') {
+  const supportedLang = (['en', 'hi'].includes(lang as string)) ? lang as 'en' | 'hi' : 'en';
+  return navItemsContent[supportedLang].roles[role] || navItemsContent.en.roles[role];
 }
 
 export function SidebarNav() {
@@ -129,7 +135,8 @@ export function SidebarNav() {
   const searchParams = useSearchParams();
   const { lang } = useContext(LanguageContext);
   const role = (searchParams.get("role") as Role) || "farmer";
-  const t = navItemsContent[lang];
+  const supportedLang = (['en', 'hi'].includes(lang as string)) ? lang as 'en' | 'hi' : 'en';
+  const t = navItemsContent[supportedLang];
 
   const currentNavItems = t[role] || navItemsContent.en[role];
   const roleQuery = `?role=${role}&lang=${lang}`;
@@ -146,15 +153,21 @@ export function SidebarNav() {
         <SidebarMenu>
           {currentNavItems.map((item) => (
             <SidebarMenuItem key={item.href}>
-              <Link href={`${item.href}${roleQuery}`}>
-                <SidebarMenuButton
-                  isActive={pathname === item.href}
-                  tooltip={{ children: item.label }}
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={{ children: item.label }}
+              >
+                <Link 
+                  href={`${item.href}${roleQuery}`}
+                  onClick={(e) => {
+                    console.log('Navigation clicked:', `${item.href}${roleQuery}`);
+                  }}
                 >
                   <item.icon />
                   <span>{item.label}</span>
-                </SidebarMenuButton>
-              </Link>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
             {role === 'farmer' && (

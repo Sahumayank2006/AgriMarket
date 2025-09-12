@@ -363,13 +363,6 @@ export default function GreenGuardianDashboard() {
             </CardHeader>
             <CardContent>
               <div className="relative">
-                {!iframeLoaded && !iframeError && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                    <div className="bg-white/80 dark:bg-black/30 backdrop-blur-sm px-3 py-2 rounded-md shadow-sm text-sm text-gray-700 dark:text-gray-200">
-                      {isReachable === false ? "Node-RED not reachable…" : "Connecting to Node-RED…"}
-                    </div>
-                  </div>
-                )}
                 <iframe
                   key={iframeKey}
                   src={nodeRedUrl}
@@ -377,12 +370,11 @@ export default function GreenGuardianDashboard() {
                   title="Node-RED IoT Dashboard"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-top-navigation"
                   scrolling="yes"
+                  style={{ zIndex: 5 }}
                   onLoad={() => {
-                    // Wait a brief moment to ensure the iframe is fully rendered
-                    setTimeout(() => {
-                      setIframeLoaded(true);
-                      setIframeError(null);
-                    }, 500);
+                    // Immediately mark as loaded
+                    setIframeLoaded(true);
+                    setIframeError(null);
                   }}
                 />
                 <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs font-medium shadow-sm ${iframeError ? "bg-gray-400" : "bg-green-500 text-white animate-pulse"}`}>

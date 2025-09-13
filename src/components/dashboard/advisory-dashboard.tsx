@@ -145,7 +145,7 @@ export function AdvisoryDashboard() {
                             <Button variant="secondary" size="sm">Learn More</Button>
                         </div>
                         <div className="mt-3 pt-3 border-t flex flex-wrap gap-4 text-xs">
-                           <p><span className="font-semibold">Eligibility:</span> {scheme.eligibility}</p>
+                           <div><span className="font-semibold">Eligibility:</span> {scheme.eligibility}</div>
                            <Badge variant={scheme.deadline.includes("Open") ? "default" : "destructive"}>
                             Deadline: {scheme.deadline}
                            </Badge>

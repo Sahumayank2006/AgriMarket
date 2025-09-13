@@ -120,6 +120,7 @@ export default function GreenGuardianDashboard() {
     if (isTail) {
       return (
         <circle
+          key={`${cssVarColor}-dot-${index}`}
           cx={cx}
           cy={cy}
           r={4}
@@ -130,7 +131,7 @@ export default function GreenGuardianDashboard() {
       );
     }
     // Return an empty SVG group to satisfy type Checker (cannot return null)
-    return <g />;
+    return <g key={`${cssVarColor}-empty-${index}`} />;
   };
 
   // Helper function to determine temperature status with rim animation

@@ -25,6 +25,7 @@ import {
   Landmark,
   CalendarCheck,
   Settings,
+  Bell,
 } from "lucide-react";
 
 import { Logo } from "@/components/icons";
@@ -59,6 +60,7 @@ const navItemsContent = {
             { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
             { href: "/dashboard/inventory", label: "Inventory", icon: Package },
             { href: "/dashboard/slot-management", label: "Slot Management", icon: CalendarCheck },
+            { href: "/dashboard/alerts", label: "Alerts", icon: Bell },
             { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
             { href: "/dashboard/profile", label: "My Profile", icon: User },
             { href: "/dashboard/settings", label: "Settings", icon: Settings },
@@ -98,6 +100,7 @@ const navItemsContent = {
             { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },
             { href: "/dashboard/inventory", label: "इन्वेंटरी", icon: Package },
             { href: "/dashboard/slot-management", label: "स्लॉट प्रबंधन", icon: CalendarCheck },
+            { href: "/dashboard/alerts", label: "अलर्ट", icon: Bell },
             { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
             { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
             { href: "/dashboard/settings", label: "सेटिंग्स", icon: Settings },

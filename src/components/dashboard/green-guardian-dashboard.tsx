@@ -12,7 +12,10 @@ import {
   ExternalLink,
   Bell,
   Clock,
+  ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import {
   Card,
@@ -26,9 +29,6 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Responsi
 import { WarehouseSlotVisibility } from "./warehouse-slot-visibility";
 import { TruckTracking } from "./truck-tracking";
 import { useSensorData } from "@/hooks/use-sensor-data";
-import { WarehouseAlerts } from "./warehouse-alerts";
-import { WarehouseWeatherCard } from "./warehouse-weather-card";
-import { ProductShelfLife } from "./product-shelf-life";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -58,6 +58,10 @@ const sensorChartConfig = {
 export default function GreenGuardianDashboard() {
   // Fetch real sensor data with 30-second refresh interval
   const { stats, chartData, isLoading, error, refetch } = useSensorData(30000);
+  const searchParams = useSearchParams();
+  const role = searchParams.get("role") || "green-guardian";
+  const lang = searchParams.get("lang") || "en";
+  const roleQuery = `?role=${role}&lang=${lang}`;
 
   // Live IoT iframe state
   const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -191,12 +195,12 @@ export default function GreenGuardianDashboard() {
 
       {/* Dashboard Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Warehouse Management Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Manager</h1>
         <p className="text-gray-600">Monitor and manage warehouse operations, IoT sensors, and logistics in real-time</p>
       </div>
 
       {/* Overview Stats - Mobile Optimized */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-700">
@@ -262,6 +266,44 @@ export default function GreenGuardianDashboard() {
             <p className="text-sm text-gray-500">3 tasks pending</p>
           </CardContent>
         </Card>
+
+        {/* Local Temperature Card */}
+        <Card className="hover:shadow-md transition-all duration-300 border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-sm font-medium text-orange-700">
+              Local Temperature
+            </CardTitle>
+            <Thermometer className="h-5 w-5 text-orange-600" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-orange-900">28°C</div>
+            <p className="text-sm text-orange-600 flex items-center">
+              <Clock className="h-3 w-3 mr-1" />
+              Updated 5 min ago
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Link href={`/dashboard/alerts${roleQuery}`}>
+          <Card className="hover:shadow-lg transition-all duration-200 border-amber-200 bg-amber-50 cursor-pointer group">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-medium text-amber-700">
+                Warehouse Alerts
+              </CardTitle>
+              <div className="flex items-center space-x-2">
+                <Bell className="h-5 w-5 text-amber-600" />
+                <ArrowRight className="h-4 w-4 text-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-amber-900">5 Active</div>
+              <p className="text-sm text-amber-600 flex items-center">
+                <span className="flex h-2 w-2 rounded-full bg-red-500 mr-2 animate-pulse"></span>
+                2 Critical alerts
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Main Content Grid */}
@@ -344,19 +386,6 @@ export default function GreenGuardianDashboard() {
             </CardContent>
           </Card>
 
-          {/* New Warehouse Alerts Component */}
-          <WarehouseAlerts 
-            warehouseId="W01"
-            temperature={stats?.avgTemperature || 22}
-            humidity={stats?.avgHumidity || 60}
-            refreshing={isLoading}
-          />
-          
-          {/* New Warehouse Weather Component */}
-          <WarehouseWeatherCard 
-            warehouseId="W01"
-          />
-          
           {/* 3. Upcoming Slot Bookings */}
           <WarehouseSlotVisibility />
         </div>
@@ -421,13 +450,6 @@ export default function GreenGuardianDashboard() {
             </CardContent>
           </Card>
 
-          {/* New Product Shelf Life Prediction Component */}
-          <ProductShelfLife 
-            warehouseId="W01"
-            temperature={stats?.avgTemperature || 22}
-            humidity={stats?.avgHumidity || 60}
-          />
-          
           {/* 5. Stock Level Tracker */}
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader>

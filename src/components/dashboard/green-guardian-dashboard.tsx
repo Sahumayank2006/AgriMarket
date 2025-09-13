@@ -99,9 +99,14 @@ export default function GreenGuardianDashboard() {
     // After 15s, if not loaded and unreachable, show error
     const errorTimer = setTimeout(() => {
       if (!cancelled && !iframeLoaded && isReachable === false) {
-        setIframeError(
-          `Can't reach Node-RED dashboard at ${nodeRedUrl}. Make sure Node-RED is running (default http://127.0.0.1:1880).`
-        );
+        const isLocalUrl = nodeRedUrl.includes('127.0.0.1') || nodeRedUrl.includes('localhost');
+        const errorMsg = isLocalUrl 
+          ? `Node-RED dashboard not accessible at ${nodeRedUrl}. For production deployment, you need to:
+             1. Deploy Node-RED to a cloud service (FlowFuse, Heroku, etc.)
+             2. Set NEXT_PUBLIC_NODERED_URL environment variable in Vercel to your public Node-RED URL
+             3. Or use ngrok for testing: 'ngrok http 1880'`
+          : `Can't reach Node-RED dashboard at ${nodeRedUrl}. Please check if the URL is accessible.`;
+        setIframeError(errorMsg);
       }
     }, 15000);
 

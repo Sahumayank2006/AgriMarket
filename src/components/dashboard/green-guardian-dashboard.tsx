@@ -72,11 +72,22 @@ export default function GreenGuardianDashboard() {
   const nodeRedUrl = useMemo(() => {
     const base = rawNodeRedUrl.replace(/\/$/, "");
     // If a hash route is already present, keep it as-is
-    if (base.includes("#!/")) return base;
+    if (base.includes("#!/")) {
+      // For ngrok URLs, we need to add the skip warning parameter
+      if (base.includes('ngrok')) {
+        const hasQuery = base.includes('?');
+        return `${base}${hasQuery ? '&' : '?'}ngrok-skip-browser-warning=true`;
+      }
+      return base;
+    }
     // Ensure /ui exists
     const withUi = base.endsWith("/ui") ? base : `${base}/ui`;
-    // Use default dashboard tab route
-    return `${withUi}/#!/0`;
+    // Use default dashboard tab route with ngrok skip parameter if needed
+    const finalUrl = `${withUi}/#!/0`;
+    if (finalUrl.includes('ngrok')) {
+      return `${finalUrl}?ngrok-skip-browser-warning=true`;
+    }
+    return finalUrl;
   }, [rawNodeRedUrl]);
   const [isReachable, setIsReachable] = useState<boolean | null>(null);
 
@@ -87,7 +98,17 @@ export default function GreenGuardianDashboard() {
     // Proactively check reachability (CORS-friendly; Node-RED typically sets ACAO:*)
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
-    fetch(nodeRedUrl.replace(/#.*$/, ""), { signal: controller.signal })
+    const headers: HeadersInit = {};
+    
+    // Add ngrok header if using ngrok URL to skip browser warning
+    if (nodeRedUrl.includes('ngrok')) {
+      headers['ngrok-skip-browser-warning'] = 'true';
+    }
+    
+    fetch(nodeRedUrl.replace(/#.*$/, ""), { 
+      signal: controller.signal,
+      headers 
+    })
       .then(() => {
         if (!cancelled) setIsReachable(true);
       })

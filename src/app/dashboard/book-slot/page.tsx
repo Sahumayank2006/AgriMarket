@@ -134,7 +134,7 @@ export default function BookSlotPage() {
         status: "Upcoming",
         farmerId,
         farmerName,
-        farmerAvatar: "https://i.pravatar.cc/150?u=rohan"
+        farmerAvatar: "https://i.ibb.co/QvRcVK86/Copilot-20250915-232755.png"
       });
       
       // Create notification for the farmer

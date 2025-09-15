@@ -195,7 +195,7 @@ export default function RoleSelectionPage() {
       location: "Pune District",
       achievement: "Highest crop utilization rate",
       rupeesSaved: "₹3,20,000",
-      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+      avatarUrl: "https://i.ibb.co/QvRcVK86/Copilot-20250915-232755.png"
     },
     {
       name: "Aisha Sharma",

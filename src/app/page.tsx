@@ -273,15 +273,15 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
-      <header className="w-full bg-white px-4 py-2">
+      <header className="w-full bg-white px-4 py-1">
         {/* Mobile Layout */}
         <div className="grid grid-cols-3 items-center md:hidden">
           <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={90} height={36} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={78} height={32}/>
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={97} height={40}/>
           </div>
           <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={75} height={75} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={94} height={94} />
           </div>
           <div className="flex justify-end">
             <DropdownMenu>
@@ -304,13 +304,13 @@ export default function RoleSelectionPage() {
         </div>
         
         {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-between h-24">
+        <div className="hidden md:flex items-center justify-between h-20">
           <div className="flex items-center gap-4">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={140} height={56} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={210} height={85}/>
           </div>
           <div className="flex-shrink-0">
-              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
+              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={110} height={110} />
           </div>
           <div className="flex items-center gap-2">
               <DropdownMenu>
@@ -523,19 +523,16 @@ export default function RoleSelectionPage() {
               </div>
             </div>
 
-            <div className="mt-12 w-full max-w-7xl text-center animate-in fade-in duration-1000">
-              <div className="mb-6">
-                <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
-              </div>
-              <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.impactTitle}</h2>
-              <div className="bg-[#EBF5FF] dark:bg-blue-900/20 py-8 px-4 rounded-2xl">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
+            <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
+              <div className="max-w-6xl mx-auto px-4">
+                <h2 className="text-4xl font-bold text-center text-foreground mb-8">{pageContent.impactTitle}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   {pageContent.impactStats.map((stat, index) => (
                     <div key={index} className="flex flex-col items-center text-center">
-                      <div className="bg-white rounded-full p-4 mb-4 shadow-md">
+                      <div className="bg-white dark:bg-gray-700 rounded-full p-4 mb-4 shadow-md border">
                         <stat.icon className="h-10 w-10 text-primary" />
                       </div>
-                      <p className="text-3xl font-bold">{stat.value}</p>
+                      <p className="text-3xl font-bold text-foreground">{stat.value}</p>
                       <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
                     </div>
                   ))}

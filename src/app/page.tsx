@@ -28,6 +28,7 @@ import {
   Cloud,
   Heart,
   Wheat,
+  Users,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -336,20 +337,20 @@ export default function RoleSelectionPage() {
         <main className="flex-grow wavy-border">
             <div className="flex w-full flex-col items-center justify-center p-4">
 
-                <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
-                    <div className="mb-6 text-foreground flex items-center gap-4">
+                <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-10">
+                    <div className="mb-4 text-foreground flex items-center gap-4">
                         <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                             {pageContent.welcome}
                         </h1>
                         <Wheat className="h-12 w-12 text-yellow-500" />
                     </div>
-                    <p className="max-w-3xl text-center text-xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-top-6 duration-1000">
+                    <p className="max-w-3xl text-center text-xl text-muted-foreground mb-6 animate-in fade-in slide-in-from-top-6 duration-1000">
                         {pageContent.tagline}
                     </p>
 
 
-                    <p className="text-lg text-muted-foreground mb-8">{pageContent.chooseRole}</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    <p className="text-lg text-muted-foreground mb-6">{pageContent.chooseRole}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                     {pageContent.roles.slice(0, 4).map((role, idx) => (
                         <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
                         <div className="flex-shrink-0">
@@ -374,7 +375,7 @@ export default function RoleSelectionPage() {
                     
                     {/* Admin card centered */}
                     {pageContent.roles.length > 4 && (
-                    <div className="flex justify-center w-full max-w-4xl mx-auto mb-16">
+                    <div className="flex justify-center w-full max-w-4xl mx-auto mb-10">
                         <div className="w-full max-w-md">
                         {pageContent.roles.slice(4).map((role, idx) => (
                             <div key={idx + 4} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-blue-500 hover:outline hover:outline-2 hover:outline-blue-500 hover:-translate-y-1">
@@ -401,36 +402,56 @@ export default function RoleSelectionPage() {
                     )}
                     
 
-                    {/* Exact replica of eSanjeevani watermark section */}
-                    <div className="relative w-full h-80 md:h-96 flex flex-col justify-center items-center overflow-hidden bg-white">
-                    {/* Ultra-light watermark text - barely visible like in reference */}
-                    <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
-                        <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 opacity-30 leading-none tracking-tighter whitespace-nowrap">
-                        #eAaharSetu
-                        </span>
-                    </div>
-                    {/* Colored overlay text - perfectly centered */}
-                    <div className="relative z-10 flex flex-col items-center justify-center">
-                        <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4">
-                        <span className="text-orange-500">#</span><span className="text-green-500">eAaharSetu</span>
-                        </span>
-                        {/* Animated Counter */}
-                        <div className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
-                        <IndianRupee className="h-6 w-6 md:h-8 md:w-8" />
-                        <AnimatedCounter end={17300000} duration={3000} />
+                    {/* eSanjeevani-style watermark section */}
+                    <div className="relative w-full py-8 md:py-12 flex flex-col justify-center items-center overflow-hidden bg-white">
+                        <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
+                            <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 opacity-30 leading-none tracking-tighter whitespace-nowrap">
+                                #eAaharSetu
+                            </span>
                         </div>
-                        <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                        Saved this year
-                        </p>
-                    </div>
+                        <div className="relative z-10 flex flex-col items-center justify-center">
+                            <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4">
+                                <span className="text-orange-500">#</span><span className="text-green-500">eAaharSetu</span>
+                            </span>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4">
+                                <div>
+                                    <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
+                                        <IndianRupee className="h-6 w-6 md:h-8 md:w-8" />
+                                        <AnimatedCounter end={17300000} duration={3000} />
+                                    </div>
+                                    <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                                        Value Saved this year
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-yellow-600">
+                                        <Wheat className="h-6 w-6 md:h-8 md:w-8" />
+                                        <AnimatedCounter end={5000} duration={3000} suffix=" Tons"/>
+                                    </div>
+                                    <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                                        Grains Saved
+                                    </p>
+                                </div>
+                                 <div>
+                                    <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-blue-600">
+                                        <Users className="h-6 w-6 md:h-8 md:w-8" />
+                                        <AnimatedCounter end={25000} duration={3000} />
+                                    </div>
+                                    <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                                        People Fed (Est.)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="mt-20 w-full text-left animate-in fade-in duration-1000">
-                        <div className="mb-8 max-w-5xl mx-auto">
+
+                    <div className="mt-12 w-full text-left animate-in fade-in duration-1000">
+                        <div className="mb-6 max-w-5xl mx-auto">
                             <hr className="w-1/4 border-t-2 border-primary/20" />
                         </div>
 
-                        <h2 className="text-4xl font-bold text-foreground mb-8 max-w-5xl mx-auto">{pageContent.topPerformers}</h2>
+                        <h2 className="text-4xl font-bold text-foreground mb-6 max-w-5xl mx-auto">{pageContent.topPerformers}</h2>
                         <div className="relative w-full">
                         <Carousel
                             setApi={setPerformerApi}
@@ -462,8 +483,8 @@ export default function RoleSelectionPage() {
                         </div>
                     </div>
 
-                    <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
-                        <div className="mb-8">
+                    <div className="mt-12 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+                        <div className="mb-6">
                             <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                         </div>
                         <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl">
@@ -503,8 +524,8 @@ export default function RoleSelectionPage() {
                         </div>
                     </div>
 
-                    <div className="mt-20 w-full max-w-5xl text-center animate-in fade-in duration-1000">
-                        <div className="mb-8">
+                    <div className="mt-12 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+                        <div className="mb-6">
                             <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                         </div>
                         <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.impactTitle}</h2>
@@ -519,7 +540,7 @@ export default function RoleSelectionPage() {
                         </div>
                     </div>
 
-                    <div className="my-20 w-full max-w-5xl text-center">
+                    <div className="my-12 w-full max-w-5xl text-center">
                         <div className="flex justify-around items-center gap-8 flex-wrap">
                             {/* SSL Encryption */}
                             <div className="flex flex-col items-center space-y-2">
@@ -554,25 +575,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    
-
-    
-
-
-
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-

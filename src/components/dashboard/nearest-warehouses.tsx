@@ -39,20 +39,20 @@ const pageContent = {
 const mockWarehouses = [
   {
     id: 1,
-    name: "Nashik Cold Storage",
+    name: "Gwalior Central Warehousing",
     distance: "5 km",
     availability: "Available",
   },
   {
     id: 2,
-    name: "Panchvati Warehouse Hub",
+    name: "Malwa Agri Storage, Gwalior",
     distance: "8 km",
     availability: "Limited Slots",
   },
   {
     id: 3,
-    name: "Sinnar Agri-Storage",
-    distance: "15 km",
+    name: "Chambal Cold Storage, Morena",
+    distance: "40 km",
     availability: "Full",
   },
 ];

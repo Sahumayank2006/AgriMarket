@@ -274,20 +274,16 @@ export default function RoleSelectionPage() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <header className="w-full bg-white px-4 py-1">
-        {/* Common responsive header */}
         <div className="flex items-center justify-between h-16">
-          {/* Left logos */}
           <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={175} height={70} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={151} height={62}/>
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={160} height={64} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={138} height={57}/>
           </div>
           
-          {/* Center logo - hidden on smaller screens to prevent overlap */}
           <div className="hidden lg:flex justify-center flex-grow">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={148} height={148} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={100} height={100} />
           </div>
 
-          {/* Right content */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -346,7 +342,6 @@ export default function RoleSelectionPage() {
                 ))}
               </div>
               
-              {/* Admin card centered */}
               {pageContent.roles.length > 4 && (
                 <div className="flex justify-center w-full max-w-4xl mx-auto mb-10">
                   <div className="w-full max-w-md">
@@ -387,7 +382,7 @@ export default function RoleSelectionPage() {
                   <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4">
                       <span className="text-orange-500">#</span><span className="text-green-500">eAaharSetu</span>
                   </span>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4">
                       <div>
                           <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
                               <IndianRupee className="h-6 w-6 md:h-8 md:w-8" />
@@ -413,15 +408,6 @@ export default function RoleSelectionPage() {
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
                               People Fed (Est.)
-                          </p>
-                      </div>
-                      <div>
-                          <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-red-600">
-                              <Heart className="h-6 w-6 md:h-8 md:w-8" />
-                              <AnimatedCounter end={95} duration={3000} suffix="%" />
-                          </div>
-                          <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              Customer Satisfaction
                           </p>
                       </div>
                   </div>
@@ -559,5 +545,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    

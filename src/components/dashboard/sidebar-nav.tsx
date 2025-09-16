@@ -62,12 +62,9 @@ const navItemsContent = {
             { href: "/dashboard/slot-management", label: "Slot Management", icon: CalendarCheck },
             { href: "/dashboard/alerts", label: "Alerts", icon: Bell },
             { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
-<<<<<<< HEAD
             { href: "/dashboard/profile", label: "My Profile", icon: User },
             { href: "/dashboard/settings", label: "Settings", icon: Settings },
-=======
             { href: "/dashboard/route-optimization", label: "Logistics", icon: Truck },
->>>>>>> 86d4cd5 (make logostic page inside warehouse manager as an option in sidebar)
         ],
         logistics: [
             { href: "/dashboard", label: "Logistics Overview", icon: Truck },
@@ -106,12 +103,9 @@ const navItemsContent = {
             { href: "/dashboard/slot-management", label: "स्लॉट प्रबंधन", icon: CalendarCheck },
             { href: "/dashboard/alerts", label: "अलर्ट", icon: Bell },
             { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
-<<<<<<< HEAD
             { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
             { href: "/dashboard/settings", label: "सेटिंग्स", icon: Settings },
-=======
             { href: "/dashboard/route-optimization", label: "रसद", icon: Truck },
->>>>>>> 86d4cd5 (make logostic page inside warehouse manager as an option in sidebar)
         ],
         logistics: [
             { href: "/dashboard", label: "रसद अवलोकन", icon: Truck },

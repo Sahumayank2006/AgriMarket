@@ -276,12 +276,12 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4 py-1">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={160} height={64} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={138} height={57}/>
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <Image src="https://i.ibb.co/Rk31CNxx/images-1.jpg" alt="images-1" width={68} height={68}/>
           </div>
           
-          <div className="hidden lg:flex justify-center flex-grow">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={100} height={100} />
+          <div className="flex justify-center flex-grow">
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
@@ -497,7 +497,7 @@ export default function RoleSelectionPage() {
             <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
               <div className="max-w-6xl mx-auto px-4">
                 <h2 className="text-4xl font-bold text-center text-foreground mb-8">{pageContent.impactTitle}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {pageContent.impactStats.map((stat, index) => (
                     <div key={index} className="flex flex-col items-center text-center">
                       <div className="bg-white dark:bg-gray-700 rounded-full p-4 mb-4 shadow-md border">

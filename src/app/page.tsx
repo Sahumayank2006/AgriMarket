@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import Link from "next/link";
@@ -277,12 +276,12 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4 py-2">
         {/* Mobile Layout */}
         <div className="grid grid-cols-3 items-center md:hidden">
-          <div className="flex items-center gap-1 justify-start">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={60} height={24} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={52} height={21}/>
+          <div className="flex items-center gap-2 justify-start">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={90} height={36} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={78} height={32}/>
           </div>
           <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={50} height={50} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={75} height={75} />
           </div>
           <div className="flex justify-end">
             <DropdownMenu>
@@ -305,13 +304,13 @@ export default function RoleSelectionPage() {
         </div>
         
         {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-between h-14">
-          <div className="flex items-center gap-2">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={120} height={48}/>
+        <div className="hidden md:flex items-center justify-between h-24">
+          <div className="flex items-center gap-4">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
           </div>
           <div className="flex-shrink-0">
-              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
+              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
           </div>
           <div className="flex items-center gap-2">
               <DropdownMenu>
@@ -401,7 +400,6 @@ export default function RoleSelectionPage() {
             </div>
           </div>
           
-          {/* eSanjeevani-style watermark section */}
           <div className="w-full bg-sky-100 dark:bg-sky-900/30 py-8 md:py-12">
             <div className="relative max-w-5xl mx-auto px-4">
               <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
@@ -579,3 +577,5 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    

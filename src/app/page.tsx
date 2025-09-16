@@ -403,9 +403,9 @@ export default function RoleSelectionPage() {
                     
 
                     {/* eSanjeevani-style watermark section */}
-                    <div className="relative w-full py-8 md:py-12 flex flex-col justify-center items-center overflow-hidden bg-white">
+                    <div className="relative w-full py-8 md:py-12 flex flex-col justify-center items-center overflow-hidden bg-sky-100 dark:bg-sky-900/30 rounded-2xl">
                         <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
-                            <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 opacity-30 leading-none tracking-tighter whitespace-nowrap">
+                            <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 dark:text-gray-500/10 opacity-30 leading-none tracking-tighter whitespace-nowrap">
                                 #eAaharSetu
                             </span>
                         </div>

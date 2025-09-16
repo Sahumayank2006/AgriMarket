@@ -3,7 +3,7 @@
 
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import type { Role } from '@/lib/types';
-import { Sprout, ShoppingBag, Warehouse, Truck, ShieldCheck, IndianRupee, Leaf } from 'lucide-react';
+import { Sprout, ShoppingBag, Warehouse, ShieldCheck, IndianRupee, Leaf } from 'lucide-react';
 
 export const content = {
   en: {
@@ -15,7 +15,6 @@ export const content = {
       { role: "farmer" as Role, title: "Farmer", description: "Manage your crops, predict spoilage, and reduce waste.", icon: Sprout, dataAiHint: "farm crops" },
       { role: "dealer" as Role, title: "Dealer", description: "Browse surplus crops, place orders, and track deliveries.", icon: ShoppingBag, dataAiHint: "market stall" },
       { role: "green-guardian" as Role, title: "Warehouse Manager", description: "Monitor storage, manage inventory, and ensure quality.", icon: Warehouse, dataAiHint: "warehouse interior" },
-      { role: "logistics" as Role, title: "Logistics", description: "Manage transportation, track deliveries, and optimize routes.", icon: Truck, dataAiHint: "delivery truck" },
       { role: "admin" as Role, title: "Admin", description: "Oversee the platform, manage users, and view analytics.", icon: ShieldCheck, dataAiHint: "data dashboard" },
     ],
     continueAs: "Continue as",
@@ -57,7 +56,6 @@ export const content = {
       { role: "farmer" as Role, title: "किसान", description: "अपनी फसलों का प्रबंधन करें, खराब होने का अनुमान लगाएं और कचरे को कम करें।", icon: Sprout, dataAiHint: "farm crops" },
       { role: "dealer" as Role, title: "व्यापारी", description: "अधिशेष फसलों को ब्राउज़ करें, ऑर्डर दें और डिलीवरी ट्रैक करें।", icon: ShoppingBag, dataAiHint: "market stall" },
       { role: "green-guardian" as Role, title: "गोदाम प्रबंधक", description: "भंडारण की निगरानी करें, इन्वेंट्री का प्रबंधन करें और गुणवत्ता सुनिश्चित करें।", icon: Warehouse, dataAiHint: "warehouse interior" },
-      { role: "logistics" as Role, title: "रसद", description: "परिवहन का प्रबंधन करें, डिलीवरी ट्रैक करें और मार्गों का अनुकूलन करें।", icon: Truck, dataAiHint: "delivery truck" },
       { role: "admin" as Role, title: "व्यवस्थापक", description: "प्लेटफ़ॉर्म की देखरेख करें, उपयोगकर्ताओं का प्रबंधन करें और विश्लेषण देखें।", icon: ShieldCheck, dataAiHint: "data dashboard" },
     ],
     continueAs: "के रूप में जारी रखें",
@@ -99,7 +97,6 @@ export const content = {
       { role: "farmer" as Role, title: " কৃষক", description: "আপনার ফসল পরিচালনা করুন, 예측 করুন এবং বর্জ্য হ্রাস করুন।", icon: Sprout, dataAiHint: "farm crops" },
       { role: "dealer" as Role, title: "ডিলার", description: "উודিলারৃত্ত ফসল ব্রাউজ করুন, অর্ডার দিন এবং ডেলিভারি ট্র্যাক করুন।", icon: ShoppingBag, dataAiHint: "market stall" },
       { role: "green-guardian" as Role, title: "গুদام ব্যবস্থাপک", description: "স্টোরেজ নিরীক্ষণ করুন, ইনভেন্টরি পরিচালনা করুন এবং গুণমান নিশ্চিত করুন।", icon: Warehouse, dataAiHint: "warehouse interior" },
-      { role: "logistics" as Role, title: "লজিস্টিকস", description: "পরিবহন পরিচালনা করুন, ডেলিভারি ট্র্যাক করুন এবং রুট অপ্টিমাইজ করুন।", icon: Truck, dataAiHint: "delivery truck" },
       { role: "admin" as Role, title: "অ্যাডমিন", description: "প্ল্যাটফর্মের তত্ত্বাবধান করুন, ব্যবহারকারীদের পরিচালনা করুন এবং বিশ্লেষণ দেখুন।", icon: ShieldCheck, dataAiHint: "data dashboard" },
     ],
     continueAs: "হিসাবে চালিয়ে যান",
@@ -141,7 +138,6 @@ export const content = {
       { role: "farmer" as Role, title: "రైతు", description: "మీ పంటలను నిర్వహించండి, పాడుకాకుండా అంచనా వేయండి మరియు వ్యర్థాలను తగ్గించండి.", icon: Sprout, dataAiHint: "farm crops" },
       { role: "dealer" as Role, title: "డీलर", description: "మిగులు పంటలను బ్రౌజ్ చేయండి, ఆర్డర్లు ఇవ్వండి మరియు డెలివరీలను ట్రాక్ చేయండి.", icon: ShoppingBag, dataAiHint: "market stall" },
       { role: "green-guardian" as Role, title: "గిడ్డంగి व्यवस्थापक", description: "నిల్వను పర్యవేక్షించండి, इन्वेंटरीని నిర్వహించండి మరియు నాణ్యతను నిర్ధారించండి.", icon: Warehouse, dataAiHint: "warehouse interior" },
-      { role: "logistics" as Role, title: "లాజిస్టిక్స్", description: "రవాణాను నిర్వహించండి, డెలివరీలను ట్రాక్ చేయండి మరియు మార్గాలను ఆప్టిమైజ్ చేయండి.", icon: Truck, dataAiHint: "delivery truck" },
       { role: "admin" as Role, title: "అడ్మిన్", description: "ప్లాట్‌ఫారమ్‌ను పర్యవేక్షించండి, వినియోగదారులను నిర్వహించండి మరియు విశ్లేషణలను వీక్షించండి.", icon: ShieldCheck, dataAiHint: "data dashboard" },
     ],
     continueAs: "గా కొనసాగండి",
@@ -183,7 +179,6 @@ export const content = {
         { role: "farmer" as Role, title: "शेतकरी", description: "तुमच्या पिकांचे व्यवस्थापन करा, नासाडीचा अंदाज घ्या आणि कचरा कमी करा.", icon: Sprout, dataAiHint: "farm crops" },
         { role: "dealer" as Role, title: "व्यापारी", description: "शिल्लक पिके ब्राउझ करा, ऑर्डर द्या आणि डिलिव्हरीचा मागोवा घ्या.", icon: ShoppingBag, dataAiHint: "market stall" },
         { role: "green-guardian" as Role, title: "वेअरहाऊस व्यवस्थापक", description: "साठवणुकीचे निरीक्षण करा, इन्व्हेंटरी व्यवस्थापित करा आणि गुणवत्ता सुनिश्चित करा.", icon: Warehouse, dataAiHint: "warehouse interior" },
-        { role: "logistics" as Role, title: "लॉजिस्टिक्स", description: "वाहतुकीचे व्यवस्थापन करा, डिलिव्हरीचा मागोवा घ्या आणि मार्ग ऑप्टिमाइझ करा.", icon: Truck, dataAiHint: "delivery truck" },
         { role: "admin" as Role, title: "प्रशासक", description: "प्लॅटफॉर्मचे निरीक्षण करा, वापरकर्त्यांचे व्यवस्थापन करा आणि विश्लेषणे पहा.", icon: ShieldCheck, dataAiHint: "data dashboard" },
     ],
     continueAs: "म्हणून सुरू ठेवा",
@@ -225,7 +220,6 @@ export const content = {
         { role: "farmer" as Role, title: "விவசாயி", description: "உங்கள் பயிர்களை நிர்வகிக்கவும், கெட்டுப்போவதை கணிக்கவும் மற்றும் கழிவுகளை குறைக்கவும்.", icon: Sprout, dataAiHint: "farm crops" },
         { role: "dealer" as Role, title: "డీलर", description: "உபரி பயிர்களை உலவவும், ஆர்டர்களை வைக்கவும் மற்றும் டெலிவரிகளைக் கண்காணிக்கவும்.", icon: ShoppingBag, dataAiHint: "market stall" },
         { role: "green-guardian" as Role, title: "கிடங்கு மேலாளர்", description: "சேமிப்பகத்தை கண்காணிக்கவும், சரக்குகளை நிர்வகிக்கவும் மற்றும் தரத்தை உறுதிப்படுத்தவும்.", icon: Warehouse, dataAiHint: "warehouse interior" },
-        { role: "logistics" as Role, title: "லாஜிஸ்டிக்ஸ்", description: "போக்குவரத்தை நிர்வகிக்கவும், டெலிவரிகளைக் கண்காணிக்கவும் மற்றும் வழிகளை மேம்படுத்தவும்.", icon: Truck, dataAiHint: "delivery truck" },
         { role: "admin" as Role, title: "நிர்வாகி", description: "தளத்தை மேற்பார்வையிடவும், பயனர்களை நிர்வகிக்கவும் మరియు பகுப்பாய்வுகளைப் பார்க்கவும்.", icon: ShieldCheck, dataAiHint: "data dashboard" },
     ],
     continueAs: "ஆக തുടരുക",

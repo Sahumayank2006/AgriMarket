@@ -530,7 +530,7 @@ export default function RoleSelectionPage() {
                         </div>
                         <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.impactTitle}</h2>
                         <div className="bg-[#EBF5FF] dark:bg-blue-900/20 py-8 px-4 rounded-2xl">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
                             {pageContent.impactStats.map((stat, index) => (
                                 <div key={index} className="flex flex-col items-center text-center">
                                     <div className="bg-white rounded-full p-4 mb-4 shadow-md">

@@ -67,7 +67,7 @@ const formSchema = z.object({
 });
 
 const cropOptions = [
-    { id: "rice", name: "Rice", image: "https://i.ibb.co/ Benson/rice.png", en_name: "Rice", hi_name: "चावल" },
+    { id: "rice", name: "Rice", image: "https://i.ibb.co/mCcRCBWN/Copilot-20250916-202230.png", en_name: "Rice", hi_name: "चावल" },
     { id: "wheat", name: "Wheat", image: "https://i.ibb.co/6J4RJx2j/Generated-Image-September-16-2025-8-04-PM.png", en_name: "Wheat", hi_name: "गेहूँ" },
     { id: "maize", name: "Maize", image: "https://i.ibb.co/bX2gG0F/maize.png", en_name: "Maize", hi_name: "मक्का" },
 ];
@@ -407,4 +407,3 @@ export default function BookSlotPage() {
     </div>
   );
 }
-

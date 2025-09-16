@@ -274,18 +274,43 @@ export default function RoleSelectionPage() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <header className="w-full bg-white px-4 py-1">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-            <Image src="https://i.ibb.co/tRMVnGg/image.png" alt="Department of Agriculture Logo" width={68} height={68}/>
+        <div className="grid grid-cols-3 items-center md:hidden h-16">
+          <div className="flex items-center gap-2 justify-start">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
           </div>
-          
-          <div className="flex justify-center flex-grow">
+          <div className="flex justify-center">
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
+          </div>
+          <div className="flex justify-end">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="border-blue-500 border-2">
+                  <Languages className="mr-1 h-3 w-3 md:mr-2 md:h-4 md:w-4" />
+                  <span className="text-xs">{content[lang].langName}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+        
+        <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
+          <div className="flex items-center gap-4">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <Image src="https://i.ibb.co/rfzgVKgY/Screenshot-2025-09-16-220853.png" alt="Department of Agriculture Logo" width={168} height={68}/>
+          </div>
+          <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
           </div>
-
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <DropdownMenu>
+          <div className="flex justify-end">
+             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="border-blue-500 border-2">
                   <Languages className="mr-1 h-3 w-3 md:mr-2 md:h-4 md:w-4" />
@@ -545,3 +570,5 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    

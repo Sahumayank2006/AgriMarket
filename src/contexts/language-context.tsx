@@ -3,7 +3,7 @@
 
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import type { Role } from '@/lib/types';
-import { Sprout, ShoppingBag, Warehouse, ShieldCheck, IndianRupee, Leaf } from 'lucide-react';
+import { Sprout, ShoppingBag, Warehouse, ShieldCheck, IndianRupee, Leaf, Users } from 'lucide-react';
 
 export const content = {
   en: {
@@ -31,6 +31,7 @@ export const content = {
       { icon: Warehouse, value: "150+", label: "Warehouses Connected" },
       { icon: Leaf, value: "5,000+ Tons", label: "Food Saved from Waste" },
       { icon: IndianRupee, value: "₹25 Cr+", label: "Value Created for Farmers" },
+      { icon: Users, value: "25,000+", label: "People Fed" },
     ],
     footerAbout: "About Us",
     footerCareers: "Careers",
@@ -72,6 +73,7 @@ export const content = {
       { icon: Warehouse, value: "150+", label: "गोदाम जुड़े" },
       { icon: Leaf, value: "5,000+ टन", label: "भोजन बर्बादी से बचाया" },
       { icon: IndianRupee, value: "₹25 करोड़+", label: "किसानों के लिए बनाया गया मूल्य" },
+      { icon: Users, value: "25,000+", label: "लोगों को खिलाया" },
     ],
     footerAbout: "हमारे बारे में",
     footerCareers: "करियर",
@@ -113,6 +115,7 @@ export const content = {
       { icon: Warehouse, value: "150+", label: "সংযুক্ত গুদাম" },
       { icon: Leaf, value: "5,000+ টন", label: "খাদ্য অপচয় থেকে বাঁচানো হয়েছে" },
       { icon: IndianRupee, value: "₹25 কোটি+", label: "কৃষকদের জন্য তৈরি मूल्य" },
+      { icon: Users, value: "25,000+", label: "মানুষকে খাওয়ানো হয়েছে" },
     ],
     footerAbout: "আমাদের সম্পর্কে",
     footerCareers: "কেরিয়ার",
@@ -154,6 +157,7 @@ export const content = {
       { icon: Warehouse, value: "150+", label: "అనుసంధానించబడిన గిడ్డంగులు" },
       { icon: Leaf, value: "5,000+ టన్నులు", label: "ఆహారం వృధా కాకుండా కాపాడబడింది" },
       { icon: IndianRupee, value: "₹25 కోట్లు+", label: "రైతుల కోసం సృష్టించబడిన విలువ" },
+      { icon: Users, value: "25,000+", label: "ప్రజలకు ఆహారం అందించబడింది" },
     ],
     footerAbout: "మా గురించి",
     footerCareers: "కెరీర్లు",
@@ -195,6 +199,7 @@ export const content = {
         { icon: Warehouse, value: "150+", label: "जोडलेली गोदामे" },
         { icon: Leaf, value: "5,000+ टन", label: "अन्न वाया जाण्यापासून वाचवले" },
         { icon: IndianRupee, value: "₹25 कोटी+", label: "शेतकऱ्यांसाठी निर्माण केलेले मूल्य" },
+        { icon: Users, value: "25,000+", label: "लोकांना जेवण दिले" },
     ],
     footerAbout: "आमच्याबद्दल",
     footerCareers: "करिअर",
@@ -236,6 +241,7 @@ export const content = {
         { icon: Warehouse, value: "150+", label: "இணைக்கப்பட்ட கிடங்குகள்" },
         { icon: Leaf, value: "5,000+ டன்கள்", label: "உணவு வீணாவதிலிருந்து சேமிக்கப்பட்டது" },
         { icon: IndianRupee, value: "₹25 கோடி+", label: "விவசாயிகளுக்காக உருவாக்கப்பட்ட மதிப்பு" },
+        { icon: Users, value: "25,000+", label: "மக்கள் உணவளிக்கப்பட்டது" },
     ],
     footerAbout: "எங்களைப் பற்றி",
     footerCareers: "வேலை வாய்ப்புகள்",

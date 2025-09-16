@@ -27,6 +27,7 @@ import {
   CircleDot,
   Cloud,
   Heart,
+  Wheat,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -303,39 +304,40 @@ export default function RoleSelectionPage() {
         </div>
         
         {/* Desktop Layout */}
-        <div className="hidden md:grid md:grid-cols-3 md:items-center md:h-24">
-        <div className="flex items-center gap-4 justify-start">
-          <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-          <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
-        </div>
-        <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
-        </div>
-        <div className="flex items-center gap-2 justify-end">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  <Languages className="mr-2 h-4 w-4" />
-                  {content[lang].langName}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
+        <div className="hidden md:flex items-center justify-between h-16">
+          <div className="flex items-center gap-4">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
+          </div>
+          <div className="flex-shrink-0">
+              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={72} height={72} />
+          </div>
+          <div className="flex items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    <Languages className="mr-2 h-4 w-4" />
+                    {content[lang].langName}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+          </div>
         </div>
       </div>
       <hr className="w-full border-t-8 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow wavy-border">
 
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
-                <div className="mb-6 text-foreground">
+                <div className="mb-6 text-foreground flex items-center gap-4">
+                    <Wheat className="h-12 w-12 text-primary" />
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         {pageContent.welcome}
                     </h1>

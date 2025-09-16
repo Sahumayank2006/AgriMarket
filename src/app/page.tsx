@@ -273,15 +273,15 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
-      <div className="w-full bg-white px-4 py-3">
+      <header className="w-full bg-white px-4 py-2">
         {/* Mobile Layout */}
         <div className="grid grid-cols-3 items-center md:hidden">
-          <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={70} height={28}/>
+          <div className="flex items-center gap-1 justify-start">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={60} height={24} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={52} height={21}/>
           </div>
           <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={50} height={50} />
           </div>
           <div className="flex justify-end">
             <DropdownMenu>
@@ -304,13 +304,13 @@ export default function RoleSelectionPage() {
         </div>
         
         {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-between h-16">
-          <div className="flex items-center gap-4">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={168} height={68}/>
+        <div className="hidden md:flex items-center justify-between h-14">
+          <div className="flex items-center gap-2">
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
+            <Image src="https://i.ibb.co/twpxgfHk/logoagriculture.png" alt="logoagriculture" width={120} height={48}/>
           </div>
           <div className="flex-shrink-0">
-              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={72} height={72} />
+              <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
           </div>
           <div className="flex items-center gap-2">
               <DropdownMenu>
@@ -331,16 +331,16 @@ export default function RoleSelectionPage() {
               </DropdownMenu>
           </div>
         </div>
-      </div>
+      </header>
       <hr className="w-full border-t-8 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow wavy-border">
 
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">
                 <div className="mb-6 text-foreground flex items-center gap-4">
-                    <Wheat className="h-12 w-12 text-primary" />
                     <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
                         {pageContent.welcome}
                     </h1>
+                     <Wheat className="h-12 w-12 text-yellow-500" />
                 </div>
                 <p className="max-w-3xl text-center text-xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-top-6 duration-1000">
                     {pageContent.tagline}
@@ -544,45 +544,8 @@ export default function RoleSelectionPage() {
             </div>
         </div>
 
-         <footer className="w-full bg-gray-900 text-white py-12 animate-in fade-in duration-1000 mt-20">
-            <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div className="md:col-span-1">
-                    <div className="flex items-center gap-2 mb-4">
-                        <Logo className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-semibold">eAaharSetu</span>
-                    </div>
-                    <p className="text-gray-400 text-sm">
-                        Reducing food waste, one crop at a time. A digital ecosystem for sustainable agriculture.
-                    </p>
-                </div>
-                <div>
-                    <h4 className="font-semibold mb-4">Company</h4>
-                    <ul className="space-y-2 text-sm text-gray-400">
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerAbout}</Link></li>
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerCareers}</Link></li>
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerPress}</Link></li>
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerContact}</Link></li>
-                    </ul>
-                </div>
-                 <div>
-                    <h4 className="font-semibold mb-4">{pageContent.footerLegal}</h4>
-                    <ul className="space-y-2 text-sm text-gray-400">
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerPrivacy}</Link></li>
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerTerms}</Link></li>
-                        <li><Link href="#" className="hover:text-white">{pageContent.footerCookie}</Link></li>
-                    </ul>
-                </div>
-                <div>
-                     <h4 className="font-semibold mb-4">{pageContent.footerFollow}</h4>
-                    <div className="flex space-x-4">
-                        <Link href="#" className="text-gray-400 hover:text-white"><Facebook className="h-6 w-6" /></Link>
-                        <Link href="#" className="text-gray-400 hover:text-white"><Twitter className="h-6 w-6" /></Link>
-                        <Link href="#" className="text-gray-400 hover:text-white"><Instagram className="h-6 w-6" /></Link>
-                        <Link href="#" className="text-gray-400 hover:text-white"><Linkedin className="h-6 w-6" /></Link>
-                    </div>
-                </div>
-            </div>
-            <div className="max-w-6xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+         <footer className="w-full bg-gray-900 text-white py-8 animate-in fade-in duration-1000 mt-20">
+            <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
                 <p>&copy; {new Date().getFullYear()} eAaharSetu. {pageContent.footerRights}</p>
             </div>
         </footer>
@@ -609,3 +572,4 @@ export default function RoleSelectionPage() {
     
 
     
+

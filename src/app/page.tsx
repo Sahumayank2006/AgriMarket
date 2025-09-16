@@ -331,7 +331,7 @@ export default function RoleSelectionPage() {
         </div>
         </div>
       </div>
-      <hr className="w-full border-t-4 border-primary" />
+      <hr className="w-full border-t-8 border-primary" />
         <div className="flex w-full flex-col items-center justify-center p-4 grow wavy-border">
 
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-16">

@@ -67,9 +67,9 @@ const formSchema = z.object({
 });
 
 const cropOptions = [
-    { id: "wheat", name: "Wheat", image: "https://i.ibb.co/6J4RJx2j/Generated-Image-September-16-2025-8-04-PM.png" },
-    { id: "mustard", name: "Mustard", image: "https://i.ibb.co/VvzFHd3/mustard.png" },
-    { id: "soybean", name: "Soybean", image: "https://i.ibb.co/Y0R9F2K/soyabean.png" },
+    { id: "rice", name: "Rice", image: "https://i.ibb.co/ Benson/rice.png", en_name: "Rice", hi_name: "चावल" },
+    { id: "wheat", name: "Wheat", image: "https://i.ibb.co/6J4RJx2j/Generated-Image-September-16-2025-8-04-PM.png", en_name: "Wheat", hi_name: "गेहूँ" },
+    { id: "maize", name: "Maize", image: "https://i.ibb.co/bX2gG0F/maize.png", en_name: "Maize", hi_name: "मक्का" },
 ];
 
 const pageContent = {
@@ -261,6 +261,10 @@ export default function BookSlotPage() {
                                 >
                                     <CardContent className="p-2 flex flex-col items-center justify-center gap-2">
                                         <Image src={crop.image} alt={crop.name} width={100} height={100} className="rounded-md object-cover h-24 w-24" />
+                                        <div className="text-center">
+                                            <p className="text-sm font-medium">{crop.en_name}</p>
+                                            <p className="text-sm font-light text-muted-foreground">{crop.hi_name}</p>
+                                        </div>
                                     </CardContent>
                                 </Card>
                             ))}

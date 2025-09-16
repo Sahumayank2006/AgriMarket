@@ -529,7 +529,7 @@ export default function RoleSelectionPage() {
                             <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                         </div>
                         <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.impactTitle}</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         {pageContent.impactStats.map((stat, index) => (
                             <Card key={index} className="p-6 text-center">
                                 <stat.icon className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -575,3 +575,4 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+

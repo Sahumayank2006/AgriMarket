@@ -67,7 +67,7 @@ const formSchema = z.object({
 });
 
 const cropOptions = [
-    { id: "wheat", name: "Wheat", image: "https://i.ibb.co/6r0jS0Z/wheat-1.png" },
+    { id: "wheat", name: "Wheat", image: "https://i.ibb.co/6J4RJx2j/Generated-Image-September-16-2025-8-04-PM.png" },
     { id: "mustard", name: "Mustard", image: "https://i.ibb.co/VvzFHd3/mustard.png" },
     { id: "soybean", name: "Soybean", image: "https://i.ibb.co/Y0R9F2K/soyabean.png" },
 ];
@@ -261,7 +261,6 @@ export default function BookSlotPage() {
                                 >
                                     <CardContent className="p-2 flex flex-col items-center justify-center gap-2">
                                         <Image src={crop.image} alt={crop.name} width={100} height={100} className="rounded-md object-cover h-24 w-24" />
-                                        <p className="font-medium text-center">{crop.name}</p>
                                     </CardContent>
                                 </Card>
                             ))}

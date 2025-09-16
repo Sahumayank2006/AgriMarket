@@ -277,7 +277,7 @@ export default function RoleSelectionPage() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
             <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-            <Image src="https://i.ibb.co/Rk31CNxx/images-1.jpg" alt="images-1" width={68} height={68}/>
+            <Image src="https://i.ibb.co/tRMVnGg/image.png" alt="Department of Agriculture Logo" width={68} height={68}/>
           </div>
           
           <div className="flex justify-center flex-grow">

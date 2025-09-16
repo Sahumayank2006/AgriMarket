@@ -524,19 +524,23 @@ export default function RoleSelectionPage() {
                         </div>
                     </div>
 
-                    <div className="mt-12 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+                    <div className="mt-12 w-full max-w-7xl text-center animate-in fade-in duration-1000">
                         <div className="mb-6">
                             <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
                         </div>
                         <h2 className="text-4xl font-bold text-foreground mb-8">{pageContent.impactTitle}</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        {pageContent.impactStats.map((stat, index) => (
-                            <Card key={index} className="p-6 text-center">
-                                <stat.icon className="h-12 w-12 text-primary mx-auto mb-4" />
-                                <p className="text-4xl font-bold">{stat.value}</p>
-                                <p className="text-muted-foreground mt-1">{stat.label}</p>
-                            </Card>
-                        ))}
+                        <div className="bg-[#EBF5FF] dark:bg-blue-900/20 py-8 px-4 rounded-2xl">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+                            {pageContent.impactStats.map((stat, index) => (
+                                <div key={index} className="flex flex-col items-center text-center">
+                                    <div className="bg-white rounded-full p-4 mb-4 shadow-md">
+                                        <stat.icon className="h-10 w-10 text-primary" />
+                                    </div>
+                                    <p className="text-3xl font-bold">{stat.value}</p>
+                                    <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
+                                </div>
+                            ))}
+                            </div>
                         </div>
                     </div>
 
@@ -575,4 +579,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-

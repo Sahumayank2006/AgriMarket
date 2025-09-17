@@ -276,7 +276,7 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4 py-1">
         <div className="grid grid-cols-3 items-center md:hidden h-16">
           <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={90} height={36} />
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
@@ -303,11 +303,11 @@ export default function RoleSelectionPage() {
         
         <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
           <div className="flex items-center gap-4">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={112} height={45} />
-            <Image src="https://i.ibb.co/rfzgVKgY/Screenshot-2025-09-16-220853.png" alt="Department of Agriculture Logo" width={168} height={68}/>
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={100} height={40} />
+            <Image src="https://i.ibb.co/rfzgVKgY/Screenshot-2025-09-16-220853.png" alt="Department of Agriculture Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={88} height={88} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={80} height={80} />
           </div>
           <div className="flex justify-end">
              <DropdownMenu>
@@ -404,9 +404,9 @@ export default function RoleSelectionPage() {
                   </span>
               </div>
               <div className="relative z-10 flex flex-col items-center justify-center">
-                  <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4">
-                      <span className="text-orange-500">#</span><span className="text-green-500">eAaharSetu</span>
-                  </span>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4 bg-gradient-to-r from-orange-500 via-white to-green-500 text-transparent bg-clip-text">
+                      #eAaharSetu
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4">
                       <div>
                           <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-green-600">

@@ -395,69 +395,8 @@ export default function GreenGuardianDashboard() {
               )}
             </CardContent>
           </Card>
-        </div>
 
-        {/* Right Column */}
-        <div className="space-y-6">
-          {/* 2. Live IoT Dashboard */}
-          <Card className="hover:shadow-md transition-shadow">
-            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-              <div className="space-y-1">
-                <CardTitle className="text-lg font-semibold text-gray-900">Live IoT Dashboard</CardTitle>
-                <CardDescription className="text-sm text-gray-600">
-                  Real-time Node-RED dashboard with live sensor feeds and controls
-                </CardDescription>
-              </div>
-              <Button variant="outline" size="sm" asChild>
-                <a href={nodeRedUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Open Full
-                </a>
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="relative">
-                <iframe
-                  key={iframeKey}
-                  src={nodeRedUrl}
-                  className="w-full h-[300px] border rounded-lg shadow-sm"
-                  title="Node-RED IoT Dashboard"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-top-navigation"
-                  scrolling="yes"
-                  style={{ zIndex: 5 }}
-                  onLoad={() => {
-                    // Immediately mark as loaded
-                    setIframeLoaded(true);
-                    setIframeError(null);
-                  }}
-                />
-                <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs font-medium shadow-sm ${iframeError ? "bg-gray-400" : "bg-green-500 text-white animate-pulse"}`}>
-                  {iframeError ? "OFFLINE" : "LIVE"}
-                </div>
-                {iframeError && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                    <div className="bg-red-50 border border-red-200 text-red-700 dark:bg-red-950/30 dark:border-red-900 dark:text-red-200 px-4 py-3 rounded-md text-sm max-w-md text-center">
-                      {iframeError}
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-3"
-                      onClick={() => {
-                        setIframeLoaded(false);
-                        setIframeError(null);
-                        setIframeKey((k) => k + 1);
-                      }}
-                    >
-                      <RefreshCw className="h-3 w-3 mr-2" /> Retry
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* 5. Stock Level Tracker */}
+           {/* 5. Stock Level Tracker */}
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-gray-900">Stock Level Tracker</CardTitle>
@@ -499,6 +438,67 @@ export default function GreenGuardianDashboard() {
                   <Bar dataKey="outgoing" fill="hsl(var(--chart-3))" name="Outgoing (kg)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right Column */}
+        <div className="space-y-6">
+          {/* 2. Live IoT Dashboard */}
+          <Card className="hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+              <div className="space-y-1">
+                <CardTitle className="text-lg font-semibold text-gray-900">Live IoT Dashboard</CardTitle>
+                <CardDescription className="text-sm text-gray-600">
+                  Real-time Node-RED dashboard with live sensor feeds and controls
+                </CardDescription>
+              </div>
+              <Button variant="outline" size="sm" asChild>
+                <a href={nodeRedUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Open Full
+                </a>
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                <iframe
+                  key={iframeKey}
+                  src={nodeRedUrl}
+                  className="w-full h-[600px] border rounded-lg shadow-sm"
+                  title="Node-RED IoT Dashboard"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-top-navigation"
+                  scrolling="yes"
+                  style={{ zIndex: 5 }}
+                  onLoad={() => {
+                    // Immediately mark as loaded
+                    setIframeLoaded(true);
+                    setIframeError(null);
+                  }}
+                />
+                <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs font-medium shadow-sm ${iframeError ? "bg-gray-400" : "bg-green-500 text-white animate-pulse"}`}>
+                  {iframeError ? "OFFLINE" : "LIVE"}
+                </div>
+                {iframeError && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                    <div className="bg-red-50 border border-red-200 text-red-700 dark:bg-red-950/30 dark:border-red-900 dark:text-red-200 px-4 py-3 rounded-md text-sm max-w-md text-center">
+                      {iframeError}
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mt-3"
+                      onClick={() => {
+                        setIframeLoaded(false);
+                        setIframeError(null);
+                        setIframeKey((k) => k + 1);
+                      }}
+                    >
+                      <RefreshCw className="h-3 w-3 mr-2" /> Retry
+                    </Button>
+                  </div>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>

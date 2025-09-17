@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import {
@@ -38,15 +39,15 @@ import {
 
 
 const inventoryData = [
-  { id: "CROP-001", name: "Organic Tomatoes", quantity: "120 kg", storage: "Cold Storage", spoilsIn: 3, harvestDate: "2024-07-28" },
-  { id: "CROP-002", name: "Red Apples", quantity: "300 kg", storage: "Warehouse A", spoilsIn: 8, harvestDate: "2024-07-23" },
-  { id: "CROP-003", name: "Sweet Corn", quantity: "500 kg", storage: "Farm Shed 2", spoilsIn: 2, harvestDate: "2024-07-29" },
-  { id: "CROP-004", name: "Potatoes", quantity: "1000 kg", storage: "Warehouse B", spoilsIn: 14, harvestDate: "2024-07-17" },
-  { id: "CROP-005", name: "Wheat", quantity: "5000 kg", storage: "Silo 1", spoilsIn: 90, harvestDate: "2024-06-01" },
+  { id: "CROP-001", name: "Wheat", quantity: "5000 kg", storage: "Silo 1", spoilsIn: 90, harvestDate: "2024-06-01" },
+  { id: "CROP-002", name: "Rice", quantity: "3000 kg", storage: "Warehouse A", spoilsIn: 120, harvestDate: "2024-05-15" },
+  { id: "CROP-003", name: "Maize", quantity: "4000 kg", storage: "Warehouse B", spoilsIn: 2, harvestDate: "2024-07-29" },
+  { id: "CROP-004", name: "Basmati Rice", quantity: "1000 kg", storage: "Warehouse A", spoilsIn: 150, harvestDate: "2024-05-20" },
+  { id: "CROP-005", name: "Durum Wheat", quantity: "2000 kg", storage: "Silo 2", spoilsIn: 80, harvestDate: "2024-06-10" },
 ];
 
 export function YourInventory() {
-    const cropsAtRisk = inventoryData.filter(item => item.spoilsIn <= 3);
+    const cropsAtRisk = inventoryData.filter(item => item.spoilsIn <= 7);
 
   return (
     <Card>
@@ -105,7 +106,7 @@ export function YourInventory() {
                 <TableCell>{item.storage}</TableCell>
                 <TableCell>{item.harvestDate}</TableCell>
                 <TableCell className="text-right">
-                    <Badge variant={item.spoilsIn <= 3 ? "destructive" : item.spoilsIn <=7 ? "secondary" : "outline"} className="text-sm">
+                    <Badge variant={item.spoilsIn <= 7 ? "destructive" : item.spoilsIn <=30 ? "secondary" : "outline"} className="text-sm">
                         {item.spoilsIn} days
                     </Badge>
                 </TableCell>

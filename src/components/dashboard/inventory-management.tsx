@@ -97,8 +97,8 @@ const dummyInventory: InventoryItem[] = [
   },
   {
     id: "INV003",
-    name: "Potatoes",
-    category: "Vegetables",
+    name: "Maize",
+    category: "Grains",
     quantity: 0,
     unit: "kg",
     status: "out-of-stock",
@@ -109,11 +109,11 @@ const dummyInventory: InventoryItem[] = [
   },
   {
     id: "INV004",
-    name: "Apples",
-    category: "Fruits",
+    name: "Basmati Rice",
+    category: "Grains",
     quantity: 750,
     unit: "kg",
-    status: "expiring-soon",
+    status: "in-stock",
     lastUpdated: "2025-09-13",
     expiryDate: "2025-09-20",
     location: "Section C1",
@@ -121,14 +121,14 @@ const dummyInventory: InventoryItem[] = [
   }
 ];
 
-const categories = ["All", "Grains", "Vegetables", "Fruits", "Dairy", "Spices"];
+const categories = ["All", "Grains"];
 
 const getStatusBadge = (status: string) => {
   switch (status) {
     case "in-stock":
       return <Badge className="bg-green-500"><PackageCheck className="w-3 h-3 mr-1" />In Stock</Badge>;
     case "low-stock":
-      return <Badge variant="warning"><AlertTriangle className="w-3 h-3 mr-1" />Low Stock</Badge>;
+      return <Badge variant="destructive" className="bg-amber-500"><AlertTriangle className="w-3 h-3 mr-1" />Low Stock</Badge>;
     case "out-of-stock":
       return <Badge variant="destructive"><PackageX className="w-3 h-3 mr-1" />Out of Stock</Badge>;
     case "expiring-soon":

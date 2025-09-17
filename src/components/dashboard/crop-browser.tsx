@@ -32,75 +32,39 @@ import { Badge } from "../ui/badge";
 const mockCrops = [
   {
     id: 1,
-    name: "Organic Tomatoes",
+    name: "Wheat",
     farmer: "Green Valley Farms",
     location: "Nashik, Maharashtra",
-    price: 120,
-    quantity: 120,
-    expiry: "3 days",
-    image: "https://picsum.photos/seed/tomatoes/400/300",
-    dataAiHint: "tomatoes",
-    type: "vegetable"
+    price: 2100,
+    quantity: 5000,
+    expiry: "90 days",
+    image: "https://i.ibb.co/hx5gjmcZ/Copilot-20250916-195707.png",
+    dataAiHint: "wheat field",
+    type: "grain"
   },
   {
     id: 2,
-    name: "Sweet Corn",
+    name: "Rice",
     farmer: "Sunrise Agriculture",
     location: "Pune, Maharashtra",
-    price: 60,
-    quantity: 500,
-    expiry: "5 days",
-    image: "https://picsum.photos/seed/corn/400/300",
-    dataAiHint: "corn field",
-    type: "vegetable"
+    price: 2400,
+    quantity: 3000,
+    expiry: "120 days",
+    image: "https://i.ibb.co/mCcRCBWN/Copilot-20250916-202230.png",
+    dataAiHint: "rice paddy",
+    type: "grain"
   },
   {
     id: 3,
-    name: "Red Apples",
-    farmer: "Orchard Fresh",
-    location: "Nashik, Maharashtra",
-    price: 180,
-    quantity: 300,
-    expiry: "10 days",
-    image: "https://picsum.photos/seed/apples/400/300",
-    dataAiHint: "apples",
-    type: "fruit"
-  },
-  {
-    id: 4,
-    name: "Potatoes",
-    farmer: "Green Valley Farms",
-    location: "Pune, Maharashtra",
-    price: 40,
-    quantity: 1000,
-    expiry: "14 days",
-    image: "https://picsum.photos/seed/potatoes/400/300",
-    dataAiHint: "potatoes",
-    type: "vegetable"
-  },
-  {
-    id: 5,
-    name: "Organic Carrots",
-    farmer: "Sunrise Agriculture",
-    location: "Nagpur, Maharashtra",
-    price: 90,
-    quantity: 250,
-    expiry: "7 days",
-    image: "https://picsum.photos/seed/carrots/400/300",
-    dataAiHint: "carrots",
-    type: "vegetable"
-  },
-  {
-    id: 6,
-    name: "Oranges",
+    name: "Maize",
     farmer: "Orchard Fresh",
     location: "Nagpur, Maharashtra",
-    price: 250,
-    quantity: 80,
-    expiry: "6 days",
-    image: "https://picsum.photos/seed/oranges/400/300",
-    dataAiHint: "oranges",
-    type: "fruit"
+    price: 1800,
+    quantity: 4000,
+    expiry: "100 days",
+    image: "https://i.ibb.co/bX2gG0F/maize.png",
+    dataAiHint: "maize corn",
+    type: "grain"
   },
 ];
 
@@ -151,9 +115,9 @@ export function CropBrowser() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Any time</SelectItem>
-              <SelectItem value="3">3 days</SelectItem>
-              <SelectItem value="7">7 days</SelectItem>
-              <SelectItem value="14">14 days</SelectItem>
+              <SelectItem value="30">30 days</SelectItem>
+              <SelectItem value="90">90 days</SelectItem>
+              <SelectItem value="120">120 days</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" className="w-full md:w-auto">
@@ -195,7 +159,7 @@ export function CropBrowser() {
                 <div className="text-lg font-bold text-primary">
                   ₹{crop.price.toFixed(2)}
                   <span className="text-sm font-normal text-muted-foreground">
-                    /kg
+                    /quintal
                   </span>
                 </div>
                 <Button>

@@ -69,6 +69,7 @@ export const STORAGE_CONDITIONS = {
     humidity: { min: 35, max: 60 },
     baseShelfLife: 180 // days in optimal conditions
   },
+  // Kept for type safety but not used in new mock data
   VEGETABLES: {
     temperature: { min: 4, max: 10 },
     humidity: { min: 80, max: 95 },
@@ -382,32 +383,6 @@ export const SAMPLE_STORAGE_ITEMS: StorageItem[] = [
     }
   },
   {
-    id: 'veg-001',
-    name: 'Potatoes',
-    category: 'VEGETABLES',
-    quantity: 2000,
-    unit: 'kg',
-    storageDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
-    expiryDate: new Date(Date.now() + 9 * 24 * 60 * 60 * 1000).toISOString(), // 9 days from now
-    optimalConditions: {
-      temperature: { min: 4, max: 10 },
-      humidity: { min: 80, max: 95 }
-    }
-  },
-  {
-    id: 'fruit-001',
-    name: 'Apples',
-    category: 'FRUITS',
-    quantity: 1500,
-    unit: 'kg',
-    storageDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days ago
-    expiryDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // 14 days from now
-    optimalConditions: {
-      temperature: { min: 7, max: 12 },
-      humidity: { min: 85, max: 95 }
-    }
-  },
-  {
     id: 'grain-002',
     name: 'Rice',
     category: 'GRAINS',
@@ -418,6 +393,19 @@ export const SAMPLE_STORAGE_ITEMS: StorageItem[] = [
     optimalConditions: {
       temperature: { min: 10, max: 25 },
       humidity: { min: 35, max: 60 }
+    }
+  },
+  {
+    id: 'grain-003',
+    name: 'Maize',
+    category: 'GRAINS',
+    quantity: 4000,
+    unit: 'kg',
+    storageDate: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days ago
+    expiryDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString(), // 120 days from now
+    optimalConditions: {
+      temperature: { min: 10, max: 25 },
+      humidity: { min: 40, max: 65 }
     }
   }
 ];

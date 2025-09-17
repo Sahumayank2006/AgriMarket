@@ -42,41 +42,41 @@ const orders = [
     id: "ORD-001",
     customer: "Green Valley Farms",
     date: "2024-08-01",
-    total: "₹25,000",
+    total: "₹2,50,000",
     status: "Processing",
-    items: "50kg Tomatoes, 20kg Potatoes",
+    items: "500kg Wheat, 200kg Rice",
   },
   {
     id: "ORD-002",
     customer: "Sunrise Agriculture",
     date: "2024-07-30",
-    total: "₹42,000",
+    total: "₹4,20,000",
     status: "Shipped",
-    items: "100kg Sweet Corn",
+    items: "1000kg Maize",
   },
   {
     id: "ORD-003",
     customer: "Orchard Fresh",
     date: "2024-07-28",
-    total: "₹18,000",
+    total: "₹1,80,000",
     status: "Delivered",
-    items: "100kg Red Apples",
+    items: "1000kg Rice",
   },
   {
     id: "ORD-004",
     customer: "Green Valley Farms",
     date: "2024-07-25",
-    total: "₹8,500",
+    total: "₹85,000",
     status: "Cancelled",
-    items: "200kg Onions",
+    items: "2000kg Wheat",
   },
    {
     id: "ORD-005",
-    customer: "Nagpur Greens",
+    customer: "Nagpur Grains",
     date: "2024-08-02",
-    total: "₹12,500",
+    total: "₹1,25,000",
     status: "Pending",
-    items: "150kg Oranges",
+    items: "1500kg Maize",
   },
 ];
 
@@ -186,4 +186,3 @@ export function DealerOrders() {
     </Card>
   );
 }
-

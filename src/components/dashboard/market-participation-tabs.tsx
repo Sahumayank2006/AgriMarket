@@ -41,57 +41,57 @@ import Link from "next/link";
 const dealerBids = [
   {
     id: "bid-01",
-    dealerName: "Fresh Produce Inc.",
-    crop: "Organic Tomatoes",
+    dealerName: "Grain Traders Inc.",
+    crop: "Wheat",
     quantity: 500,
-    offerPrice: 125,
+    offerPrice: 2150,
     location: "Pune, Maharashtra",
     dealerImage: "https://picsum.photos/seed/logo1/80/80",
-    dataAiHint: "vegetable stall"
-  },
-  {
-    id: "bid-02",
-    dealerName: "Agro Traders",
-    crop: "Red Apples",
-    quantity: 1000,
-    offerPrice: 170,
-    location: "Nashik, Maharashtra",
-    dealerImage: "https://picsum.photos/seed/logo2/80/80",
     dataAiHint: "grain market"
   },
   {
+    id: "bid-02",
+    dealerName: "Agro Connect",
+    crop: "Rice",
+    quantity: 1000,
+    offerPrice: 2350,
+    location: "Nashik, Maharashtra",
+    dealerImage: "https://picsum.photos/seed/logo2/80/80",
+    dataAiHint: "farm logo"
+  },
+  {
     id: "bid-03",
-    dealerName: "Nagpur Greens",
-    crop: "Potatoes",
+    dealerName: "Nagpur Grains",
+    crop: "Maize",
     quantity: 2000,
-    offerPrice: 38,
+    offerPrice: 1750,
     location: "Nagpur, Maharashtra",
     dealerImage: "https://picsum.photos/seed/logo3/80/80",
-    dataAiHint: "farm logo"
+    dataAiHint: "corn field"
   },
    {
     id: "bid-04",
-    dealerName: "Corn Connect",
-    crop: "Sweet Corn",
+    dealerName: "Harvest Hub",
+    crop: "Wheat",
     quantity: 800,
-    offerPrice: 65,
+    offerPrice: 2180,
     location: "Pune, Maharashtra",
     dealerImage: "https://picsum.photos/seed/logo4/80/80",
-    dataAiHint: "corn logo"
+    dataAiHint: "wheat logo"
   },
 ];
 
 const myListings = [
-    { id: "list-01", crop: "Oranges", quantity: 80, price: 250, status: "active", bids: 3 },
-    { id: "list-02", crop: "Organic Carrots", quantity: 250, price: 90, status: "active", bids: 5 },
-    { id: "list-03", crop: "Wheat", quantity: 5000, price: 2100, status: "pending", bids: 0 },
+    { id: "list-01", crop: "Wheat", quantity: 5000, price: 2100, status: "active", bids: 3 },
+    { id: "list-02", crop: "Rice", quantity: 3000, price: 2400, status: "active", bids: 5 },
+    { id: "list-03", crop: "Maize", quantity: 4000, price: 1800, status: "pending", bids: 0 },
 ];
 
 const salesHistory = [
-    { id: "sale-01", crop: "Organic Tomatoes", quantity: 120, price: 120, dealer: "Green Valley Farms", date: "2024-07-15", status: "Completed" },
-    { id: "sale-02", crop: "Red Apples", quantity: 300, price: 180, dealer: "Orchard Fresh", date: "2024-07-10", status: "Completed" },
-    { id: "sale-03", crop: "Sweet Corn", quantity: 500, price: 60, dealer: "Sunrise Agriculture", date: "2024-07-05", status: "Paid" },
-    { id: "sale-04", crop: "Potatoes", quantity: 100, price: 40, dealer: "Green Valley Farms", date: "2024-06-28", status: "In Transit" },
+    { id: "sale-01", crop: "Wheat", quantity: 1200, price: 2100, dealer: "Green Valley Farms", date: "2024-07-15", status: "Completed" },
+    { id: "sale-02", crop: "Rice", quantity: 800, price: 2350, dealer: "Orchard Fresh", date: "2024-07-10", status: "Completed" },
+    { id: "sale-03", crop: "Maize", quantity: 2500, price: 1750, dealer: "Sunrise Agriculture", date: "2024-07-05", status: "Paid" },
+    { id: "sale-04", crop: "Wheat", quantity: 1000, price: 2120, dealer: "Green Valley Farms", date: "2024-06-28", status: "In Transit" },
 ];
 
 function BrowseBids() {
@@ -148,7 +148,7 @@ function BrowseBids() {
                 </div>
                  <div>
                     <p className="text-xs text-muted-foreground">Offer Price</p>
-                    <p className="font-medium text-primary">₹{bid.offerPrice}/kg</p>
+                    <p className="font-medium text-primary">₹{bid.offerPrice}/quintal</p>
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@ function ManageListings() {
                             <TableRow key={listing.id}>
                                 <TableCell className="font-medium">{listing.crop}</TableCell>
                                 <TableCell>{listing.quantity} kg</TableCell>
-                                <TableCell>₹{listing.price}/kg</TableCell>
+                                <TableCell>₹{listing.price}/quintal</TableCell>
                                 <TableCell>
                                     <Badge variant="secondary">{listing.bids} new bids</Badge>
                                 </TableCell>

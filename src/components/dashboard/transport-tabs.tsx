@@ -29,14 +29,14 @@ import { Badge } from "@/components/ui/badge";
 import { RequestTransportForm } from "./request-transport-form";
 
 const transportRequests = [
-    { id: "TR-001", crop: "Tomatoes", status: "En Route", vehicle: "MH12-3456", eta: "2 hours" },
-    { id: "TR-002", crop: "Potatoes", status: "Accepted", vehicle: "KA05-7890", eta: "Tomorrow, 10 AM" },
-    { id: "TR-003", crop: "Wheat", status: "Pending", vehicle: "N/A", eta: "N/A" },
+    { id: "TR-001", crop: "Wheat", status: "En Route", vehicle: "MH12-3456", eta: "2 hours" },
+    { id: "TR-002", crop: "Rice", status: "Accepted", vehicle: "KA05-7890", eta: "Tomorrow, 10 AM" },
+    { id: "TR-003", crop: "Maize", status: "Pending", vehicle: "N/A", eta: "N/A" },
 ];
 
 const transportHistory = [
-    { id: "TR-H01", crop: "Onions", date: "2024-07-18", cost: 3500, status: "Completed" },
-    { id: "TR-H02", crop: "Apples", date: "2024-07-15", cost: 5200, status: "Completed" },
+    { id: "TR-H01", crop: "Wheat", date: "2024-07-18", cost: 3500, status: "Completed" },
+    { id: "TR-H02", crop: "Rice", date: "2024-07-15", cost: 5200, status: "Completed" },
 ];
 
 function ManageRequests() {

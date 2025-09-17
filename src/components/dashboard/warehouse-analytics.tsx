@@ -67,10 +67,7 @@ const temperatureTrends = [
 
 // Mock data for stock analytics
 const stockData = [
-  { category: "Vegetables", current: 4200, capacity: 5000, turnover: 85, wastage: 3.2 },
-  { category: "Fruits", current: 3800, capacity: 4500, turnover: 92, wastage: 5.1 },
-  { category: "Grains", current: 2100, capacity: 3000, turnover: 76, wastage: 1.8 },
-  { category: "Dairy", current: 1950, capacity: 2500, turnover: 88, wastage: 2.4 },
+  { category: "Grains", current: 9100, capacity: 12500, turnover: 85, wastage: 1.8 },
 ];
 
 // Mock data for monthly trends
@@ -85,7 +82,7 @@ const monthlyTrends = [
 
 // Mock data for efficiency metrics
 const efficiencyData = [
-  { name: "Storage Utilization", value: 84 },
+  { name: "Storage Utilization", value: 73 },
   { name: "Temperature Control", value: 92 },
   { name: "Humidity Control", value: 88 },
   { name: "Stock Turnover", value: 76 },
@@ -271,7 +268,7 @@ export function WarehouseAnalytics() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Optimal (20-25°C)</span>
+                    <span className="text-sm">Optimal (10-25°C)</span>
                     <div className="flex items-center gap-2">
                       <Progress value={78} className="w-24" />
                       <span className="text-sm font-medium">78%</span>
@@ -285,7 +282,7 @@ export function WarehouseAnalytics() {
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Below Optimal ({"<"}20°C)</span>
+                    <span className="text-sm">Below Optimal ({"<"}10°C)</span>
                     <div className="flex items-center gap-2">
                       <Progress value={7} className="w-24" />
                       <span className="text-sm font-medium">7%</span>
@@ -313,9 +310,9 @@ export function WarehouseAnalytics() {
           <div className="grid gap-6 lg:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Stock Levels by Category</CardTitle>
+                <CardTitle>Stock Levels</CardTitle>
                 <CardDescription>
-                  Current stock vs capacity across categories
+                  Current stock vs capacity for grains
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -337,7 +334,7 @@ export function WarehouseAnalytics() {
               <CardHeader>
                 <CardTitle>Stock Performance Metrics</CardTitle>
                 <CardDescription>
-                  Turnover rates and wastage by category
+                  Turnover rates and wastage for grains
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -466,9 +463,9 @@ export function WarehouseAnalytics() {
                   <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg">
                     <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5" />
                     <div>
-                      <div className="font-medium text-amber-900">Fruit Wastage High</div>
+                      <div className="font-medium text-amber-900">Grains Wastage Low</div>
                       <div className="text-sm text-amber-700">
-                        5.1% wastage rate suggests need for faster turnover
+                        1.8% wastage rate is well within acceptable limits.
                       </div>
                     </div>
                   </div>
@@ -476,9 +473,9 @@ export function WarehouseAnalytics() {
                   <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
                     <Activity className="h-5 w-5 text-blue-600 mt-0.5" />
                     <div>
-                      <div className="font-medium text-blue-900">Storage Utilization Good</div>
+                      <div className="font-medium text-blue-900">Storage Utilization Moderate</div>
                       <div className="text-sm text-blue-700">
-                        84% utilization with room for 16% more capacity
+                        73% utilization with room for 27% more capacity
                       </div>
                     </div>
                   </div>

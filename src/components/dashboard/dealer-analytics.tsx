@@ -13,11 +13,11 @@ import { Badge } from "../ui/badge";
 
 
 const topProducts = [
-    { id: 1, name: "Organic Tomatoes", sold: 1200, revenue: 144000 },
-    { id: 2, name: "Red Apples", sold: 800, revenue: 136000 },
-    { id: 3, name: "Sweet Corn", sold: 2500, revenue: 162500 },
-    { id: 4, name: "Potatoes", sold: 5000, revenue: 200000 },
-    { id: 5, name: "Oranges", sold: 600, revenue: 150000 },
+    { id: 1, name: "Wheat", sold: 5000, revenue: 10500000 },
+    { id: 2, name: "Rice", sold: 3000, revenue: 7200000 },
+    { id: 3, name: "Maize", sold: 4000, revenue: 7200000 },
+    { id: 4, name: "Basmati Rice", sold: 1500, revenue: 12750000 },
+    { id: 5, name: "Durum Wheat", sold: 2500, revenue: 5500000 },
 ]
 
 export function DealerAnalytics() {

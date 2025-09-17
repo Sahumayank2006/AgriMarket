@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Link from "next/link";
@@ -177,7 +178,7 @@ interface GuidelineCardProps {
 
 function GuidelineCard({ title, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
   return (
-    <Card className="overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg">
+    <Card className="rounded-lg overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg bg-white/10 border-white/20">
       <a href={downloadUrl} download>
         <CardContent className="p-0 relative">
           <Image src={imageUrl} alt={title} width={250} height={150} className="w-full h-auto object-cover" />
@@ -188,10 +189,10 @@ function GuidelineCard({ title, year, size, imageUrl, downloadUrl }: GuidelineCa
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="p-3 bg-white dark:bg-card">
+        <CardFooter className="p-3 bg-white/20 backdrop-blur-sm">
           <div>
-            <p className="font-semibold text-sm">{title}</p>
-            <p className="text-xs text-muted-foreground">{year}</p>
+            <p className="font-semibold text-sm text-white">{title}</p>
+            <p className="text-xs text-gray-300">{year}</p>
           </div>
         </CardFooter>
       </a>
@@ -554,9 +555,9 @@ export default function RoleSelectionPage() {
           </div>
         </main>
         
-        <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-12">
+        <section className="w-full bg-blue-950 text-white py-12">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-foreground mb-6 text-center">{pageContent.guidelinesTitle}</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">{pageContent.guidelinesTitle}</h2>
                 <Carousel
                     opts={{
                         align: "start",

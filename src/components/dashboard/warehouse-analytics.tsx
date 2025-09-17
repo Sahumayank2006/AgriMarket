@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo } from "react";
@@ -67,7 +68,9 @@ const temperatureTrends = [
 
 // Mock data for stock analytics
 const stockData = [
-  { category: "Grains", current: 9100, capacity: 12500, turnover: 85, wastage: 1.8 },
+  { category: "Rice", current: 3000, capacity: 4000, turnover: 90, wastage: 1.2 },
+  { category: "Wheat", current: 4000, capacity: 5000, turnover: 85, wastage: 1.8 },
+  { category: "Maize", current: 2100, capacity: 3500, turnover: 88, wastage: 1.5 },
 ];
 
 // Mock data for monthly trends

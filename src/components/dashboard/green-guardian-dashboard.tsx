@@ -34,10 +34,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 // Removed dummy sensor data - now using real data from hook
 
 const stockData = [
-    { name: "Vegetables", in_stock: 4000, incoming: 2400, outgoing: 2400 },
-    { name: "Fruits", in_stock: 3000, incoming: 1398, outgoing: 2210 },
-    { name: "Grains", in_stock: 2000, incoming: 9800, outgoing: 2290 },
-    { name: "Dairy", in_stock: 2780, incoming: 3908, outgoing: 2000 },
+    { name: "Rice", in_stock: 3000, incoming: 1398, outgoing: 2210 },
+    { name: "Wheat", in_stock: 4000, incoming: 2400, outgoing: 2400 },
+    { name: "Maize", in_stock: 2000, incoming: 9800, outgoing: 2290 },
 ];
 
 
@@ -202,7 +201,7 @@ export default function GreenGuardianDashboard() {
   };
 
   return (
-    <div className="space-y-6 p-4 max-w-full overflow-hidden">
+    <div className="space-y-6 max-w-full overflow-hidden">
       {/* Error Alert */}
       {error && (
         <Alert variant="destructive">
@@ -233,8 +232,8 @@ export default function GreenGuardianDashboard() {
             <Package className="h-5 w-5 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">11,780 kg</div>
-            <p className="text-sm text-gray-500">Across 4 categories</p>
+            <div className="text-2xl font-bold text-gray-900">9,000 kg</div>
+            <p className="text-sm text-gray-500">Across 3 categories</p>
           </CardContent>
         </Card>
         

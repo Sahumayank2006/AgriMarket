@@ -148,7 +148,7 @@ interface PerformerCardProps {
 
 function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: PerformerCardProps) {
   return (
-    <Card className="relative group bg-blue-100 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
+    <Card className="relative group bg-sky-100/50 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
         <Users className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-24 text-blue-200/50 dark:text-blue-800/50" />
         <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
         <Avatar className="h-20 w-20 border-4 border-white dark:border-blue-900/50 ring-2 ring-blue-200 dark:ring-blue-700 mb-3">
@@ -531,29 +531,33 @@ export default function RoleSelectionPage() {
               </div>
             </div>
           </div>
-          <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12">
-              <div className="container mx-auto px-4">
-                  <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
-                  <Carousel
-                      opts={{
-                          align: "start",
-                          loop: false,
-                      }}
-                      className="w-full"
-                  >
-                      <CarouselContent className="-ml-4">
-                          {guidelines.map((guideline, index) => (
-                              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
-                                  <GuidelineCard {...guideline} />
-                              </CarouselItem>
-                          ))}
-                      </CarouselContent>
-                      <CarouselPrevious className="left-[-10px]" />
-                      <CarouselNext className="right-[-10px]" />
-                  </Carousel>
-              </div>
-          </section>
+        </main>
+        
+        <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12">
+            <div className="container mx-auto px-4">
+                <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
+                <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
+                <Carousel
+                    opts={{
+                        align: "start",
+                        loop: false,
+                    }}
+                    className="w-full"
+                >
+                    <CarouselContent className="-ml-4">
+                        {guidelines.map((guideline, index) => (
+                            <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
+                                <GuidelineCard {...guideline} />
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-[-10px]" />
+                    <CarouselNext className="right-[-10px]" />
+                </Carousel>
+            </div>
+        </section>
+
+        <div className="w-full wavy-border">
           <div className="w-full max-w-6xl mx-auto px-4">
             <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
               <div className="max-w-6xl mx-auto px-4">
@@ -592,7 +596,7 @@ export default function RoleSelectionPage() {
               </div>
             </div>
           </div>
-        </main>
+        </div>
 
          <footer className="w-full bg-gray-900 text-white py-8">
             <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
@@ -602,8 +606,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    
-    
-
-    

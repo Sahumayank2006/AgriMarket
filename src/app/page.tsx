@@ -28,6 +28,7 @@ import {
   Heart,
   Wheat,
   Users,
+  Star,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -145,28 +146,24 @@ interface PerformerCardProps {
   avatarUrl: string;
 }
 
-function PerformerCard({ name, role, location, achievement, rupeesSaved, avatarUrl }: PerformerCardProps) {
+function PerformerCard({ name, role, location, rupeesSaved, avatarUrl }: PerformerCardProps) {
   return (
-    <div className="group bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1 h-28">
-      <div className="flex-shrink-0">
-        <Avatar className="h-16 w-16 border-4 border-gray-200 dark:border-gray-600 group-hover:border-primary/30 transition-all duration-300">
+    <Card className="relative group bg-blue-100 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
+        <Users className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-24 text-blue-200/50 dark:text-blue-800/50" />
+        <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
+        <Avatar className="h-20 w-20 border-4 border-white dark:border-blue-900/50 ring-2 ring-blue-200 dark:ring-blue-700 mb-3">
           <AvatarImage src={avatarUrl} alt={name} />
-          <AvatarFallback className="bg-gray-100 text-gray-600 font-light text-lg">{name.charAt(0)}</AvatarFallback>
+          <AvatarFallback className="bg-blue-200 text-blue-800 font-medium text-lg">{name.charAt(0)}</AvatarFallback>
         </Avatar>
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="font-light text-lg text-foreground mb-1 truncate">{name}</div>
-        <div className="text-sm text-muted-foreground mb-1 truncate font-light">{role} • {location}</div>
-        <div className="text-sm text-gray-600 font-light truncate">{achievement}</div>
-        <div className="text-xs text-gray-500 font-light mt-1">Saved: {rupeesSaved}</div>
-      </div>
-      <div className="flex flex-col items-center gap-1 flex-shrink-0">
-        <div className="bg-gray-100 dark:bg-gray-700/50 p-2 rounded-full">
-          <Award className="h-5 w-5 text-gray-500" />
+        <div className="font-bold text-lg text-blue-900 dark:text-blue-100">{name}</div>
+        <div className="text-sm text-blue-800 dark:text-blue-200 font-light">{role}</div>
+        <div className="text-xs text-blue-600 dark:text-blue-300 font-light mb-4">{location}</div>
+
+        <div className="mt-auto bg-white/70 dark:bg-blue-900/50 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-sm text-blue-900 dark:text-blue-100 font-medium shadow-sm">
+            <Star className="h-4 w-4 text-yellow-500 fill-current" />
+            <span>{rupeesSaved} Saved</span>
         </div>
-        <span className="text-xs font-light text-muted-foreground">Top</span>
-      </div>
-    </div>
+    </Card>
   );
 }
 export default function RoleSelectionPage() {
@@ -180,7 +177,7 @@ export default function RoleSelectionPage() {
       location: "Maharashtra Region",
       achievement: "1.2 tons of food wastage saved",
       rupeesSaved: "₹2,40,000",
-      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      avatarUrl: "https://i.pravatar.cc/150?u=vijay"
     },
     {
       name: "Meera Patel", 
@@ -188,7 +185,7 @@ export default function RoleSelectionPage() {
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
       rupeesSaved: "₹1,85,000",
-      avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+      avatarUrl: "https://i.pravatar.cc/150?u=meera"
     },
     {
       name: "Rohan Gupta",
@@ -204,7 +201,7 @@ export default function RoleSelectionPage() {
       location: "Nagpur Hub", 
       achievement: "99.8% quality rating",
       rupeesSaved: "₹1,65,000",
-      avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      avatarUrl: "https://i.pravatar.cc/150?u=aisha"
     },
     {
       name: "Suresh Singh",
@@ -212,7 +209,7 @@ export default function RoleSelectionPage() {
       location: "Aurangabad",
       achievement: "50+ tons of surplus moved",
       rupeesSaved: "₹4,50,000",
-      avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+      avatarUrl: "https://i.pravatar.cc/150?u=suresh"
     },
     {
         name: "Priya Rao",
@@ -220,7 +217,7 @@ export default function RoleSelectionPage() {
         location: "Satara", 
         achievement: "30% reduction in food waste",
         rupeesSaved: "₹2,75,000",
-        avatarUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
+        avatarUrl: "https://i.pravatar.cc/150?u=priya"
     },
     {
         name: "Amit Deshmukh",
@@ -228,7 +225,7 @@ export default function RoleSelectionPage() {
         location: "Mumbai Port",
         achievement: "On-time delivery rate 98%",
         rupeesSaved: "₹1,95,000",
-        avatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face"
+        avatarUrl: "https://i.pravatar.cc/150?u=amit"
     }
   ];
 
@@ -273,13 +270,13 @@ export default function RoleSelectionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
-      <header className="w-full bg-white px-4 py-1">
-        <div className="grid grid-cols-3 items-center md:hidden h-16">
+      <header className="w-full bg-white px-4">
+        <div className="grid grid-cols-3 items-center md:hidden h-14">
           <div className="flex items-center gap-2 justify-start">
             <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
           </div>
           <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={55} height={55} />
           </div>
           <div className="flex justify-end">
             <DropdownMenu>
@@ -307,7 +304,7 @@ export default function RoleSelectionPage() {
             <Image src="https://i.ibb.co/rfzgVKgY/Screenshot-2025-09-16-220853.png" alt="Department of Agriculture Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">
-            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={80} height={80} />
+            <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={70} height={70} />
           </div>
           <div className="flex justify-end">
              <DropdownMenu>
@@ -440,28 +437,28 @@ export default function RoleSelectionPage() {
             </div>
           </div>
           
-          <div className="w-full max-w-5xl mx-auto px-4">
+          <div className="w-full max-w-6xl mx-auto px-4">
             <div className="mt-12 w-full text-left animate-in fade-in duration-1000">
-              <div className="mb-6 max-w-5xl mx-auto">
+              <div className="mb-6 max-w-6xl mx-auto">
                 <hr className="w-1/4 border-t-2 border-primary/20" />
               </div>
 
-              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-5xl mx-auto">{pageContent.topPerformers}</h2>
+              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{pageContent.topPerformers}</h2>
               <div className="relative w-full">
                 <Carousel
                   setApi={setPerformerApi}
                   opts={{
                   align: "start",
                   loop: false,
-                  slidesToScroll: 1,
+                  slidesToScroll: "auto",
                   }}
                   className="w-full"
                 >
-                  <CarouselContent className="flex ml-4">
+                  <CarouselContent className="-ml-4">
                     {topPerformers.map((performer, index) => (
                       <CarouselItem
                         key={index}
-                        className="mr-4 md:basis-[32%] lg:basis-[32%] flex-shrink-0"
+                        className="pl-4 md:basis-1/2 lg:basis-1/3"
                       >
                         <div className="h-full">
                           <PerformerCard {...performer} />
@@ -469,7 +466,6 @@ export default function RoleSelectionPage() {
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  {/* Navigation arrows positioned in the center */}
                   <div className="flex justify-center items-center mt-8 gap-4 w-full">
                     <CarouselPrevious className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
                     <CarouselNext className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
@@ -478,7 +474,7 @@ export default function RoleSelectionPage() {
               </div>
             </div>
 
-            <div className="mt-12 w-full max-w-5xl text-center animate-in fade-in duration-1000">
+            <div className="mt-12 w-full max-w-5xl text-center animate-in fade-in duration-1000 mx-auto">
               <div className="mb-6">
                 <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
               </div>
@@ -536,24 +532,20 @@ export default function RoleSelectionPage() {
               </div>
             </div>
 
-            <div className="my-12 w-full max-w-5xl text-center">
+            <div className="my-12 w-full max-w-5xl text-center mx-auto">
               <div className="flex justify-around items-center gap-8 flex-wrap">
-                {/* SSL Encryption */}
                 <div className="flex flex-col items-center space-y-2">
                   <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
                 </div>
                 
-                {/* ABDM Compliant */}
                 <div className="flex flex-col items-center space-y-2">
                   <Image src="https://i.ibb.co/6JLL2CHR/Copilot-20250911-211324.png" alt="ABDM compliant" width={163} height={163} />
                 </div>
                 
-                {/* Ministry of Health and Family Welfare */}
                 <div className="flex flex-col items-center space-y-2">
                   <Image src="https://i.ibb.co/GvMq7x8r/Copilot-20250911-211848.png" alt="MoHFW Guidelines" width={163} height={163} />
                 </div>
                 
-                {/* Cloud Based */}
                 <div className="flex flex-col items-center space-y-2">
                   <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
                 </div>

@@ -6,7 +6,6 @@ import {
   Package,
   Thermometer,
   Droplets,
-  Users as UsersIcon,
   RefreshCw,
   AlertTriangle,
   ExternalLink,
@@ -26,8 +25,6 @@ import {
 } from "@/components/ui/card";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from "recharts";
-import { WarehouseSlotVisibility } from "./warehouse-slot-visibility";
-import { TruckTracking } from "./truck-tracking";
 import { useSensorData } from "@/hooks/use-sensor-data";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -227,7 +224,7 @@ export default function GreenGuardianDashboard() {
       </div>
 
       {/* Overview Stats - Mobile Optimized */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-700">
@@ -281,7 +278,6 @@ export default function GreenGuardianDashboard() {
           </CardContent>
         </Card>
         
-        {/* Local Temperature Card */}
         <Card className="hover:shadow-md transition-all duration-300 border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-orange-700">
@@ -399,9 +395,6 @@ export default function GreenGuardianDashboard() {
               )}
             </CardContent>
           </Card>
-
-          {/* 3. Upcoming Slot Bookings */}
-          <WarehouseSlotVisibility />
         </div>
 
         {/* Right Column */}
@@ -510,10 +503,6 @@ export default function GreenGuardianDashboard() {
           </Card>
         </div>
       </div>
-
-      {/* Full Width Section */}
-      {/* 4. Truck Movement Tracking */}
-      <TruckTracking />
     </div>
   );
 }

@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   Carrot,
@@ -28,7 +29,6 @@ import {
   Bell,
 } from "lucide-react";
 
-import { Logo } from "@/components/icons";
 import {
   Sidebar,
   SidebarContent,
@@ -150,7 +150,7 @@ export function SidebarNav() {
     <>
       <SidebarHeader>
         <div className="flex items-center gap-2">
-          <Logo className="h-8 w-8 text-primary" />
+          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={32} height={32} />
           <span className="text-xl font-semibold">eAaharSetu</span>
         </div>
       </SidebarHeader>

@@ -330,7 +330,7 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4">
         <div className="grid grid-cols-3 items-center md:hidden h-14">
           <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={80} height={32} />
+            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={112} height={45} />
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={55} height={55} />
@@ -357,7 +357,7 @@ export default function RoleSelectionPage() {
         
         <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
           <div className="flex items-center gap-4">
-            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={100} height={40} />
+            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={112} height={45} />
             <Image src="https://i.ibb.co/xSXvd9zh/qci.png" alt="QCI Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">
@@ -605,4 +605,5 @@ export default function RoleSelectionPage() {
   );
 }
 
+    
     

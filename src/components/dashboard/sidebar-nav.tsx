@@ -28,6 +28,7 @@ import {
   Settings,
   Bell,
   LogOut,
+  MoreHorizontal,
 } from "lucide-react";
 
 import {

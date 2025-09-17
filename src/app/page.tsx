@@ -177,7 +177,7 @@ export default function RoleSelectionPage() {
       location: "Maharashtra Region",
       achievement: "1.2 tons of food wastage saved",
       rupeesSaved: "₹2,40,000",
-      avatarUrl: "https://i.pravatar.cc/150?u=vijay"
+      avatarUrl: "https://i.ibb.co/Ldv5mMD/indian-farmer-2.jpg"
     },
     {
       name: "Meera Patel", 
@@ -185,7 +185,7 @@ export default function RoleSelectionPage() {
       location: "Nashik Cold Storage",
       achievement: "25% spoilage reduction",
       rupeesSaved: "₹1,85,000",
-      avatarUrl: "https://i.pravatar.cc/150?u=meera"
+      avatarUrl: "https://i.ibb.co/L6wzGZx/indian-farmer-3.jpg"
     },
     {
       name: "Rohan Gupta",
@@ -201,7 +201,7 @@ export default function RoleSelectionPage() {
       location: "Nagpur Hub", 
       achievement: "99.8% quality rating",
       rupeesSaved: "₹1,65,000",
-      avatarUrl: "https://i.pravatar.cc/150?u=aisha"
+      avatarUrl: "https://i.ibb.co/3Wk09vj/indian-farmer-4.jpg"
     },
     {
       name: "Suresh Singh",
@@ -209,7 +209,7 @@ export default function RoleSelectionPage() {
       location: "Aurangabad",
       achievement: "50+ tons of surplus moved",
       rupeesSaved: "₹4,50,000",
-      avatarUrl: "https://i.pravatar.cc/150?u=suresh"
+      avatarUrl: "https://i.ibb.co/fHn3v3V/indian-farmer-1.jpg"
     },
     {
         name: "Priya Rao",
@@ -217,7 +217,7 @@ export default function RoleSelectionPage() {
         location: "Satara", 
         achievement: "30% reduction in food waste",
         rupeesSaved: "₹2,75,000",
-        avatarUrl: "https://i.pravatar.cc/150?u=priya"
+        avatarUrl: "https://i.ibb.co/v4d71vN/indian-farmer-5.jpg"
     },
     {
         name: "Amit Deshmukh",
@@ -225,7 +225,7 @@ export default function RoleSelectionPage() {
         location: "Mumbai Port",
         achievement: "On-time delivery rate 98%",
         rupeesSaved: "₹1,95,000",
-        avatarUrl: "https://i.pravatar.cc/150?u=amit"
+        avatarUrl: "https://i.ibb.co/VWVj4k3/indian-farmer-6.jpg"
     }
   ];
 

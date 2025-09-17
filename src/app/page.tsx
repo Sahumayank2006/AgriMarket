@@ -533,7 +533,7 @@ export default function RoleSelectionPage() {
           </div>
         </main>
         
-        <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12">
+        <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12 wavy-border">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
                 <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
@@ -606,3 +606,5 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    

@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { readSensorDataFromFile, calculateSensorStats, formatSensorDataForChart } from '@/lib/sensor-data';
 import path from 'path';
 
-// Path to your IoT sensor CSV file
-const SENSOR_DATA_PATH = 'c:\\Users\\Parikshit\\Desktop\\PyGames\\IOT\\SensorData\\W01.csv';
+// Path to your IoT sensor CSV file, now from an environment variable
+const SENSOR_DATA_PATH = process.env.SENSOR_DATA_PATH || 'c:\\Users\\Parikshit\\Desktop\\PyGames\\IOT\\SensorData\\W01.csv';
 
 export async function GET(request: Request) {
   try {

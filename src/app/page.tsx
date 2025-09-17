@@ -148,9 +148,9 @@ interface PerformerCardProps {
 
 function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: PerformerCardProps) {
   return (
-    <Card className="relative group bg-sky-100/70 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
+    <Card className="relative group bg-sky-100/50 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
         <Users className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-24 text-blue-200/50 dark:text-blue-800/50" />
-        <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
+        <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
         <Avatar className="h-20 w-20 border-4 border-white dark:border-blue-900/50 ring-2 ring-blue-200 dark:ring-blue-700 mb-3">
           <AvatarImage src={avatarUrl} alt={name} />
           <AvatarFallback className="bg-blue-200 text-blue-800 font-medium text-lg">{name.charAt(0)}</AvatarFallback>
@@ -330,7 +330,7 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4">
         <div className="grid grid-cols-3 items-center md:hidden h-14">
           <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
+            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={80} height={32} />
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={55} height={55} />
@@ -357,7 +357,7 @@ export default function RoleSelectionPage() {
         
         <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
           <div className="flex items-center gap-4">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={100} height={40} />
+            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={100} height={40} />
             <Image src="https://i.ibb.co/xSXvd9zh/qci.png" alt="QCI Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">

@@ -72,11 +72,11 @@ const navItemsContent = {
             { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
             { href: "/dashboard/inventory", label: "Inventory", icon: Package },
             { href: "/dashboard/slot-management", label: "Slot Management", icon: CalendarCheck },
+            { href: "/dashboard/route-optimization", label: "Logistics", icon: Truck },
             { href: "/dashboard/alerts", label: "Alerts", icon: Bell },
             { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
             { href: "/dashboard/profile", label: "My Profile", icon: User },
             { href: "/dashboard/settings", label: "Settings", icon: Settings },
-            { href: "/dashboard/route-optimization", label: "Logistics", icon: Truck },
         ],
         logistics: [
             { href: "/dashboard", label: "Logistics Overview", icon: Truck },
@@ -116,11 +116,11 @@ const navItemsContent = {
             { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },
             { href: "/dashboard/inventory", label: "इन्वेंटरी", icon: Package },
             { href: "/dashboard/slot-management", label: "स्लॉट प्रबंधन", icon: CalendarCheck },
+            { href: "/dashboard/route-optimization", label: "रसद", icon: Truck },
             { href: "/dashboard/alerts", label: "अलर्ट", icon: Bell },
             { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
             { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
             { href: "/dashboard/settings", label: "सेटिंग्स", icon: Settings },
-            { href: "/dashboard/route-optimization", label: "रसद", icon: Truck },
         ],
         logistics: [
             { href: "/dashboard", label: "रसद अवलोकन", icon: Truck },
@@ -168,8 +168,8 @@ export function SidebarNav() {
   return (
     <>
       <SidebarHeader>
-        <div className="flex items-center justify-center p-2">
-          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={180} height={60} />
+        <div className="flex items-center justify-center p-0">
+          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={220} height={75} />
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">

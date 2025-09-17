@@ -141,12 +141,11 @@ interface PerformerCardProps {
   name: string;
   role: string;
   location: string;
-  achievement: string;
-  rupeesSaved: string;
+  grainsSaved: string;
   avatarUrl: string;
 }
 
-function PerformerCard({ name, role, location, rupeesSaved, avatarUrl }: PerformerCardProps) {
+function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: PerformerCardProps) {
   return (
     <Card className="relative group bg-blue-100 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
         <Users className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-24 text-blue-200/50 dark:text-blue-800/50" />
@@ -161,7 +160,7 @@ function PerformerCard({ name, role, location, rupeesSaved, avatarUrl }: Perform
 
         <div className="mt-auto bg-white/70 dark:bg-blue-900/50 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-sm text-blue-900 dark:text-blue-100 font-medium shadow-sm">
             <Star className="h-4 w-4 text-yellow-500 fill-current" />
-            <span>{rupeesSaved} Saved</span>
+            <span>{grainsSaved} Grains Saved</span>
         </div>
     </Card>
   );
@@ -175,56 +174,49 @@ export default function RoleSelectionPage() {
       name: "Vijay Kumar",
       role: "Logistics Head",
       location: "Maharashtra Region",
-      achievement: "1.2 tons of food wastage saved",
-      rupeesSaved: "₹2,40,000",
+      grainsSaved: "1.2 Tons",
       avatarUrl: "https://i.ibb.co/Ldv5mMD/indian-farmer-2.jpg"
     },
     {
       name: "Meera Patel", 
       role: "Warehouse Manager",
       location: "Nashik Cold Storage",
-      achievement: "25% spoilage reduction",
-      rupeesSaved: "₹1,85,000",
+      grainsSaved: "800 kg",
       avatarUrl: "https://i.ibb.co/L6wzGZx/indian-farmer-3.jpg"
     },
     {
       name: "Rohan Gupta",
       role: "Top Farmer", 
       location: "Pune District",
-      achievement: "Highest crop utilization rate",
-      rupeesSaved: "₹3,20,000",
+      grainsSaved: "1.5 Tons",
       avatarUrl: "https://i.ibb.co/QvRcVK86/Copilot-20250915-232755.png"
     },
     {
       name: "Aisha Sharma",
       role: "Quality Control Lead",
       location: "Nagpur Hub", 
-      achievement: "99.8% quality rating",
-      rupeesSaved: "₹1,65,000",
+      grainsSaved: "750 kg",
       avatarUrl: "https://i.ibb.co/3Wk09vj/indian-farmer-4.jpg"
     },
     {
       name: "Suresh Singh",
       role: "Top Dealer",
       location: "Aurangabad",
-      achievement: "50+ tons of surplus moved",
-      rupeesSaved: "₹4,50,000",
+      grainsSaved: "2.1 Tons",
       avatarUrl: "https://i.ibb.co/fHn3v3V/indian-farmer-1.jpg"
     },
     {
         name: "Priya Rao",
         role: "Eco-Farmer",
         location: "Satara", 
-        achievement: "30% reduction in food waste",
-        rupeesSaved: "₹2,75,000",
+        grainsSaved: "900 kg",
         avatarUrl: "https://i.ibb.co/v4d71vN/indian-farmer-5.jpg"
     },
     {
         name: "Amit Deshmukh",
         role: "Logistics Coordinator",
         location: "Mumbai Port",
-        achievement: "On-time delivery rate 98%",
-        rupeesSaved: "₹1,95,000",
+        grainsSaved: "600 kg",
         avatarUrl: "https://i.ibb.co/VWVj4k3/indian-farmer-6.jpg"
     }
   ];
@@ -562,5 +554,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    

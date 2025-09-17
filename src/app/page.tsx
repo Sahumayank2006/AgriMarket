@@ -358,6 +358,7 @@ export default function RoleSelectionPage() {
         <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
           <div className="flex items-center gap-4">
             <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <div className="border-l-2 border-gray-300 h-10"></div>
             <Image src="https://i.ibb.co/xSXvd9zh/qci.png" alt="QCI Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">
@@ -545,7 +546,7 @@ export default function RoleSelectionPage() {
           </section>
         </main>
         
-        <section className="w-full bg-blue-950/80 text-white py-12">
+        <section className="w-full bg-blue-900 text-white py-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold mb-6 text-center">{pageContent.guidelinesTitle}</h2>
                 <Carousel
@@ -595,6 +596,7 @@ export default function RoleSelectionPage() {
 
     
     
+
 
 
 

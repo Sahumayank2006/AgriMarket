@@ -149,8 +149,8 @@ export function SidebarNav() {
   return (
     <>
       <SidebarHeader>
-        <div className="flex items-center justify-center p-2">
-          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={120} height={40} />
+        <div className="flex items-center justify-center">
+          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={150} height={50} />
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">

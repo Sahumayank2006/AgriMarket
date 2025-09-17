@@ -331,7 +331,7 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4">
         <div className="grid grid-cols-3 items-center md:hidden h-14">
           <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={112} height={45} />
+            <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={80} height={32} />
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={55} height={55} />
@@ -576,26 +576,23 @@ export default function RoleSelectionPage() {
             </div>
         </section>
 
-        <div>
-          <div className="w-full max-w-6xl mx-auto px-4">
-            <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
-              <div className="max-w-6xl mx-auto px-4">
-                <h2 className="text-4xl font-bold text-center text-foreground mb-8">{pageContent.impactTitle}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {pageContent.impactStats.slice(0,3).map((stat, index) => (
-                    <div key={index} className="flex flex-col items-center text-center">
-                      <div className="bg-white dark:bg-gray-700 rounded-full p-4 mb-4 shadow-md border">
-                        <stat.icon className="h-10 w-10 text-primary" />
-                      </div>
-                      <p className="text-3xl font-bold text-foreground">{stat.value}</p>
-                      <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
-                    </div>
-                  ))}
+        <section className="w-full bg-blue-100 dark:bg-blue-900/20 py-8 md:py-12">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row justify-around items-center gap-8 text-center md:text-left">
+              {pageContent.impactStats.slice(0, 4).map((stat, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  <div className="bg-white rounded-full p-4 shadow-md">
+                    <stat.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-blue-900 dark:text-blue-100">{stat.value}</p>
+                    <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
-        </div>
+        </section>
       </div>
       <footer className="w-full bg-gray-900 text-white py-8">
           <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
@@ -608,3 +605,4 @@ export default function RoleSelectionPage() {
 
     
     
+

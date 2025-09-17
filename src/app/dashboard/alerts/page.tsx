@@ -21,7 +21,7 @@ export default function AlertsPage() {
   }, [stats]);
 
   return (
-    <div className="space-y-6 p-4 max-w-full overflow-hidden">
+    <div className="space-y-6 p-4 md:p-6">
       {/* Error Alert */}
       {error && (
         <Alert variant="destructive">

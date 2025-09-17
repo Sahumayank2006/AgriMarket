@@ -276,7 +276,7 @@ export default function RoleSelectionPage() {
       <header className="w-full bg-white px-4 py-1">
         <div className="grid grid-cols-3 items-center md:hidden h-16">
           <div className="flex items-center gap-2 justify-start">
-            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={90} height={36} />
+            <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={80} height={32} />
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={60} height={60} />
@@ -404,7 +404,7 @@ export default function RoleSelectionPage() {
                   </span>
               </div>
               <div className="relative z-10 flex flex-col items-center justify-center">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4 bg-gradient-to-r from-orange-500 via-white to-green-500 text-transparent bg-clip-text">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4 bg-gradient-to-r from-orange-500 via-blue-500 to-green-500 text-transparent bg-clip-text">
                       #eAaharSetu
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4">
@@ -523,7 +523,7 @@ export default function RoleSelectionPage() {
               <div className="max-w-6xl mx-auto px-4">
                 <h2 className="text-4xl font-bold text-center text-foreground mb-8">{pageContent.impactTitle}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {pageContent.impactStats.map((stat, index) => (
+                  {pageContent.impactStats.slice(0,3).map((stat, index) => (
                     <div key={index} className="flex flex-col items-center text-center">
                       <div className="bg-white dark:bg-gray-700 rounded-full p-4 mb-4 shadow-md border">
                         <stat.icon className="h-10 w-10 text-primary" />

@@ -427,7 +427,7 @@ export const SAMPLE_STORAGE_ITEMS: StorageItem[] = [
  */
 export const SAMPLE_WEATHER_DATA: Record<string, WeatherData> = {
   'W01': {
-    location: 'Delhi',
+    location: 'Gwalior, MP',
     temperature: 32,
     humidity: 65,
     condition: 'Sunny',
@@ -457,7 +457,7 @@ export const SAMPLE_WEATHER_DATA: Record<string, WeatherData> = {
     ]
   },
   'W02': {
-    location: 'Mumbai',
+    location: 'Morena, MP',
     temperature: 29,
     humidity: 85,
     condition: 'Rainy',
@@ -487,7 +487,7 @@ export const SAMPLE_WEATHER_DATA: Record<string, WeatherData> = {
     ]
   },
   'W03': {
-    location: 'Bangalore',
+    location: 'Bhind, MP',
     temperature: 24,
     humidity: 60,
     condition: 'Cloudy',
@@ -517,7 +517,7 @@ export const SAMPLE_WEATHER_DATA: Record<string, WeatherData> = {
     ]
   },
   'W04': {
-    location: 'Chennai',
+    location: 'Shivpuri, MP',
     temperature: 31,
     humidity: 75,
     condition: 'Humid',
@@ -547,7 +547,7 @@ export const SAMPLE_WEATHER_DATA: Record<string, WeatherData> = {
     ]
   },
   'W05': {
-    location: 'Kolkata',
+    location: 'Datia, MP',
     temperature: 30,
     humidity: 80,
     condition: 'Overcast',

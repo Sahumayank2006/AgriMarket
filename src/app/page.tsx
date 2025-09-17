@@ -358,7 +358,7 @@ export default function RoleSelectionPage() {
         <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
           <div className="flex items-center gap-4">
             <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={100} height={40} />
-            <Image src="https://i.ibb.co/rfzgVKgY/Screenshot-2025-09-16-220853.png" alt="Department of Agriculture Logo" width={150} height={60}/>
+            <Image src="https://i.ibb.co/xSXvd9zh/qci.png" alt="QCI Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={70} height={70} />

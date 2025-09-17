@@ -56,11 +56,13 @@ export default function FarmerDashboard() {
         </CardHeader>
         <CardContent className="space-y-6">
             <FarmLocationMap />
-            <NearestWarehouses />
         </CardContent>
       </Card>
       
-      <SlotBooking />
+      <div className="grid lg:grid-cols-2 gap-8">
+        <NearestWarehouses />
+        <SlotBooking />
+      </div>
       
     </div>
   );

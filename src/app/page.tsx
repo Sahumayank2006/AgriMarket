@@ -546,7 +546,7 @@ export default function RoleSelectionPage() {
           </section>
         </main>
         
-        <section className="w-full bg-blue-900 text-white py-12">
+        <section className="w-full bg-blue-800 text-white py-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold mb-6 text-center">{pageContent.guidelinesTitle}</h2>
                 <Carousel
@@ -596,6 +596,7 @@ export default function RoleSelectionPage() {
 
     
     
+
 
 
 

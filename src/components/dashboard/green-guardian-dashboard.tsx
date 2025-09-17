@@ -227,7 +227,7 @@ export default function GreenGuardianDashboard() {
       </div>
 
       {/* Overview Stats - Mobile Optimized */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-700">
@@ -281,19 +281,6 @@ export default function GreenGuardianDashboard() {
           </CardContent>
         </Card>
         
-        <Card className="hover:shadow-md transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-medium text-gray-700">
-              Active Workforce
-            </CardTitle>
-            <UsersIcon className="h-5 w-5 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-gray-900">12 Active</div>
-            <p className="text-sm text-gray-500">3 tasks pending</p>
-          </CardContent>
-        </Card>
-
         {/* Local Temperature Card */}
         <Card className="hover:shadow-md transition-all duration-300 border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">

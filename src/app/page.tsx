@@ -534,25 +534,16 @@ export default function RoleSelectionPage() {
             </div>
           </div>
 
-          <div className="my-12 w-full max-w-5xl text-center mx-auto">
-            <div className="flex justify-around items-center gap-8 flex-wrap">
-              <div className="flex flex-col items-center space-y-2">
-                <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
-              </div>
-              
-              <div className="flex flex-col items-center space-y-2">
-                <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={163} height={163} />
-              </div>
-              
-              <div className="flex flex-col items-center space-y-2">
-                <Image src="https://i.ibb.co/xSXvd9zh/qci.png" alt="QCI" width={163} height={163} />
-              </div>
-              
-              <div className="flex flex-col items-center space-y-2">
-                <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
+          <section className="w-full bg-gray-50 dark:bg-gray-800/10 py-12 my-12">
+            <div className="container mx-auto px-4">
+              <div className="flex justify-around items-center gap-8 flex-wrap">
+                <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={140} height={140} className="object-contain" />
+                <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={140} height={140} className="object-contain" />
+                <Image src="https://i.ibb.co/xSXvd9zh/qci.png" alt="QCI" width={140} height={140} className="object-contain" />
+                <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={140} height={140} className="object-contain" />
               </div>
             </div>
-          </div>
+          </section>
         </main>
         
         <section className="w-full bg-blue-950 text-white py-12">
@@ -576,7 +567,7 @@ export default function RoleSelectionPage() {
             </div>
         </section>
 
-        <section className="w-full bg-blue-100 dark:bg-blue-900/20 py-8 md:py-12">
+        <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-8 md:py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-around items-center gap-8 text-center md:text-left">
               {pageContent.impactStats.slice(0, 4).map((stat, index) => (
@@ -605,4 +596,5 @@ export default function RoleSelectionPage() {
 
     
     
+
 

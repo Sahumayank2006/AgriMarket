@@ -25,6 +25,8 @@ export default function RootLayout({
       <head>
         <title>eAaharSetu</title>
         <meta name="description" content="A platform to efficiently manage surplus food, reduce waste, and facilitate marketplace transactions." />
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&family=Hind:wght@300;500&family=Hind+Siliguri:wght@400;600&family=Hind+Guntur:wght@300;500&family=Hind+Madurai:wght@300;500&display=swap" rel="stylesheet" />

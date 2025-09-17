@@ -29,6 +29,7 @@ import {
   Wheat,
   Users,
   Star,
+  Download,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -165,6 +166,39 @@ function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: Perform
     </Card>
   );
 }
+
+interface GuidelineCardProps {
+  title: string;
+  year: string;
+  size: string;
+  imageUrl: string;
+  downloadUrl: string;
+}
+
+function GuidelineCard({ title, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
+  return (
+    <Card className="overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg">
+      <a href={downloadUrl} download>
+        <CardContent className="p-0 relative">
+          <Image src={imageUrl} alt={title} width={250} height={150} className="w-full h-auto object-cover" />
+          <div className="absolute top-2 right-2">
+            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs h-7">
+              <Download className="mr-2 h-3 w-3" />
+              {size}
+            </Button>
+          </div>
+        </CardContent>
+        <CardFooter className="p-3 bg-white dark:bg-card">
+          <div>
+            <p className="font-semibold text-sm">{title}</p>
+            <p className="text-xs text-muted-foreground">{year}</p>
+          </div>
+        </CardFooter>
+      </a>
+    </Card>
+  );
+}
+
 export default function RoleSelectionPage() {
   const { lang, setLang } = useContext(LanguageContext);
   const pageContent = content[lang];
@@ -219,6 +253,37 @@ export default function RoleSelectionPage() {
         grainsSaved: "600 kg",
         avatarUrl: "https://i.ibb.co/VWVj4k3/indian-farmer-6.jpg"
     }
+  ];
+
+  const guidelines: GuidelineCardProps[] = [
+    { 
+      title: "Farmer Handbook",
+      year: "2024",
+      size: "1.2 MB",
+      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      downloadUrl: "/docs/farmer-handbook.pdf"
+    },
+    { 
+      title: "Dealer Operations Manual",
+      year: "2024",
+      size: "850 KB",
+      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      downloadUrl: "/docs/dealer-manual.pdf"
+    },
+    { 
+      title: "Warehouse Best Practices",
+      year: "2024",
+      size: "1.5 MB",
+      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      downloadUrl: "/docs/warehouse-practices.pdf"
+    },
+    { 
+      title: "Platform Usage Policy",
+      year: "2024",
+      size: "450 KB",
+      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      downloadUrl: "/docs/platform-policy.pdf"
+    },
   ];
 
   const [api, setApi] = useState<CarouselApi>();
@@ -466,46 +531,30 @@ export default function RoleSelectionPage() {
               </div>
             </div>
 
-            <div className="mt-12 w-full max-w-5xl text-center animate-in fade-in duration-1000 mx-auto">
-              <div className="mb-6">
-                <hr className="w-1/4 mx-auto border-t-2 border-primary/20" />
-              </div>
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl">
-                <h2 className="text-4xl font-bold text-foreground mb-4">{pageContent.guidelinesTitle}</h2>
-                <p className="max-w-2xl mx-auto text-muted-foreground mb-8">{pageContent.guidelinesDescription}</p>
-                <Card className="max-w-3xl mx-auto text-left">
-                  <CardHeader>
-                    <CardTitle>{pageContent.documentCenterTitle}</CardTitle>
-                    <CardDescription>{pageContent.documentCenterDescription}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div {...getRootProps()} className={cn("flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-lg cursor-pointer hover:bg-muted/50", isDragActive && "bg-muted/50 border-primary")}>
-                      <input {...getInputProps()} />
-                      <Upload className="w-8 h-8 mb-4 text-muted-foreground" />
-                      <p className="mb-2 text-sm text-muted-foreground">
-                        {isDragActive ? pageContent.dropzoneActive : pageContent.dropzoneIdle}
-                      </p>
-                      <p className="text-xs text-muted-foreground">{pageContent.dropzoneHint}</p>
-                    </div>
-                    {files.length > 0 && (
-                      <div className="mt-4 grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-                        {files.map(file => (
-                          <Card key={file.name} className="p-2 flex items-center justify-between">
-                            <div className="flex items-center gap-2 overflow-hidden">
-                              <FileText className="h-5 w-5 flex-shrink-0" />
-                              <span className="text-sm truncate">{file.name}</span>
-                            </div>
-                            <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => removeFile(file.name)}>
-                              <X className="h-4 w-4" />
-                            </Button>
-                          </Card>
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+            <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12 -mx-4 px-4">
+                <div className="max-w-6xl mx-auto">
+                    <h2 className="text-3xl font-bold text-foreground mb-2">Standard Guidelines</h2>
+                    <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
+                    <Carousel
+                        opts={{
+                            align: "start",
+                            loop: false,
+                        }}
+                        className="w-full"
+                    >
+                        <CarouselContent className="-ml-4">
+                            {guidelines.map((guideline, index) => (
+                                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
+                                    <GuidelineCard {...guideline} />
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="left-[-10px]" />
+                        <CarouselNext className="right-[-10px]" />
+                    </Carousel>
+                </div>
+            </section>
+
 
             <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
               <div className="max-w-6xl mx-auto px-4">

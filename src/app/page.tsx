@@ -534,10 +534,29 @@ export default function RoleSelectionPage() {
             </div>
           </main>
           
-          <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-12 mt-12">
+          <div className="my-12 w-full max-w-5xl text-center mx-auto">
+            <div className="flex justify-around items-center gap-8 flex-wrap">
+              <div className="flex flex-col items-center space-y-2">
+                <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2">
+                <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={163} height={163} />
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2">
+                <Image src="https://i.ibb.co/GvMq7x8r/Copilot-20250911-211848.png" alt="MoHFW Guidelines" width={163} height={163} />
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2">
+                <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
+              </div>
+            </div>
+          </div>
+          
+          <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-12">
               <div className="container mx-auto px-4">
-                  <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
+                  <h2 className="text-3xl font-bold text-foreground mb-6 text-center">{pageContent.guidelinesTitle}</h2>
                   <Carousel
                       opts={{
                           align: "start",
@@ -552,8 +571,6 @@ export default function RoleSelectionPage() {
                               </CarouselItem>
                           ))}
                       </CarouselContent>
-                      <CarouselPrevious className="left-[-10px]" />
-                      <CarouselNext className="right-[-10px]" />
                   </Carousel>
               </div>
           </section>
@@ -573,26 +590,6 @@ export default function RoleSelectionPage() {
                         <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
                       </div>
                     ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="my-12 w-full max-w-5xl text-center mx-auto">
-                <div className="flex justify-around items-center gap-8 flex-wrap">
-                  <div className="flex flex-col items-center space-y-2">
-                    <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
-                  </div>
-                  
-                  <div className="flex flex-col items-center space-y-2">
-                    <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={163} height={163} />
-                  </div>
-                  
-                  <div className="flex flex-col items-center space-y-2">
-                    <Image src="https://i.ibb.co/GvMq7x8r/Copilot-20250911-211848.png" alt="MoHFW Guidelines" width={163} height={163} />
-                  </div>
-                  
-                  <div className="flex flex-col items-center space-y-2">
-                    <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
                   </div>
                 </div>
               </div>

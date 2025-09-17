@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -45,7 +46,7 @@ export function SpoilagePrediction() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      cropType: "Tomatoes",
+      cropType: "Wheat",
       temperature: 20,
       humidity: 60,
       storageDays: 5,
@@ -93,7 +94,7 @@ export function SpoilagePrediction() {
                 <FormItem>
                   <FormLabel>Crop Type</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Potatoes" {...field} />
+                    <Input placeholder="e.g., Wheat" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -203,3 +204,5 @@ export function SpoilagePrediction() {
     </Card>
   );
 }
+
+    

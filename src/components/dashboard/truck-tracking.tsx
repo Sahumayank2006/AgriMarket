@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -498,3 +499,5 @@ export function TruckTracking() {
     </Card>
   );
 }
+
+    

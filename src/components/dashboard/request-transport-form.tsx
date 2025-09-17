@@ -38,8 +38,7 @@ import { Checkbox } from "../ui/checkbox";
 
 const myCrops = [
     { id: "crop-1", label: "5000kg of Wheat" },
-    { id: "crop-2", label: "300kg of Organic Tomatoes" },
-    { id: "crop-3", label: "800kg of Red Apples" },
+    { id: "crop-2", label: "800kg of Rice" },
 ] as const;
 
 const formSchema = z.object({
@@ -247,3 +246,5 @@ export function RequestTransportForm() {
     </Card>
   );
 }
+
+    

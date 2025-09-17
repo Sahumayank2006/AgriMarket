@@ -21,7 +21,7 @@ export default function AlertsPage() {
   }, [stats]);
 
   return (
-    <div className="space-y-6 p-4 md:p-6">
+    <div className="space-y-6">
       {/* Error Alert */}
       {error && (
         <Alert variant="destructive">
@@ -129,51 +129,6 @@ export default function AlertsPage() {
             humidity={stats?.avgHumidity || 60}
             className="h-fit"
           />
-          
-          {/* Additional Alert Statistics */}
-          <Card className="hover:shadow-md transition-shadow">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Alert Statistics</CardTitle>
-              <CardDescription className="text-sm text-gray-600">
-                Summary of alerts over the past 24 hours
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-200">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
-                    <span className="font-medium text-red-800">Critical Alerts</span>
-                  </div>
-                  <Badge variant="destructive">2</Badge>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 bg-amber-50 rounded-lg border border-amber-200">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-amber-500 rounded-full mr-3"></div>
-                    <span className="font-medium text-amber-800">High Priority</span>
-                  </div>
-                  <Badge variant="outline">3</Badge>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                    <span className="font-medium text-yellow-800">Medium Priority</span>
-                  </div>
-                  <Badge variant="secondary">7</Badge>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg border border-green-200">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                    <span className="font-medium text-green-800">Resolved Today</span>
-                  </div>
-                  <Badge>12</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

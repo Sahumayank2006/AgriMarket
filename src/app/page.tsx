@@ -148,7 +148,7 @@ interface PerformerCardProps {
 
 function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: PerformerCardProps) {
   return (
-    <Card className="relative group bg-sky-100/50 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
+    <Card className="relative group bg-sky-100/70 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
         <Users className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-24 text-blue-200/50 dark:text-blue-800/50" />
         <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
         <Avatar className="h-20 w-20 border-4 border-white dark:border-blue-900/50 ring-2 ring-blue-200 dark:ring-blue-700 mb-3">
@@ -385,220 +385,220 @@ export default function RoleSelectionPage() {
       </header>
       <hr className="w-full border-t-8 border-primary" />
       <div className="wavy-border">
-        <main>
-          <div className="flex w-full flex-col items-center justify-center p-4">
-            <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-10">
-              <div className="mb-4 text-foreground flex items-center gap-4">
-                <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                  {pageContent.welcome}
-                </h1>
-                <Wheat className="h-12 w-12 text-yellow-500" />
-              </div>
-              <p className="max-w-3xl text-center text-xl text-muted-foreground mb-6 animate-in fade-in slide-in-from-top-6 duration-1000">
-                {pageContent.tagline}
-              </p>
-
-              <p className="text-lg text-muted-foreground mb-6">{pageContent.chooseRole}</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                {pageContent.roles.slice(0, 4).map((role, idx) => (
-                  <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
-                    <div className="flex-shrink-0">
-                      <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-primary/30 transition-all duration-300">
-                        <role.icon className="h-8 w-8 text-primary" />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
-                      <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
-                    </div>
-                    <div>
-                      <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
-                        <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
-                          <ArrowRight className="h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {pageContent.roles.length > 4 && (
-                <div className="flex justify-center w-full max-w-4xl mx-auto mb-10">
-                  <div className="w-full max-w-md">
-                    {pageContent.roles.slice(4).map((role, idx) => (
-                      <div key={idx + 4} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-blue-500 hover:outline hover:outline-2 hover:outline-blue-500 hover:-translate-y-1">
-                        <div className="flex-shrink-0">
-                          <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-blue-400 transition-all duration-300">
-                            <role.icon className="h-8 w-8 text-blue-600" />
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
-                          <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
-                        </div>
-                        <div>
-                          <Button asChild size="icon" className="rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 group-hover:scale-110 transition-transform duration-300">
-                            <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
-                              <ArrowRight className="h-5 w-5" />
-                            </Link>
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+          <main>
+            <div className="flex w-full flex-col items-center justify-center p-4">
+              <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-10">
+                <div className="mb-4 text-foreground flex items-center gap-4">
+                  <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
+                    {pageContent.welcome}
+                  </h1>
+                  <Wheat className="h-12 w-12 text-yellow-500" />
                 </div>
-              )}
-            </div>
-          </div>
-          
-          <div className="w-full bg-sky-100 dark:bg-sky-900/30 py-8 md:py-12">
-            <div className="relative max-w-5xl mx-auto px-4">
-              <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
-                  <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 dark:text-gray-500/10 opacity-30 leading-none tracking-tighter whitespace-nowrap">
-                      #eAaharSetu
-                  </span>
-              </div>
-              <div className="relative z-10 flex flex-col items-center justify-center">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4 bg-gradient-to-r from-orange-500 via-blue-500 to-green-500 text-transparent bg-clip-text">
-                      #eAaharSetu
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4">
-                      <div>
-                          <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
-                              <IndianRupee className="h-6 w-6 md:h-8 md:w-8" />
-                              <AnimatedCounter end={17300000} duration={3000} />
-                          </div>
-                          <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              Value Saved this year
-                          </p>
-                      </div>
-                      <div>
-                          <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-yellow-600">
-                              <Wheat className="h-6 w-6 md:h-8 md:w-8" />
-                              <AnimatedCounter end={5000} duration={3000} suffix=" Tons"/>
-                          </div>
-                          <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              Grains Saved
-                          </p>
-                      </div>
-                        <div>
-                          <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-blue-600">
-                              <Users className="h-6 w-6 md:h-8 md:w-8" />
-                              <AnimatedCounter end={25000} duration={3000} />
-                          </div>
-                          <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              People Fed (Est.)
-                          </p>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="w-full max-w-6xl mx-auto px-4">
-            <div className="mt-12 w-full text-left animate-in fade-in duration-1000">
-              <div className="mb-6 max-w-6xl mx-auto">
-                <hr className="w-1/4 border-t-2 border-primary/20" />
-              </div>
+                <p className="max-w-3xl text-center text-xl text-muted-foreground mb-6 animate-in fade-in slide-in-from-top-6 duration-1000">
+                  {pageContent.tagline}
+                </p>
 
-              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{pageContent.topPerformers}</h2>
-              <div className="relative w-full">
-                <Carousel
-                  setApi={setPerformerApi}
-                  opts={{
-                  align: "start",
-                  loop: false,
-                  slidesToScroll: "auto",
-                  }}
-                  className="w-full"
-                >
-                  <CarouselContent className="-ml-4">
-                    {topPerformers.map((performer, index) => (
-                      <CarouselItem
-                        key={index}
-                        className="pl-4 md:basis-1/2 lg:basis-1/3"
-                      >
-                        <div className="h-full">
-                          <PerformerCard {...performer} />
+                <p className="text-lg text-muted-foreground mb-6">{pageContent.chooseRole}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                  {pageContent.roles.slice(0, 4).map((role, idx) => (
+                    <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
+                      <div className="flex-shrink-0">
+                        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-primary/30 transition-all duration-300">
+                          <role.icon className="h-8 w-8 text-primary" />
                         </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <div className="flex justify-center items-center mt-8 gap-4 w-full">
-                    <CarouselPrevious className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
-                    <CarouselNext className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
-                  </div>
-                </Carousel>
-              </div>
-            </div>
-          </div>
-        </main>
-        
-        <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12">
-            <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
-                <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
-                <Carousel
-                    opts={{
-                        align: "start",
-                        loop: false,
-                    }}
-                    className="w-full"
-                >
-                    <CarouselContent className="-ml-4">
-                        {guidelines.map((guideline, index) => (
-                            <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
-                                <GuidelineCard {...guideline} />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="left-[-10px]" />
-                    <CarouselNext className="right-[-10px]" />
-                </Carousel>
-            </div>
-        </section>
-
-        <div>
-          <div className="w-full max-w-6xl mx-auto px-4">
-            <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
-              <div className="max-w-6xl mx-auto px-4">
-                <h2 className="text-4xl font-bold text-center text-foreground mb-8">{pageContent.impactTitle}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {pageContent.impactStats.slice(0,3).map((stat, index) => (
-                    <div key={index} className="flex flex-col items-center text-center">
-                      <div className="bg-white dark:bg-gray-700 rounded-full p-4 mb-4 shadow-md border">
-                        <stat.icon className="h-10 w-10 text-primary" />
                       </div>
-                      <p className="text-3xl font-bold text-foreground">{stat.value}</p>
-                      <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
+                      <div className="flex-1">
+                        <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
+                        <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
+                      </div>
+                      <div>
+                        <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
+                          <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
+                            <ArrowRight className="h-5 w-5" />
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>
+                
+                {pageContent.roles.length > 4 && (
+                  <div className="flex justify-center w-full max-w-4xl mx-auto mb-10">
+                    <div className="w-full max-w-md">
+                      {pageContent.roles.slice(4).map((role, idx) => (
+                        <div key={idx + 4} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-blue-500 hover:outline hover:outline-2 hover:outline-blue-500 hover:-translate-y-1">
+                          <div className="flex-shrink-0">
+                            <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-blue-400 transition-all duration-300">
+                              <role.icon className="h-8 w-8 text-blue-600" />
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
+                            <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
+                          </div>
+                          <div>
+                            <Button asChild size="icon" className="rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 group-hover:scale-110 transition-transform duration-300">
+                              <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
+                                <ArrowRight className="h-5 w-5" />
+                              </Link>
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
+            
+            <div className="w-full bg-sky-100 dark:bg-sky-900/30 py-8 md:py-12">
+              <div className="relative max-w-5xl mx-auto px-4">
+                <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none">
+                    <span className="text-[25vw] md:text-[20vw] lg:text-[18vw] xl:text-[16vw] font-black text-gray-100 dark:text-gray-500/10 opacity-30 leading-none tracking-tighter whitespace-nowrap">
+                        #eAaharSetu
+                    </span>
+                </div>
+                <div className="relative z-10 flex flex-col items-center justify-center">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none tracking-tight mb-4 bg-gradient-to-r from-orange-500 via-blue-500 to-green-500 text-transparent bg-clip-text">
+                        #eAaharSetu
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4">
+                        <div>
+                            <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-green-600">
+                                <IndianRupee className="h-6 w-6 md:h-8 md:w-8" />
+                                <AnimatedCounter end={17300000} duration={3000} />
+                            </div>
+                            <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                                Value Saved this year
+                            </p>
+                        </div>
+                        <div>
+                            <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-yellow-600">
+                                <Wheat className="h-6 w-6 md:h-8 md:w-8" />
+                                <AnimatedCounter end={5000} duration={3000} suffix=" Tons"/>
+                            </div>
+                            <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                                Grains Saved
+                            </p>
+                        </div>
+                          <div>
+                            <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-blue-600">
+                                <Users className="h-6 w-6 md:h-8 md:w-8" />
+                                <AnimatedCounter end={25000} duration={3000} />
+                            </div>
+                            <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
+                                People Fed (Est.)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="w-full max-w-6xl mx-auto px-4">
+              <div className="mt-12 w-full text-left animate-in fade-in duration-1000">
+                <div className="mb-6 max-w-6xl mx-auto">
+                  <hr className="w-1/4 border-t-2 border-primary/20" />
+                </div>
 
-            <div className="my-12 w-full max-w-5xl text-center mx-auto">
-              <div className="flex justify-around items-center gap-8 flex-wrap">
-                <div className="flex flex-col items-center space-y-2">
-                  <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
+                <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{pageContent.topPerformers}</h2>
+                <div className="relative w-full">
+                  <Carousel
+                    setApi={setPerformerApi}
+                    opts={{
+                    align: "start",
+                    loop: false,
+                    slidesToScroll: "auto",
+                    }}
+                    className="w-full"
+                  >
+                    <CarouselContent className="-ml-4">
+                      {topPerformers.map((performer, index) => (
+                        <CarouselItem
+                          key={index}
+                          className="pl-4 md:basis-1/2 lg:basis-1/3"
+                        >
+                          <div className="h-full">
+                            <PerformerCard {...performer} />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <div className="flex justify-center items-center mt-8 gap-4 w-full">
+                      <CarouselPrevious className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
+                      <CarouselNext className="rounded-full bg-white shadow-lg border-0 hover:bg-gray-50 w-10 h-10 flex items-center justify-center static" />
+                    </div>
+                  </Carousel>
                 </div>
-                
-                <div className="flex flex-col items-center space-y-2">
-                  <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={163} height={163} />
+              </div>
+            </div>
+          </main>
+          
+          <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-12 mt-12">
+              <div className="container mx-auto px-4">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
+                  <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
+                  <Carousel
+                      opts={{
+                          align: "start",
+                          loop: false,
+                      }}
+                      className="w-full"
+                  >
+                      <CarouselContent className="-ml-4">
+                          {guidelines.map((guideline, index) => (
+                              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
+                                  <GuidelineCard {...guideline} />
+                              </CarouselItem>
+                          ))}
+                      </CarouselContent>
+                      <CarouselPrevious className="left-[-10px]" />
+                      <CarouselNext className="right-[-10px]" />
+                  </Carousel>
+              </div>
+          </section>
+
+          <div>
+            <div className="w-full max-w-6xl mx-auto px-4">
+              <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
+                <div className="max-w-6xl mx-auto px-4">
+                  <h2 className="text-4xl font-bold text-center text-foreground mb-8">{pageContent.impactTitle}</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {pageContent.impactStats.slice(0,3).map((stat, index) => (
+                      <div key={index} className="flex flex-col items-center text-center">
+                        <div className="bg-white dark:bg-gray-700 rounded-full p-4 mb-4 shadow-md border">
+                          <stat.icon className="h-10 w-10 text-primary" />
+                        </div>
+                        <p className="text-3xl font-bold text-foreground">{stat.value}</p>
+                        <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                
-                <div className="flex flex-col items-center space-y-2">
-                  <Image src="https://i.ibb.co/GvMq7x8r/Copilot-20250911-211848.png" alt="MoHFW Guidelines" width={163} height={163} />
-                </div>
-                
-                <div className="flex flex-col items-center space-y-2">
-                  <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
+              </div>
+
+              <div className="my-12 w-full max-w-5xl text-center mx-auto">
+                <div className="flex justify-around items-center gap-8 flex-wrap">
+                  <div className="flex flex-col items-center space-y-2">
+                    <Image src="https://i.ibb.co/bgnrMSGd/Copilot-20250911-210534.png" alt="Encryption" width={163} height={163} />
+                  </div>
+                  
+                  <div className="flex flex-col items-center space-y-2">
+                    <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={163} height={163} />
+                  </div>
+                  
+                  <div className="flex flex-col items-center space-y-2">
+                    <Image src="https://i.ibb.co/GvMq7x8r/Copilot-20250911-211848.png" alt="MoHFW Guidelines" width={163} height={163} />
+                  </div>
+                  
+                  <div className="flex flex-col items-center space-y-2">
+                    <Image src="https://i.ibb.co/j9LT9FKW/Copilot-20250911-210952.png" alt="Cloud Based" width={163} height={163} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       <footer className="w-full bg-gray-900 text-white py-8">
           <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
               <p>&copy; {new Date().getFullYear()} eAaharSetu. {pageContent.footerRights}</p>

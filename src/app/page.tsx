@@ -384,7 +384,8 @@ export default function RoleSelectionPage() {
         </div>
       </header>
       <hr className="w-full border-t-8 border-primary" />
-        <main className="flex-grow wavy-border">
+      <div className="wavy-border">
+        <main>
           <div className="flex w-full flex-col items-center justify-center p-4">
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-10">
               <div className="mb-4 text-foreground flex items-center gap-4">
@@ -533,7 +534,7 @@ export default function RoleSelectionPage() {
           </div>
         </main>
         
-        <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12 wavy-border">
+        <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
                 <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
@@ -557,7 +558,7 @@ export default function RoleSelectionPage() {
             </div>
         </section>
 
-        <div className="w-full wavy-border">
+        <div>
           <div className="w-full max-w-6xl mx-auto px-4">
             <div className="w-full bg-gray-50 dark:bg-gray-800/20 py-12 mt-12">
               <div className="max-w-6xl mx-auto px-4">
@@ -583,7 +584,7 @@ export default function RoleSelectionPage() {
                 </div>
                 
                 <div className="flex flex-col items-center space-y-2">
-                  <Image src="https://i.ibb.co/6JLL2CHR/Copilot-20250911-211324.png" alt="ABDM compliant" width={163} height={163} />
+                  <Image src="https://i.ibb.co/BKFshMHK/fci.png" alt="FCI" width={163} height={163} />
                 </div>
                 
                 <div className="flex flex-col items-center space-y-2">
@@ -597,14 +598,12 @@ export default function RoleSelectionPage() {
             </div>
           </div>
         </div>
-
-         <footer className="w-full bg-gray-900 text-white py-8">
-            <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
-                <p>&copy; {new Date().getFullYear()} eAaharSetu. {pageContent.footerRights}</p>
-            </div>
-        </footer>
+      </div>
+      <footer className="w-full bg-gray-900 text-white py-8">
+          <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+              <p>&copy; {new Date().getFullYear()} eAaharSetu. {pageContent.footerRights}</p>
+          </div>
+      </footer>
     </div>
   );
 }
-
-    

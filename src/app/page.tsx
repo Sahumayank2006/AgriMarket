@@ -150,7 +150,6 @@ interface PerformerCardProps {
 function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: PerformerCardProps) {
   return (
     <Card className="relative group bg-sky-100/50 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
-        <Users className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-24 text-blue-200/50 dark:text-blue-800/50" />
         <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
         <Avatar className="h-20 w-20 border-4 border-white dark:border-blue-900/50 ring-2 ring-blue-200 dark:ring-blue-700 mb-3">
           <AvatarImage src={avatarUrl} alt={name} />
@@ -546,7 +545,7 @@ export default function RoleSelectionPage() {
           </section>
         </main>
         
-        <section className="w-full bg-blue-950 text-white py-12">
+        <section className="w-full bg-blue-950/80 text-white py-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold mb-6 text-center">{pageContent.guidelinesTitle}</h2>
                 <Carousel
@@ -596,5 +595,6 @@ export default function RoleSelectionPage() {
 
     
     
+
 
 

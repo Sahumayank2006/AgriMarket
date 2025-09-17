@@ -27,6 +27,7 @@ import {
   CalendarCheck,
   Settings,
   Bell,
+  LogOut,
 } from "lucide-react";
 
 import {
@@ -38,11 +39,21 @@ import {
   SidebarMenuButton,
   SidebarFooter,
 } from "@/components/ui/sidebar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import type { Role } from "@/lib/types";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useContext } from "react";
-import { LanguageContext } from "@/contexts/language-context";
+import { LanguageContext, content } from "@/contexts/language-context";
+import { NotificationDropdown } from "./notification-dropdown";
+import { Button } from "../ui/button";
 
 const navItemsContent = {
     en: {
@@ -85,6 +96,9 @@ const navItemsContent = {
             logistics: "Logistics",
         },
         totalRevenue: "Total Revenue",
+        profile: "Profile",
+        settings: "Settings",
+        logout: "Log out",
     },
     hi: {
         farmer: [
@@ -126,6 +140,9 @@ const navItemsContent = {
             logistics: "रसद",
         },
         totalRevenue: "कुल राजस्व",
+        profile: "प्रोफ़ाइल",
+        settings: "सेटिंग्स",
+        logout: "लॉग आउट",
     }
 }
 
@@ -145,12 +162,13 @@ export function SidebarNav() {
 
   const currentNavItems = t[role] || navItemsContent.en[role];
   const roleQuery = `?role=${role}&lang=${lang}`;
+  const currentRoleName = getRoleName(role, lang);
 
   return (
     <>
       <SidebarHeader>
-        <div className="flex items-center justify-center">
-          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={150} height={50} />
+        <div className="flex items-center justify-center p-2">
+          <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu Logo" width={180} height={60} />
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">
@@ -184,20 +202,66 @@ export function SidebarNav() {
       </SidebarContent>
       <SidebarFooter>
         <div className="flex flex-col gap-3 rounded-md p-3 bg-muted/50">
-           <div className="flex items-center gap-3">
+           <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
                 <Avatar className="h-10 w-10">
-                        <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
-                        <AvatarFallback>
-                        {getRoleName(role, lang).charAt(0)}
-                        </AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col">
-                        <p className="text-sm font-medium leading-none">
-                        {getRoleName(role, lang)}
-                        </p>
-                        <p className="text-xs leading-none text-muted-foreground">
-                        {role}@eaaharsetu.com
-                        </p>                    </div>
+                  <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
+                  <AvatarFallback>
+                  {getRoleName(role, lang).charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                    <p className="text-sm font-medium leading-none">
+                    {getRoleName(role, lang)}
+                    </p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                    {role}@eaaharsetu.com
+                    </p>                    
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <NotificationDropdown />
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56" align="end" forceMount>
+                      <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            {currentRoleName}
+                          </p>
+                          <p className="text-xs leading-none text-muted-foreground">
+                            {role}@eaaharsetu.com
+                          </p>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/profile${roleQuery}`}>
+                          <User className="mr-2 h-4 w-4" />
+                          <span>{t.profile}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/settings${roleQuery}`}>
+                          <Settings className="mr-2 h-4 w-4" />
+                          <span>{t.settings}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href="/">
+                          <LogOut className="mr-2 h-4 w-4" />
+                          <span>{t.logout}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
         </div>
       </SidebarFooter>

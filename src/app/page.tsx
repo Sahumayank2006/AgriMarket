@@ -358,7 +358,7 @@ export default function RoleSelectionPage() {
         <div className="hidden md:grid md:grid-cols-3 md:items-center h-20">
           <div className="flex items-center gap-4">
             <Image src="https://i.ibb.co/9kdhzXMM/Generated-Image-September-10-2025-7-55-PM.png" alt="eAaharSetu Logo" width={100} height={40} />
-            <Image src="https://i.ibb.co/rfzgVKgY/Screenshot-2025-09-16-220853.png" alt="Department of Agriculture Logo" width={150} height={60}/>
+            <Image src="https://i.ibb.co/Rk31CNxx/images-1.jpg" alt="Department of Agriculture Logo" width={150} height={60}/>
           </div>
           <div className="flex justify-center">
             <Image src="https://i.ibb.co/R4S2M88G/Azadi-Ka-Amrit-Mahotsav-Logo.png" alt="Azadi-Ka-Amrit-Mahotsav-Logo" width={70} height={70} />
@@ -533,7 +533,7 @@ export default function RoleSelectionPage() {
 
             <section className="w-full bg-sky-100/50 dark:bg-sky-900/20 py-12 mt-12 -mx-4 px-4">
                 <div className="max-w-6xl mx-auto">
-                    <h2 className="text-3xl font-bold text-foreground mb-2">Standard Guidelines</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-2">{pageContent.guidelinesTitle}</h2>
                     <p className="text-muted-foreground mb-6">{pageContent.guidelinesDescription}</p>
                     <Carousel
                         opts={{
@@ -603,3 +603,5 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+    

@@ -14,6 +14,7 @@ import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { useContext } from "react";
 import { LanguageContext } from "@/contexts/language-context";
+import Image from "next/image";
 
 const pageContent = {
     en: {
@@ -42,18 +43,24 @@ const mockWarehouses = [
     name: "Gwalior Central Warehousing",
     distance: "5 km",
     availability: "Available",
+    imageUrl: "https://picsum.photos/seed/gwalior-central/400/200",
+    dataAiHint: "large warehouse"
   },
   {
     id: 2,
     name: "Malwa Agri Storage, Gwalior",
     distance: "8 km",
     availability: "Limited Slots",
+    imageUrl: "https://picsum.photos/seed/malwa-agri/400/200",
+    dataAiHint: "modern warehouse"
   },
   {
     id: 3,
     name: "Chambal Cold Storage, Morena",
     distance: "40 km",
     availability: "Full",
+    imageUrl: "https://picsum.photos/seed/chambal-cold/400/200",
+    dataAiHint: "cold storage"
   },
 ];
 
@@ -80,39 +87,53 @@ export function NearestWarehouses() {
       </CardHeader>
       <CardContent className="space-y-4">
         {mockWarehouses.map((warehouse) => (
-          <div key={warehouse.id} className="flex items-center justify-between p-3 border rounded-lg">
-            <div className="flex-1">
+          <Card key={warehouse.id} className="overflow-hidden">
+            <Link href={`/dashboard/book-slot?role=farmer&lang=${lang}&warehouse=${warehouse.id}`} passHref>
+                <div className="relative h-32 w-full cursor-pointer">
+                    <Image
+                        src={warehouse.imageUrl}
+                        alt={warehouse.name}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        className="transition-transform duration-300 hover:scale-105"
+                        data-ai-hint={warehouse.dataAiHint}
+                    />
+                    <div className="absolute inset-0 bg-black/30"></div>
+                    <div className="absolute top-2 left-2">
+                         <Badge 
+                            variant={
+                                warehouse.availability === "Available" ? "default" :
+                                warehouse.availability === "Limited Slots" ? "secondary" : "destructive"
+                            }
+                            className={
+                                warehouse.availability === "Available" ? "bg-green-600 text-white" :
+                                warehouse.availability === "Limited Slots" ? "bg-amber-500 text-white" : ""
+                            }
+                        >
+                            {getAvailabilityText(warehouse.availability)}
+                        </Badge>
+                    </div>
+                </div>
+            </Link>
+            <div className="p-4">
               <h4 className="font-semibold">{warehouse.name}</h4>
               <p className="text-sm text-muted-foreground flex items-center gap-1">
                 <MapPin className="h-3 w-3" />
                 Approx. {warehouse.distance} {t.away}
               </p>
+              <Button 
+                asChild 
+                size="sm"
+                className="w-full mt-4"
+                disabled={warehouse.availability === "Full"}
+              >
+                <Link href={`/dashboard/book-slot?role=farmer&lang=${lang}&warehouse=${warehouse.id}`}>
+                    <CalendarPlus className="mr-2 h-4 w-4" />
+                    {t.bookSlot}
+                </Link>
+              </Button>
             </div>
-            <div className="flex items-center gap-4">
-                <Badge 
-                    variant={
-                        warehouse.availability === "Available" ? "default" :
-                        warehouse.availability === "Limited Slots" ? "secondary" : "destructive"
-                    }
-                    className={
-                        warehouse.availability === "Available" ? "bg-green-600 text-white" :
-                        warehouse.availability === "Limited Slots" ? "bg-amber-500 text-white" : ""
-                    }
-                >
-                    {getAvailabilityText(warehouse.availability)}
-                </Badge>
-                <Button 
-                    asChild 
-                    size="sm"
-                    disabled={warehouse.availability === "Full"}
-                >
-                    <Link href={`/dashboard/book-slot?role=farmer&lang=${lang}`}>
-                         <CalendarPlus className="mr-2 h-4 w-4" />
-                         {t.bookSlot}
-                    </Link>
-                </Button>
-            </div>
-          </div>
+          </Card>
         ))}
       </CardContent>
     </Card>

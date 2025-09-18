@@ -143,12 +143,14 @@ function RoleCard({ role, title, description, icon: Icon, lang, continueAsText }
 interface PerformerCardProps {
   name: string;
   role: string;
+  roleKey: string;
   location: string;
   grainsSaved: string;
   avatarUrl: string;
 }
 
-function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: PerformerCardProps) {
+function PerformerCard({ name, role, roleKey, location, grainsSaved, avatarUrl }: PerformerCardProps) {
+  const { t } = useTranslation();
   return (
     <Card className="relative group bg-sky-100/50 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
         <Image src="https://i.ibb.co/cXtXWVTv/logo-main.png" alt="eAaharSetu mini logo" width={80} height={32} className="mb-4" />
@@ -157,12 +159,12 @@ function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: Perform
           <AvatarFallback className="bg-blue-200 text-blue-800 font-medium text-lg">{name.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="font-bold text-lg text-blue-900 dark:text-blue-100">{name}</div>
-        <div className="text-sm text-blue-800 dark:text-blue-200 font-light">{role}</div>
+        <div className="text-sm text-blue-800 dark:text-blue-200 font-light">{t(roleKey, role)}</div>
         <div className="text-xs text-blue-600 dark:text-blue-300 font-light mb-4">{location}</div>
 
         <div className="mt-auto bg-white/70 dark:bg-blue-900/50 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-sm text-blue-900 dark:text-blue-100 font-medium shadow-sm">
             <Star className="h-4 w-4 text-yellow-500 fill-current" />
-            <span>{grainsSaved} Grains Saved</span>
+            <span>{grainsSaved} {t('grainsSavedUnit', 'Grains Saved')}</span>
         </div>
     </Card>
   );
@@ -170,13 +172,15 @@ function PerformerCard({ name, role, location, grainsSaved, avatarUrl }: Perform
 
 interface GuidelineCardProps {
   title: string;
+  titleKey: string;
   year: string;
   size: string;
   imageUrl: string;
   downloadUrl: string;
 }
 
-function GuidelineCard({ title, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
+function GuidelineCard({ title, titleKey, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
+  const { t } = useTranslation();
   return (
     <Card className="rounded-lg overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg bg-white/10 border-white/20">
       <a href={downloadUrl} download>
@@ -191,7 +195,7 @@ function GuidelineCard({ title, year, size, imageUrl, downloadUrl }: GuidelineCa
         </CardContent>
         <CardFooter className="p-3 bg-white/20 backdrop-blur-sm">
           <div>
-            <p className="font-semibold text-sm text-white">{title}</p>
+            <p className="font-semibold text-sm text-white">{t(titleKey, title)}</p>
             <p className="text-xs text-gray-300">{year}</p>
           </div>
         </CardFooter>
@@ -204,10 +208,11 @@ export default function RoleSelectionPage() {
   const { lang, setLang, t } = useTranslation();
   const pageContent = content.en;
   
-  const topPerformers: PerformerCardProps[] = [
+  const topPerformers: Omit<PerformerCardProps, 't'>[] = [
     {
       name: "Vijay Kumar",
       role: "Logistics Head",
+      roleKey: "logistics_head",
       location: "Maharashtra Region",
       grainsSaved: "1.2 Tons",
       avatarUrl: "https://i.ibb.co/Ldv5mMD/indian-farmer-2.jpg"
@@ -215,6 +220,7 @@ export default function RoleSelectionPage() {
     {
       name: "Meera Patel", 
       role: "Warehouse Manager",
+      roleKey: "warehouse_manager",
       location: "Nashik Cold Storage",
       grainsSaved: "800 kg",
       avatarUrl: "https://i.ibb.co/L6wzGZx/indian-farmer-3.jpg"
@@ -222,6 +228,7 @@ export default function RoleSelectionPage() {
     {
       name: "Rohan Gupta",
       role: "Top Farmer", 
+      roleKey: "top_farmer",
       location: "Pune District",
       grainsSaved: "1.5 Tons",
       avatarUrl: "https://i.ibb.co/QvRcVK86/Copilot-20250915-232755.png"
@@ -229,6 +236,7 @@ export default function RoleSelectionPage() {
     {
       name: "Aisha Sharma",
       role: "Quality Control Lead",
+      roleKey: "quality_control_lead",
       location: "Nagpur Hub", 
       grainsSaved: "750 kg",
       avatarUrl: "https://i.ibb.co/3Wk09vj/indian-farmer-4.jpg"
@@ -236,6 +244,7 @@ export default function RoleSelectionPage() {
     {
       name: "Suresh Singh",
       role: "Top Dealer",
+      roleKey: "top_dealer",
       location: "Aurangabad",
       grainsSaved: "2.1 Tons",
       avatarUrl: "https://i.ibb.co/fHn3v3V/indian-farmer-1.jpg"
@@ -243,6 +252,7 @@ export default function RoleSelectionPage() {
     {
         name: "Priya Rao",
         role: "Eco-Farmer",
+        roleKey: "eco_farmer",
         location: "Satara", 
         grainsSaved: "900 kg",
         avatarUrl: "https://i.ibb.co/v4d71vN/indian-farmer-5.jpg"
@@ -250,15 +260,17 @@ export default function RoleSelectionPage() {
     {
         name: "Amit Deshmukh",
         role: "Logistics Coordinator",
+        roleKey: "logistics_coordinator",
         location: "Mumbai Port",
         grainsSaved: "600 kg",
         avatarUrl: "https://i.ibb.co/VWVj4k3/indian-farmer-6.jpg"
     }
   ];
 
-  const guidelines: GuidelineCardProps[] = [
+  const guidelines: Omit<GuidelineCardProps, 't'>[] = [
     { 
       title: "Farmer Handbook",
+      titleKey: "farmer_handbook",
       year: "2024",
       size: "1.2 MB",
       imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
@@ -266,6 +278,7 @@ export default function RoleSelectionPage() {
     },
     { 
       title: "Dealer Operations Manual",
+      titleKey: "dealer_manual",
       year: "2024",
       size: "850 KB",
       imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
@@ -273,6 +286,7 @@ export default function RoleSelectionPage() {
     },
     { 
       title: "Warehouse Best Practices",
+      titleKey: "warehouse_practices",
       year: "2024",
       size: "1.5 MB",
       imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
@@ -280,6 +294,7 @@ export default function RoleSelectionPage() {
     },
     { 
       title: "Platform Usage Policy",
+      titleKey: "platform_policy",
       year: "2024",
       size: "450 KB",
       imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
@@ -415,7 +430,7 @@ export default function RoleSelectionPage() {
                     </div>
                     <div>
                       <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
-                        <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
+                        <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`${t('continueAs', 'Continue as')} ${t(role.titleKey, role.title)}`}>
                           <ArrowRight className="h-5 w-5" />
                         </Link>
                       </Button>
@@ -440,7 +455,7 @@ export default function RoleSelectionPage() {
                         </div>
                         <div>
                           <Button asChild size="icon" className="rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 group-hover:scale-110 transition-transform duration-300">
-                            <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`Continue as ${role.title}`}>
+                            <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`${t('continueAs', 'Continue as')} ${t(role.titleKey, role.title)}`}>
                               <ArrowRight className="h-5 w-5" />
                             </Link>
                           </Button>
@@ -471,16 +486,16 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={17300000} duration={3000} />
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              Value Saved this year
+                              {t('valueSaved', 'Value Saved this year')}
                           </p>
                       </div>
                       <div>
                           <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-yellow-600">
                               <Wheat className="h-6 w-6 md:h-8 md:w-8" />
-                              <AnimatedCounter end={5000} duration={3000} suffix=" Tons"/>
+                              <AnimatedCounter end={5000} duration={3000} suffix={` ${t('tons', 'Tons')}`}/>
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              Grains Saved
+                              {t('grainsSaved', 'Grains Saved')}
                           </p>
                       </div>
                         <div>
@@ -489,7 +504,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={25000} duration={3000} />
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              People Fed (Est.)
+                              {t('peopleFed', 'People Fed (Est.)')}
                           </p>
                       </div>
                   </div>
@@ -594,3 +609,6 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
+
+
+    

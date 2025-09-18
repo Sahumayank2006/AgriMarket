@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -52,10 +51,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useContext, useState } from "react";
-import { LanguageContext } from "@/contexts/language-context";
+import { useState } from "react";
 import { db } from "@/lib/firebase/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useTranslation } from "@/hooks/use-language-font";
 
 const formSchema = z.object({
   warehouse: z.string().min(1, "Please select a warehouse."),
@@ -67,62 +66,13 @@ const formSchema = z.object({
 });
 
 const cropOptions = [
-    { id: "rice", name: "Rice", image: "https://i.ibb.co/mCcRCBWN/Copilot-20250916-202230.png", en_name: "Rice", hi_name: "चावल" },
-    { id: "wheat", name: "Wheat", image: "https://i.ibb.co/hx5gjmcZ/Copilot-20250916-195707.png", en_name: "Wheat", hi_name: "गेहूँ" },
-    { id: "maize", name: "Maize", image: "https://i.ibb.co/RpnWxPMQ/image.png", en_name: "Maize", hi_name: "मक्का" },
+    { id: "rice", name: "Rice", image: "https://i.ibb.co/mCcRCBWN/Copilot-20250916-202230.png", nameKey: "rice" },
+    { id: "wheat", name: "Wheat", image: "https://i.ibb.co/hx5gjmcZ/Copilot-20250916-195707.png", nameKey: "wheat" },
+    { id: "maize", name: "Maize", image: "https://i.ibb.co/RpnWxPMQ/image.png", nameKey: "maize" },
 ];
 
-const pageContent = {
-    en: {
-        title: "Book a Warehouse Slot",
-        description: "Fill in the details to reserve your spot at a selected warehouse.",
-        selectWarehouse: "Select Warehouse*",
-        warehousePlaceholder: "Choose a warehouse from the list...",
-        warehouse1: "Gwalior Central Warehousing (5km away)",
-        warehouse2: "Malwa Agri Storage, Gwalior (8km away)",
-        warehouse3: "Chambal Cold Storage, Morena (40km away)",
-        selectCrop: "Select Crop*",
-        quantity: "Quantity*",
-        quintal: "Quintal",
-        ton: "Ton",
-        bookingDate: "Booking Date*",
-        pickDate: "Pick a date",
-        confirmBooking: "Confirm Booking",
-        bookingSuccessTitle: "Slot Booked Successfully!",
-        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `Your slot at ${values.warehouse} for ${values.quantity} ${values.unit} of ${values.cropType} is confirmed.`,
-        bookingErrorTitle: "Booking Failed",
-        bookingErrorDesc: "Could not save your booking. Please try again.",
-        juteBags: "No. of Jute Bags",
-        looseQuantity: "Loose Quantity"
-    },
-    hi: {
-        title: "वेयरहाउस स्लॉट बुक करें",
-        description: "चयनित वेयरहाउस में अपना स्थान आरक्षित करने के लिए विवरण भरें।",
-        selectWarehouse: "वेयरहाउस चुनें*",
-        warehousePlaceholder: "सूची में से एक वेयरहाउस चुनें...",
-        warehouse1: "ग्वालियर सेंट्रल वेयरहाउसिंग (5 किमी दूर)",
-        warehouse2: "मालवा एग्री स्टोरेज, ग्वालियर (8 किमी दूर)",
-        warehouse3: "चंबल कोल्ड स्टोरेज, मुरैना (40 किमी दूर)",
-        selectCrop: "फसल चुनें*",
-        quantity: "मात्रा*",
-        quintal: "क्विंटल",
-        ton: "टन",
-        bookingDate: "बुकिंग तिथि*",
-        pickDate: "एक तारीख चुनें",
-        confirmBooking: "बुकिंग की पुष्टि करें",
-        bookingSuccessTitle: "स्लॉट सफलतापूर्वक बुक हो गया!",
-        bookingSuccessDesc: (values: z.infer<typeof formSchema>) => `${values.warehouse} पर ${values.cropType} के ${values.quantity} ${values.unit} के लिए आपका स्लॉट कन्फर्म हो गया है।`,
-        bookingErrorTitle: "बुकिंग विफल",
-        bookingErrorDesc: "आपकी बुकिंग सहेजी नहीं जा सकी। कृपया पुनः प्रयास करें।",
-        juteBags: "जूट बैग की संख्या",
-        looseQuantity: "खुली मात्रा"
-    }
-}
-
-
 export default function BookSlotPage() {
-  const { lang } = useContext(LanguageContext);
-  const t = pageContent[lang];
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   
@@ -176,8 +126,8 @@ export default function BookSlotPage() {
       });
 
       toast({
-        title: t.bookingSuccessTitle,
-        description: "Slot has been generated",
+        title: t('booking_success_title', "Slot Booked Successfully!"),
+        description: t('booking_generated_desc', "Slot has been generated"),
       });
       form.reset({
         warehouse: "",
@@ -191,8 +141,8 @@ export default function BookSlotPage() {
       console.error("Error adding document: ", error);
       toast({
         variant: "destructive",
-        title: t.bookingErrorTitle,
-        description: t.bookingErrorDesc,
+        title: t('booking_error_title', "Booking Failed"),
+        description: t('booking_error_desc', "Could not save your booking. Please try again."),
       });
     } finally {
         setIsLoading(false);
@@ -206,7 +156,11 @@ export default function BookSlotPage() {
   return (
     <div className="space-y-6">
       <Card>
-        <CardContent className="pt-6">
+        <CardHeader>
+          <CardTitle>{t('book_warehouse_slot_title', "Book a Warehouse Slot")}</CardTitle>
+          <CardDescription>{t('book_warehouse_slot_desc', "Fill in the details to reserve your spot at a selected warehouse.")}</CardDescription>
+        </CardHeader>
+        <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
@@ -214,17 +168,17 @@ export default function BookSlotPage() {
                 name="warehouse"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="flex items-center gap-2"><Warehouse className="h-4 w-4"/>{t.selectWarehouse}</FormLabel>
+                    <FormLabel className="flex items-center gap-2"><Warehouse className="h-4 w-4"/>{t('select_warehouse', "Select Warehouse*")}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder={t.warehousePlaceholder} />
+                          <SelectValue placeholder={t('warehouse_placeholder', "Choose a warehouse from the list...")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Gwalior Central Warehousing">{t.warehouse1}</SelectItem>
-                        <SelectItem value="Malwa Agri Storage, Gwalior">{t.warehouse2}</SelectItem>
-                        <SelectItem value="Chambal Cold Storage, Morena">{t.warehouse3}</SelectItem>
+                        <SelectItem value="Gwalior Central Warehousing">{t('warehouse1', "Gwalior Central Warehousing (5km away)")}</SelectItem>
+                        <SelectItem value="Malwa Agri Storage, Gwalior">{t('warehouse2', "Malwa Agri Storage, Gwalior (8km away)")}</SelectItem>
+                        <SelectItem value="Chambal Cold Storage, Morena">{t('warehouse3', "Chambal Cold Storage, Morena (40km away)")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -237,7 +191,7 @@ export default function BookSlotPage() {
                 name="cropType"
                 render={({ field }) => (
                   <FormItem>
-                     <FormLabel className="flex items-center gap-2"><Carrot className="h-4 w-4"/>{t.selectCrop}</FormLabel>
+                     <FormLabel className="flex items-center gap-2"><Carrot className="h-4 w-4"/>{t('select_crop', "Select Crop*")}</FormLabel>
                      <FormControl>
                         <div className="grid grid-cols-3 gap-4">
                             {cropOptions.map((crop) => (
@@ -254,8 +208,7 @@ export default function BookSlotPage() {
                                     <CardContent className="p-2 flex flex-col items-center justify-center gap-2">
                                         <Image src={crop.image} alt={crop.name} width={100} height={100} className="rounded-md object-cover h-24 w-24" />
                                         <div className="text-center">
-                                            <p className="text-sm font-medium">{crop.en_name}</p>
-                                            <p className="text-sm font-light text-muted-foreground">{crop.hi_name}</p>
+                                            <p className="text-sm font-medium">{t(crop.nameKey, crop.name)}</p>
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -273,7 +226,7 @@ export default function BookSlotPage() {
                     name="quantityMode"
                     render={({ field }) => (
                       <FormItem>
-                         <FormLabel className="flex items-center gap-2"><Package className="h-4 w-4"/>{t.quantity}</FormLabel>
+                         <FormLabel className="flex items-center gap-2"><Package className="h-4 w-4"/>{t('quantity', "Quantity*")}</FormLabel>
                          <FormControl>
                            <RadioGroup
                             onValueChange={field.onChange}
@@ -283,13 +236,13 @@ export default function BookSlotPage() {
                                 <FormItem>
                                     <RadioGroupItem value="quantity" id="loose" className="peer sr-only" />
                                     <FormLabel htmlFor="loose" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
-                                        {t.looseQuantity}
+                                        {t('loose_quantity', "Loose Quantity")}
                                     </FormLabel>
                                 </FormItem>
                                  <FormItem>
                                     <RadioGroupItem value="bags" id="bags" className="peer sr-only" />
                                     <FormLabel htmlFor="bags" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
-                                        {t.juteBags}
+                                        {t('jute_bags', "No. of Jute Bags")}
                                     </FormLabel>
                                 </FormItem>
                             </RadioGroup>
@@ -304,7 +257,7 @@ export default function BookSlotPage() {
                         name="quantity"
                         render={({ field }) => (
                           <FormItem className="flex-1">
-                            <FormLabel className="sr-only">{t.quantity}</FormLabel>
+                            <FormLabel className="sr-only">{t('quantity', "Quantity*")}</FormLabel>
                              <div className="flex items-center">
                                 <Button type="button" variant="outline" size="icon" className="h-10 w-10" onClick={() => handleQuantityChange(-1)}><Minus className="h-4 w-4"/></Button>
                                 <FormControl>
@@ -332,7 +285,7 @@ export default function BookSlotPage() {
                                             <RadioGroupItem value="quintal" id="quintal" className="sr-only peer" />
                                         </FormControl>
                                         <FormLabel htmlFor="quintal" className="flex h-10 w-full items-center justify-center rounded-md border-2 border-muted bg-popover text-sm hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
-                                            {t.quintal}
+                                            {t('quintal', "Quintal")}
                                         </FormLabel>
                                     </FormItem>
                                      <FormItem className="flex-1">
@@ -340,7 +293,7 @@ export default function BookSlotPage() {
                                             <RadioGroupItem value="ton" id="ton" className="sr-only peer" />
                                         </FormControl>
                                         <FormLabel htmlFor="ton" className="flex h-10 w-full items-center justify-center rounded-md border-2 border-muted bg-popover text-sm hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer">
-                                            {t.ton}
+                                            {t('ton', "Ton")}
                                         </FormLabel>
                                     </FormItem>
                                 </RadioGroup>
@@ -355,7 +308,7 @@ export default function BookSlotPage() {
                 name="bookingDate"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel className="flex items-center gap-2"><CalendarIcon className="h-4 w-4"/>{t.bookingDate}</FormLabel>
+                    <FormLabel className="flex items-center gap-2"><CalendarIcon className="h-4 w-4"/>{t('booking_date', "Booking Date*")}</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -369,7 +322,7 @@ export default function BookSlotPage() {
                             {field.value ? (
                               format(field.value, "PPP")
                             ) : (
-                              <span>{t.pickDate}</span>
+                              <span>{t('pick_date', "Pick a date")}</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                           </Button>
@@ -390,7 +343,7 @@ export default function BookSlotPage() {
               />
               <Button type="submit" size="lg" disabled={isLoading}>
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {t.confirmBooking}
+                {t('confirm_booking', "Confirm Booking")}
               </Button>
             </form>
           </Form>
@@ -399,7 +352,3 @@ export default function BookSlotPage() {
     </div>
   );
 }
-
-    
-
-    

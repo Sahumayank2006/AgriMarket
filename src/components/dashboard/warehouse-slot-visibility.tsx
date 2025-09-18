@@ -37,6 +37,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useTranslation } from "@/hooks/use-language-font";
 
 interface Slot {
     id: string;
@@ -50,28 +51,28 @@ interface Slot {
     status: string;
 }
 
-const getStatusBadge = (status: string) => {
+const getStatusBadge = (status: string, t: (key: string, defaultText: string) => string) => {
     switch (status.toLowerCase()) {
         case 'completed':
-            return <Badge className="bg-green-600 text-white hover:bg-green-700"><CheckCircle className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge className="bg-green-600 text-white hover:bg-green-700"><CheckCircle className="mr-1 h-3 w-3"/>{t('completed', status)}</Badge>;
         case 'upcoming':
-            return <Badge className="bg-blue-500 text-white hover:bg-blue-600"><Clock className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge className="bg-blue-500 text-white hover:bg-blue-600"><Clock className="mr-1 h-3 w-3"/>{t('upcoming', status)}</Badge>;
         case 'cancelled':
-            return <Badge variant="destructive"><XCircle className="mr-1 h-3 w-3"/>{status}</Badge>;
-         case 'accepted':
-            return <Badge className="bg-green-600 text-white hover:bg-green-700"><Check className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge variant="destructive"><XCircle className="mr-1 h-3 w-3"/>{t('cancelled', status)}</Badge>;
+        case 'accepted':
+            return <Badge className="bg-green-600 text-white hover:bg-green-700"><Check className="mr-1 h-3 w-3"/>{t('accepted', status)}</Badge>;
         case 'rejected':
-            return <Badge variant="destructive"><Ban className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge variant="destructive"><Ban className="mr-1 h-3 w-3"/>{t('rejected', status)}</Badge>;
         default:
-            return <Badge variant="outline">{status}</Badge>;
+            return <Badge variant="outline">{t(status.toLowerCase(), status)}</Badge>;
     }
 }
-
 
 export function WarehouseSlotVisibility() {
     const [bookedSlots, setBookedSlots] = useState<Slot[]>([]);
     const [loading, setLoading] = useState(true);
     const { toast } = useToast();
+    const { t } = useTranslation();
     const isInitialLoad = useRef(true);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
@@ -92,10 +93,9 @@ export function WarehouseSlotVisibility() {
             } else {
                  querySnapshot.docChanges().forEach((change) => {
                     if (change.type === "added") {
-                        const newSlot = change.doc.data();
                         toast({
-                            title: "New Slot Booked!",
-                            description: `A farmer has booked a slot. Kindly check.`
+                            title: t('new_slot_booked', "New Slot Booked!"),
+                            description: t('new_slot_booked_desc', `A farmer has booked a slot. Kindly check.`)
                         });
                     }
                 });
@@ -104,7 +104,7 @@ export function WarehouseSlotVisibility() {
         });
 
         return () => unsubscribe();
-    }, [toast]);
+    }, [toast, t]);
 
     const handleUpdateStatus = async (slot: Slot, status: "Accepted" | "Rejected") => {
         const slotRef = doc(db, "slots", slot.id);
@@ -115,22 +115,22 @@ export function WarehouseSlotVisibility() {
              await addDoc(collection(db, "notifications"), {
                 userId: slot.farmerId,
                 icon: status === "Accepted" ? "CheckCircle" : "XCircle",
-                title: `Booking ${status}!`,
-                description: `Your booking for ${slot.quantity} ${slot.unit} of ${slot.cropType} has been ${status.toLowerCase()}.`,
+                title: t('booking_status_title', `Booking ${status}!`),
+                description: t('booking_status_desc', `Your booking for ${slot.quantity} ${slot.unit} of ${slot.cropType} has been ${status.toLowerCase()}.`),
                 timestamp: serverTimestamp(),
                 read: false,
             });
 
             toast({
-                title: "Slot Updated",
-                description: `Booking ${slot.id} has been marked as ${status}.`
+                title: t('slot_updated', "Slot Updated"),
+                description: t('slot_updated_desc', `Booking ${slot.id} has been marked as ${status}.`)
             });
         } catch (error) {
             console.error("Error updating slot status:", error);
             toast({
                 variant: "destructive",
-                title: "Update Failed",
-                description: "Could not update the slot status. Please try again."
+                title: t('update_failed', "Update Failed"),
+                description: t('update_failed_desc', "Could not update the slot status. Please try again.")
             });
         }
     };
@@ -144,22 +144,22 @@ export function WarehouseSlotVisibility() {
             await addDoc(collection(db, "notifications"), {
                 userId: slot.farmerId,
                 icon: "XCircle",
-                title: "Booking Deleted by Warehouse",
-                description: `Your booking for ${slot.quantity} ${slot.unit} of ${slot.cropType} on ${format(slot.bookingDate.toDate(), "PPP")} has been removed by the warehouse manager.`,
+                title: t('booking_deleted_title', "Booking Deleted by Warehouse"),
+                description: t('booking_deleted_desc', `Your booking for ${slot.quantity} ${slot.unit} of ${slot.cropType} on ${format(slot.bookingDate.toDate(), "PPP")} has been removed by the warehouse manager.`),
                 timestamp: serverTimestamp(),
                 read: false,
             });
 
             toast({
-                title: "Slot Deleted",
-                description: `Booking ${slot.id} has been permanently deleted.`
+                title: t('slot_deleted', "Slot Deleted"),
+                description: t('slot_deleted_desc', `Booking ${slot.id} has been permanently deleted.`)
             });
         } catch (error) {
             console.error("Error deleting slot:", error);
              toast({
                 variant: "destructive",
-                title: "Deletion Failed",
-                description: "Could not delete the slot. Please try again."
+                title: t('deletion_failed', "Deletion Failed"),
+                description: t('deletion_failed_desc', "Could not delete the slot. Please try again.")
             });
         } finally {
             setDialogOpen(false);
@@ -175,9 +175,9 @@ export function WarehouseSlotVisibility() {
       <CardHeader className="px-4 sm:px-6">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-base sm:text-lg">Upcoming Slot Bookings</CardTitle>
+            <CardTitle className="text-base sm:text-lg">{t('upcoming_slot_bookings', "Upcoming Slot Bookings")}</CardTitle>
             <CardDescription className="text-xs sm:text-sm">
-              Review and manage scheduled drop-offs from farmers.
+              {t('upcoming_slot_bookings_desc', "Review and manage scheduled drop-offs from farmers.")}
             </CardDescription>
           </div>
           {hasMoreSlots && (
@@ -190,12 +190,12 @@ export function WarehouseSlotVisibility() {
               {isExpanded ? (
                 <>
                   <ChevronUp className="h-4 w-4" />
-                  Show Less
+                  {t('show_less', "Show Less")}
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-4 w-4" />
-                  Show All ({bookedSlots.length})
+                  {t('show_all', `Show All (${bookedSlots.length})`)}
                 </>
               )}
             </Button>
@@ -213,12 +213,12 @@ export function WarehouseSlotVisibility() {
                 <Table className="min-w-full">
                 <TableHeader>
                     <TableRow>
-                    <TableHead className="text-xs sm:text-sm">Farmer</TableHead>
-                    <TableHead className="text-xs sm:text-sm hidden sm:table-cell">Crop Type</TableHead>
-                    <TableHead className="text-xs sm:text-sm">Quantity</TableHead>
-                    <TableHead className="text-xs sm:text-sm hidden md:table-cell">Arrival Date</TableHead>
-                    <TableHead className="text-xs sm:text-sm">Status</TableHead>
-                    <TableHead className="text-xs sm:text-sm text-right">Actions</TableHead>
+                    <TableHead className="text-xs sm:text-sm">{t('farmer', "Farmer")}</TableHead>
+                    <TableHead className="text-xs sm:text-sm hidden sm:table-cell">{t('crop_type', "Crop Type")}</TableHead>
+                    <TableHead className="text-xs sm:text-sm">{t('quantity', "Quantity")}</TableHead>
+                    <TableHead className="text-xs sm:text-sm hidden md:table-cell">{t('arrival_date', "Arrival Date")}</TableHead>
+                    <TableHead className="text-xs sm:text-sm">{t('status', "Status")}</TableHead>
+                    <TableHead className="text-xs sm:text-sm text-right">{t('actions', "Actions")}</TableHead>
                     </TableRow>
                 </TableHeader>
             <TableBody>
@@ -239,7 +239,7 @@ export function WarehouseSlotVisibility() {
                     <TableCell className="p-2 sm:p-4 hidden sm:table-cell text-xs sm:text-sm">{slot.cropType}</TableCell>
                     <TableCell className="p-2 sm:p-4 text-xs sm:text-sm">{slot.quantity} {slot.unit}</TableCell>
                     <TableCell className="p-2 sm:p-4 hidden md:table-cell text-xs sm:text-sm">{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
-                    <TableCell className="p-2 sm:p-4">{getStatusBadge(slot.status)}</TableCell>
+                    <TableCell className="p-2 sm:p-4">{getStatusBadge(slot.status, t)}</TableCell>
                     <TableCell className="p-2 sm:p-4 text-right">
                         <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -249,13 +249,13 @@ export function WarehouseSlotVisibility() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuLabel>{t('actions', "Actions")}</DropdownMenuLabel>
                             <DropdownMenuItem 
                                 disabled={slot.status !== 'Upcoming'}
                                 onClick={() => handleUpdateStatus(slot, 'Accepted')}
                             >
                             <Check className="mr-2 h-4 w-4" />
-                            Accept
+                            {t('accept', "Accept")}
                             </DropdownMenuItem>
                              <DropdownMenuItem 
                                 className="text-destructive"
@@ -263,16 +263,16 @@ export function WarehouseSlotVisibility() {
                                 onClick={() => handleUpdateStatus(slot, 'Rejected')}
                             >
                             <Ban className="mr-2 h-4 w-4" />
-                            Reject
+                            {t('reject', "Reject")}
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <User className="mr-2 h-4 w-4" />
-                                View Farmer Profile
+                                {t('view_farmer_profile', "View Farmer Profile")}
                             </DropdownMenuItem>
                             <AlertDialogTrigger asChild>
                                 <DropdownMenuItem className="text-destructive" onClick={() => setSelectedSlot(slot)}>
                                     <Trash2 className="mr-2 h-4 w-4" />
-                                    Delete Permanently
+                                    {t('delete_permanently', "Delete Permanently")}
                                 </DropdownMenuItem>
                             </AlertDialogTrigger>
                         </DropdownMenuContent>
@@ -285,16 +285,15 @@ export function WarehouseSlotVisibility() {
             </div>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t('are_you_sure', "Are you absolutely sure?")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete the booking
-                        for <span className="font-semibold">{selectedSlot?.farmerName}</span>'s <span className="font-semibold">{selectedSlot?.cropType}</span> and notify them.
+                        {t('delete_booking_confirmation', `This action cannot be undone. This will permanently delete the booking for ${selectedSlot?.farmerName}'s ${selectedSlot?.cropType} and notify them.`)}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel onClick={() => setSelectedSlot(null)}>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel onClick={() => setSelectedSlot(null)}>{t('cancel', "Cancel")}</AlertDialogCancel>
                     <AlertDialogAction onClick={() => handleDeleteSlot(selectedSlot)}>
-                        Yes, delete it
+                        {t('yes_delete_it', "Yes, delete it")}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

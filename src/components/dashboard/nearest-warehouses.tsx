@@ -12,30 +12,8 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Warehouse, CalendarPlus } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
-import { useContext } from "react";
-import { LanguageContext } from "@/contexts/language-context";
 import Image from "next/image";
-
-const pageContent = {
-    en: {
-        title: "Nearest Warehouses",
-        description: "Find available storage facilities near your farm location.",
-        available: "Available",
-        limited: "Limited Slots",
-        full: "Full",
-        bookSlot: "Book Slot",
-        away: "away"
-    },
-    hi: {
-        title: "निकटतम गोदाम",
-        description: "अपने खेत के स्थान के पास उपलब्ध भंडारण सुविधाएं खोजें।",
-        available: "उपलब्ध",
-        limited: "सीमित स्लॉट",
-        full: "भरा हुआ",
-        bookSlot: "स्लॉट बुक करें",
-        away: "दूर"
-    }
-}
+import { useTranslation } from "@/hooks/use-language-font";
 
 const mockWarehouses = [
   {
@@ -43,6 +21,7 @@ const mockWarehouses = [
     name: "Gwalior Central Warehousing",
     distance: "5 km",
     availability: "Available",
+    availabilityKey: "available",
     imageUrl: "https://picsum.photos/seed/gwalior-central/400/200",
     dataAiHint: "large warehouse"
   },
@@ -51,6 +30,7 @@ const mockWarehouses = [
     name: "Malwa Agri Storage, Gwalior",
     distance: "8 km",
     availability: "Limited Slots",
+    availabilityKey: "limited_slots",
     imageUrl: "https://picsum.photos/seed/malwa-agri/400/200",
     dataAiHint: "modern warehouse"
   },
@@ -59,30 +39,21 @@ const mockWarehouses = [
     name: "Chambal Cold Storage, Morena",
     distance: "40 km",
     availability: "Full",
+    availabilityKey: "full",
     imageUrl: "https://picsum.photos/seed/chambal-cold/400/200",
     dataAiHint: "cold storage"
   },
 ];
 
 export function NearestWarehouses() {
-  const { lang } = useContext(LanguageContext);
-  const t = pageContent[lang];
-
-  const getAvailabilityText = (availability: string) => {
-    switch (availability) {
-        case "Available": return t.available;
-        case "Limited Slots": return t.limited;
-        case "Full": return t.full;
-        default: return availability;
-    }
-  }
+  const { lang, t } = useTranslation();
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2"><Warehouse /> {t.title}</CardTitle>
+        <CardTitle className="flex items-center gap-2"><Warehouse /> {t('nearest_warehouses', "Nearest Warehouses")}</CardTitle>
         <CardDescription>
-          {t.description}
+          {t('nearest_warehouses_desc', "Find available storage facilities near your farm location.")}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -110,7 +81,7 @@ export function NearestWarehouses() {
                                 warehouse.availability === "Limited Slots" ? "bg-amber-500 text-white" : ""
                             }
                         >
-                            {getAvailabilityText(warehouse.availability)}
+                            {t(warehouse.availabilityKey, warehouse.availability)}
                         </Badge>
                     </div>
                 </div>
@@ -119,7 +90,7 @@ export function NearestWarehouses() {
               <h4 className="font-semibold">{warehouse.name}</h4>
               <p className="text-sm text-muted-foreground flex items-center gap-1">
                 <MapPin className="h-3 w-3" />
-                Approx. {warehouse.distance} {t.away}
+                {t('approx', 'Approx.')} {warehouse.distance} {t('away', "away")}
               </p>
               <Button 
                 asChild 
@@ -129,7 +100,7 @@ export function NearestWarehouses() {
               >
                 <Link href={`/dashboard/book-slot?role=farmer&lang=${lang}&warehouse=${warehouse.id}`}>
                     <CalendarPlus className="mr-2 h-4 w-4" />
-                    {t.bookSlot}
+                    {t('book_slot', "Book Slot")}
                 </Link>
               </Button>
             </div>

@@ -51,121 +51,68 @@ import {
 import { cn } from "@/lib/utils";
 import type { Role } from "@/lib/types";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { useContext } from "react";
-import { LanguageContext, content } from "@/contexts/language-context";
 import { NotificationDropdown } from "./notification-dropdown";
 import { Button } from "../ui/button";
+import { useTranslation } from "@/hooks/use-language-font";
 
 const navItemsContent = {
-    en: {
-        farmer: [
-            { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-            { href: "/dashboard/profile", label: "My Profile", icon: User },
-            { href: "/dashboard/slot-history", label: "Slot History", icon: CalendarCheck },
-        ],
-        dealer: [
-            { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
-            { href: "/dashboard/orders", label: "My Orders", icon: Package },
-            { isNotification: true, label: "Notifications", icon: Bell },
-            { isProfile: true, label: "Profile", icon: User },
-        ],
-        "green-guardian": [
-            { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
-            { href: "/dashboard/inventory", label: "Inventory", icon: Package },
-            { href: "/dashboard/slot-management", label: "Slot Management", icon: CalendarCheck },
-            { href: "/dashboard/route-optimization", label: "Logistics", icon: Truck },
-            { href: "/dashboard/alerts", label: "Alerts", icon: Bell },
-            { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
-            { href: "/dashboard/profile", label: "My Profile", icon: User },
-            { href: "/dashboard/settings", label: "Settings", icon: Settings },
-        ],
-        logistics: [
-            { href: "/dashboard", label: "Logistics Overview", icon: Truck },
-            { href: "/dashboard/route-optimization", label: "Route Optimization", icon: Map },
-            { href: "/dashboard/delivery-tracking", label: "Delivery Tracking", icon: Package },
-        ],
-        admin: [
-            { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-            { href: "/dashboard/users", label: "User Management", icon: Users },
-            { href: "/dashboard/transactions", label: "Transactions", icon: Handshake },
-            { href: "/dashboard/platform-analytics", label: "Platform Analytics", icon: LineChart },
-        ],
-        roles: {
-            farmer: "Farmer",
-            dealer: "Dealer",
-            admin: "Admin",
-            "green-guardian": "Warehouse Manager",
-            logistics: "Logistics",
-        },
-        totalRevenue: "Total Revenue",
-        profile: "Profile",
-        settings: "Settings",
-        logout: "Log out",
-    },
-    hi: {
-        farmer: [
-            { href: "/dashboard", label: "डैशबोर्ड", icon: LayoutDashboard },
-            { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
-            { href: "/dashboard/slot-history", label: "स्लॉट इतिहास", icon: CalendarCheck },
-        ],
-        dealer: [
-            { href: "/dashboard", label: "बाजार", icon: ShoppingBag },
-            { href: "/dashboard/orders", label: "मेरे आदेश", icon: Package },
-            { isNotification: true, label: "सूचनाएं", icon: Bell },
-            { isProfile: true, label: "प्रोफ़ाइल", icon: User },
-        ],
-        "green-guardian": [
-            { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },
-            { href: "/dashboard/inventory", label: "इन्वेंटरी", icon: Package },
-            { href: "/dashboard/slot-management", label: "स्लॉट प्रबंधन", icon: CalendarCheck },
-            { href: "/dashboard/route-optimization", label: "रसद", icon: Truck },
-            { href: "/dashboard/alerts", label: "अलर्ट", icon: Bell },
-            { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
-            { href: "/dashboard/profile", label: "मेरी प्रोफाइल", icon: User },
-            { href: "/dashboard/settings", label: "सेटिंग्स", icon: Settings },
-        ],
-        logistics: [
-            { href: "/dashboard", label: "रसद अवलोकन", icon: Truck },
-            { href: "/dashboard/route-optimization", label: "मार्ग अनुकूलन", icon: Map },
-            { href: "/dashboard/delivery-tracking", label: "वितरण ट्रैकिंग", icon: Package },
-        ],
-        admin: [
-            { href: "/dashboard", label: "अवलोकन", icon: LayoutDashboard },
-            { href: "/dashboard/users", label: "उपयोगकर्ता प्रबंधन", icon: Users },
-            { href: "/dashboard/transactions", label: "लेन-देन", icon: Handshake },
-            { href: "/dashboard/platform-analytics", label: "प्लेटफ़ॉर्म एनालिटिक्स", icon: LineChart },
-        ],
-        roles: {
-            farmer: "किसान",
-            dealer: "व्यापारी",
-            admin: "व्यवस्थापक",
-            "green-guardian": "गोदाम प्रबंधक",
-            logistics: "रसद",
-        },
-        totalRevenue: "कुल राजस्व",
-        profile: "प्रोफ़ाइल",
-        settings: "सेटिंग्स",
-        logout: "लॉग आउट",
-    }
-}
+  farmer: [
+      { href: "/dashboard", labelKey: "dashboard", defaultLabel: "Dashboard", icon: LayoutDashboard },
+      { href: "/dashboard/profile", labelKey: "my_profile", defaultLabel: "My Profile", icon: User },
+      { href: "/dashboard/slot-history", labelKey: "slot_history", defaultLabel: "Slot History", icon: CalendarCheck },
+  ],
+  dealer: [
+      { href: "/dashboard", labelKey: "marketplace", defaultLabel: "Marketplace", icon: ShoppingBag },
+      { href: "/dashboard/orders", labelKey: "my_orders", defaultLabel: "My Orders", icon: Package },
+      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
+      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
+  ],
+  "green-guardian": [
+      { href: "/dashboard", labelKey: "warehouse_overview", defaultLabel: "Warehouse Overview", icon: Warehouse },
+      { href: "/dashboard/inventory", labelKey: "inventory", defaultLabel: "Inventory", icon: Package },
+      { href: "/dashboard/slot-management", labelKey: "slot_management", defaultLabel: "Slot Management", icon: CalendarCheck },
+      { href: "/dashboard/route-optimization", labelKey: "logistics", defaultLabel: "Logistics", icon: Truck },
+      { href: "/dashboard/alerts", labelKey: "alerts", defaultLabel: "Alerts", icon: Bell },
+      { href: "/dashboard/analytics", labelKey: "analytics", defaultLabel: "Analytics", icon: LineChart },
+      { href: "/dashboard/profile", labelKey: "my_profile", defaultLabel: "My Profile", icon: User },
+      { href: "/dashboard/settings", labelKey: "settings", defaultLabel: "Settings", icon: Settings },
+  ],
+  logistics: [
+      { href: "/dashboard", labelKey: "logistics_overview", defaultLabel: "Logistics Overview", icon: Truck },
+      { href: "/dashboard/route-optimization", labelKey: "route_optimization", defaultLabel: "Route Optimization", icon: Map },
+      { href: "/dashboard/delivery-tracking", labelKey: "delivery_tracking", defaultLabel: "Delivery Tracking", icon: Package },
+  ],
+  admin: [
+      { href: "/dashboard", labelKey: "overview", defaultLabel: "Overview", icon: LayoutDashboard },
+      { href: "/dashboard/users", labelKey: "user_management", defaultLabel: "User Management", icon: Users },
+      { href: "/dashboard/transactions", labelKey: "transactions", defaultLabel: "Transactions", icon: Handshake },
+      { href: "/dashboard/platform_analytics", defaultLabel: "Platform Analytics", icon: LineChart },
+  ],
+};
 
+const roleNameKeys = {
+  farmer: "Farmer",
+  dealer: "Dealer",
+  admin: "Admin",
+  "green-guardian": "Warehouse Manager",
+  logistics: "Logistics",
+};
 
-function getRoleName(role: Role, lang: 'en' | 'hi' | 'bn' | 'te' | 'mr' | 'ta') {
-  const supportedLang = (['en', 'hi'].includes(lang as string)) ? lang as 'en' | 'hi' : 'en';
-  return navItemsContent[supportedLang].roles[role] || navItemsContent.en.roles[role];
+function getRoleName(role: Role, t: (key: string, defaultValue: string) => string) {
+  const roleKey = role.replace(/-/g, '_');
+  const defaultName = roleNameKeys[role] || "User";
+  return t(roleKey, defaultName);
 }
 
 export function SidebarNav() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { lang } = useContext(LanguageContext);
+  const { lang, t } = useTranslation();
   const role = (searchParams.get("role") as Role) || "farmer";
-  const supportedLang = (['en', 'hi'].includes(lang as string)) ? lang as 'en' | 'hi' : 'en';
-  const t = navItemsContent[supportedLang];
 
-  const currentNavItems = t[role] || navItemsContent.en[role];
+  const currentNavItems = navItemsContent[role] || navItemsContent.farmer;
   const roleQuery = `?role=${role}&lang=${lang}`;
-  const currentRoleName = getRoleName(role, lang);
+  const currentRoleName = getRoleName(role, t);
 
   return (
     <>
@@ -177,7 +124,7 @@ export function SidebarNav() {
       <SidebarContent className="p-2">
         <SidebarMenu>
           {currentNavItems.map((item) => (
-            <SidebarMenuItem key={item.label}>
+            <SidebarMenuItem key={item.labelKey}>
               {item.isNotification && role === 'dealer' ? (
                 <NotificationDropdown isSidebarItem={true} />
               ) : item.isProfile && role === 'dealer' ? (
@@ -185,7 +132,7 @@ export function SidebarNav() {
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton>
                             <User />
-                            <span>{item.label}</span>
+                            <span>{t(item.labelKey, item.defaultLabel)}</span>
                             <MoreHorizontal className="ml-auto h-4 w-4" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
@@ -204,20 +151,20 @@ export function SidebarNav() {
                       <DropdownMenuItem asChild>
                         <Link href={`/dashboard/profile${roleQuery}`}>
                           <User className="mr-2 h-4 w-4" />
-                          <span>{t.profile}</span>
+                          <span>{t("profile", "Profile")}</span>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link href={`/dashboard/settings${roleQuery}`}>
                           <Settings className="mr-2 h-4 w-4" />
-                          <span>{t.settings}</span>
+                          <span>{t("settings", "Settings")}</span>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem asChild>
                         <Link href="/">
                           <LogOut className="mr-2 h-4 w-4" />
-                          <span>{t.logout}</span>
+                          <span>{t("logout", "Log out")}</span>
                         </Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -226,13 +173,13 @@ export function SidebarNav() {
                 <SidebarMenuButton
                   asChild
                   isActive={pathname === item.href}
-                  tooltip={{ children: item.label }}
+                  tooltip={{ children: t(item.labelKey, item.defaultLabel) }}
                 >
                   <Link 
                     href={`${item.href}${roleQuery}`}
                   >
                     <item.icon />
-                    <span>{item.label}</span>
+                    <span>{t(item.labelKey, item.defaultLabel)}</span>
                   </Link>
                 </SidebarMenuButton>
               )}
@@ -240,7 +187,7 @@ export function SidebarNav() {
           ))}
             {role === 'farmer' && (
                  <div className="mt-4 p-2">
-                    <p className="text-xs text-muted-foreground px-2">{t.totalRevenue}</p>
+                    <p className="text-xs text-muted-foreground px-2">{t("total_revenue", "Total Revenue")}</p>
                     <p className="text-lg font-semibold px-2">₹1,25,430</p>
                 </div>
             )}
@@ -253,12 +200,12 @@ export function SidebarNav() {
                 <Avatar className="h-10 w-10">
                   <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
                   <AvatarFallback>
-                  {getRoleName(role, lang).charAt(0)}
+                  {currentRoleName.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
                     <p className="text-sm font-medium leading-none">
-                    {getRoleName(role, lang)}
+                    {currentRoleName}
                     </p>
                     <p className="text-xs leading-none text-muted-foreground">
                     {role}@eaaharsetu.com
@@ -290,20 +237,20 @@ export function SidebarNav() {
                         <DropdownMenuItem asChild>
                             <Link href={`/dashboard/profile${roleQuery}`}>
                             <User className="mr-2 h-4 w-4" />
-                            <span>{t.profile}</span>
+                            <span>{t("profile", "Profile")}</span>
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                             <Link href={`/dashboard/settings${roleQuery}`}>
                             <Settings className="mr-2 h-4 w-4" />
-                            <span>{t.settings}</span>
+                            <span>{t("settings", "Settings")}</span>
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
                             <Link href="/">
                             <LogOut className="mr-2 h-4 w-4" />
-                            <span>{t.logout}</span>
+                            <span>{t("logout", "Log out")}</span>
                             </Link>
                         </DropdownMenuItem>
                         </DropdownMenuContent>

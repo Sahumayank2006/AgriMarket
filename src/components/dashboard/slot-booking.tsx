@@ -10,44 +10,27 @@ import {
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { CalendarPlus } from "lucide-react";
-import { useContext } from "react";
-import { LanguageContext } from "@/contexts/language-context";
-
-const pageContent = {
-    en: {
-        title: "Warehouse Slot Booking",
-        description: "Schedule a time to drop off your produce at a nearby warehouse to ensure space and reduce wait times.",
-        buttonText: "Book a New Slot",
-        cta: "Click the button below to find a warehouse and book your slot."
-    },
-    hi: {
-        title: "वेयरहाउस स्लॉट बुकिंग",
-        description: "जगह सुनिश्चित करने और प्रतीक्षा समय कम करने के लिए अपने उत्पादों को पास के गोदाम में छोड़ने का समय निर्धारित करें।",
-        buttonText: "एक नया स्लॉट बुक करें",
-        cta: "गोदाम खोजने और अपना स्लॉट बुक करने के लिए नीचे दिए गए बटन पर क्लिक करें।"
-    }
-}
+import { useTranslation } from "@/hooks/use-language-font";
 
 export function SlotBooking() {
-  const { lang } = useContext(LanguageContext);
-  const t = pageContent[lang];
+  const { lang, t } = useTranslation();
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t.title}</CardTitle>
+        <CardTitle>{t('warehouse_slot_booking', "Warehouse Slot Booking")}</CardTitle>
         <CardDescription>
-          {t.description}
+          {t('warehouse_slot_booking_desc', "Schedule a time to drop off your produce at a nearby warehouse to ensure space and reduce wait times.")}
         </CardDescription>
       </CardHeader>
       <CardContent className="text-center">
         <p className="text-muted-foreground mb-4">
-            {t.cta}
+            {t('slot_booking_cta', "Click the button below to find a warehouse and book your slot.")}
         </p>
         <Button asChild size="lg">
             <Link href={`/dashboard/book-slot?role=farmer&lang=${lang}`}>
                 <CalendarPlus className="mr-2 h-5 w-5" />
-                {t.buttonText}
+                {t('book_new_slot', "Book a New Slot")}
             </Link>
         </Button>
       </CardContent>

@@ -22,6 +22,7 @@ import { useEffect, useState, useRef } from "react";
 import { db } from "@/lib/firebase/firebase";
 import { collection, onSnapshot, query, Timestamp, where, orderBy } from "firebase/firestore";
 import { format } from "date-fns";
+import { useTranslation } from "@/hooks/use-language-font";
 
 interface Slot {
     id: string;
@@ -34,22 +35,23 @@ interface Slot {
     status: string;
 }
 
-const getStatusBadge = (status: string) => {
+const getStatusBadge = (status: string, t: (key: string, defaultText: string) => string) => {
     switch (status.toLowerCase()) {
         case 'completed':
-            return <Badge className="bg-green-600 text-white hover:bg-green-700"><CheckCircle className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge className="bg-green-600 text-white hover:bg-green-700"><CheckCircle className="mr-1 h-3 w-3"/>{t('completed', status)}</Badge>;
         case 'upcoming':
-            return <Badge className="bg-blue-500 text-white hover:bg-blue-600"><Clock className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge className="bg-blue-500 text-white hover:bg-blue-600"><Clock className="mr-1 h-3 w-3"/>{t('upcoming', status)}</Badge>;
         case 'cancelled':
-            return <Badge variant="destructive"><XCircle className="mr-1 h-3 w-3"/>{status}</Badge>;
+            return <Badge variant="destructive"><XCircle className="mr-1 h-3 w-3"/>{t('cancelled', status)}</Badge>;
         default:
-            return <Badge variant="outline">{status}</Badge>;
+            return <Badge variant="outline">{t(status.toLowerCase(), status)}</Badge>;
     }
 }
 
 export function FarmerSlotHistory() {
     const [bookedSlots, setBookedSlots] = useState<Slot[]>([]);
     const [loading, setLoading] = useState(true);
+    const { t } = useTranslation();
 
     useEffect(() => {
         // In a real app, you'd get the current farmer's ID from auth state
@@ -76,7 +78,6 @@ export function FarmerSlotHistory() {
             setLoading(false);
         }, (error) => {
             console.error("Error fetching slot history: ", error);
-            // You might want to show an error message to the user
             setLoading(false);
         });
 
@@ -86,8 +87,8 @@ export function FarmerSlotHistory() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Your Bookings</CardTitle>
-                <CardDescription>A list of all your warehouse bookings.</CardDescription>
+                <CardTitle>{t('your_bookings', "Your Bookings")}</CardTitle>
+                <CardDescription>{t('your_bookings_desc', "A list of all your warehouse bookings.")}</CardDescription>
             </CardHeader>
             <CardContent>
                 {loading ? (
@@ -96,18 +97,18 @@ export function FarmerSlotHistory() {
                     </div>
                 ) : bookedSlots.length === 0 ? (
                     <div className="text-center py-16 text-muted-foreground">
-                        <p className="font-semibold">No bookings found.</p>
-                        <p className="text-sm">You haven't booked any warehouse slots yet.</p>
+                        <p className="font-semibold">{t('no_bookings_found', "No bookings found.")}</p>
+                        <p className="text-sm">{t('no_bookings_desc', "You haven't booked any warehouse slots yet.")}</p>
                     </div>
                 ) : (
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead><Warehouse className="h-4 w-4 inline-block mr-2"/>Warehouse</TableHead>
-                                <TableHead>Crop Type</TableHead>
-                                <TableHead>Quantity</TableHead>
-                                <TableHead>Booking Date</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead><Warehouse className="h-4 w-4 inline-block mr-2"/>{t('warehouse', "Warehouse")}</TableHead>
+                                <TableHead>{t('crop_type', "Crop Type")}</TableHead>
+                                <TableHead>{t('quantity', "Quantity")}</TableHead>
+                                <TableHead>{t('booking_date', "Booking Date")}</TableHead>
+                                <TableHead>{t('status', "Status")}</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -117,7 +118,7 @@ export function FarmerSlotHistory() {
                                     <TableCell>{slot.cropType}</TableCell>
                                     <TableCell>{slot.quantity} {slot.unit}</TableCell>
                                     <TableCell>{format(slot.bookingDate.toDate(), "PPP")}</TableCell>
-                                    <TableCell>{getStatusBadge(slot.status)}</TableCell>
+                                    <TableCell>{getStatusBadge(slot.status, t)}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

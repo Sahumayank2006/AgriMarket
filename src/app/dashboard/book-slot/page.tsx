@@ -69,7 +69,7 @@ const formSchema = z.object({
 const cropOptions = [
     { id: "rice", name: "Rice", image: "https://i.ibb.co/mCcRCBWN/Copilot-20250916-202230.png", en_name: "Rice", hi_name: "चावल" },
     { id: "wheat", name: "Wheat", image: "https://i.ibb.co/hx5gjmcZ/Copilot-20250916-195707.png", en_name: "Wheat", hi_name: "गेहूँ" },
-    { id: "maize", name: "Maize", image: "https://i.ibb.co/bX2gG0F/maize.png", en_name: "Maize", hi_name: "मक्का" },
+    { id: "maize", name: "Maize", image: "https://i.ibb.co/RpnWxPMQ/image.png", en_name: "Maize", hi_name: "मक्का" },
 ];
 
 const pageContent = {

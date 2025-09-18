@@ -98,91 +98,91 @@ const getStatusBadge = (status: string) => {
 
 export function DealerOrders() {
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-            <div>
-                <CardTitle>Order History</CardTitle>
-                <CardDescription>
-                Manage and review all your customer orders.
-                </CardDescription>
-            </div>
-            <div className="flex gap-2 w-full md:w-auto">
-                 <div className="relative flex-1 md:flex-initial">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input placeholder="Search by Order ID..." className="pl-10" />
-                </div>
-                <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline">
-                        Status <ChevronDown className="ml-2 h-4 w-4" />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuItem>All</DropdownMenuItem>
-                    <DropdownMenuItem>Pending</DropdownMenuItem>
-                    <DropdownMenuItem>Processing</DropdownMenuItem>
-                    <DropdownMenuItem>Shipped</DropdownMenuItem>
-                    <DropdownMenuItem>Delivered</DropdownMenuItem>
-                    <DropdownMenuItem>Cancelled</DropdownMenuItem>
-                </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
-        </div>
+    <>
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6">
+          <div>
+              <h1 className="text-2xl font-bold">Order History</h1>
+              <p className="text-muted-foreground">
+              Manage and review all your customer orders.
+              </p>
+          </div>
+          <div className="flex gap-2 w-full md:w-auto">
+                <div className="relative flex-1 md:flex-initial">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="Search by Order ID..." className="pl-10" />
+              </div>
+              <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                      Status <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                  <DropdownMenuItem>All</DropdownMenuItem>
+                  <DropdownMenuItem>Pending</DropdownMenuItem>
+                  <DropdownMenuItem>Processing</DropdownMenuItem>
+                  <DropdownMenuItem>Shipped</DropdownMenuItem>
+                  <DropdownMenuItem>Delivered</DropdownMenuItem>
+                  <DropdownMenuItem>Cancelled</DropdownMenuItem>
+              </DropdownMenuContent>
+              </DropdownMenu>
+          </div>
+      </div>
 
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Order ID</TableHead>
-              <TableHead>Customer</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Total</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {orders.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell className="font-medium">{order.id}</TableCell>
-                <TableCell>{order.customer}</TableCell>
-                <TableCell>{order.date}</TableCell>
-                <TableCell>{order.total}</TableCell>
-                <TableCell>
-                  {getStatusBadge(order.status)}
-                </TableCell>
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>
-                        <FileText className="mr-2 h-4 w-4" />
-                        View Details
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                         <Truck className="mr-2 h-4 w-4" />
-                        Track Order
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive">
-                        Cancel Order
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
+      <Card>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Order ID</TableHead>
+                <TableHead>Customer</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Total</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+            </TableHeader>
+            <TableBody>
+              {orders.map((order) => (
+                <TableRow key={order.id}>
+                  <TableCell className="font-medium">{order.id}</TableCell>
+                  <TableCell>{order.customer}</TableCell>
+                  <TableCell>{order.date}</TableCell>
+                  <TableCell>{order.total}</TableCell>
+                  <TableCell>
+                    {getStatusBadge(order.status)}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                          <span className="sr-only">Open menu</span>
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>
+                          <FileText className="mr-2 h-4 w-4" />
+                          View Details
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Truck className="mr-2 h-4 w-4" />
+                          Track Order
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="text-destructive">
+                          Cancel Order
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </>
   );
 }

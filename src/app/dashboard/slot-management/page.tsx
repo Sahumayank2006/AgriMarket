@@ -1,6 +1,5 @@
 
 import { WarehouseSlotVisibility } from "@/components/dashboard/warehouse-slot-visibility";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Suspense } from "react";
 
 export default function SlotManagementPage() {

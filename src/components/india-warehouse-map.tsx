@@ -1,13 +1,14 @@
+
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import "leaflet/dist/leaflet.css";
+import React, { useMemo } from "react";
 import {
-	MapContainer as RLMapContainer,
-	TileLayer as RLTileLayer,
-	CircleMarker as RLCircleMarker,
-	Tooltip as RLTooltip,
+	MapContainer,
+	TileLayer,
+	CircleMarker,
+	Tooltip,
 } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Warehouse } from "lucide-react";
 
@@ -70,12 +71,6 @@ function seededRandom(seed: number) {
 }
 
 export default function IndiaWarehouseMap() {
-	// Avoid double-init in React 18 StrictMode by rendering after mount
-	const [mounted, setMounted] = useState(false);
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
 	const warehouses: WarehousePoint[] = useMemo(() => {
 		const rnd = seededRandom(42);
 		const pts: WarehousePoint[] = [];
@@ -99,12 +94,6 @@ export default function IndiaWarehouseMap() {
 		return pts.slice(0, Math.max(100, pts.length));
 	}, []);
 
-	// Aliases (with any) to keep TS relaxed while preserving clean JSX
-	const MC = RLMapContainer as unknown as React.ComponentType<any>;
-	const TL = RLTileLayer as unknown as React.ComponentType<any>;
-	const CM = RLCircleMarker as unknown as React.ComponentType<any>;
-	const TT = RLTooltip as unknown as React.ComponentType<any>;
-
 	return (
 		<Card className="hover:shadow-md transition-shadow overflow-hidden">
 			<CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
@@ -120,9 +109,7 @@ export default function IndiaWarehouseMap() {
 			</CardHeader>
 			<CardContent>
 				<div className="w-full h-[360px] rounded-lg overflow-hidden border">
-					{mounted && (
-						<MC
-							key="india-map"
+						<MapContainer
 							center={[22.5, 79]}
 							zoom={5}
 							minZoom={4}
@@ -130,12 +117,12 @@ export default function IndiaWarehouseMap() {
 							scrollWheelZoom={false}
 							className="h-full w-full"
 					 >
-							<TL
+							<TileLayer
 								attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+								url="https://tiles.openfreemap.org/styles/liberty/{z}/{x}/{y}.png"
 							/>
 							{warehouses.map((w) => (
-								<CM
+								<CircleMarker
 									key={w.id}
 									center={[w.lat, w.lng]}
 									radius={5}
@@ -145,20 +132,18 @@ export default function IndiaWarehouseMap() {
 										fillOpacity: 0.85,
 									}}
 							 >
-									<TT direction="top" offset={[0, -6]} opacity={1} className="text-xs">
+									<Tooltip direction="top" offset={[0, -6]} opacity={1} className="text-xs">
 										<div className="text-xs">
 											<div className="font-medium">{w.name}</div>
 											<div className="text-muted-foreground">{w.state}</div>
 											<div className="text-muted-foreground">Capacity: {w.capacity} tons</div>
 										</div>
-									</TT>
-								</CM>
+									</Tooltip>
+								</CircleMarker>
 							))}
-						</MC>
-					)}
+						</MapContainer>
 				</div>
 			</CardContent>
 		</Card>
 	);
 }
-

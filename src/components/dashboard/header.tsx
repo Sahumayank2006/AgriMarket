@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import {
   Bell,
   Home,
+  Languages,
   LogOut,
   Moon,
   Settings,
@@ -31,6 +32,7 @@ import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import type { Role } from "@/lib/types";
 import { LanguageContext, content } from "@/contexts/language-context";
+import type { LangKey } from "@/contexts/language-context";
 import { NotificationDropdown } from "./notification-dropdown";
 
 function getRoleName(role: Role | null, lang: 'en' | 'hi' | 'bn' | 'te' | 'mr' | 'ta') {
@@ -59,7 +61,7 @@ function getRoleName(role: Role | null, lang: 'en' | 'hi' | 'bn' | 'te' | 'mr' |
 export function Header() {
   const searchParams = useSearchParams();
   const [role, setRole] = useState<Role | null>(null);
-  const { lang } = useContext(LanguageContext);
+  const { lang, setLang } = useContext(LanguageContext);
   const t = content[lang];
 
   useEffect(() => {
@@ -80,7 +82,22 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* Placeholder to balance the layout, can be removed or used for other actions */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm" className="border-blue-500 border-2 text-white bg-transparent hover:bg-white/10 hover:text-white">
+              <Languages className="mr-1 h-3 w-3 md:mr-2 md:h-4 md:w-4" />
+              <span className="text-xs">{content[lang].langName}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );

@@ -8,14 +8,6 @@ import { RouteOptimization } from "./route-optimization";
 export default function LogisticsDashboard() {
   return (
     <div className="flex flex-col gap-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>Welcome, Logistics Manager!</CardTitle>
-          <CardDescription>
-            Manage routes, track deliveries, and ensure timely distribution of produce.
-          </CardDescription>
-        </CardHeader>
-      </Card>
       <Tabs defaultValue="route-optimization" className="w-full">
         <TabsList className="grid w-full grid-cols-1 md:grid-cols-3">
           <TabsTrigger value="route-optimization">

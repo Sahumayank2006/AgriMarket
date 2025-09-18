@@ -39,25 +39,7 @@ export default function FarmerDashboard() {
 
   return (
     <div className="flex flex-col gap-8">
-       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle>{t.welcome}</CardTitle>
-            <CardDescription className="mt-2">
-              {t.description}
-            </CardDescription>
-          </div>
-          <Button asChild variant="outline">
-            <Link href={`/dashboard/profile?role=farmer&lang=${lang}`}>
-              <User className="mr-2 h-4 w-4" />
-              {t.manageProfile}
-            </Link>
-          </Button>
-        </CardHeader>
-        <CardContent className="space-y-6">
-            <FarmLocationMap />
-        </CardContent>
-      </Card>
+      <FarmLocationMap />
       
       <div className="grid lg:grid-cols-2 gap-8">
         <NearestWarehouses />

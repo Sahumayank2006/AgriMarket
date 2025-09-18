@@ -27,6 +27,7 @@ import { formatDistanceToNow } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import type { Role } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
+import { SidebarMenuButton } from "../ui/sidebar";
 
 type NotificationIcon = "CheckCircle" | "Package" | "AlertTriangle" | "User" | "XCircle";
 
@@ -50,7 +51,7 @@ const iconMap: Record<NotificationIcon, React.ReactNode> = {
 };
 
 
-export function NotificationDropdown() {
+export function NotificationDropdown({ isSidebarItem }: { isSidebarItem?: boolean }) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const searchParams = useSearchParams();
   const role = searchParams.get("role") as Role | null;
@@ -62,6 +63,7 @@ export function NotificationDropdown() {
         switch(role) {
             case "farmer": return "farmer-rohan";
             case "green-guardian": return "warehouse-manager";
+            case "dealer": return "dealer-user";
             default: return null;
         }
     }
@@ -157,16 +159,26 @@ export function NotificationDropdown() {
     }
   };
 
+  const trigger = isSidebarItem ? (
+    <SidebarMenuButton>
+        <Bell />
+        <span>Notifications</span>
+        {unreadCount > 0 && (
+            <Badge className="ml-auto">{unreadCount}</Badge>
+        )}
+    </SidebarMenuButton>
+  ) : (
+    <Button variant="ghost" size="icon" aria-label="Notifications" className="relative">
+      <Bell className="h-5 w-5" />
+      {unreadCount > 0 && (
+        <Badge className="absolute -top-1 -right-1 h-5 w-5 justify-center p-0">{unreadCount}</Badge>
+      )}
+    </Button>
+  );
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Notifications" className="relative">
-          <Bell className="h-5 w-5" />
-          {unreadCount > 0 && (
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 justify-center p-0">{unreadCount}</Badge>
-          )}
-        </Button>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-80 md:w-96" align="end">
         <div className="flex items-center justify-between px-2 py-1.5">
           <DropdownMenuLabel>Notifications</DropdownMenuLabel>

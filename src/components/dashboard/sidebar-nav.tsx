@@ -66,7 +66,7 @@ const navItemsContent = {
         dealer: [
             { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
             { href: "/dashboard/orders", label: "My Orders", icon: Package },
-            { href: "/dashboard/notifications", label: "Notifications", icon: Bell },
+            { isNotification: true, label: "Notifications", icon: Bell },
         ],
         "green-guardian": [
             { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
@@ -110,7 +110,7 @@ const navItemsContent = {
         dealer: [
             { href: "/dashboard", label: "बाजार", icon: ShoppingBag },
             { href: "/dashboard/orders", label: "मेरे आदेश", icon: Package },
-            { href: "/dashboard/notifications", label: "सूचनाएं", icon: Bell },
+            { isNotification: true, label: "सूचनाएं", icon: Bell },
         ],
         "green-guardian": [
             { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },
@@ -175,22 +175,26 @@ export function SidebarNav() {
       <SidebarContent className="p-2">
         <SidebarMenu>
           {currentNavItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
-              <SidebarMenuButton
-                asChild
-                isActive={pathname === item.href}
-                tooltip={{ children: item.label }}
-              >
-                <Link 
-                  href={`${item.href}${roleQuery}`}
-                  onClick={(e) => {
-                    console.log('Navigation clicked:', `${item.href}${roleQuery}`);
-                  }}
+            <SidebarMenuItem key={item.label}>
+              {item.isNotification && role === 'dealer' ? (
+                <NotificationDropdown isSidebarItem={true} />
+              ) : (
+                <SidebarMenuButton
+                  asChild
+                  isActive={pathname === item.href}
+                  tooltip={{ children: item.label }}
                 >
-                  <item.icon />
-                  <span>{item.label}</span>
-                </Link>
-              </SidebarMenuButton>
+                  <Link 
+                    href={`${item.href}${roleQuery}`}
+                    onClick={(e) => {
+                      console.log('Navigation clicked:', `${item.href}${roleQuery}`);
+                    }}
+                  >
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              )}
             </SidebarMenuItem>
           ))}
             {role === 'farmer' && (
@@ -222,7 +226,7 @@ export function SidebarNav() {
               </div>
 
               <div className="flex items-center gap-1">
-                <NotificationDropdown />
+                {role !== 'dealer' && <NotificationDropdown />}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">

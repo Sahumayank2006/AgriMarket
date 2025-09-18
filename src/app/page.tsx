@@ -105,40 +105,6 @@ function AnimatedCounter({ start = 0, end, duration = 2000, prefix = "", suffix 
 }
 
 
-interface RoleCardProps {
-  role: Role;
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  dataAiHint: string;
-}
-
-function RoleCard({ role, title, description, icon: Icon, lang, continueAsText }: RoleCardProps & { lang: LangKey; continueAsText: string }) {
-  return (
-    <Card className="group h-full flex flex-col text-center transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-primary/20 hover:shadow-2xl">
-      <CardHeader className="items-center pt-8">
-         <div className="p-4 bg-secondary rounded-full ring-8 ring-background group-hover:ring-primary/10 transition-all duration-300">
-            <Icon className="h-8 w-8 text-primary" />
-         </div>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <CardTitle className="text-2xl font-bold">{title}</CardTitle>
-        <CardDescription className="mt-2 text-base text-muted-foreground min-h-[50px]">
-            {description}
-        </CardDescription>
-      </CardContent>
-      <CardFooter>
-         <Button asChild size="lg" className="w-full text-lg">
-          <Link href={`/dashboard?role=${role}&lang=${lang}`}>
-             {continueAsText} {title}
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-}
-
 interface PerformerCardProps {
   name: string;
   role: string;
@@ -485,7 +451,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={17300000} duration={3000} />
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              {t('valueSaved', 'Value Saved this year')}
+                              {t('valueSaved', pageContent.valueSaved)}
                           </p>
                       </div>
                       <div>
@@ -494,7 +460,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={5000} duration={3000} suffix={` ${t('tons', 'Tons')}`}/>
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              {t('grainsSaved', 'Grains Saved')}
+                              {t('grainsSaved', pageContent.grainsSaved)}
                           </p>
                       </div>
                         <div>
@@ -503,7 +469,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={25000} duration={3000} />
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              {t('peopleFed', 'People Fed (Est.)')}
+                              {t('peopleFed', pageContent.peopleFed)}
                           </p>
                       </div>
                   </div>
@@ -608,5 +574,3 @@ export default function RoleSelectionPage() {
     </div>
   );
 }
-
-    

@@ -1,8 +1,15 @@
+
 import { useContext } from 'react';
 import { LanguageContext } from '@/contexts/language-context';
 
-export const useLanguageFont = () => {
-  const { lang } = useContext(LanguageContext);
+export const useTranslation = () => {
+  const context = useContext(LanguageContext);
+  
+  if (!context) {
+    throw new Error('useTranslation must be used within a LanguageProvider');
+  }
+
+  const { lang, setLang, t, loading } = context;
 
   const getFontClass = (weight: 'light' | 'medium' = 'light'): string => {
     const fontMap = {
@@ -32,6 +39,9 @@ export const useLanguageFont = () => {
 
   return {
     lang,
+    setLang,
+    t,
+    loading,
     getFontClass,
     getFontFamily,
     lightFont: getFontClass('light'),

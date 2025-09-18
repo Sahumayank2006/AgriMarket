@@ -59,6 +59,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LanguageContext, content } from "@/contexts/language-context";
 import type { LangKey } from "@/contexts/language-context";
+import { useTranslation } from "@/hooks/use-language-font";
 
 // Animated Counter Component
 function AnimatedCounter({ start = 0, end, duration = 2000, prefix = "", suffix = "" }: {
@@ -200,8 +201,8 @@ function GuidelineCard({ title, year, size, imageUrl, downloadUrl }: GuidelineCa
 }
 
 export default function RoleSelectionPage() {
-  const { lang, setLang } = useContext(LanguageContext);
-  const pageContent = content[lang];
+  const { lang, setLang, t } = useTranslation();
+  const pageContent = content.en;
   
   const topPerformers: PerformerCardProps[] = [
     {
@@ -391,15 +392,15 @@ export default function RoleSelectionPage() {
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-10">
               <div className="mb-4 text-foreground flex items-center gap-4">
                 <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                  {pageContent.welcome}
+                  {t('welcome', pageContent.welcome)}
                 </h1>
                 <Wheat className="h-12 w-12 text-yellow-500" />
               </div>
               <p className="max-w-3xl text-center text-xl text-muted-foreground mb-6 animate-in fade-in slide-in-from-top-6 duration-1000">
-                {pageContent.tagline}
+                {t('tagline', pageContent.tagline)}
               </p>
 
-              <p className="text-lg text-muted-foreground mb-6">{pageContent.chooseRole}</p>
+              <p className="text-lg text-muted-foreground mb-6">{t('chooseRole', pageContent.chooseRole)}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                 {pageContent.roles.slice(0, 4).map((role, idx) => (
                   <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
@@ -409,8 +410,8 @@ export default function RoleSelectionPage() {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
-                      <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
+                      <div className="font-bold text-xl text-foreground mb-1">{t(role.title.toLowerCase(), role.title)}</div>
+                      <div className="text-sm text-muted-foreground mb-2">{t(role.description.toLowerCase().replace(/ /g, '_'), role.description)}</div>
                     </div>
                     <div>
                       <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
@@ -434,8 +435,8 @@ export default function RoleSelectionPage() {
                           </div>
                         </div>
                         <div className="flex-1">
-                          <div className="font-bold text-xl text-foreground mb-1">{role.title}</div>
-                          <div className="text-sm text-muted-foreground mb-2">{role.description}</div>
+                          <div className="font-bold text-xl text-foreground mb-1">{t(role.title.toLowerCase(), role.title)}</div>
+                          <div className="text-sm text-muted-foreground mb-2">{t(role.description.toLowerCase().replace(/ /g, '_'), role.description)}</div>
                         </div>
                         <div>
                           <Button asChild size="icon" className="rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 group-hover:scale-110 transition-transform duration-300">
@@ -502,7 +503,7 @@ export default function RoleSelectionPage() {
                 <hr className="w-1/4 border-t-2 border-primary/20" />
               </div>
 
-              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{pageContent.topPerformers}</h2>
+              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{t('topPerformers', pageContent.topPerformers)}</h2>
               <div className="relative w-full">
                 <Carousel
                   setApi={setPerformerApi}
@@ -548,7 +549,7 @@ export default function RoleSelectionPage() {
         
         <section className="w-full bg-blue-800 text-white py-12">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-6 text-center">{pageContent.guidelinesTitle}</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">{t('guidelinesTitle', pageContent.guidelinesTitle)}</h2>
                 <Carousel
                     opts={{
                         align: "start",
@@ -570,14 +571,14 @@ export default function RoleSelectionPage() {
         <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-8 md:py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-around items-center gap-8 text-center md:text-left">
-              {pageContent.impactStats.slice(0, 4).map((stat, index) => (
+              {pageContent.impactStats.map((stat, index) => (
                 <div key={index} className="flex items-center gap-4">
                   <div className="bg-white rounded-full p-4 shadow-md">
                     <stat.icon className="h-8 w-8 text-primary" />
                   </div>
                   <div>
                     <p className="text-3xl font-bold text-blue-900 dark:text-blue-100">{stat.value}</p>
-                    <p className="text-muted-foreground mt-1 text-sm">{stat.label}</p>
+                    <p className="text-muted-foreground mt-1 text-sm">{t(stat.label.toLowerCase().replace(/ /g, '_'), stat.label)}</p>
                   </div>
                 </div>
               ))}
@@ -587,17 +588,9 @@ export default function RoleSelectionPage() {
       </div>
       <footer className="w-full bg-gray-900 text-white py-8">
           <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
-              <p>&copy; {new Date().getFullYear()} eAaharSetu. {pageContent.footerRights}</p>
+              <p>&copy; {new Date().getFullYear()} eAaharSetu. {t('footerRights', pageContent.footerRights)}</p>
           </div>
       </footer>
     </div>
   );
 }
-
-    
-    
-
-
-
-
-

@@ -107,14 +107,14 @@ function AnimatedCounter({ start = 0, end, duration = 2000, prefix = "", suffix 
 
 interface PerformerCardProps {
   name: string;
-  role: string;
   roleKey: string;
   location: string;
-  grainsSaved: string;
+  value: string;
+  unitKey: string;
   avatarUrl: string;
 }
 
-function PerformerCard({ name, role, roleKey, location, grainsSaved, avatarUrl }: PerformerCardProps) {
+function PerformerCard({ name, roleKey, location, value, unitKey, avatarUrl }: PerformerCardProps) {
   const { t } = useTranslation();
   return (
     <Card className="relative group bg-sky-100/50 dark:bg-blue-900/30 rounded-2xl border-2 border-transparent hover:border-blue-300 transition-all duration-300 flex flex-col items-center p-6 text-center h-full overflow-hidden">
@@ -124,19 +124,18 @@ function PerformerCard({ name, role, roleKey, location, grainsSaved, avatarUrl }
           <AvatarFallback className="bg-blue-200 text-blue-800 font-medium text-lg">{name.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="font-bold text-lg text-blue-900 dark:text-blue-100">{name}</div>
-        <div className="text-sm text-blue-800 dark:text-blue-200 font-light">{t(roleKey, role)}</div>
+        <div className="text-sm text-blue-800 dark:text-blue-200 font-light">{t(roleKey, roleKey.replace(/_/g, ' '))}</div>
         <div className="text-xs text-blue-600 dark:text-blue-300 font-light mb-4">{location}</div>
 
         <div className="mt-auto bg-white/70 dark:bg-blue-900/50 backdrop-blur-sm rounded-full px-4 py-2 flex items-center gap-2 text-sm text-blue-900 dark:text-blue-100 font-medium shadow-sm">
             <Star className="h-4 w-4 text-yellow-500 fill-current" />
-            <span>{grainsSaved} {t('grainsSavedUnit', 'Grains Saved')}</span>
+            <span>{value} {t(unitKey, unitKey)}</span>
         </div>
     </Card>
   );
 }
 
 interface GuidelineCardProps {
-  title: string;
   titleKey: string;
   year: string;
   size: string;
@@ -144,13 +143,13 @@ interface GuidelineCardProps {
   downloadUrl: string;
 }
 
-function GuidelineCard({ title, titleKey, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
+function GuidelineCard({ titleKey, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
   const { t } = useTranslation();
   return (
     <Card className="rounded-lg overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg bg-white/10 border-white/20">
       <a href={downloadUrl} download>
         <CardContent className="p-0 relative">
-          <Image src={imageUrl} alt={title} width={250} height={150} className="w-full h-auto object-cover" />
+          <Image src={imageUrl} alt={t(titleKey, titleKey)} width={250} height={150} className="w-full h-auto object-cover" />
           <div className="absolute top-2 right-2">
             <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs h-7">
               <Download className="mr-2 h-3 w-3" />
@@ -160,7 +159,7 @@ function GuidelineCard({ title, titleKey, year, size, imageUrl, downloadUrl }: G
         </CardContent>
         <CardFooter className="p-3 bg-white/20 backdrop-blur-sm">
           <div>
-            <p className="font-semibold text-sm text-white">{t(titleKey, title)}</p>
+            <p className="font-semibold text-sm text-white">{t(titleKey, titleKey.replace(/_/g, ' '))}</p>
             <p className="text-xs text-gray-300">{year}</p>
           </div>
         </CardFooter>
@@ -171,70 +170,68 @@ function GuidelineCard({ title, titleKey, year, size, imageUrl, downloadUrl }: G
 
 export default function RoleSelectionPage() {
   const { lang, setLang, t } = useTranslation();
-  const pageContent = content.en;
   
-  const topPerformers: Omit<PerformerCardProps, 't'>[] = [
+  const topPerformers: PerformerCardProps[] = [
     {
       name: "Vijay Kumar",
-      role: "Logistics Head",
       roleKey: "logistics_head",
       location: "Maharashtra Region",
-      grainsSaved: "1.2 Tons",
+      value: "1.2",
+      unitKey: "tons",
       avatarUrl: "https://i.ibb.co/Ldv5mMD/indian-farmer-2.jpg"
     },
     {
       name: "Meera Patel", 
-      role: "Warehouse Manager",
       roleKey: "warehouse_manager",
       location: "Nashik Cold Storage",
-      grainsSaved: "800 kg",
+      value: "800",
+      unitKey: "kg",
       avatarUrl: "https://i.ibb.co/L6wzGZx/indian-farmer-3.jpg"
     },
     {
       name: "Rohan Gupta",
-      role: "Top Farmer", 
       roleKey: "top_farmer",
       location: "Pune District",
-      grainsSaved: "1.5 Tons",
+      value: "1.5",
+      unitKey: "tons",
       avatarUrl: "https://i.ibb.co/QvRcVK86/Copilot-20250915-232755.png"
     },
     {
       name: "Aisha Sharma",
-      role: "Quality Control Lead",
       roleKey: "quality_control_lead",
       location: "Nagpur Hub", 
-      grainsSaved: "750 kg",
+      value: "750",
+      unitKey: "kg",
       avatarUrl: "https://i.ibb.co/3Wk09vj/indian-farmer-4.jpg"
     },
     {
       name: "Suresh Singh",
-      role: "Top Dealer",
       roleKey: "top_dealer",
       location: "Aurangabad",
-      grainsSaved: "2.1 Tons",
+      value: "2.1",
+      unitKey: "tons",
       avatarUrl: "https://i.ibb.co/fHn3v3V/indian-farmer-1.jpg"
     },
     {
         name: "Priya Rao",
-        role: "Eco-Farmer",
         roleKey: "eco_farmer",
         location: "Satara", 
-        grainsSaved: "900 kg",
+        value: "900",
+        unitKey: "kg",
         avatarUrl: "https://i.ibb.co/v4d71vN/indian-farmer-5.jpg"
     },
     {
         name: "Amit Deshmukh",
-        role: "Logistics Coordinator",
         roleKey: "logistics_coordinator",
         location: "Mumbai Port",
-        grainsSaved: "600 kg",
+        value: "600",
+        unitKey: "kg",
         avatarUrl: "https://i.ibb.co/VWVj4k3/indian-farmer-6.jpg"
     }
   ];
 
-  const guidelines: Omit<GuidelineCardProps, 't'>[] = [
+  const guidelines: GuidelineCardProps[] = [
     { 
-      title: "Farmer Handbook",
       titleKey: "farmer_handbook",
       year: "2024",
       size: "1.2 MB",
@@ -242,7 +239,6 @@ export default function RoleSelectionPage() {
       downloadUrl: "/docs/farmer-handbook.pdf"
     },
     { 
-      title: "Dealer Operations Manual",
       titleKey: "dealer_manual",
       year: "2024",
       size: "850 KB",
@@ -250,7 +246,6 @@ export default function RoleSelectionPage() {
       downloadUrl: "/docs/dealer-manual.pdf"
     },
     { 
-      title: "Warehouse Best Practices",
       titleKey: "warehouse_practices",
       year: "2024",
       size: "1.5 MB",
@@ -258,7 +253,6 @@ export default function RoleSelectionPage() {
       downloadUrl: "/docs/warehouse-practices.pdf"
     },
     { 
-      title: "Platform Usage Policy",
       titleKey: "platform_policy",
       year: "2024",
       size: "450 KB",
@@ -372,17 +366,17 @@ export default function RoleSelectionPage() {
             <div className="z-10 flex w-full max-w-5xl flex-col items-center justify-center pt-10">
               <div className="mb-4 text-foreground flex items-center gap-4">
                 <h1 className="text-5xl font-bold tracking-tight md:text-6xl animate-in fade-in slide-in-from-top-4 duration-1000">
-                  {t('welcome', pageContent.welcome)}
+                  {t('welcome', "Welcome to eAaharSetu")}
                 </h1>
                 <Wheat className="h-12 w-12 text-yellow-500" />
               </div>
               <p className="max-w-3xl text-center text-xl text-muted-foreground mb-6 animate-in fade-in slide-in-from-top-6 duration-1000">
-                {t('tagline', pageContent.tagline)}
+                {t('tagline', "Transforming Agriculture with a Single Digital Platform")}
               </p>
 
-              <p className="text-lg text-muted-foreground mb-6">{t('chooseRole', pageContent.chooseRole)}</p>
+              <p className="text-lg text-muted-foreground mb-6">{t('chooseRole', "Choose Your Role to Get Started")}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                {pageContent.roles.slice(0, 4).map((role, idx) => (
+                {content.en.roles.slice(0, 4).map((role, idx) => (
                   <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
                     <div className="flex-shrink-0">
                       <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-primary/30 transition-all duration-300">
@@ -404,10 +398,10 @@ export default function RoleSelectionPage() {
                 ))}
               </div>
               
-              {pageContent.roles.length > 4 && (
+              {content.en.roles.length > 4 && (
                 <div className="flex justify-center w-full max-w-4xl mx-auto mb-10">
                   <div className="w-full max-w-md">
-                    {pageContent.roles.slice(4).map((role, idx) => (
+                    {content.en.roles.slice(4).map((role, idx) => (
                       <div key={idx + 4} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-blue-500 hover:outline hover:outline-2 hover:outline-blue-500 hover:-translate-y-1">
                         <div className="flex-shrink-0">
                           <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-blue-400 transition-all duration-300">
@@ -451,7 +445,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={17300000} duration={3000} />
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              {t('valueSaved', pageContent.valueSaved)}
+                              {t('valueSaved', "Value Saved this year")}
                           </p>
                       </div>
                       <div>
@@ -460,7 +454,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={5000} duration={3000} suffix={` ${t('tons', 'Tons')}`}/>
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              {t('grainsSaved', pageContent.grainsSaved)}
+                              {t('grainsSaved', "Grains Saved")}
                           </p>
                       </div>
                         <div>
@@ -469,7 +463,7 @@ export default function RoleSelectionPage() {
                               <AnimatedCounter end={25000} duration={3000} />
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
-                              {t('peopleFed', pageContent.peopleFed)}
+                              {t('peopleFed', "People Fed (Est.)")}
                           </p>
                       </div>
                   </div>
@@ -483,7 +477,7 @@ export default function RoleSelectionPage() {
                 <hr className="w-1/4 border-t-2 border-primary/20" />
               </div>
 
-              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{t('topPerformers', pageContent.topPerformers)}</h2>
+              <h2 className="text-4xl font-bold text-foreground mb-6 max-w-6xl mx-auto">{t('topPerformers', "Top Performers")}</h2>
               <div className="relative w-full">
                 <Carousel
                   setApi={setPerformerApi}
@@ -529,7 +523,7 @@ export default function RoleSelectionPage() {
         
         <section className="w-full bg-blue-800 text-white py-12">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-6 text-center">{t('guidelinesTitle', pageContent.guidelinesTitle)}</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center">{t('guidelinesTitle', "Standard Guidelines")}</h2>
                 <Carousel
                     opts={{
                         align: "start",
@@ -551,7 +545,7 @@ export default function RoleSelectionPage() {
         <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-8 md:py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-around items-center gap-8 text-center md:text-left">
-              {pageContent.impactStats.map((stat, index) => (
+              {content.en.impactStats.map((stat, index) => (
                 <div key={index} className="flex items-center gap-4">
                   <div className="bg-white rounded-full p-4 shadow-md">
                     <stat.icon className="h-8 w-8 text-primary" />
@@ -568,7 +562,7 @@ export default function RoleSelectionPage() {
       </div>
       <footer className="w-full bg-gray-900 text-white py-8">
           <div className="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
-              <p>&copy; {new Date().getFullYear()} eAaharSetu. {t('footerRights', pageContent.footerRights)}</p>
+              <p>&copy; {new Date().getFullYear()} eAaharSetu. {t('footerRights', "All rights reserved.")}</p>
           </div>
       </footer>
     </div>

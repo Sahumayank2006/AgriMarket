@@ -30,6 +30,7 @@ export const content = {
     grainsSaved: "Grains Saved",
     peopleFed: "People Fed (Est.)",
     tons: "Tons",
+    kg: "kg",
     grainsSavedUnit: "Grains Saved",
     logistics_head: "Logistics Head",
     warehouse_manager: "Warehouse Manager",

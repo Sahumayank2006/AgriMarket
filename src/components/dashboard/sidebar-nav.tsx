@@ -58,8 +58,9 @@ import { useTranslation } from "@/hooks/use-language-font";
 const navItemsContent = {
   farmer: [
       { href: "/dashboard", labelKey: "dashboard", defaultLabel: "Dashboard", icon: LayoutDashboard },
-      { href: "/dashboard/profile", labelKey: "my_profile", defaultLabel: "My Profile", icon: User },
       { href: "/dashboard/slot-history", labelKey: "slot_history", defaultLabel: "Slot History", icon: CalendarCheck },
+      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
+      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   dealer: [
       { href: "/dashboard", labelKey: "marketplace", defaultLabel: "Marketplace", icon: ShoppingBag },
@@ -74,19 +75,23 @@ const navItemsContent = {
       { href: "/dashboard/route-optimization", labelKey: "logistics", defaultLabel: "Logistics", icon: Truck },
       { href: "/dashboard/alerts", labelKey: "alerts", defaultLabel: "Alerts", icon: Bell },
       { href: "/dashboard/analytics", labelKey: "analytics", defaultLabel: "Analytics", icon: LineChart },
-      { href: "/dashboard/profile", labelKey: "my_profile", defaultLabel: "My Profile", icon: User },
-      { href: "/dashboard/settings", labelKey: "settings", defaultLabel: "Settings", icon: Settings },
+      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
+      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   logistics: [
       { href: "/dashboard", labelKey: "logistics_overview", defaultLabel: "Logistics Overview", icon: Truck },
       { href: "/dashboard/route-optimization", labelKey: "route_optimization", defaultLabel: "Route Optimization", icon: Map },
       { href: "/dashboard/delivery-tracking", labelKey: "delivery_tracking", defaultLabel: "Delivery Tracking", icon: Package },
+      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
+      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   admin: [
       { href: "/dashboard", labelKey: "overview", defaultLabel: "Overview", icon: LayoutDashboard },
       { href: "/dashboard/users", labelKey: "user_management", defaultLabel: "User Management", icon: Users },
       { href: "/dashboard/transactions", labelKey: "transactions", defaultLabel: "Transactions", icon: Handshake },
       { href: "/dashboard/platform_analytics", defaultLabel: "Platform Analytics", icon: LineChart },
+      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
+      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
 };
 
@@ -123,11 +128,11 @@ export function SidebarNav() {
       </SidebarHeader>
       <SidebarContent className="p-2">
         <SidebarMenu>
-          {currentNavItems.map((item) => (
-            <SidebarMenuItem key={item.labelKey}>
-              {item.isNotification && role === 'dealer' ? (
+          {currentNavItems.map((item, index) => (
+            <SidebarMenuItem key={index}>
+              {item.isNotification ? (
                 <NotificationDropdown isSidebarItem={true} />
-              ) : item.isProfile && role === 'dealer' ? (
+              ) : item.isProfile ? (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton>
@@ -138,13 +143,21 @@ export function SidebarNav() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56" align="end" forceMount>
                       <DropdownMenuLabel className="font-normal">
-                        <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium leading-none">
-                            {currentRoleName}
-                          </p>
-                          <p className="text-xs leading-none text-muted-foreground">
-                            {role}@eaaharsetu.com
-                          </p>
+                        <div className="flex items-center gap-3">
+                           <Avatar className="h-10 w-10">
+                              <AvatarImage src={`https://i.pravatar.cc/150?u=${role}`} alt="User avatar" />
+                              <AvatarFallback>
+                              {currentRoleName.charAt(0)}
+                              </AvatarFallback>
+                           </Avatar>
+                           <div className="flex flex-col space-y-1">
+                              <p className="text-sm font-medium leading-none">
+                                {currentRoleName}
+                              </p>
+                              <p className="text-xs leading-none text-muted-foreground">
+                                {role}@eaaharsetu.com
+                              </p>
+                           </div>
                         </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
@@ -211,51 +224,6 @@ export function SidebarNav() {
                     {role}@eaaharsetu.com
                     </p>                    
                 </div>
-              </div>
-
-              <div className="flex items-center gap-1">
-                {role !== 'dealer' && <NotificationDropdown />}
-                {role !== 'dealer' && 
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56" align="end" forceMount>
-                        <DropdownMenuLabel className="font-normal">
-                            <div className="flex flex-col space-y-1">
-                            <p className="text-sm font-medium leading-none">
-                                {currentRoleName}
-                            </p>
-                            <p className="text-xs leading-none text-muted-foreground">
-                                {role}@eaaharsetu.com
-                            </p>
-                            </div>
-                        </DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild>
-                            <Link href={`/dashboard/profile${roleQuery}`}>
-                            <User className="mr-2 h-4 w-4" />
-                            <span>{t("profile", "Profile")}</span>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Link href={`/dashboard/settings${roleQuery}`}>
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>{t("settings", "Settings")}</span>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild>
-                            <Link href="/">
-                            <LogOut className="mr-2 h-4 w-4" />
-                            <span>{t("logout", "Log out")}</span>
-                            </Link>
-                        </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                }
               </div>
             </div>
         </div>

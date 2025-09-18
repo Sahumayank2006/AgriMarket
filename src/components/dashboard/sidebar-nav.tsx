@@ -67,6 +67,7 @@ const navItemsContent = {
             { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
             { href: "/dashboard/orders", label: "My Orders", icon: Package },
             { isNotification: true, label: "Notifications", icon: Bell },
+            { isProfile: true, label: "Profile", icon: User },
         ],
         "green-guardian": [
             { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
@@ -111,6 +112,7 @@ const navItemsContent = {
             { href: "/dashboard", label: "बाजार", icon: ShoppingBag },
             { href: "/dashboard/orders", label: "मेरे आदेश", icon: Package },
             { isNotification: true, label: "सूचनाएं", icon: Bell },
+            { isProfile: true, label: "प्रोफ़ाइल", icon: User },
         ],
         "green-guardian": [
             { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },
@@ -178,6 +180,48 @@ export function SidebarNav() {
             <SidebarMenuItem key={item.label}>
               {item.isNotification && role === 'dealer' ? (
                 <NotificationDropdown isSidebarItem={true} />
+              ) : item.isProfile && role === 'dealer' ? (
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <SidebarMenuButton>
+                            <User />
+                            <span>{item.label}</span>
+                            <MoreHorizontal className="ml-auto h-4 w-4" />
+                        </SidebarMenuButton>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56" align="end" forceMount>
+                      <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            {currentRoleName}
+                          </p>
+                          <p className="text-xs leading-none text-muted-foreground">
+                            {role}@eaaharsetu.com
+                          </p>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/profile${roleQuery}`}>
+                          <User className="mr-2 h-4 w-4" />
+                          <span>{t.profile}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/settings${roleQuery}`}>
+                          <Settings className="mr-2 h-4 w-4" />
+                          <span>{t.settings}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href="/">
+                          <LogOut className="mr-2 h-4 w-4" />
+                          <span>{t.logout}</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <SidebarMenuButton
                   asChild
@@ -186,9 +230,6 @@ export function SidebarNav() {
                 >
                   <Link 
                     href={`${item.href}${roleQuery}`}
-                    onClick={(e) => {
-                      console.log('Navigation clicked:', `${item.href}${roleQuery}`);
-                    }}
                   >
                     <item.icon />
                     <span>{item.label}</span>
@@ -227,45 +268,47 @@ export function SidebarNav() {
 
               <div className="flex items-center gap-1">
                 {role !== 'dealer' && <NotificationDropdown />}
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56" align="end" forceMount>
-                      <DropdownMenuLabel className="font-normal">
-                        <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium leading-none">
-                            {currentRoleName}
-                          </p>
-                          <p className="text-xs leading-none text-muted-foreground">
-                            {role}@eaaharsetu.com
-                          </p>
-                        </div>
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild>
-                        <Link href={`/dashboard/profile${roleQuery}`}>
-                          <User className="mr-2 h-4 w-4" />
-                          <span>{t.profile}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href={`/dashboard/settings${roleQuery}`}>
-                          <Settings className="mr-2 h-4 w-4" />
-                          <span>{t.settings}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild>
-                        <Link href="/">
-                          <LogOut className="mr-2 h-4 w-4" />
-                          <span>{t.logout}</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                {role !== 'dealer' && 
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+                            <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56" align="end" forceMount>
+                        <DropdownMenuLabel className="font-normal">
+                            <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium leading-none">
+                                {currentRoleName}
+                            </p>
+                            <p className="text-xs leading-none text-muted-foreground">
+                                {role}@eaaharsetu.com
+                            </p>
+                            </div>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                            <Link href={`/dashboard/profile${roleQuery}`}>
+                            <User className="mr-2 h-4 w-4" />
+                            <span>{t.profile}</span>
+                            </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href={`/dashboard/settings${roleQuery}`}>
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>{t.settings}</span>
+                            </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                            <Link href="/">
+                            <LogOut className="mr-2 h-4 w-4" />
+                            <span>{t.logout}</span>
+                            </Link>
+                        </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                }
               </div>
             </div>
         </div>

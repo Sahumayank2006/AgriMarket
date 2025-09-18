@@ -36,33 +36,30 @@ import type { LangKey } from "@/contexts/language-context";
 import { NotificationDropdown } from "./notification-dropdown";
 
 function getRoleName(role: Role | null, lang: 'en' | 'hi' | 'bn' | 'te' | 'mr' | 'ta') {
-  const supportedLang = (['en', 'hi'].includes(lang as string)) ? lang as 'en' | 'hi' : 'en';
   if (!role) return lang === 'en' ? "User" : "उपयोगकर्ता";
   
-  const names = {
-    en: {
+  const roleKey = role.replace(/-/g, '_') as keyof (typeof content)['en']['roles'][0];
+  const roleInfo = content.en.roles.find(r => r.role === role);
+  
+  // This is a simplified lookup, for full translation we'd use the `t` function
+  // but we can't use hooks at this top level easily.
+  const names: Record<string, string> = {
       farmer: "Farmer",
       dealer: "Dealer",
       admin: "Admin",
       "green-guardian": "Warehouse Manager",
       logistics: "Logistics",
-    },
-    hi: {
-      farmer: "किसान",
-      dealer: "व्यापारी",
-      admin: "व्यवस्थापक",
-      "green-guardian": "गोदाम प्रबंधक",
-      logistics: "रसद",
-    }
   };
-  return names[supportedLang][role];
+  
+  // A more robust solution would involve the full `t` function if we restructure
+  return names[role] || "User";
 }
+
 
 export function Header() {
   const searchParams = useSearchParams();
   const [role, setRole] = useState<Role | null>(null);
-  const { lang, setLang } = useContext(LanguageContext);
-  const t = content[lang];
+  const { lang, t } = useContext(LanguageContext);
 
   useEffect(() => {
     const newRole = searchParams.get("role") as Role | null;
@@ -78,26 +75,11 @@ export function Header() {
       </div>
 
       <div className="flex flex-1 items-center justify-center">
-        <h1 className="text-xl font-semibold text-center">{currentRoleName} {t.dashboardTitle}</h1>
+        <h1 className="text-xl font-semibold text-center">{currentRoleName} {t('dashboard', 'Dashboard')}</h1>
       </div>
 
       <div className="flex items-center gap-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="border-blue-500 border-2 text-white bg-transparent hover:bg-white/10 hover:text-white">
-              <Languages className="mr-1 h-3 w-3 md:mr-2 md:h-4 md:w-4" />
-              <span className="text-xs">{content[lang].langName}</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {/* Language dropdown removed from here */}
       </div>
     </header>
   );

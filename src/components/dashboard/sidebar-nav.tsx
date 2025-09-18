@@ -29,6 +29,7 @@ import {
   Bell,
   LogOut,
   MoreHorizontal,
+  Languages,
 } from "lucide-react";
 
 import {
@@ -54,19 +55,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { NotificationDropdown } from "./notification-dropdown";
 import { Button } from "../ui/button";
 import { useTranslation } from "@/hooks/use-language-font";
+import { content } from "@/contexts/language-context";
 
 const navItemsContent = {
   farmer: [
       { href: "/dashboard", labelKey: "dashboard", defaultLabel: "Dashboard", icon: LayoutDashboard },
       { href: "/dashboard/slot-history", labelKey: "slot_history", defaultLabel: "Slot History", icon: CalendarCheck },
-      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
-      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   dealer: [
       { href: "/dashboard", labelKey: "marketplace", defaultLabel: "Marketplace", icon: ShoppingBag },
       { href: "/dashboard/orders", labelKey: "my_orders", defaultLabel: "My Orders", icon: Package },
-      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
-      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   "green-guardian": [
       { href: "/dashboard", labelKey: "warehouse_overview", defaultLabel: "Warehouse Overview", icon: Warehouse },
@@ -75,23 +73,17 @@ const navItemsContent = {
       { href: "/dashboard/route-optimization", labelKey: "logistics", defaultLabel: "Logistics", icon: Truck },
       { href: "/dashboard/alerts", labelKey: "alerts", defaultLabel: "Alerts", icon: Bell },
       { href: "/dashboard/analytics", labelKey: "analytics", defaultLabel: "Analytics", icon: LineChart },
-      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
-      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   logistics: [
       { href: "/dashboard", labelKey: "logistics_overview", defaultLabel: "Logistics Overview", icon: Truck },
       { href: "/dashboard/route-optimization", labelKey: "route_optimization", defaultLabel: "Route Optimization", icon: Map },
       { href: "/dashboard/delivery-tracking", labelKey: "delivery_tracking", defaultLabel: "Delivery Tracking", icon: Package },
-      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
-      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
   admin: [
       { href: "/dashboard", labelKey: "overview", defaultLabel: "Overview", icon: LayoutDashboard },
       { href: "/dashboard/users", labelKey: "user_management", defaultLabel: "User Management", icon: Users },
       { href: "/dashboard/transactions", labelKey: "transactions", defaultLabel: "Transactions", icon: Handshake },
       { href: "/dashboard/platform_analytics", defaultLabel: "Platform Analytics", icon: LineChart },
-      { isNotification: true, labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
-      { isProfile: true, labelKey: "profile", defaultLabel: "Profile", icon: User },
   ],
 };
 
@@ -112,7 +104,7 @@ function getRoleName(role: Role, t: (key: string, defaultValue: string) => strin
 export function SidebarNav() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { lang, t } = useTranslation();
+  const { lang, setLang, t } = useTranslation();
   const role = (searchParams.get("role") as Role) || "farmer";
 
   const currentNavItems = navItemsContent[role] || navItemsContent.farmer;
@@ -130,14 +122,51 @@ export function SidebarNav() {
         <SidebarMenu>
           {currentNavItems.map((item, index) => (
             <SidebarMenuItem key={index}>
-              {item.isNotification ? (
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={{ children: t(item.labelKey, item.defaultLabel) }}
+              >
+                <Link 
+                  href={`${item.href}${roleQuery}`}
+                >
+                  <item.icon />
+                  <span>{t(item.labelKey, item.defaultLabel)}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+
+            <SidebarMenuItem>
                 <NotificationDropdown isSidebarItem={true} />
-              ) : item.isProfile ? (
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <SidebarMenuButton>
+                            <Languages />
+                            <span>{t('language', 'Language')}</span>
+                            <span className="ml-auto text-muted-foreground">{content[lang].langName}</span>
+                        </SidebarMenuButton>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56" align="end" forceMount>
+                        <DropdownMenuItem onClick={() => setLang('en')}>English</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setLang('hi')}>हिंदी</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton>
                             <User />
-                            <span>{t(item.labelKey, item.defaultLabel)}</span>
+                            <span>{t('profile', 'Profile')}</span>
                             <MoreHorizontal className="ml-auto h-4 w-4" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
@@ -182,22 +211,8 @@ export function SidebarNav() {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-              ) : (
-                <SidebarMenuButton
-                  asChild
-                  isActive={pathname === item.href}
-                  tooltip={{ children: t(item.labelKey, item.defaultLabel) }}
-                >
-                  <Link 
-                    href={`${item.href}${roleQuery}`}
-                  >
-                    <item.icon />
-                    <span>{t(item.labelKey, item.defaultLabel)}</span>
-                  </Link>
-                </SidebarMenuButton>
-              )}
             </SidebarMenuItem>
-          ))}
+
             {role === 'farmer' && (
                  <div className="mt-4 p-2">
                     <p className="text-xs text-muted-foreground px-2">{t("total_revenue", "Total Revenue")}</p>

@@ -152,19 +152,6 @@ export default function WarehouseSettingsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Settings className="h-5 w-5" />
-            Warehouse Manager Settings
-          </CardTitle>
-          <CardDescription>
-            Configure your notification preferences and alert settings.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
       {/* Communication Settings */}
       <Card>
         <CardHeader>

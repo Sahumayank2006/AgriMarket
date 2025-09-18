@@ -206,14 +206,6 @@ export default function BookSlotPage() {
   return (
     <div className="space-y-6">
       <Card>
-        <CardHeader>
-          <CardTitle>{t.title}</CardTitle>
-          <CardDescription>
-            {t.description}
-          </CardDescription>
-        </CardHeader>
-      </Card>
-      <Card>
         <CardContent className="pt-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

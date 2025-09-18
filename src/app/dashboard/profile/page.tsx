@@ -35,17 +35,6 @@ export default function ProfilePage() {
 
   return (
     <div className="space-y-6">
-       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Icon className="h-5 w-5" />
-            {title}
-          </CardTitle>
-          <CardDescription>
-            {description}
-          </CardDescription>
-        </CardHeader>
-      </Card>
       {component}
     </div>
   );

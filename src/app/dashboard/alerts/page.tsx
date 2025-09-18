@@ -35,21 +35,6 @@ export default function AlertsPage() {
         </Alert>
       )}
 
-      {/* Page Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
-          <Bell className="mr-3 h-7 w-7 text-red-500" />
-          Warehouse Alerts & Monitoring
-        </h1>
-        <p className="text-gray-600">
-          Real-time alerts for warehouse conditions, product shelf life, and weather impacts
-        </p>
-        <div className="flex items-center mt-2 text-sm text-muted-foreground">
-          <Clock className="h-4 w-4 mr-1" />
-          Last updated: {lastUpdated.toLocaleString()}
-        </div>
-      </div>
-
       {/* Current Conditions Overview */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <Card className="hover:shadow-md transition-shadow">
@@ -83,22 +68,6 @@ export default function AlertsPage() {
               <div className="text-2xl font-bold text-gray-900">{stats?.avgHumidity || 0}%</div>
             )}
             <p className="text-sm text-muted-foreground">Warehouse average</p>
-          </CardContent>
-        </Card>
-
-        <Card className="hover:shadow-md transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-medium text-gray-700">
-              Active Alerts
-            </CardTitle>
-            <Bell className="h-5 w-5 text-amber-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-gray-900">5</div>
-            <div className="text-sm text-muted-foreground">
-              <Badge variant="destructive" className="mr-1">2 Critical</Badge>
-              <Badge variant="outline">3 Medium</Badge>
-            </div>
           </CardContent>
         </Card>
       </div>

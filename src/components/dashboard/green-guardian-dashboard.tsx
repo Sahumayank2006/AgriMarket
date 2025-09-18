@@ -201,7 +201,7 @@ export default function GreenGuardianDashboard() {
   };
 
   return (
-    <div className="space-y-6 max-w-full overflow-hidden">
+    <div className="space-y-6">
       {/* Error Alert */}
       {error && (
         <Alert variant="destructive">

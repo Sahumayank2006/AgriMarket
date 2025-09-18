@@ -81,13 +81,6 @@ export default function AnalyticsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Analytics</h1>
-        <p className="text-muted-foreground">
-          View detailed analytics and insights for your operations.
-        </p>
-      </div>
-
       {renderAnalytics()}
     </div>
   );

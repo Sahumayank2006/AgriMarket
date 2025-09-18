@@ -29,6 +29,7 @@ import { useSensorData } from "@/hooks/use-sensor-data";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useTranslation } from "@/hooks/use-language-font";
 
 
 // Removed dummy sensor data - now using real data from hook
@@ -52,6 +53,7 @@ const sensorChartConfig = {
 };
 
 export default function GreenGuardianDashboard() {
+  const { t } = useTranslation();
   // Fetch real sensor data with 30-second refresh interval
   const { stats, chartData, isLoading, error, refetch } = useSensorData(30000);
   const searchParams = useSearchParams();
@@ -159,19 +161,19 @@ export default function GreenGuardianDashboard() {
   // Helper function to determine temperature status with rim animation
   const getTemperatureStatus = (temp: number) => {
     if (temp < 15) return { 
-      status: "Low", 
+      status: t('low', "Low"), 
       color: "text-blue-600",
       borderClass: "border-2 border-blue-500",
       rimClass: "rim-animation rim-animation-blue"
     };
     if (temp > 25) return { 
-      status: "High", 
+      status: t('high', "High"), 
       color: "text-red-600",
       borderClass: "border-2 border-red-500",
       rimClass: "rim-animation rim-animation-red"
     };
     return { 
-      status: "Optimal", 
+      status: t('optimal', "Optimal"), 
       color: "text-green-600",
       borderClass: "border-2 border-green-500",
       rimClass: ""
@@ -181,19 +183,19 @@ export default function GreenGuardianDashboard() {
   // Helper function to determine humidity status with rim animation
   const getHumidityStatus = (humidity: number) => {
     if (humidity < 45) return { 
-      status: "Low", 
+      status: t('low', "Low"), 
       color: "text-amber-600",
       borderClass: "border-2 border-amber-500",
       rimClass: "rim-animation rim-animation-amber"
     };
     if (humidity > 75) return { 
-      status: "High", 
+      status: t('high', "High"), 
       color: "text-red-600",
       borderClass: "border-2 border-red-500",
       rimClass: "rim-animation rim-animation-red"
     };
     return { 
-      status: "Stable", 
+      status: t('stable', "Stable"), 
       color: "text-green-600",
       borderClass: "border-2 border-green-500",
       rimClass: ""
@@ -207,10 +209,10 @@ export default function GreenGuardianDashboard() {
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription className="text-sm">
-            Failed to load sensor data: {error}
+            {t('sensor_data_error', 'Failed to load sensor data')}: {error}
             <Button variant="outline" size="sm" onClick={refetch} className="ml-2 mt-2 sm:mt-0">
               <RefreshCw className="h-3 w-3 mr-1" />
-              Retry
+              {t('retry', 'Retry')}
             </Button>
           </AlertDescription>
         </Alert>
@@ -221,19 +223,19 @@ export default function GreenGuardianDashboard() {
         <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-700">
-              Total Inventory
+              {t('total_inventory', 'Total Inventory')}
             </CardTitle>
             <Package className="h-5 w-5 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-gray-900">9,000 kg</div>
-            <p className="text-sm text-gray-500">Across 3 categories</p>
+            <p className="text-sm text-gray-500">{t('across_categories', 'Across 3 categories')}</p>
           </CardContent>
         </Card>
         
         <Card className={`hover:shadow-md transition-all duration-300 ${stats ? getTemperatureStatus(stats.avgTemperature).borderClass : 'border-2 border-gray-200'} ${stats ? getTemperatureStatus(stats.avgTemperature).rimClass : ''}`}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-medium text-gray-700">Avg. Temperature</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-700">{t('avg_temp', 'Avg. Temperature')}</CardTitle>
             <Thermometer className={`h-5 w-5 ${stats ? getTemperatureStatus(stats.avgTemperature).color : 'text-muted-foreground'}`} />
           </CardHeader>
           <CardContent>
@@ -244,7 +246,7 @@ export default function GreenGuardianDashboard() {
             )}
             {stats && (
               <p className={`text-sm font-medium ${getTemperatureStatus(stats.avgTemperature).color}`}>
-                {getTemperatureStatus(stats.avgTemperature).status} range
+                {getTemperatureStatus(stats.avgTemperature).status} {t('range', 'range')}
               </p>
             )}
           </CardContent>
@@ -253,7 +255,7 @@ export default function GreenGuardianDashboard() {
         <Card className={`hover:shadow-md transition-all duration-300 ${stats ? getHumidityStatus(stats.avgHumidity).borderClass : 'border-2 border-gray-200'} ${stats ? getHumidityStatus(stats.avgHumidity).rimClass : ''}`}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-gray-700">
-              Avg. Humidity
+              {t('avg_humidity', 'Avg. Humidity')}
             </CardTitle>
             <Droplets className={`h-5 w-5 ${stats ? getHumidityStatus(stats.avgHumidity).color : 'text-muted-foreground'}`} />
           </CardHeader>
@@ -265,7 +267,7 @@ export default function GreenGuardianDashboard() {
             )}
             {stats && (
               <p className={`text-sm font-medium ${getHumidityStatus(stats.avgHumidity).color}`}>
-                {getHumidityStatus(stats.avgHumidity).status} conditions
+                {getHumidityStatus(stats.avgHumidity).status} {t('conditions', 'conditions')}
               </p>
             )}
           </CardContent>
@@ -274,7 +276,7 @@ export default function GreenGuardianDashboard() {
         <Card className="hover:shadow-md transition-all duration-300 border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-medium text-orange-700">
-              Local Temperature
+              {t('local_temp', 'Local Temperature')}
             </CardTitle>
             <Thermometer className="h-5 w-5 text-orange-600" />
           </CardHeader>
@@ -282,7 +284,7 @@ export default function GreenGuardianDashboard() {
             <div className="text-2xl font-bold text-orange-900">28°C</div>
             <p className="text-sm text-orange-600 flex items-center">
               <Clock className="h-3 w-3 mr-1" />
-              Updated 5 min ago
+              {t('updated_5_min_ago', 'Updated 5 min ago')}
             </p>
           </CardContent>
         </Card>
@@ -291,7 +293,7 @@ export default function GreenGuardianDashboard() {
           <Card className="hover:shadow-lg transition-all duration-200 border-amber-200 bg-amber-50 cursor-pointer group">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
               <CardTitle className="text-sm font-medium text-amber-700">
-                Warehouse Alerts
+                {t('warehouse_alerts', 'Warehouse Alerts')}
               </CardTitle>
               <div className="flex items-center space-x-2">
                 <Bell className="h-5 w-5 text-amber-600" />
@@ -299,10 +301,10 @@ export default function GreenGuardianDashboard() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-amber-900">5 Active</div>
+              <div className="text-2xl font-bold text-amber-900">5 {t('active', 'Active')}</div>
               <p className="text-sm text-amber-600 flex items-center">
                 <span className="flex h-2 w-2 rounded-full bg-red-500 mr-2 animate-pulse"></span>
-                2 Critical alerts
+                2 {t('critical_alerts', 'Critical alerts')}
               </p>
             </CardContent>
           </Card>
@@ -317,14 +319,14 @@ export default function GreenGuardianDashboard() {
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
               <div className="space-y-1">
-                <CardTitle className="text-lg font-semibold text-gray-900">Real-time Sensor Dashboard</CardTitle>
+                <CardTitle className="text-lg font-semibold text-gray-900">{t('sensor_dashboard_title', 'Real-time Sensor Dashboard')}</CardTitle>
                 <CardDescription className="text-sm text-gray-600">
-                  Temperature and humidity over last 12 hours from IoT sensors
+                  {t('sensor_dashboard_desc', 'Temperature and humidity over last 12 hours from IoT sensors')}
                 </CardDescription>
               </div>
               <Button variant="outline" size="sm" onClick={refetch} disabled={isLoading}>
                 <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
-                Refresh
+                {t('refresh', 'Refresh')}
               </Button>
             </CardHeader>
             <CardContent>
@@ -357,7 +359,10 @@ export default function GreenGuardianDashboard() {
                       width={40}
                     />
                     <Tooltip content={<ChartTooltipContent />} />
-                    <Legend fontSize={10} />
+                    <Legend 
+                        formatter={(value) => t(value.toLowerCase(), value)}
+                        iconSize={10}
+                     />
                     <Line 
                       yAxisId="left" 
                       type="monotone" 
@@ -366,6 +371,7 @@ export default function GreenGuardianDashboard() {
                       strokeWidth={2} 
                       dot={tailDot(chartData.length, '--color-temperature') as any}
                       activeDot={{ r: 5 }}
+                      name={t('temperature', 'Temperature')}
                     />
                     <Line 
                       yAxisId="right" 
@@ -375,6 +381,7 @@ export default function GreenGuardianDashboard() {
                       strokeWidth={2} 
                       dot={tailDot(chartData.length, '--color-humidity') as any}
                       activeDot={{ r: 5 }}
+                       name={t('humidity', 'Humidity')}
                     />
                   </LineChart>
                 </ChartContainer>
@@ -382,7 +389,7 @@ export default function GreenGuardianDashboard() {
                 <div className="flex items-center justify-center h-[300px] text-gray-500">
                   <div className="text-center">
                     <AlertTriangle className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No sensor data available</p>
+                    <p>{t('no_sensor_data', 'No sensor data available')}</p>
                   </div>
                 </div>
               )}
@@ -392,9 +399,9 @@ export default function GreenGuardianDashboard() {
            {/* 5. Stock Level Tracker */}
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Stock Level Tracker</CardTitle>
+              <CardTitle className="text-lg font-semibold text-gray-900">{t('stock_level_tracker', 'Stock Level Tracker')}</CardTitle>
               <CardDescription className="text-sm text-gray-600">
-                Current, incoming, and outgoing stock levels by category
+                {t('stock_level_desc', 'Current, incoming, and outgoing stock levels by category')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -423,8 +430,9 @@ export default function GreenGuardianDashboard() {
                     }}
                   />
                   <Legend 
-                    fontSize={10}
+                    iconSize={10}
                     wrapperStyle={{ paddingTop: '10px' }}
+                    formatter={(value) => t(value.toLowerCase().replace(/ /g, '_'), value)}
                   />
                   <Bar dataKey="in_stock" fill="hsl(var(--chart-1))" name="In Stock (kg)" radius={[2, 2, 0, 0]} />
                   <Bar dataKey="incoming" fill="hsl(var(--chart-2))" name="Incoming (kg)" radius={[2, 2, 0, 0]} />
@@ -441,15 +449,15 @@ export default function GreenGuardianDashboard() {
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
               <div className="space-y-1">
-                <CardTitle className="text-lg font-semibold text-gray-900">Live IoT Dashboard</CardTitle>
+                <CardTitle className="text-lg font-semibold text-gray-900">{t('live_iot_dashboard', 'Live IoT Dashboard')}</CardTitle>
                 <CardDescription className="text-sm text-gray-600">
-                  Real-time Node-RED dashboard with live sensor feeds and controls
+                  {t('live_iot_desc', 'Real-time Node-RED dashboard with live sensor feeds and controls')}
                 </CardDescription>
               </div>
               <Button variant="outline" size="sm" asChild>
                 <a href={nodeRedUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  Open Full
+                  {t('open_full', 'Open Full')}
                 </a>
               </Button>
             </CardHeader>
@@ -470,7 +478,7 @@ export default function GreenGuardianDashboard() {
                   }}
                 />
                 <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs font-medium shadow-sm ${iframeError ? "bg-gray-400" : "bg-green-500 text-white animate-pulse"}`}>
-                  {iframeError ? "OFFLINE" : "LIVE"}
+                  {iframeError ? t('offline', 'OFFLINE') : t('live', 'LIVE')}
                 </div>
                 {iframeError && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
@@ -487,7 +495,7 @@ export default function GreenGuardianDashboard() {
                         setIframeKey((k) => k + 1);
                       }}
                     >
-                      <RefreshCw className="h-3 w-3 mr-2" /> Retry
+                      <RefreshCw className="h-3 w-3 mr-2" /> {t('retry', 'Retry')}
                     </Button>
                   </div>
                 )}

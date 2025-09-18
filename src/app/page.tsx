@@ -410,8 +410,8 @@ export default function RoleSelectionPage() {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-xl text-foreground mb-1">{t(role.title.toLowerCase(), role.title)}</div>
-                      <div className="text-sm text-muted-foreground mb-2">{t(role.description.toLowerCase().replace(/ /g, '_'), role.description)}</div>
+                      <div className="font-bold text-xl text-foreground mb-1">{t(role.titleKey, role.title)}</div>
+                      <div className="text-sm text-muted-foreground mb-2">{t(role.descriptionKey, role.description)}</div>
                     </div>
                     <div>
                       <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
@@ -435,8 +435,8 @@ export default function RoleSelectionPage() {
                           </div>
                         </div>
                         <div className="flex-1">
-                          <div className="font-bold text-xl text-foreground mb-1">{t(role.title.toLowerCase(), role.title)}</div>
-                          <div className="text-sm text-muted-foreground mb-2">{t(role.description.toLowerCase().replace(/ /g, '_'), role.description)}</div>
+                          <div className="font-bold text-xl text-foreground mb-1">{t(role.titleKey, role.title)}</div>
+                          <div className="text-sm text-muted-foreground mb-2">{t(role.descriptionKey, role.description)}</div>
                         </div>
                         <div>
                           <Button asChild size="icon" className="rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 group-hover:scale-110 transition-transform duration-300">
@@ -578,7 +578,7 @@ export default function RoleSelectionPage() {
                   </div>
                   <div>
                     <p className="text-3xl font-bold text-blue-900 dark:text-blue-100">{stat.value}</p>
-                    <p className="text-muted-foreground mt-1 text-sm">{t(stat.label.toLowerCase().replace(/ /g, '_'), stat.label)}</p>
+                    <p className="text-muted-foreground mt-1 text-sm">{t(stat.labelKey, stat.label)}</p>
                   </div>
                 </div>
               ))}

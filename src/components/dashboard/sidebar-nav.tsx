@@ -66,7 +66,6 @@ const navItemsContent = {
         dealer: [
             { href: "/dashboard", label: "Marketplace", icon: ShoppingBag },
             { href: "/dashboard/orders", label: "My Orders", icon: Package },
-            { href: "/dashboard/analytics", label: "Analytics", icon: LineChart },
         ],
         "green-guardian": [
             { href: "/dashboard", label: "Warehouse Overview", icon: Warehouse },
@@ -110,7 +109,6 @@ const navItemsContent = {
         dealer: [
             { href: "/dashboard", label: "बाजार", icon: ShoppingBag },
             { href: "/dashboard/orders", label: "मेरे आदेश", icon: Package },
-            { href: "/dashboard/analytics", label: "एनालिटिक्स", icon: LineChart },
         ],
         "green-guardian": [
             { href: "/dashboard", label: "गोदाम अवलोकन", icon: Warehouse },

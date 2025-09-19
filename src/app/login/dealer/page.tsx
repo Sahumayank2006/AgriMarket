@@ -58,7 +58,7 @@ export default function DealerLoginPage() {
         toast({
           variant: "destructive",
           title: "Login Failed",
-          description: "No account found with that email.",
+          description: "Incorrect credentials. Please try again.",
         });
         setIsLoading(false);
         return;
@@ -69,8 +69,15 @@ export default function DealerLoginPage() {
       // Here you would check the password hash. We'll skip that for the demo.
       if (dealerData.status === "approved") {
         router.push("/dashboard?role=dealer");
-      } else {
+      } else if (dealerData.status === "pending") {
         router.push("/login/dealer/pending");
+      } else { // 'rejected' or any other status
+        toast({
+          variant: "destructive",
+          title: "Login Failed",
+          description: "Your account has been rejected or is inactive.",
+        });
+        setIsLoading(false);
       }
 
     } catch (error) {
@@ -80,8 +87,7 @@ export default function DealerLoginPage() {
         title: "Login Failed",
         description: "An unexpected error occurred. Please try again.",
       });
-    } finally {
-      // Don't set loading to false on success because we are navigating away
+      setIsLoading(false);
     }
   }
 

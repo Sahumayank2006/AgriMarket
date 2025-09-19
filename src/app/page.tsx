@@ -179,7 +179,7 @@ export default function RoleSelectionPage() {
       location: "Maharashtra Region",
       value: "1.2",
       unitKey: "tons",
-      avatarUrl: "https://i.ibb.co/Ldv5mMD/indian-farmer-2.jpg"
+      avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     },
     {
       name: "Meera Patel", 
@@ -187,7 +187,7 @@ export default function RoleSelectionPage() {
       location: "Nashik Cold Storage",
       value: "800",
       unitKey: "kg",
-      avatarUrl: "https://i.ibb.co/L6wzGZx/indian-farmer-3.jpg"
+      avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     },
     {
       name: "Rohan Gupta",
@@ -195,7 +195,7 @@ export default function RoleSelectionPage() {
       location: "Pune District",
       value: "1.5",
       unitKey: "tons",
-      avatarUrl: "https://i.ibb.co/QvRcVK86/Copilot-20250915-232755.png"
+      avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     },
     {
       name: "Aisha Sharma",
@@ -203,7 +203,7 @@ export default function RoleSelectionPage() {
       location: "Nagpur Hub", 
       value: "750",
       unitKey: "kg",
-      avatarUrl: "https://i.ibb.co/3Wk09vj/indian-farmer-4.jpg"
+      avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     },
     {
       name: "Suresh Singh",
@@ -211,7 +211,7 @@ export default function RoleSelectionPage() {
       location: "Aurangabad",
       value: "2.1",
       unitKey: "tons",
-      avatarUrl: "https://i.ibb.co/fHn3v3V/indian-farmer-1.jpg"
+      avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     },
     {
         name: "Priya Rao",
@@ -219,7 +219,7 @@ export default function RoleSelectionPage() {
         location: "Satara", 
         value: "900",
         unitKey: "kg",
-        avatarUrl: "https://i.ibb.co/v4d71vN/indian-farmer-5.jpg"
+        avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     },
     {
         name: "Amit Deshmukh",
@@ -227,7 +227,7 @@ export default function RoleSelectionPage() {
         location: "Mumbai Port",
         value: "600",
         unitKey: "kg",
-        avatarUrl: "https://i.ibb.co/VWVj4k3/indian-farmer-6.jpg"
+        avatarUrl: "https://i.ibb.co/x8C9YHLn/image.png"
     }
   ];
 
@@ -564,3 +564,6 @@ export default function RoleSelectionPage() {
 
 
 
+
+
+    

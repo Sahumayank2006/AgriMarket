@@ -31,6 +31,7 @@ import {
   Star,
   Download,
 } from "lucide-react";
+import dynamic from 'next/dynamic';
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
@@ -59,6 +60,8 @@ import {
 import { LanguageContext, content } from "@/contexts/language-context";
 import type { LangKey } from "@/contexts/language-context";
 import { useTranslation } from "@/hooks/use-language-font";
+
+const IndiaWarehouseMap = dynamic(() => import('@/components/india-warehouse-map'), { ssr: false });
 
 // Animated Counter Component
 function AnimatedCounter({ start = 0, end, duration = 2000, prefix = "", suffix = "" }: {
@@ -235,28 +238,28 @@ export default function RoleSelectionPage() {
       titleKey: "farmer_handbook",
       year: "2024",
       size: "1.2 MB",
-      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      imageUrl: "https://i.ibb.co/HL7XkdFM/Generated-Image-September-18-2025-10-57-PM.png",
       downloadUrl: "/docs/farmer-handbook.pdf"
     },
     { 
       titleKey: "dealer_manual",
       year: "2024",
       size: "850 KB",
-      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      imageUrl: "https://i.ibb.co/HL7XkdFM/Generated-Image-September-18-2025-10-57-PM.png",
       downloadUrl: "/docs/dealer-manual.pdf"
     },
     { 
       titleKey: "warehouse_practices",
       year: "2024",
       size: "1.5 MB",
-      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      imageUrl: "https://i.ibb.co/HL7XkdFM/Generated-Image-September-18-2025-10-57-PM.png",
       downloadUrl: "/docs/warehouse-practices.pdf"
     },
     { 
       titleKey: "platform_policy",
       year: "2024",
       size: "450 KB",
-      imageUrl: "https://i.ibb.co/F8Y0YQf/doc-preview.png",
+      imageUrl: "https://i.ibb.co/HL7XkdFM/Generated-Image-September-18-2025-10-57-PM.png",
       downloadUrl: "/docs/platform-policy.pdf"
     },
   ];
@@ -450,7 +453,7 @@ export default function RoleSelectionPage() {
                       </div>
                       <div>
                           <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-yellow-600">
-                              <Wheat className="h-6 w-6 md:h-8 md:w-8" />
+                              <Wheat className="h-6 w-6 md:h-8 md-w-8" />
                               <AnimatedCounter end={5000} duration={3000} suffix={` ${t('tons', 'Tons')}`}/>
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
@@ -519,6 +522,10 @@ export default function RoleSelectionPage() {
               </div>
             </div>
           </section>
+
+          <section className="py-12">
+             <IndiaWarehouseMap />
+          </section>
         </main>
         
         <section className="w-full bg-blue-800 text-white py-12">
@@ -567,4 +574,5 @@ export default function RoleSelectionPage() {
       </footer>
     </div>
   );
-}
+
+    

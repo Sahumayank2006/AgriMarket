@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Link from "next/link";
@@ -147,25 +148,24 @@ interface GuidelineCardProps {
 function GuidelineCard({ titleKey, year, size, imageUrl, downloadUrl }: GuidelineCardProps) {
   const { t } = useTranslation();
   return (
-    <Card className="rounded-lg overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg bg-white/10 border-white/20">
-      <a href={downloadUrl} download className="block">
-        <CardContent className="p-0 relative aspect-[16/9]">
-          <Image src={imageUrl} alt={t(titleKey, titleKey)} fill style={{objectFit: 'cover'}} className="w-full h-full" />
-          <div className="absolute top-2 right-2">
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs h-7">
-              <Download className="mr-2 h-3 w-3" />
-              {size}
-            </Button>
-          </div>
-        </CardContent>
-        <CardFooter className="p-3 bg-white/20 backdrop-blur-sm">
+    <a href={downloadUrl} download className="block rounded-lg overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg bg-white/10 border-white/20">
+      <div className="relative aspect-video">
+        <Image src={imageUrl} alt={t(titleKey, titleKey)} fill style={{ objectFit: 'cover' }} />
+        <div className="absolute inset-0 bg-black/20"></div>
+      </div>
+      <div className="p-3 bg-white/20 backdrop-blur-sm">
+        <div className="flex justify-between items-center">
           <div>
             <p className="font-semibold text-sm text-white">{t(titleKey, titleKey.replace(/_/g, ' '))}</p>
             <p className="text-xs text-gray-300">{year}</p>
           </div>
-        </CardFooter>
-      </a>
-    </Card>
+          <Button size="sm" variant="secondary" className="rounded-full text-xs h-7 bg-blue-600 hover:bg-blue-700 text-white">
+            <Download className="mr-2 h-3 w-3" />
+            {size}
+          </Button>
+        </div>
+      </div>
+    </a>
   );
 }
 
@@ -521,9 +521,7 @@ export default function RoleSelectionPage() {
             </div>
           </section>
 
-        </main>
-        
-        <section className="w-full bg-blue-800 text-white py-12">
+          <section className="w-full bg-blue-800 text-white py-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold mb-6 text-center">{t('guidelinesTitle', "Standard Guidelines")}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -532,8 +530,10 @@ export default function RoleSelectionPage() {
                     ))}
                 </div>
             </div>
-        </section>
+          </section>
 
+        </main>
+        
         <section className="w-full bg-sky-100/70 dark:bg-sky-900/30 py-8 md:py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-around items-center gap-8 text-center md:text-left">
@@ -561,4 +561,5 @@ export default function RoleSelectionPage() {
   );
 
     
+
 

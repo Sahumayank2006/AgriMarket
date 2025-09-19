@@ -31,6 +31,7 @@ import {
   MoreHorizontal,
   Languages,
   UserCheck,
+  FileText,
 } from "lucide-react";
 
 import {
@@ -74,6 +75,7 @@ const navItemsContent = {
       { href: "/dashboard/route-optimization", labelKey: "logistics", defaultLabel: "Logistics", icon: Truck },
       { href: "/dashboard/alerts", labelKey: "alerts", defaultLabel: "Alerts", icon: Bell },
       { href: "/dashboard/analytics", labelKey: "analytics", defaultLabel: "Analytics", icon: LineChart },
+      { href: "/dashboard/reports", labelKey: "reports", defaultLabel: "Reports", icon: FileText },
   ],
   logistics: [
       { href: "/dashboard", labelKey: "logistics_overview", defaultLabel: "Logistics Overview", icon: Truck },

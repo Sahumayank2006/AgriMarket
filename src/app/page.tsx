@@ -148,9 +148,9 @@ function GuidelineCard({ titleKey, year, size, imageUrl, downloadUrl }: Guidelin
   const { t } = useTranslation();
   return (
     <Card className="rounded-lg overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-lg bg-white/10 border-white/20">
-      <a href={downloadUrl} download>
-        <CardContent className="p-0 relative">
-          <Image src={imageUrl} alt={t(titleKey, titleKey)} width={250} height={150} className="w-full h-auto object-cover" />
+      <a href={downloadUrl} download className="block">
+        <CardContent className="p-0 relative aspect-[16/9]">
+          <Image src={imageUrl} alt={t(titleKey, titleKey)} fill style={{objectFit: 'cover'}} className="w-full h-full" />
           <div className="absolute top-2 right-2">
             <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs h-7">
               <Download className="mr-2 h-3 w-3" />
@@ -526,21 +526,11 @@ export default function RoleSelectionPage() {
         <section className="w-full bg-blue-800 text-white py-12">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold mb-6 text-center">{t('guidelinesTitle', "Standard Guidelines")}</h2>
-                <Carousel
-                    opts={{
-                        align: "start",
-                        loop: false,
-                    }}
-                    className="w-full"
-                >
-                    <CarouselContent className="-ml-4">
-                        {guidelines.map((guideline, index) => (
-                            <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
-                                <GuidelineCard {...guideline} />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                </Carousel>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {guidelines.map((guideline, index) => (
+                        <GuidelineCard key={index} {...guideline} />
+                    ))}
+                </div>
             </div>
         </section>
 
@@ -571,3 +561,4 @@ export default function RoleSelectionPage() {
   );
 
     
+

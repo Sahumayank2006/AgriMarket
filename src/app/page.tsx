@@ -153,13 +153,13 @@ function GuidelineCard({ titleKey, year, size, imageUrl, downloadUrl }: Guidelin
         <Image src={imageUrl} alt={t(titleKey, titleKey)} fill style={{ objectFit: 'cover' }} />
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
-      <div className="p-3 bg-white/20 backdrop-blur-sm">
+      <div className="p-3 bg-orange-600">
         <div className="flex justify-between items-center">
           <div>
             <p className="font-semibold text-sm text-white">{t(titleKey, titleKey.replace(/_/g, ' '))}</p>
-            <p className="text-xs text-gray-300">{year}</p>
+            <p className="text-xs text-gray-200">{year}</p>
           </div>
-          <Button size="sm" variant="secondary" className="rounded-full text-xs h-7 bg-blue-600 hover:bg-blue-700 text-white">
+          <Button size="sm" variant="secondary" className="rounded-full text-xs h-7 bg-white/20 hover:bg-white/30 text-white">
             <Download className="mr-2 h-3 w-3" />
             {size}
           </Button>
@@ -377,26 +377,32 @@ export default function RoleSelectionPage() {
 
               <p className="text-lg text-muted-foreground mb-6">{t('chooseRole', "Choose Your Role to Get Started")}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                {content.en.roles.slice(0, 4).map((role, idx) => (
-                  <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
-                    <div className="flex-shrink-0">
-                      <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-primary/30 transition-all duration-300">
-                        <role.icon className="h-8 w-8 text-primary" />
+                {content.en.roles.slice(0, 4).map((role, idx) => {
+                  const href = role.role === 'dealer'
+                    ? `/register/dealer?lang=${lang}`
+                    : `/dashboard?role=${role.role}&lang=${lang}`;
+                  
+                  return (
+                    <div key={idx} className="group bg-white dark:bg-card rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center p-5 gap-5 transition-all duration-300 hover:border-2 hover:border-primary hover:outline hover:outline-2 hover:outline-primary hover:-translate-y-1">
+                      <div className="flex-shrink-0">
+                        <div className="bg-blue-50 dark:bg-blue-900/30 rounded-full p-3 flex items-center justify-center border-4 border-blue-100 dark:border-blue-900 group-hover:border-primary/30 transition-all duration-300">
+                          <role.icon className="h-8 w-8 text-primary" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-bold text-xl text-foreground mb-1">{t(role.titleKey, role.title)}</div>
+                        <div className="text-sm text-muted-foreground mb-2">{t(role.descriptionKey, role.description)}</div>
+                      </div>
+                      <div>
+                        <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
+                          <Link href={href} aria-label={`${t('continueAs', 'Continue as')} ${t(role.titleKey, role.title)}`}>
+                            <ArrowRight className="h-5 w-5" />
+                          </Link>
+                        </Button>
                       </div>
                     </div>
-                    <div className="flex-1">
-                      <div className="font-bold text-xl text-foreground mb-1">{t(role.titleKey, role.title)}</div>
-                      <div className="text-sm text-muted-foreground mb-2">{t(role.descriptionKey, role.description)}</div>
-                    </div>
-                    <div>
-                      <Button asChild size="icon" className="rounded-full bg-primary text-white shadow-md hover:bg-primary/90 group-hover:scale-110 transition-transform duration-300">
-                        <Link href={`/dashboard?role=${role.role}&lang=${lang}`} aria-label={`${t('continueAs', 'Continue as')} ${t(role.titleKey, role.title)}`}>
-                          <ArrowRight className="h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               
               {content.en.roles.length > 4 && (
@@ -566,4 +572,5 @@ export default function RoleSelectionPage() {
 
 
 
+    
     

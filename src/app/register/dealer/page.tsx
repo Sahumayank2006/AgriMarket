@@ -90,7 +90,7 @@ export default function DealerRegistrationPage() {
 
   if (isSubmitted) {
       return (
-          <div className="flex items-center justify-center min-h-screen bg-muted">
+          <div className="flex items-center justify-center min-h-screen bg-muted p-4">
               <Card className="w-full max-w-md text-center p-6">
                   <CardHeader>
                       <CardTitle className="text-2xl">Thank You!</CardTitle>
@@ -98,7 +98,7 @@ export default function DealerRegistrationPage() {
                   </CardHeader>
                   <CardContent>
                       <p className="text-muted-foreground">Your application is now pending approval from our administration team. You will receive an email notification once your account has been reviewed.</p>
-                      <div className="flex gap-4 mt-6">
+                      <div className="flex flex-col sm:flex-row gap-4 mt-6">
                         <Button asChild className="w-full">
                             <Link href="/login/dealer">Login</Link>
                         </Button>
@@ -219,6 +219,12 @@ export default function DealerRegistrationPage() {
               </Button>
             </form>
           </Form>
+           <div className="mt-4 text-center text-sm">
+            Already have an account?{" "}
+            <Link href="/login/dealer" className="underline">
+              Login here
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

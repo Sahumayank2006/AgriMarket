@@ -3,7 +3,7 @@
 
 import React, { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
 import type { Role } from '@/lib/types';
-import { Sprout, ShoppingBag, Warehouse, ShieldCheck, IndianRupee, Leaf, Users, Shield, CircleDot, Cloud, Heart, Tractor, Award, Wheat } from 'lucide-react';
+import { Sprout, ShoppingBag, Warehouse, ShieldCheck, IndianRupee, Leaf, Users, Shield, CircleDot, Cloud, Heart, Tractor, Award, Wheat, UserCheck } from 'lucide-react';
 import { translateText } from '@/lib/translate';
 
 // English content is now the source of truth
@@ -189,6 +189,7 @@ export const content = {
     food_saved: "Food Saved from Waste",
     value_created: "Value Created for Farmers",
     people_fed: "People Fed",
+    dealer_approvals: "Dealer Approvals",
   },
   hi: { langName: "हिंदी" },
   bn: { langName: "বাংলা" },

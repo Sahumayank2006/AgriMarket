@@ -91,16 +91,21 @@ export default function DealerRegistrationPage() {
   if (isSubmitted) {
       return (
           <div className="flex items-center justify-center min-h-screen bg-muted">
-              <Card className="w-full max-w-md text-center">
+              <Card className="w-full max-w-md text-center p-6">
                   <CardHeader>
-                      <CardTitle>Thank You!</CardTitle>
+                      <CardTitle className="text-2xl">Thank You!</CardTitle>
                       <CardDescription>Your registration has been submitted successfully.</CardDescription>
                   </CardHeader>
                   <CardContent>
-                      <p>Your application is now pending approval from our administration team. You will receive an email notification once your account has been reviewed.</p>
-                      <Button asChild className="mt-6">
-                          <Link href="/">Return to Home</Link>
-                      </Button>
+                      <p className="text-muted-foreground">Your application is now pending approval from our administration team. You will receive an email notification once your account has been reviewed.</p>
+                      <div className="flex gap-4 mt-6">
+                        <Button asChild className="w-full">
+                            <Link href="/login/dealer">Login</Link>
+                        </Button>
+                        <Button asChild variant="outline" className="w-full">
+                            <Link href="/">Return to Home</Link>
+                        </Button>
+                      </div>
                   </CardContent>
               </Card>
           </div>

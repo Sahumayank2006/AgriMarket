@@ -61,8 +61,6 @@ import { LanguageContext, content } from "@/contexts/language-context";
 import type { LangKey } from "@/contexts/language-context";
 import { useTranslation } from "@/hooks/use-language-font";
 
-const IndiaWarehouseMap = dynamic(() => import('@/components/india-warehouse-map'), { ssr: false });
-
 // Animated Counter Component
 function AnimatedCounter({ start = 0, end, duration = 2000, prefix = "", suffix = "" }: {
   start?: number;
@@ -523,9 +521,6 @@ export default function RoleSelectionPage() {
             </div>
           </section>
 
-          <section className="py-12">
-             <IndiaWarehouseMap />
-          </section>
         </main>
         
         <section className="w-full bg-blue-800 text-white py-12">

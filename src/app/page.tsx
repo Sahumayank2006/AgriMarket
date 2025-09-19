@@ -538,12 +538,12 @@ export default function RoleSelectionPage() {
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-around items-center gap-8 text-center md:text-left">
               {content.en.impactStats.map((stat, index) => (
-                <div key={index} className="flex items-center gap-4">
+                <div key={index} className="flex flex-col items-center gap-2">
                   <div className="bg-white rounded-full p-4 shadow-md">
                     <stat.icon className="h-8 w-8 text-primary" />
                   </div>
-                  <div>
-                    <p className="text-3xl font-bold text-blue-900 dark:text-blue-100">{stat.value}</p>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">{stat.value}</p>
                     <p className="text-muted-foreground mt-1 text-sm">{t(stat.labelKey, stat.label)}</p>
                   </div>
                 </div>
@@ -561,5 +561,6 @@ export default function RoleSelectionPage() {
   );
 
     
+
 
 

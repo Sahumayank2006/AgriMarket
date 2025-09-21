@@ -84,10 +84,9 @@ const navItemsContent = {
   ],
   admin: [
       { href: "/dashboard", labelKey: "overview", defaultLabel: "Overview", icon: LayoutDashboard },
-      { href: "/dashboard/users", labelKey: "user_management", defaultLabel: "User Management", icon: Users },
-      { href: "/dashboard/dealer-approval", labelKey: "dealer_approvals", defaultLabel: "Dealer Approvals", icon: UserCheck },
+      { href: "/dashboard/user-management", labelKey: "user_management", defaultLabel: "User Management", icon: Users },
       { href: "/dashboard/transactions", labelKey: "transactions", defaultLabel: "Transactions", icon: Handshake },
-      { href: "/dashboard/platform_analytics", defaultLabel: "Platform Analytics", icon: LineChart },
+      { href: "/dashboard/analytics", labelKey: "platform_analytics", defaultLabel: "Platform Analytics", icon: LineChart },
   ],
 };
 

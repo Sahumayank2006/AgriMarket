@@ -51,6 +51,13 @@ function AdminDashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Admin Dashboard Overview */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">Dashboard Overview</h1>
+        <p className="text-muted-foreground">
+          Platform performance and key metrics at a glance
+        </p>
+      </div>
       {/* Key Metrics Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>

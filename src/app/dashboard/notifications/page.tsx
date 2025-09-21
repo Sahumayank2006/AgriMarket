@@ -1,6 +1,6 @@
 "use client";
 
-import { NotificationSystem } from "@/components/dashboard/notification-system";
+import { NotificationSystem } from "@/components/dashboard/enhanced-notification-system";
 
 export default function NotificationsPage() {
   return (

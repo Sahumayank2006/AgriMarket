@@ -54,7 +54,6 @@ import {
 import { cn } from "@/lib/utils";
 import type { Role } from "@/lib/types";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { NotificationDropdown } from "./notification-dropdown";
 import { Button } from "../ui/button";
 import { useTranslation } from "@/hooks/use-language-font";
 import { content } from "@/contexts/language-context";
@@ -87,6 +86,7 @@ const navItemsContent = {
       { href: "/dashboard/user-management", labelKey: "user_management", defaultLabel: "User Management", icon: Users },
       { href: "/dashboard/transactions", labelKey: "transactions", defaultLabel: "Transactions", icon: Handshake },
       { href: "/dashboard/analytics", labelKey: "platform_analytics", defaultLabel: "Platform Analytics", icon: LineChart },
+      { href: "/dashboard/notifications", labelKey: "notifications", defaultLabel: "Notifications", icon: Bell },
   ],
 };
 
@@ -139,10 +139,6 @@ export function SidebarNav() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
-
-            <SidebarMenuItem>
-                <NotificationDropdown isSidebarItem={true} />
-            </SidebarMenuItem>
 
             <SidebarMenuItem>
                 <DropdownMenu>

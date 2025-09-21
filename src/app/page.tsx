@@ -316,7 +316,7 @@ export default function RoleSelectionPage() {
                 <DropdownMenuItem onClick={() => setLang('bn')}>বাংলা</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setLang('te')}>తెలుగు</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setLang('mr')}>मराठी</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang('ta')}>தமிழ்</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLang('ta')}>தமিழ்</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -419,7 +419,7 @@ export default function RoleSelectionPage() {
                       </div>
                       <div>
                           <div className="flex items-center justify-center gap-2 text-2xl md:text-3xl font-bold text-yellow-600">
-                              <Wheat className="h-6 w-6 md:h-8 md-w-8" />
+                              <Wheat className="h-6 w-6 md:h-8 md:w-8" />
                               <AnimatedCounter end={5000} duration={3000} suffix={` ${t('tons', 'Tons')}`}/>
                           </div>
                           <p className="text-sm md:text-base text-muted-foreground mt-2 font-medium">
@@ -527,6 +527,7 @@ export default function RoleSelectionPage() {
       </footer>
     </div>
   );
+}
 
     
 
